@@ -1,0 +1,10 @@
+# Generated / large data — do not commit
+cache/
+.venv/
+*.egg-info/
+__pycache__/
+*.pyc
+*.pyo
+.ipynb_checkpoints/
+.DS_Store
+.claude/
