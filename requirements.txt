@@ -1,0 +1,9 @@
+ipykernel>=7.0
+jupyter>=1.1
+matplotlib>=3.10
+numpy>=2.0
+pandas>=2.2
+fastparquet>=2024.5
+requests>=2.30
+scikit-learn>=1.5
+xgboost>=2.0
