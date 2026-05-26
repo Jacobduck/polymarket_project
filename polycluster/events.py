@@ -21,6 +21,7 @@ token ID that was filtered for in this query).
 
 from __future__ import annotations
 
+import threading
 import time
 from typing import Iterable, Literal, Sequence
 
@@ -59,6 +60,23 @@ def _log(verbose: bool, msg: str) -> None:
     line shows up immediately in notebooks instead of being buffered."""
     if verbose:
         print(msg, flush=True)
+
+
+def _heartbeat_loop(stop_event: threading.Event, interval: float = 60.0) -> None:
+    """Print a blue 'still alive' heartbeat every ``interval`` seconds.
+
+    Runs in a background daemon thread spawned by the public fetchers.
+    Exits cleanly when ``stop_event`` is set by the main thread. Used to
+    reassure users staring at the terminal during long stretches of
+    silent (non-timeout) queries that the fetch is still progressing.
+    """
+    minutes = 0
+    while not stop_event.wait(interval):
+        minutes += 1
+        print(
+            f"\033[34m[polycluster] heartbeat: {minutes} min elapsed\033[0m",
+            flush=True,
+        )
 
 
 def _is_timeout_error(exc: BaseException) -> bool:
@@ -264,11 +282,13 @@ def _fetch_orderfilled_side(
                 return rows
 
             if e - s <= min_window:
+                # ANSI green so the (potentially truncated) min_window
+                # bail-outs are easy to spot in a long fetch log.
                 _log(
                     verbose,
-                    f"[polycluster]     d={depth} side={side} "
+                    f"\033[32m[polycluster]     d={depth} side={side} "
                     f"[{s}, {e}] ({e - s}s): {len(rows)} rows in {dt:.2f}s "
-                    f"-> at min_window, returning (may be truncated)",
+                    f"-> at min_window, returning (may be truncated)\033[0m",
                 )
                 return rows
 
@@ -355,42 +375,60 @@ def get_orderfilled_events(
         f"window=[{start_ts}, {end_ts}] ({end_ts - start_ts}s)",
     )
 
-    for token_idx, token_id in enumerate(token_ids):
-        for side in ("maker", "taker"):
-            iteration += 1
-            t0 = time.time()
-            _log(
-                verbose,
-                f"[polycluster]   ({iteration}/{n_iterations}) "
-                f"token {token_idx + 1}/{len(token_ids)} side={side}: starting...",
-            )
-            side_rows = _fetch_orderfilled_side(
-                [token_id],
-                start_ts,
-                end_ts,
-                side=side,
-                page_size=page_size,
-                timeout=timeout,
-                min_window=min_window,
-                verbose=verbose,
-            )
-            for row in side_rows:
-                row["queried_token_id"] = token_id
-            all_rows.extend(side_rows)
-            _log(
-                verbose,
-                f"[polycluster]   ({iteration}/{n_iterations}) "
-                f"token {token_idx + 1}/{len(token_ids)} side={side}: "
-                f"{len(side_rows)} rows in {time.time() - t0:.1f}s",
-            )
+    # Background heartbeat: prints a blue "N min elapsed" line every 60s
+    # so long fetches show signs of life even between meaningful logs.
+    # Try/finally ensures the thread is stopped on both success and error.
+    stop_heartbeat = threading.Event()
+    heartbeat_thread: threading.Thread | None = None
+    if verbose:
+        heartbeat_thread = threading.Thread(
+            target=_heartbeat_loop,
+            args=(stop_heartbeat,),
+            daemon=True,
+        )
+        heartbeat_thread.start()
 
-    out = _sort_rows(_dedupe_rows(all_rows))
-    _log(
-        verbose,
-        f"[polycluster] get_orderfilled_events: done, {len(out)} unique rows "
-        f"in {time.time() - t_total:.1f}s",
-    )
-    return out
+    try:
+        for token_idx, token_id in enumerate(token_ids):
+            for side in ("maker", "taker"):
+                iteration += 1
+                t0 = time.time()
+                _log(
+                    verbose,
+                    f"[polycluster]   ({iteration}/{n_iterations}) "
+                    f"token {token_idx + 1}/{len(token_ids)} side={side}: starting...",
+                )
+                side_rows = _fetch_orderfilled_side(
+                    [token_id],
+                    start_ts,
+                    end_ts,
+                    side=side,
+                    page_size=page_size,
+                    timeout=timeout,
+                    min_window=min_window,
+                    verbose=verbose,
+                )
+                for row in side_rows:
+                    row["queried_token_id"] = token_id
+                all_rows.extend(side_rows)
+                _log(
+                    verbose,
+                    f"[polycluster]   ({iteration}/{n_iterations}) "
+                    f"token {token_idx + 1}/{len(token_ids)} side={side}: "
+                    f"{len(side_rows)} rows in {time.time() - t0:.1f}s",
+                )
+
+        out = _sort_rows(_dedupe_rows(all_rows))
+        _log(
+            verbose,
+            f"[polycluster] get_orderfilled_events: done, {len(out)} unique rows "
+            f"in {time.time() - t_total:.1f}s",
+        )
+        return out
+    finally:
+        stop_heartbeat.set()
+        if heartbeat_thread is not None:
+            heartbeat_thread.join(timeout=1.0)
 
 
 def _fetch_orderfilled_side_checkpointed(
@@ -584,93 +622,111 @@ def get_orderfilled_events_checkpointed(
         f"chunk={initial_chunk_seconds}s",
     )
 
-    for token_idx in range(resume_token_idx, len(token_ids)):
-        token_id = token_ids[token_idx]
-        side_start_idx = resume_side_idx if token_idx == resume_token_idx else 0
+    # Background heartbeat — see :func:`get_orderfilled_events` for the
+    # same pattern. The try/finally below covers both the early-checkpoint
+    # return and the final completion return so the thread always shuts down.
+    stop_heartbeat = threading.Event()
+    heartbeat_thread: threading.Thread | None = None
+    if verbose:
+        heartbeat_thread = threading.Thread(
+            target=_heartbeat_loop,
+            args=(stop_heartbeat,),
+            daemon=True,
+        )
+        heartbeat_thread.start()
 
-        for side_idx in range(side_start_idx, len(sides)):
-            side = sides[side_idx]
-            side_start_ts = (
-                resume_start_ts
-                if (
-                    token_idx == resume_token_idx
-                    and side_idx == resume_side_idx
-                    and resume_start_ts is not None
+    try:
+        for token_idx in range(resume_token_idx, len(token_ids)):
+            token_id = token_ids[token_idx]
+            side_start_idx = resume_side_idx if token_idx == resume_token_idx else 0
+
+            for side_idx in range(side_start_idx, len(sides)):
+                side = sides[side_idx]
+                side_start_ts = (
+                    resume_start_ts
+                    if (
+                        token_idx == resume_token_idx
+                        and side_idx == resume_side_idx
+                        and resume_start_ts is not None
+                    )
+                    else start_ts
                 )
-                else start_ts
-            )
 
-            pair_idx += 1
-            t_pair = time.time()
-            _log(
-                verbose,
-                f"[polycluster] ({pair_idx}/{n_pairs}) "
-                f"token {token_idx + 1}/{len(token_ids)} side={side}: "
-                f"starting from {side_start_ts}",
-            )
-
-            result = _fetch_orderfilled_side_checkpointed(
-                token_ids=[token_id],
-                start_ts=side_start_ts,
-                end_ts=end_ts,
-                side=side,
-                page_size=page_size,
-                timeout=timeout,
-                min_window=min_window,
-                initial_chunk_seconds=initial_chunk_seconds,
-                verbose=verbose,
-                log_prefix=f"[polycluster]   token {token_idx + 1} side={side} ",
-            )
-
-            for row in result["rows"]:
-                row = dict(row)
-                row["queried_token_id"] = token_id
-                row["queried_side"] = side
-                all_rows.append(row)
-
-            _log(
-                verbose,
-                f"[polycluster] ({pair_idx}/{n_pairs}) "
-                f"token {token_idx + 1}/{len(token_ids)} side={side}: "
-                f"{len(result['rows'])} rows in {time.time() - t_pair:.1f}s "
-                f"(complete={result['complete']})",
-            )
-
-            if not result["complete"]:
+                pair_idx += 1
+                t_pair = time.time()
                 _log(
                     verbose,
-                    f"[polycluster] checkpointing at token_idx={token_idx} "
-                    f"side_idx={side_idx} resume_start_ts={result['resume_start_ts']}",
+                    f"[polycluster] ({pair_idx}/{n_pairs}) "
+                    f"token {token_idx + 1}/{len(token_ids)} side={side}: "
+                    f"starting from {side_start_ts}",
                 )
-                return {
-                    "rows": _dedupe_rows(all_rows),
-                    "complete": False,
-                    "resume_token_idx": token_idx,
-                    "resume_side_idx": side_idx,
-                    "resume_token_id": token_id,
-                    "resume_side": side,
-                    "resume_start_ts": result["resume_start_ts"],
-                    "failed_chunk_end_ts": result["failed_chunk_end_ts"],
-                    "error": result["error"],
-                }
 
-    out_rows = _dedupe_rows(all_rows)
-    _log(
-        verbose,
-        f"[polycluster] get_orderfilled_events_checkpointed: done, "
-        f"{len(out_rows)} unique rows in {time.time() - t_total:.1f}s",
-    )
-    return {
-        "rows": out_rows,
-        "complete": True,
-        "resume_token_idx": None,
-        "resume_side_idx": None,
-        "resume_token_id": None,
-        "resume_side": None,
-        "resume_start_ts": None,
-        "failed_chunk_end_ts": None,
-        "error": None,
-    }
+                result = _fetch_orderfilled_side_checkpointed(
+                    token_ids=[token_id],
+                    start_ts=side_start_ts,
+                    end_ts=end_ts,
+                    side=side,
+                    page_size=page_size,
+                    timeout=timeout,
+                    min_window=min_window,
+                    initial_chunk_seconds=initial_chunk_seconds,
+                    verbose=verbose,
+                    log_prefix=f"[polycluster]   token {token_idx + 1} side={side} ",
+                )
+
+                for row in result["rows"]:
+                    row = dict(row)
+                    row["queried_token_id"] = token_id
+                    row["queried_side"] = side
+                    all_rows.append(row)
+
+                _log(
+                    verbose,
+                    f"[polycluster] ({pair_idx}/{n_pairs}) "
+                    f"token {token_idx + 1}/{len(token_ids)} side={side}: "
+                    f"{len(result['rows'])} rows in {time.time() - t_pair:.1f}s "
+                    f"(complete={result['complete']})",
+                )
+
+                if not result["complete"]:
+                    _log(
+                        verbose,
+                        f"[polycluster] checkpointing at token_idx={token_idx} "
+                        f"side_idx={side_idx} resume_start_ts={result['resume_start_ts']}",
+                    )
+                    return {
+                        "rows": _dedupe_rows(all_rows),
+                        "complete": False,
+                        "resume_token_idx": token_idx,
+                        "resume_side_idx": side_idx,
+                        "resume_token_id": token_id,
+                        "resume_side": side,
+                        "resume_start_ts": result["resume_start_ts"],
+                        "failed_chunk_end_ts": result["failed_chunk_end_ts"],
+                        "error": result["error"],
+                    }
+
+        out_rows = _dedupe_rows(all_rows)
+        _log(
+            verbose,
+            f"[polycluster] get_orderfilled_events_checkpointed: done, "
+            f"{len(out_rows)} unique rows in {time.time() - t_total:.1f}s",
+        )
+        return {
+            "rows": out_rows,
+            "complete": True,
+            "resume_token_idx": None,
+            "resume_side_idx": None,
+            "resume_token_id": None,
+            "resume_side": None,
+            "resume_start_ts": None,
+            "failed_chunk_end_ts": None,
+            "error": None,
+        }
+    finally:
+        stop_heartbeat.set()
+        if heartbeat_thread is not None:
+            heartbeat_thread.join(timeout=1.0)
 
 
 def _data_api_trade_to_orderfilled_event(t: dict) -> dict:
