@@ -146,7 +146,19 @@ def get_market_by_slug(slug: str, *, timeout: float = 30.0) -> Market:
 
     outcomes = _normalize_outcomes(payload["outcomes"])
     token_ids = _normalize_token_ids(payload["clobTokenIds"])
-    start_ts = _time_str_to_uint256(payload["acceptingOrdersTimestamp"])
+    # Newer markets expose acceptingOrdersTimestamp; older ones (e.g. 2024
+    # presidential election) only have startDate. Prefer the former when
+    # available since it's the actual orderbook-open time, but fall back
+    # so historical markets still resolve.
+    start_ts_str = (
+        payload.get("acceptingOrdersTimestamp") or payload.get("startDate")
+    )
+    if start_ts_str is None:
+        raise KeyError(
+            f"market {slug!r} has neither 'acceptingOrdersTimestamp' "
+            f"nor 'startDate' in its gamma payload"
+        )
+    start_ts = _time_str_to_uint256(start_ts_str)
 
     closed = str(payload.get("closed", "")).lower() == "true"
     if closed:

@@ -217,6 +217,7 @@ def _fetch_orderfilled_side(
     timeout: float = 30.0,
     min_window: int = 60,
     max_depth: int = 30,
+    verbose: bool = False,
 ) -> list[dict]:
     """Recursively fetch every event for one side by halving saturated windows.
 
@@ -227,6 +228,10 @@ def _fetch_orderfilled_side(
 
     This is the building block for :func:`get_orderfilled_events`. For
     long-running markets, prefer the checkpointed variant.
+
+    When ``verbose=True``, prints a line for every successful query and
+    every saturation-triggered split so progress is visible even outside
+    timeout events.
     """
 
     def helper(s: int, e: int, depth: int = 0) -> list[dict]:
@@ -238,6 +243,7 @@ def _fetch_orderfilled_side(
             )
 
         try:
+            t_q = time.time()
             rows = _query_orderfilled_window(
                 token_ids=token_ids,
                 start_ts=s,
@@ -246,14 +252,33 @@ def _fetch_orderfilled_side(
                 page_size=page_size,
                 timeout=timeout,
             )
+            dt = time.time() - t_q
 
             if len(rows) < page_size:
+                _log(
+                    verbose,
+                    f"[polycluster]     d={depth} side={side} "
+                    f"[{s}, {e}] ({e - s}s): {len(rows)} rows in {dt:.2f}s "
+                    f"-> done",
+                )
                 return rows
 
             if e - s <= min_window:
+                _log(
+                    verbose,
+                    f"[polycluster]     d={depth} side={side} "
+                    f"[{s}, {e}] ({e - s}s): {len(rows)} rows in {dt:.2f}s "
+                    f"-> at min_window, returning (may be truncated)",
+                )
                 return rows
 
             mid = (s + e) // 2
+            _log(
+                verbose,
+                f"[polycluster]     d={depth} side={side} "
+                f"[{s}, {e}] ({e - s}s): {len(rows)} rows in {dt:.2f}s "
+                f"-> saturated, splitting at {mid}",
+            )
             return helper(s, mid, depth + 1) + helper(mid + 1, e, depth + 1)
 
         except Exception as exc:
@@ -347,6 +372,7 @@ def get_orderfilled_events(
                 page_size=page_size,
                 timeout=timeout,
                 min_window=min_window,
+                verbose=verbose,
             )
             for row in side_rows:
                 row["queried_token_id"] = token_id

@@ -16,7 +16,7 @@ from polycluster.events import get_market_orderfilled_events
 from polycluster.markets import get_market_by_slug
 
 
-MARKET_SLUG = "MARKET_SLUG"
+MARKET_SLUG = "will-kamala-harris-win-the-2024-us-presidential-election"
 
 PAGE_SIZE = 100
 MIN_WINDOW = 60
