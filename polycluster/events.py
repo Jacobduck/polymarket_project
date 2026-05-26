@@ -55,6 +55,26 @@ Side = Literal["maker", "taker"]
 Source = Literal["auto", "subgraph", "data_api"]
 
 
+#: Max chars to keep from a market slug when embedding it in a log prefix.
+#: Some Polymarket slugs are 200+ chars; left untruncated they'd dominate
+#: every log line. 40 chars is enough to disambiguate by eye in practice.
+_SLUG_LOG_TRUNCATE = 40
+
+
+def _log_prefix(slug: str | None) -> str:
+    """Build the ``[polycluster]`` (or ``[polycluster:<slug>]``) log prefix.
+
+    When ``slug`` is ``None`` the bare ``[polycluster]`` form is used so
+    callers that invoke the primitive fetchers directly (without a Market
+    in hand) don't get a misleading marker. Long slugs are truncated to
+    :data:`_SLUG_LOG_TRUNCATE` characters to keep log lines readable.
+    """
+    if not slug:
+        return "[polycluster]"
+    short = slug if len(slug) <= _SLUG_LOG_TRUNCATE else slug[:_SLUG_LOG_TRUNCATE]
+    return f"[polycluster:{short}]"
+
+
 def _log(verbose: bool, msg: str) -> None:
     """Print a progress line to stdout when verbose, with flush so the
     line shows up immediately in notebooks instead of being buffered."""
@@ -62,19 +82,27 @@ def _log(verbose: bool, msg: str) -> None:
         print(msg, flush=True)
 
 
-def _heartbeat_loop(stop_event: threading.Event, interval: float = 60.0) -> None:
+def _heartbeat_loop(
+    stop_event: threading.Event,
+    prefix: str = "[polycluster]",
+    interval: float = 60.0,
+) -> None:
     """Print a blue 'still alive' heartbeat every ``interval`` seconds.
 
     Runs in a background daemon thread spawned by the public fetchers.
     Exits cleanly when ``stop_event`` is set by the main thread. Used to
     reassure users staring at the terminal during long stretches of
     silent (non-timeout) queries that the fetch is still progressing.
+
+    ``prefix`` is the same ``[polycluster]`` / ``[polycluster:<slug>]``
+    string the rest of the fetcher uses, so multi-market parallel runs
+    can be told apart at a glance.
     """
     minutes = 0
     while not stop_event.wait(interval):
         minutes += 1
         print(
-            f"\033[34m[polycluster] heartbeat: {minutes} min elapsed\033[0m",
+            f"\033[34m{prefix} heartbeat: {minutes} min elapsed\033[0m",
             flush=True,
         )
 
@@ -236,6 +264,7 @@ def _fetch_orderfilled_side(
     min_window: int = 60,
     max_depth: int = 30,
     verbose: bool = False,
+    slug: str | None = None,
 ) -> list[dict]:
     """Recursively fetch every event for one side by halving saturated windows.
 
@@ -251,6 +280,8 @@ def _fetch_orderfilled_side(
     every saturation-triggered split so progress is visible even outside
     timeout events.
     """
+
+    prefix = _log_prefix(slug)
 
     def helper(s: int, e: int, depth: int = 0) -> list[dict]:
         if s > e:
@@ -275,7 +306,7 @@ def _fetch_orderfilled_side(
             if len(rows) < page_size:
                 _log(
                     verbose,
-                    f"[polycluster]     d={depth} side={side} "
+                    f"{prefix}     d={depth} side={side} "
                     f"[{s}, {e}] ({e - s}s): {len(rows)} rows in {dt:.2f}s "
                     f"-> done",
                 )
@@ -286,7 +317,7 @@ def _fetch_orderfilled_side(
                 # bail-outs are easy to spot in a long fetch log.
                 _log(
                     verbose,
-                    f"\033[32m[polycluster]     d={depth} side={side} "
+                    f"\033[32m{prefix}     d={depth} side={side} "
                     f"[{s}, {e}] ({e - s}s): {len(rows)} rows in {dt:.2f}s "
                     f"-> at min_window, returning (may be truncated)\033[0m",
                 )
@@ -295,7 +326,7 @@ def _fetch_orderfilled_side(
             mid = (s + e) // 2
             _log(
                 verbose,
-                f"[polycluster]     d={depth} side={side} "
+                f"{prefix}     d={depth} side={side} "
                 f"[{s}, {e}] ({e - s}s): {len(rows)} rows in {dt:.2f}s "
                 f"-> saturated, splitting at {mid}",
             )
@@ -305,14 +336,16 @@ def _fetch_orderfilled_side(
             if _is_timeout_error(exc):
                 if e - s <= min_window:
                     print(
-                        f"[WARN] timeout on minimal window [{s}, {e}] "
-                        f"for side={side}; skipping split"
+                        f"{prefix} [WARN] timeout on minimal window [{s}, {e}] "
+                        f"for side={side}; skipping split",
+                        flush=True,
                     )
                     raise
                 mid = (s + e) // 2
                 print(
-                    f"[INFO] timeout on [{s}, {e}] for side={side}; "
-                    f"splitting into [{s}, {mid}] and [{mid + 1}, {e}]"
+                    f"{prefix} [INFO] timeout on [{s}, {e}] for side={side}; "
+                    f"splitting into [{s}, {mid}] and [{mid + 1}, {e}]",
+                    flush=True,
                 )
                 return helper(s, mid, depth + 1) + helper(mid + 1, e, depth + 1)
             raise
@@ -329,6 +362,7 @@ def get_orderfilled_events(
     timeout: float = 30.0,
     min_window: int = 60,
     verbose: bool = False,
+    slug: str | None = None,
 ) -> list[dict]:
     """Fetch all OrderFilled events for one or more CLOB tokens in a window.
 
@@ -365,13 +399,14 @@ def get_orderfilled_events(
     """
     token_ids = _normalize_token_ids(token_ids)
     all_rows: list[dict] = []
+    prefix = _log_prefix(slug)
 
     n_iterations = len(token_ids) * 2
     iteration = 0
     t_total = time.time()
     _log(
         verbose,
-        f"[polycluster] get_orderfilled_events: {len(token_ids)} token(s), "
+        f"{prefix} get_orderfilled_events: {len(token_ids)} token(s), "
         f"window=[{start_ts}, {end_ts}] ({end_ts - start_ts}s)",
     )
 
@@ -383,7 +418,7 @@ def get_orderfilled_events(
     if verbose:
         heartbeat_thread = threading.Thread(
             target=_heartbeat_loop,
-            args=(stop_heartbeat,),
+            args=(stop_heartbeat, prefix),
             daemon=True,
         )
         heartbeat_thread.start()
@@ -395,7 +430,7 @@ def get_orderfilled_events(
                 t0 = time.time()
                 _log(
                     verbose,
-                    f"[polycluster]   ({iteration}/{n_iterations}) "
+                    f"{prefix}   ({iteration}/{n_iterations}) "
                     f"token {token_idx + 1}/{len(token_ids)} side={side}: starting...",
                 )
                 side_rows = _fetch_orderfilled_side(
@@ -407,13 +442,14 @@ def get_orderfilled_events(
                     timeout=timeout,
                     min_window=min_window,
                     verbose=verbose,
+                    slug=slug,
                 )
                 for row in side_rows:
                     row["queried_token_id"] = token_id
                 all_rows.extend(side_rows)
                 _log(
                     verbose,
-                    f"[polycluster]   ({iteration}/{n_iterations}) "
+                    f"{prefix}   ({iteration}/{n_iterations}) "
                     f"token {token_idx + 1}/{len(token_ids)} side={side}: "
                     f"{len(side_rows)} rows in {time.time() - t0:.1f}s",
                 )
@@ -421,7 +457,7 @@ def get_orderfilled_events(
         out = _sort_rows(_dedupe_rows(all_rows))
         _log(
             verbose,
-            f"[polycluster] get_orderfilled_events: done, {len(out)} unique rows "
+            f"{prefix} get_orderfilled_events: done, {len(out)} unique rows "
             f"in {time.time() - t_total:.1f}s",
         )
         return out
@@ -559,6 +595,7 @@ def get_orderfilled_events_checkpointed(
     resume_side_idx: int = 0,
     resume_start_ts: int | None = None,
     verbose: bool = False,
+    slug: str | None = None,
 ) -> dict:
     """Resumable variant of :func:`get_orderfilled_events` for long markets.
 
@@ -610,13 +647,14 @@ def get_orderfilled_events_checkpointed(
     """
     token_ids = _normalize_token_ids(token_ids)
     all_rows: list[dict] = []
+    prefix = _log_prefix(slug)
 
     n_pairs = (len(token_ids) - resume_token_idx) * len(sides) - resume_side_idx
     pair_idx = 0
     t_total = time.time()
     _log(
         verbose,
-        f"[polycluster] get_orderfilled_events_checkpointed: "
+        f"{prefix} get_orderfilled_events_checkpointed: "
         f"{len(token_ids)} token(s), sides={list(sides)}, "
         f"window=[{start_ts}, {end_ts}] ({end_ts - start_ts}s), "
         f"chunk={initial_chunk_seconds}s",
@@ -630,7 +668,7 @@ def get_orderfilled_events_checkpointed(
     if verbose:
         heartbeat_thread = threading.Thread(
             target=_heartbeat_loop,
-            args=(stop_heartbeat,),
+            args=(stop_heartbeat, prefix),
             daemon=True,
         )
         heartbeat_thread.start()
@@ -656,7 +694,7 @@ def get_orderfilled_events_checkpointed(
                 t_pair = time.time()
                 _log(
                     verbose,
-                    f"[polycluster] ({pair_idx}/{n_pairs}) "
+                    f"{prefix} ({pair_idx}/{n_pairs}) "
                     f"token {token_idx + 1}/{len(token_ids)} side={side}: "
                     f"starting from {side_start_ts}",
                 )
@@ -671,7 +709,7 @@ def get_orderfilled_events_checkpointed(
                     min_window=min_window,
                     initial_chunk_seconds=initial_chunk_seconds,
                     verbose=verbose,
-                    log_prefix=f"[polycluster]   token {token_idx + 1} side={side} ",
+                    log_prefix=f"{prefix}   token {token_idx + 1} side={side} ",
                 )
 
                 for row in result["rows"]:
@@ -682,7 +720,7 @@ def get_orderfilled_events_checkpointed(
 
                 _log(
                     verbose,
-                    f"[polycluster] ({pair_idx}/{n_pairs}) "
+                    f"{prefix} ({pair_idx}/{n_pairs}) "
                     f"token {token_idx + 1}/{len(token_ids)} side={side}: "
                     f"{len(result['rows'])} rows in {time.time() - t_pair:.1f}s "
                     f"(complete={result['complete']})",
@@ -691,7 +729,7 @@ def get_orderfilled_events_checkpointed(
                 if not result["complete"]:
                     _log(
                         verbose,
-                        f"[polycluster] checkpointing at token_idx={token_idx} "
+                        f"{prefix} checkpointing at token_idx={token_idx} "
                         f"side_idx={side_idx} resume_start_ts={result['resume_start_ts']}",
                     )
                     return {
@@ -709,7 +747,7 @@ def get_orderfilled_events_checkpointed(
         out_rows = _dedupe_rows(all_rows)
         _log(
             verbose,
-            f"[polycluster] get_orderfilled_events_checkpointed: done, "
+            f"{prefix} get_orderfilled_events_checkpointed: done, "
             f"{len(out_rows)} unique rows in {time.time() - t_total:.1f}s",
         )
         return {
@@ -900,13 +938,18 @@ def get_market_orderfilled_events(
         A list of event dicts (when ``checkpointed=False``) or a
         checkpointed-result dict (when ``checkpointed=True``).
     """
+    # Resolve the slug up-front so the resolution log line itself carries
+    # the slug-tagged prefix (handy when running multiple fetches in parallel).
+    requested_slug = market if isinstance(market, str) else market.slug
+    prefix = _log_prefix(requested_slug)
+
     if isinstance(market, str):
-        _log(verbose, f"[polycluster] resolving market slug={market!r}...")
+        _log(verbose, f"{prefix} resolving market slug={market!r}...")
         t0 = time.time()
         market = get_market_by_slug(market, timeout=timeout)
         _log(
             verbose,
-            f"[polycluster] resolved slug={market.slug!r}: "
+            f"{prefix} resolved slug={market.slug!r}: "
             f"{len(market.token_ids)} token(s), closed={market.closed}, "
             f"window=[{market.start_ts}, {market.end_ts}] in {time.time() - t0:.1f}s",
         )
@@ -930,6 +973,7 @@ def get_market_orderfilled_events(
             timeout=timeout,
             initial_chunk_seconds=initial_chunk_seconds,
             verbose=verbose,
+            slug=market.slug,
         )
 
     try:
@@ -941,13 +985,14 @@ def get_market_orderfilled_events(
             timeout=timeout,
             min_window=min_window,
             verbose=verbose,
+            slug=market.slug,
         )
     except Exception as exc:
         if source != "auto":
             raise
         _log(
             verbose,
-            f"[polycluster] subgraph raised {type(exc).__name__}: {exc!s:.180}; "
+            f"{prefix} subgraph raised {type(exc).__name__}: {exc!s:.180}; "
             "falling back to Polymarket Data API",
         )
         events = []
@@ -956,7 +1001,7 @@ def get_market_orderfilled_events(
         if events == []:
             _log(
                 verbose,
-                "[polycluster] subgraph returned 0 events; "
+                f"{prefix} subgraph returned 0 events; "
                 "falling back to Polymarket Data API",
             )
         events = get_market_trades_via_data_api(
