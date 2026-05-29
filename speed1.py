@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 """Speed test A: page_size=1000, min_window=600.
 
 Bigger pages + less aggressive recursive splitting (stops halving the
@@ -9,7 +11,13 @@ Fetches the full market lifetime, both tokens, both sides (maker+taker).
 No local caching: polycluster.events always hits Goldsky live.
 """
 
-from __future__ import annotations
+
+""""caffeinate -i .venv/bin/python speed1.py 2>&1 | tee speed1.log && \
+caffeinate -i .venv/bin/python speed2.py 2>&1 | tee speed2.log"""
+
+"""speed1 with 1000 and 600 takes 170s"""
+
+
 
 import time
 
@@ -17,10 +25,10 @@ from polycluster.events import get_market_orderfilled_events
 from polycluster.markets import get_market_by_slug
 
 
-MARKET_SLUG = "will-kamala-harris-win-the-2024-us-presidential-election"
+MARKET_SLUG = "will-zelenskyy-wear-a-suit-before-july"
 
 PAGE_SIZE = 1000
-MIN_WINDOW = 600
+MIN_WINDOW = 60
 
 
 def main() -> None:

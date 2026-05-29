@@ -1,0 +1,1293 @@
+13:51:00 [scan] ============================================================
+13:51:00 [scan] scan_markets starting, log=scan_markets_20260529_135100.log
+13:51:00 [scan] model: cache/models/xgb_insider_30feat_latest.json
+13:51:00 [scan] threshold: 0.7, top_N: 100
+13:51:00 [scan] ============================================================
+13:51:00 [scan] loaded 30-feat model with 30 features
+13:51:00 [scan] 
+13:51:00 [scan] ============================================================
+13:51:00 [scan] market 1/5: will-russia-capture-all-of-hryshyne-by-april-30
+13:51:00 [scan] ============================================================
+13:51:01 [scan]   resolved: tokens=2 closed=True duration=29.5d
+13:51:01 [scan]   events: fetching (recursive-split, both tokens, both sides)...
+[polycluster:will-russia-capture-all-of-hryshyne-by-a] get_orderfilled_events: 2 token(s), window=[1775070083, 1777620930] (2550847s)
+[polycluster:will-russia-capture-all-of-hryshyne-by-a]   (1/4) token 1/2 side=maker: starting...
+[polycluster:will-russia-capture-all-of-hryshyne-by-a]     d=0 side=maker [1775070083, 1777620930] (2550847s): 246 rows in 1.41s -> done
+[polycluster:will-russia-capture-all-of-hryshyne-by-a]   (1/4) token 1/2 side=maker: 246 rows in 1.4s
+[polycluster:will-russia-capture-all-of-hryshyne-by-a]   (2/4) token 1/2 side=taker: starting...
+[polycluster:will-russia-capture-all-of-hryshyne-by-a]     d=0 side=taker [1775070083, 1777620930] (2550847s): 503 rows in 1.44s -> done
+[polycluster:will-russia-capture-all-of-hryshyne-by-a]   (2/4) token 1/2 side=taker: 503 rows in 1.4s
+[polycluster:will-russia-capture-all-of-hryshyne-by-a]   (3/4) token 2/2 side=maker: starting...
+[polycluster:will-russia-capture-all-of-hryshyne-by-a] [INFO] timeout on [1775070083, 1777620930] for side=maker; splitting into [1775070083, 1776345506] and [1776345507, 1777620930]
+[polycluster:will-russia-capture-all-of-hryshyne-by-a]     d=1 side=maker [1775070083, 1776345506] (1275423s): 74 rows in 0.26s -> done
+[polycluster:will-russia-capture-all-of-hryshyne-by-a]     d=1 side=maker [1776345507, 1777620930] (1275423s): 485 rows in 4.76s -> done
+[polycluster:will-russia-capture-all-of-hryshyne-by-a]   (3/4) token 2/2 side=maker: 559 rows in 7.3s
+[polycluster:will-russia-capture-all-of-hryshyne-by-a]   (4/4) token 2/2 side=taker: starting...
+[polycluster:will-russia-capture-all-of-hryshyne-by-a]     d=0 side=taker [1775070083, 1777620930] (2550847s): 886 rows in 0.69s -> done
+[polycluster:will-russia-capture-all-of-hryshyne-by-a]   (4/4) token 2/2 side=taker: 886 rows in 0.7s
+[polycluster:will-russia-capture-all-of-hryshyne-by-a] get_orderfilled_events: done, 2194 unique rows in 10.8s
+13:51:11 [scan]   events: fetched 2194 in 10.8s
+13:51:11 [scan]   events: cached to cache/events/will-russia-capture-all-of-hryshyne-by-april-30.pkl
+13:51:12 [scan]   wallets: 281 total, taking top 100 by volume
+13:51:12 [scan]   market: closed=True, final_outcome_yes=0
+13:51:12 [scan]   wallet   1/100: 0x4bfb41d5b3570defd03c39a9a4d8de6bd8b8982e trades=881 volume=$25,897
+13:51:15 [scan]     features computed in 3.28s
+13:51:15 [scan]   wallet   2/100: 0x9238743eeba8bbfe9e85ac7ba2e1e3d77877b73e trades=130 volume=$6,046
+13:51:16 [scan]     features computed in 0.91s
+13:51:16 [scan]   wallet   3/100: 0xbfba6d718f5c10057bc134cb284d398697c07567 trades=20 volume=$5,663
+13:51:16 [scan]     features computed in 0.39s
+13:51:16 [scan]   wallet   4/100: 0xe762c62c0cd669fe9f6c7ac08be8e2700418064b trades=110 volume=$3,130
+13:51:17 [scan]     features computed in 0.45s
+13:51:17 [scan]   wallet   5/100: 0x863176c50b2039c67811cdf0a28da82c854f9a73 trades=56 volume=$2,800
+13:51:17 [scan]     features computed in 0.63s
+13:51:17 [scan]   wallet   6/100: 0xf2fc14b3623b6d61d714fce23cc80baad71b7a15 trades=9 volume=$1,871
+13:51:18 [scan]     features computed in 0.29s
+13:51:18 [scan]   wallet   7/100: 0x3034b5a37eef3aa86c7a713185829e93510add88 trades=19 volume=$1,814
+13:51:18 [scan]     features computed in 0.38s
+13:51:18 [scan]   wallet   8/100: 0x168fd7301811b13e0596c4725fe6507884249e00 trades=27 volume=$1,783
+13:51:18 [scan]     features computed in 0.39s
+13:51:18 [scan]   wallet   9/100: 0x8f69269039b9a401de28a38c2f1c3001364b7df1 trades=29 volume=$1,485
+13:51:19 [scan]     features computed in 0.43s
+13:51:19 [scan]   wallet  10/100: 0x29a1ccae81f6b9fc0822f3027b2e34fabc645645 trades=89 volume=$1,387
+13:51:19 [scan]     features computed in 0.35s
+13:51:19 [scan]   wallet  11/100: 0x21ffd2b7a212a6f277ed3eca1a9f8efcbca90d71 trades=54 volume=$1,360
+13:51:19 [scan]     features computed in 0.35s
+13:51:19 [scan]   wallet  12/100: 0x3a89710075d3783417aafde3924ddef31738a4d6 trades=55 volume=$1,209
+13:51:20 [scan]     features computed in 0.80s
+13:51:20 [scan]   wallet  13/100: 0xc109ae1aebb28caced2c94044f177912f7ff450b trades=115 volume=$1,201
+13:51:21 [scan]     features computed in 1.03s
+13:51:21 [scan]   wallet  14/100: 0xe2daacf7238349851019238517c98d2f722174e3 trades=34 volume=$1,112
+13:51:22 [scan]     features computed in 0.48s
+13:51:22 [scan]   wallet  15/100: 0x9b22f05eab284c3379ef2576019739e32a273a92 trades=61 volume=$1,052
+13:51:22 [scan]     features computed in 0.68s
+13:51:22 [scan]   wallet  16/100: 0x75d1b199a96801338e67a6efaa35c0028ea87a5f trades=8 volume=$1,015
+13:51:23 [scan]     features computed in 0.32s
+13:51:23 [scan]   wallet  17/100: 0xfe50114e81d83d767cbb7fbcde2ca4b698f26eb6 trades=36 volume=$897
+13:51:23 [scan]     features computed in 0.41s
+13:51:23 [scan]   wallet  18/100: 0x7c8b2af934eed0bad9b7437e927ef09c0ebca211 trades=21 volume=$808
+13:51:24 [scan]     features computed in 0.38s
+13:51:24 [scan]   wallet  19/100: 0xcda4925bee5b2bacd8ba056bd6e7e5a01e8e1d82 trades=3 volume=$778
+13:51:24 [scan]     features computed in 0.27s
+13:51:24 [scan]   wallet  20/100: 0xf0b0ef1d6320c6be896b4c9c54dd74407e7f8cab trades=91 volume=$757
+13:51:24 [scan]     features computed in 0.37s
+13:51:24 [scan]   wallet  21/100: 0x87515da08f102aa6405cbc4130d20c762f33b1f7 trades=28 volume=$710
+13:51:25 [scan]     features computed in 0.37s
+13:51:25 [scan]   wallet  22/100: 0xc8ab97a9089a9ff7e6ef0688e6e591a066946418 trades=14 volume=$701
+13:51:25 [scan]     features computed in 0.31s
+13:51:25 [scan]   wallet  23/100: 0x0117b9f1f71b9d1f7ed158f3927456815a74f6b3 trades=58 volume=$659
+13:51:25 [scan]     features computed in 0.64s
+13:51:25 [scan]   wallet  24/100: 0x72532d980ccb626be374df2bc5fded3444c19190 trades=30 volume=$653
+13:51:26 [scan]     features computed in 0.40s
+13:51:26 [scan]   wallet  25/100: 0x5f88abaa08e8450f8a7c582165cba13df085da69 trades=6 volume=$600
+13:51:26 [scan]     features computed in 0.29s
+13:51:26 [scan]   wallet  26/100: 0x6f679c4a78330853ac7762a1cda0a469333f102c trades=10 volume=$591
+13:51:26 [scan]     features computed in 0.26s
+13:51:26 [scan]   wallet  27/100: 0x9ca119b8cd7bdb890aecf1ff3b0f6e3a45cc13b5 trades=49 volume=$556
+13:51:27 [scan]     features computed in 0.55s
+13:51:27 [scan]   wallet  28/100: 0xe443b5f6105c075f562a24f658a396451170c065 trades=3 volume=$550
+13:51:27 [scan]     features computed in 0.34s
+13:51:27 [scan]   wallet  29/100: 0x42c13aabb54133c8067a9302f101067c2d02559f trades=14 volume=$543
+13:51:28 [scan]     features computed in 0.40s
+13:51:28 [scan]   wallet  30/100: 0x165ed327dd594bfe95a5a9836cad385813cff5aa trades=11 volume=$524
+13:51:28 [scan]     features computed in 0.53s
+13:51:28 [scan]   wallet  31/100: 0xd054e72b9e7995a6900aa8ced24dcfbd12007e38 trades=8 volume=$510
+13:51:29 [scan]     features computed in 0.31s
+13:51:29 [scan]   wallet  32/100: 0x9d6286a4e5e7e24a3da490bcc4ba62e40cbafdda trades=6 volume=$478
+13:51:29 [scan]     features computed in 0.30s
+13:51:29 [scan]   wallet  33/100: 0xb1f707470989340e21ee5332123625c3a202ebcc trades=105 volume=$473
+13:51:30 [scan]     features computed in 0.69s
+13:51:30 [scan]   wallet  34/100: 0x42b904c89e4512644c1e9f534168e46a9cffded7 trades=6 volume=$472
+13:51:30 [scan]     features computed in 0.29s
+13:51:30 [scan]   wallet  35/100: 0x41df47c1a2c3f04fef35eabcadeaebe065e14b70 trades=12 volume=$457
+13:51:30 [scan]     features computed in 0.39s
+13:51:30 [scan]   wallet  36/100: 0x9c976cfe2b51a92f9cc6ab889f30d16426f84569 trades=76 volume=$437
+13:51:31 [scan]     features computed in 0.83s
+13:51:31 [scan]   wallet  37/100: 0x2bc7e939bf48259488c991b095977d1f3beee411 trades=31 volume=$410
+13:51:32 [scan]     features computed in 0.57s
+13:51:32 [scan]   wallet  38/100: 0x6b5486e63cf539965b40ec541ebdd87ac664abd2 trades=17 volume=$404
+13:51:32 [scan]     features computed in 0.30s
+13:51:32 [scan]   wallet  39/100: 0xc4c1246af95cf0cfe70448f08a1a3655b6e77324 trades=16 volume=$398
+13:51:33 [scan]     features computed in 0.78s
+13:51:33 [scan]   wallet  40/100: 0xbd6d646b2c713ce7459afcb1502f34c30f93ed0b trades=6 volume=$381
+13:51:33 [scan]     features computed in 0.48s
+13:51:33 [scan]   wallet  41/100: 0x288986eecb0f6bc1ac1a1b1bc86ae073d9cafc69 trades=4 volume=$372
+13:51:34 [scan]     features computed in 0.40s
+13:51:34 [scan]   wallet  42/100: 0xa2ef4082377b3a2ba4c4789d904cf851cdba4535 trades=9 volume=$366
+13:51:34 [scan]     features computed in 0.33s
+13:51:34 [scan]   wallet  43/100: 0xf92a950992181e21874dd1b36c7e5666c443a517 trades=17 volume=$341
+13:51:34 [scan]     features computed in 0.41s
+13:51:34 [scan]   wallet  44/100: 0xad5353afe30c2da57709e2704ef3ccdcf67eef24 trades=78 volume=$327
+13:51:35 [scan]     features computed in 0.47s
+13:51:35 [scan]   wallet  45/100: 0xeab61f1c7168138db3e0bb87acadfb77ce8dd4c6 trades=41 volume=$324
+13:51:35 [scan]     features computed in 0.58s
+13:51:35 [scan]   wallet  46/100: 0xbeb2bfdd49760ee27693596b8cfa3f9aca29376d trades=8 volume=$317
+13:51:36 [scan]     features computed in 0.27s
+13:51:36 [scan]   wallet  47/100: 0xcba7a9f1f8d25664c9358b7aee144849589cf187 trades=24 volume=$293
+13:51:36 [scan]     features computed in 0.46s
+13:51:36 [scan]   wallet  48/100: 0x74e0c48ac82a239958dc4c0922c05b631a28af4b trades=9 volume=$270
+13:51:36 [scan]     features computed in 0.30s
+13:51:36 [scan]   wallet  49/100: 0xca081780bdc892deb5a9a8114514d756c2631267 trades=15 volume=$266
+13:51:37 [scan]     features computed in 0.35s
+13:51:37 [scan]   wallet  50/100: 0x9b4eaf9a1948d18fd63d07ecafc41f0c9e0d93a3 trades=7 volume=$263
+13:51:37 [scan]     features computed in 0.34s
+13:51:37 [scan]   wallet  51/100: 0x708254e7454b8754231949a6e958e50354b53a10 trades=62 volume=$249
+13:51:38 [scan]     features computed in 0.44s
+13:51:38 [scan]   wallet  52/100: 0xf30a11553a20c3ee1fa7a7f17a7dd30721063583 trades=8 volume=$248
+13:51:38 [scan]     features computed in 0.30s
+13:51:38 [scan]   wallet  53/100: 0x5c45b99e2cc808a271a631096fbfbb2c4f357786 trades=4 volume=$243
+13:51:38 [scan]     features computed in 0.31s
+13:51:38 [scan]   wallet  54/100: 0x4df56d1a41ce5005ee21bbcf3ef74a720453c097 trades=133 volume=$239
+13:51:39 [scan]     features computed in 0.67s
+13:51:39 [scan]   wallet  55/100: 0x5ca3c45725b659e0a277ecf394199c38d8e6360a trades=6 volume=$231
+13:51:39 [scan]     features computed in 0.31s
+13:51:39 [scan]   wallet  56/100: 0xc28478563095d3ab219263e19f6bf87034799507 trades=16 volume=$225
+13:51:40 [scan]     features computed in 0.41s
+13:51:40 [scan]   wallet  57/100: 0x3ecb9f922bd75133eee399c204ba72fd156caa7d trades=3 volume=$220
+13:51:40 [scan]     features computed in 0.29s
+13:51:40 [scan]   wallet  58/100: 0xeeff18351334a1ed2cce2224f57950a2f77f9b38 trades=10 volume=$211
+13:51:40 [scan]     features computed in 0.34s
+13:51:40 [scan]   wallet  59/100: 0x8519e77262dcb594d68ef7ceec39480159a1819b trades=33 volume=$211
+13:51:41 [scan]     features computed in 0.44s
+13:51:41 [scan]   wallet  60/100: 0x3d39a48612659c5cac93a6cdf7b44bf1d7c48f74 trades=9 volume=$210
+13:51:41 [scan]     features computed in 0.35s
+13:51:41 [scan]   wallet  61/100: 0x124f1f38b694344eeefcc1e4a36fe87601510dea trades=31 volume=$207
+13:51:41 [scan]     features computed in 0.29s
+13:51:41 [scan]   wallet  62/100: 0xb8e4a4551d2c6b080ae5a523ff1f0cae8e922dae trades=4 volume=$206
+13:51:42 [scan]     features computed in 0.30s
+13:51:42 [scan]   wallet  63/100: 0x39a5427a77b11630f9030ab7daa7c9513db6f276 trades=5 volume=$203
+13:51:42 [scan]     features computed in 0.30s
+13:51:42 [scan]   wallet  64/100: 0x2f2b6e3176e4914ccc79111dd9c704904d390f9a trades=15 volume=$201
+13:51:42 [scan]     features computed in 0.38s
+13:51:42 [scan]   wallet  65/100: 0x4717eccf1e1e2443e7563b330c6e0b3b6f96bdde trades=6 volume=$200
+13:51:43 [scan]     features computed in 0.36s
+13:51:43 [scan]   wallet  66/100: 0x9e707e1bd8457ad8f0a3a49bbff4f139e532c74b trades=92 volume=$192
+13:51:43 [scan]     features computed in 0.41s
+13:51:43 [scan]   wallet  67/100: 0xce835747e39bf987de4c04052b1677e6633e5b97 trades=4 volume=$185
+13:51:43 [scan]     features computed in 0.32s
+13:51:43 [scan]   wallet  68/100: 0x30328330513d01e16174d53d98c2047ef35c99e7 trades=4 volume=$185
+13:51:44 [scan]     features computed in 0.37s
+13:51:44 [scan]   wallet  69/100: 0x69af844d4fbacebfc1c4124b0978801db3600a19 trades=8 volume=$173
+13:51:44 [scan]     features computed in 0.34s
+13:51:44 [scan]   wallet  70/100: 0xdc62ee4f66555520c58230d6ae8a9d10a5bf1eb3 trades=7 volume=$173
+13:51:44 [scan]     features computed in 0.37s
+13:51:44 [scan]   wallet  71/100: 0xeffa49615c40bbac293e0b0400d27e3db3ea94b4 trades=33 volume=$171
+13:51:45 [scan]     features computed in 0.49s
+13:51:45 [scan]   wallet  72/100: 0x50a3b6cb6fe6b987cdd541c8270fe855ed140a78 trades=16 volume=$161
+13:51:45 [scan]     features computed in 0.33s
+13:51:45 [scan]   wallet  73/100: 0xa0b9c52dcacc522b3e73b7756c44c9581d566048 trades=3 volume=$154
+13:51:46 [scan]     features computed in 0.32s
+13:51:46 [scan]   wallet  74/100: 0x94bbb8f7632d11dead6b8970646ad5655a5fc320 trades=9 volume=$153
+13:51:46 [scan]     features computed in 0.36s
+13:51:46 [scan]   wallet  75/100: 0xa58d4f278d7953cd38eeb929f7e242bfc7c0b9b8 trades=10 volume=$150
+13:51:46 [scan]     features computed in 0.33s
+13:51:46 [scan]   wallet  76/100: 0x21d9469de3b6164c056ef69cad9cefaa42007e60 trades=17 volume=$148
+13:51:47 [scan]     features computed in 0.34s
+13:51:47 [scan]   wallet  77/100: 0x0c3c6cedfc55e5977fd9ad1221b75d25c62a5eea trades=16 volume=$148
+13:51:47 [scan]     features computed in 0.36s
+13:51:47 [scan]   wallet  78/100: 0x437b8df29d183fe384601c61a42202fef7a10f0b trades=9 volume=$144
+13:51:47 [scan]     features computed in 0.30s
+13:51:47 [scan]   wallet  79/100: 0x3103cfb4faa022967f45a89dea06ec7086277a98 trades=10 volume=$144
+13:51:48 [scan]     features computed in 0.31s
+13:51:48 [scan]   wallet  80/100: 0xa3c2ec158f222f3f4f5f4f57b113d761a4d3df3d trades=19 volume=$142
+13:51:48 [scan]     features computed in 0.29s
+13:51:48 [scan]   wallet  81/100: 0xac4a1fabdac2438d6afa2a9e8e83845310a0bf1e trades=22 volume=$130
+13:51:48 [scan]     features computed in 0.41s
+13:51:48 [scan]   wallet  82/100: 0x140891ee5c1214859198b80f0a5a4880ba57b4f8 trades=23 volume=$127
+13:51:49 [scan]     features computed in 0.36s
+13:51:49 [scan]   wallet  83/100: 0x2c050c346ebd9c1e91bc846c139b252f748711a8 trades=15 volume=$127
+13:51:49 [scan]     features computed in 0.42s
+13:51:49 [scan]   wallet  84/100: 0x46993766421015bf9483046d36db8be552cd7822 trades=7 volume=$126
+13:51:49 [scan]     features computed in 0.33s
+13:51:49 [scan]   wallet  85/100: 0xc71b43cf1a6c9f79743bdf5e15a763d93d7ce265 trades=16 volume=$126
+13:51:50 [scan]     features computed in 0.44s
+13:51:50 [scan]   wallet  86/100: 0x37ae88e497c966efffb94696eeec44ef006b8def trades=2 volume=$124
+13:51:50 [scan]     features computed in 0.67s
+13:51:50 [scan]   wallet  87/100: 0x33cda297e88811ffd6637735afa8b98c9939727b trades=10 volume=$120
+13:51:51 [scan]     features computed in 0.91s
+13:51:51 [scan]   wallet  88/100: 0xee257b00fdc660243235dce9d909af16bdef7cd3 trades=13 volume=$120
+13:51:52 [scan]     features computed in 0.69s
+13:51:52 [scan]   wallet  89/100: 0xdfc673d3be4819f258d9cd253a358921fb2052c6 trades=3 volume=$116
+13:51:53 [scan]     features computed in 0.49s
+13:51:53 [scan]   wallet  90/100: 0xd21515da28b7c0ec0d4e39454ea223c7c14d5395 trades=4 volume=$116
+13:51:53 [scan]     features computed in 0.33s
+13:51:53 [scan]   wallet  91/100: 0x4619a51158280228650b20f663578fbc64ef2108 trades=5 volume=$104
+13:51:53 [scan]     features computed in 0.30s
+13:51:53 [scan]   wallet  92/100: 0xd3ba95052406df0a67e60861be0d831373ec33b9 trades=4 volume=$104
+13:51:54 [scan]     features computed in 0.30s
+13:51:54 [scan]   wallet  93/100: 0x166a49699aba5d7a9ce3142450062deedf83d7ed trades=6 volume=$103
+13:51:54 [scan]     features computed in 0.31s
+13:51:54 [scan]   wallet  94/100: 0x1cdd071bb612de6d66d0c882b676c663697de595 trades=23 volume=$101
+13:51:54 [scan]     features computed in 0.33s
+13:51:54 [scan]   wallet  95/100: 0xf54182f69f0ec9134dbcea73d276ddefc939202e trades=2 volume=$100
+13:51:55 [scan]     features computed in 0.63s
+13:51:55 [scan]   wallet  96/100: 0x9d736920e486176e7df7a76fa218f1ebd853216b trades=2 volume=$100
+13:51:55 [scan]     features computed in 0.46s
+13:51:55 [scan]   wallet  97/100: 0x71c8f8742d5a477871f04f474335d717b5d87e18 trades=8 volume=$100
+13:51:56 [scan]     features computed in 0.36s
+13:51:56 [scan]   wallet  98/100: 0xd883267f7965f34b8c8a0cdf5bc5385302714fd7 trades=2 volume=$98
+13:51:56 [scan]     features computed in 0.31s
+13:51:56 [scan]   wallet  99/100: 0xd6fa07ff19d2e2d3ec77c7621fffe67be54b4f2d trades=10 volume=$96
+13:51:56 [scan]     features computed in 0.31s
+13:51:56 [scan]   wallet 100/100: 0xcceb22d524e186153cffe79f13c0aeb75889f030 trades=3 volume=$96
+13:51:57 [scan]     features computed in 0.31s
+13:51:57 [scan]   features: computed 100 wallets in 45.0s, saved to cache/features_30feat/will-russia-capture-all-of-hryshyne-by-april-30.parquet
+13:51:57 [scan]   scoring: 0/100 flagged at threshold 0.7
+13:51:57 [scan]   market done in 56.8s: 0 flagged
+13:51:57 [scan] 
+13:51:57 [scan] ============================================================
+13:51:57 [scan] market 2/5: strait-of-hormuz-traffic-returns-to-normal-by-july-31
+13:51:57 [scan] ============================================================
+13:51:57 [scan]   resolved: tokens=2 closed=False duration=18.2d
+13:51:57 [scan]   events: fetching (recursive-split, both tokens, both sides)...
+[polycluster:strait-of-hormuz-traffic-returns-to-norm] get_orderfilled_events: 2 token(s), window=[1778505233, 1780077117] (1571884s)
+[polycluster:strait-of-hormuz-traffic-returns-to-norm]   (1/4) token 1/2 side=maker: starting...
+[polycluster:strait-of-hormuz-traffic-returns-to-norm]     d=0 side=maker [1778505233, 1780077117] (1571884s): 0 rows in 0.50s -> done
+[polycluster:strait-of-hormuz-traffic-returns-to-norm]   (1/4) token 1/2 side=maker: 0 rows in 0.5s
+[polycluster:strait-of-hormuz-traffic-returns-to-norm]   (2/4) token 1/2 side=taker: starting...
+[polycluster:strait-of-hormuz-traffic-returns-to-norm]     d=0 side=taker [1778505233, 1780077117] (1571884s): 0 rows in 0.14s -> done
+[polycluster:strait-of-hormuz-traffic-returns-to-norm]   (2/4) token 1/2 side=taker: 0 rows in 0.1s
+[polycluster:strait-of-hormuz-traffic-returns-to-norm]   (3/4) token 2/2 side=maker: starting...
+[polycluster:strait-of-hormuz-traffic-returns-to-norm]     d=0 side=maker [1778505233, 1780077117] (1571884s): 0 rows in 0.16s -> done
+[polycluster:strait-of-hormuz-traffic-returns-to-norm]   (3/4) token 2/2 side=maker: 0 rows in 0.2s
+[polycluster:strait-of-hormuz-traffic-returns-to-norm]   (4/4) token 2/2 side=taker: starting...
+[polycluster:strait-of-hormuz-traffic-returns-to-norm]     d=0 side=taker [1778505233, 1780077117] (1571884s): 0 rows in 0.18s -> done
+[polycluster:strait-of-hormuz-traffic-returns-to-norm]   (4/4) token 2/2 side=taker: 0 rows in 0.2s
+[polycluster:strait-of-hormuz-traffic-returns-to-norm] get_orderfilled_events: done, 0 unique rows in 1.0s
+[polycluster:strait-of-hormuz-traffic-returns-to-norm] subgraph returned 0 events; falling back to Polymarket Data API
+[data-api] fetched 500 trades (offset=0)
+[data-api] fetched 1000 trades (offset=500)
+[data-api] fetched 1500 trades (offset=1000)
+[data-api] fetched 2000 trades (offset=1500)
+[data-api] fetched 2500 trades (offset=2000)
+[data-api] fetched 3000 trades (offset=2500)
+13:52:10 [scan]   events: fetched 3000 in 12.8s
+13:52:10 [scan]   events: cached to cache/events/strait-of-hormuz-traffic-returns-to-normal-by-july-31.pkl
+13:52:10 [scan]   wallets: 1763 total, taking top 100 by volume
+13:52:10 [scan]   market: closed=False, final_outcome_yes=None
+13:52:10 [scan]   wallet   1/100: 0x0000000000000000000000000000000000000000 trades=3000 volume=$203,354
+13:52:23 [scan]     features computed in 12.71s
+13:52:23 [scan]   wallet   2/100: 0x20a138ee2b93b82bb2ac06a1980095132519807b trades=3 volume=$11,167
+13:52:24 [scan]     features computed in 0.66s
+13:52:24 [scan]   wallet   3/100: 0xb10047d6a254b2ebb306d7a7d13bf59171ab6461 trades=2 volume=$9,657
+13:52:24 [scan]     features computed in 0.70s
+13:52:24 [scan]   wallet   4/100: 0x12d6cccfc7470a3f4bafc53599a4779cbf2cf2a8 trades=6 volume=$9,371
+13:52:25 [scan]     features computed in 0.84s
+13:52:25 [scan]   wallet   5/100: 0x25257a6a89dba93dd0c536b6279365632a4eb919 trades=3 volume=$8,455
+13:52:26 [scan]     features computed in 0.67s
+13:52:26 [scan]   wallet   6/100: 0x3e4c0eb732788566e67a6d2a584ac3c9e7bcbc78 trades=4 volume=$8,214
+13:52:27 [scan]     features computed in 0.83s
+13:52:27 [scan]   wallet   7/100: 0x8a98109fb0f1d87d9bfcb4486ba3587b95c51b92 trades=76 volume=$7,195
+13:52:28 [scan]     features computed in 1.00s
+13:52:28 [scan]   wallet   8/100: 0x5235578efe24555b0c98e7dc10a902b09089c04a trades=49 volume=$6,868
+13:52:29 [scan]     features computed in 1.01s
+13:52:29 [scan]   wallet   9/100: 0xc4086b708cd3a50880b7069add1a1a80000f4675 trades=2 volume=$6,792
+13:52:29 [scan]     features computed in 0.71s
+13:52:29 [scan]   wallet  10/100: 0x02388370985ec313bcc199911073f91f52b6eb0b trades=9 volume=$4,713
+13:52:30 [scan]     features computed in 0.93s
+13:52:30 [scan]   wallet  11/100: 0x8f2f04f6a10a8ffadb8b39999b5b3ef40adeb226 trades=4 volume=$4,270
+13:52:31 [scan]     features computed in 0.61s
+13:52:31 [scan]   wallet  12/100: 0xeb77593d1187a2d01c22fb24567b21cddd214e6b trades=5 volume=$4,111
+13:52:32 [scan]     features computed in 0.73s
+13:52:32 [scan]   wallet  13/100: 0x8ac3a558f884566ce851f402bf7e69dd90a716f6 trades=3 volume=$3,533
+13:52:32 [scan]     features computed in 0.72s
+13:52:32 [scan]   wallet  14/100: 0xac907f33498dc8a1617d0e7a9d3f7d91debe5d06 trades=2 volume=$2,390
+13:52:33 [scan]     features computed in 0.84s
+13:52:33 [scan]   wallet  15/100: 0x9952d39fcc7a5baf664da51dd1b9c95f23ca9cba trades=1 volume=$1,770
+13:52:34 [scan]     features computed in 0.59s
+13:52:34 [scan]   wallet  16/100: 0x47ae6d13566c3418c4795c98ced1f197575eee94 trades=8 volume=$1,739
+13:52:34 [scan]     features computed in 0.63s
+13:52:34 [scan]   wallet  17/100: 0x771293a34f18f936023bbaa37db010a232030c28 trades=1 volume=$1,675
+13:52:35 [scan]     features computed in 0.76s
+13:52:35 [scan]   wallet  18/100: 0xf27de6607cbd15be1133619b9807ff63fb86e6d3 trades=3 volume=$1,622
+13:52:36 [scan]     features computed in 0.58s
+13:52:36 [scan]   wallet  19/100: 0xb7ef580a13f0463561170074bece5fb7bbd3812c trades=4 volume=$1,578
+13:52:36 [scan]     features computed in 0.57s
+13:52:36 [scan]   wallet  20/100: 0xa8c63f775ddbbe66b56614191747def3021444e8 trades=1 volume=$1,573
+13:52:37 [scan]     features computed in 0.55s
+13:52:37 [scan]   wallet  21/100: 0x2b9dd0a3ae93bf0d08ef733650bb9002160574f5 trades=3 volume=$1,364
+13:52:37 [scan]     features computed in 0.56s
+13:52:37 [scan]   wallet  22/100: 0x7818687f1c2cda416877ab68d18d2c9c25f9d185 trades=1 volume=$1,260
+13:52:38 [scan]     features computed in 0.55s
+13:52:38 [scan]   wallet  23/100: 0x943ceb686511fe7aaca6a863b00493e088da1d17 trades=1 volume=$1,235
+13:52:38 [scan]     features computed in 0.55s
+13:52:38 [scan]   wallet  24/100: 0x71abe97b83eaba3f06cb04fd4d9a03ee37d2f015 trades=1 volume=$1,225
+13:52:39 [scan]     features computed in 0.56s
+13:52:39 [scan]   wallet  25/100: 0x6b44cdccdc280e6d0be71782f0772a6bf4b2be1e trades=4 volume=$1,140
+13:52:40 [scan]     features computed in 0.57s
+13:52:40 [scan]   wallet  26/100: 0x5817085e044a0fe9e597653ed93a09ae1dd7ccfb trades=1 volume=$1,032
+13:52:40 [scan]     features computed in 0.54s
+13:52:40 [scan]   wallet  27/100: 0x131a9f5401b17992b470093c4b95563b650b73f9 trades=1 volume=$1,000
+13:52:41 [scan]     features computed in 0.56s
+13:52:41 [scan]   wallet  28/100: 0x10a512b64e8bf0178bfb5e13331c13427530e468 trades=1 volume=$995
+13:52:41 [scan]     features computed in 0.55s
+13:52:41 [scan]   wallet  29/100: 0xf42f4a4211d058cd109d503cf13f7bcdfc82a6a7 trades=7 volume=$985
+13:52:42 [scan]     features computed in 0.60s
+13:52:42 [scan]   wallet  30/100: 0xb8ef280363e9ab561a4c6f210b5bcc6cd6e8f3b8 trades=1 volume=$950
+13:52:42 [scan]     features computed in 0.54s
+13:52:42 [scan]   wallet  31/100: 0x3d369fdb1e0f5c8c2f6b879d1bd1a316c0056a0e trades=2 volume=$921
+13:52:43 [scan]     features computed in 0.55s
+13:52:43 [scan]   wallet  32/100: 0x9588cd5e34c49cefd6ab3ecb290ee7fdb4f7913d trades=1 volume=$900
+13:52:43 [scan]     features computed in 0.55s
+13:52:43 [scan]   wallet  33/100: 0xbcd469dc55232807cb861c1df0102f1232966616 trades=1 volume=$900
+13:52:44 [scan]     features computed in 0.55s
+13:52:44 [scan]   wallet  34/100: 0xbe3d34441e4fd5f3c69c5a00e694376e37964dc6 trades=9 volume=$881
+13:52:45 [scan]     features computed in 0.63s
+13:52:45 [scan]   wallet  35/100: 0xd52b8dcb4b812c4056faf41164a6f6c73f4c5c72 trades=1 volume=$833
+13:52:45 [scan]     features computed in 0.56s
+13:52:45 [scan]   wallet  36/100: 0xf9c1190aa8184bcbe418e6f5321c53b0bfbc39e2 trades=1 volume=$794
+13:52:46 [scan]     features computed in 0.55s
+13:52:46 [scan]   wallet  37/100: 0xf917d809c08d853f2464bc3ca6cce319913431d7 trades=5 volume=$788
+13:52:46 [scan]     features computed in 0.58s
+13:52:46 [scan]   wallet  38/100: 0x981205e2d5d6cca7e01d9ef248515444cdd0644f trades=1 volume=$780
+13:52:47 [scan]     features computed in 0.62s
+13:52:47 [scan]   wallet  39/100: 0x1a3fb05e94caef23e28905767cd603eb574a6dea trades=1 volume=$780
+13:52:47 [scan]     features computed in 0.55s
+13:52:47 [scan]   wallet  40/100: 0xd312ee222979444109999573bfc5de95282d7236 trades=1 volume=$712
+13:52:48 [scan]     features computed in 0.56s
+13:52:48 [scan]   wallet  41/100: 0xd14aa86fa6cac2e09edd9944f5c0c0d48634a8ad trades=1 volume=$672
+13:52:49 [scan]     features computed in 0.55s
+13:52:49 [scan]   wallet  42/100: 0x712433f69c169ebaaa67ce13f3f66f54575e70c1 trades=2 volume=$650
+13:52:49 [scan]     features computed in 0.56s
+13:52:49 [scan]   wallet  43/100: 0x3069c1002bd0bb6aec054c7a27722919df95f8ef trades=1 volume=$585
+13:52:50 [scan]     features computed in 0.55s
+13:52:50 [scan]   wallet  44/100: 0x2c41d0ca2b4b2344912eead711f28cd4dcff133e trades=2 volume=$570
+13:52:50 [scan]     features computed in 0.55s
+13:52:50 [scan]   wallet  45/100: 0x4e617ec97e179213f7b4b751d706713453fb82ee trades=1 volume=$500
+13:52:51 [scan]     features computed in 0.55s
+13:52:51 [scan]   wallet  46/100: 0xb51b3beffd13cde071ed799e70a7b0b598e8b4d9 trades=4 volume=$500
+13:52:51 [scan]     features computed in 0.57s
+13:52:51 [scan]   wallet  47/100: 0x02a90ebcea0bac0b442db4c688d5d2e36f8e0a38 trades=1 volume=$455
+13:52:52 [scan]     features computed in 0.55s
+13:52:52 [scan]   wallet  48/100: 0xfc352f5875d5d3a3534da480fb0fbb2da873a4d1 trades=2 volume=$452
+13:52:52 [scan]     features computed in 0.55s
+13:52:52 [scan]   wallet  49/100: 0xf3b7a8e68bd2a3e93de77ad556561c74e53ef35e trades=2 volume=$449
+13:52:53 [scan]     features computed in 0.55s
+13:52:53 [scan]   wallet  50/100: 0x392ae2a1fbc20cc1be679958f4a8809c8b49262d trades=2 volume=$444
+13:52:54 [scan]     features computed in 0.57s
+13:52:54 [scan]   wallet  51/100: 0xde0d8b8fce53f25081acf359a0a241949f7db6ca trades=1 volume=$435
+13:52:54 [scan]     features computed in 0.55s
+13:52:54 [scan]   wallet  52/100: 0x0c0e270cf879583d6a0142fc817e05b768d0434e trades=1 volume=$406
+13:52:55 [scan]     features computed in 0.55s
+13:52:55 [scan]   wallet  53/100: 0xd2061635466c6501fe493b2914a96cafa0ed5aca trades=1 volume=$400
+13:52:55 [scan]     features computed in 0.54s
+13:52:55 [scan]   wallet  54/100: 0x177e555fc75a36b4f45ca1025e6724d1e0a09424 trades=1 volume=$400
+13:52:56 [scan]     features computed in 0.55s
+13:52:56 [scan]   wallet  55/100: 0x5fe2c3045e50ee9f7eccb9527a80b70c55d4d740 trades=2 volume=$400
+13:52:56 [scan]     features computed in 0.55s
+13:52:56 [scan]   wallet  56/100: 0xcca90a5d3c8f2d6663817e3650d6adbe9ab44c9f trades=2 volume=$400
+13:52:57 [scan]     features computed in 0.57s
+13:52:57 [scan]   wallet  57/100: 0xcfce2a14ab7a79a76ce11ce035e8b0c8804280c7 trades=1 volume=$399
+13:52:57 [scan]     features computed in 0.55s
+13:52:57 [scan]   wallet  58/100: 0x38458ff12b96ae67983dae09e39fe6ab7db9a2d5 trades=2 volume=$397
+13:52:58 [scan]     features computed in 0.56s
+13:52:58 [scan]   wallet  59/100: 0xa7eccd255152871e8ad3bf8da6896739e3710b5e trades=3 volume=$395
+13:52:59 [scan]     features computed in 0.63s
+13:52:59 [scan]   wallet  60/100: 0x27fc913ca7369842526d5eca61027753f2c8c4f8 trades=4 volume=$376
+13:52:59 [scan]     features computed in 0.56s
+13:52:59 [scan]   wallet  61/100: 0x899b8e8994f72c64474e103b5d58bb4fdfe95f0e trades=3 volume=$355
+13:53:00 [scan]     features computed in 0.57s
+13:53:00 [scan]   wallet  62/100: 0xa060e5fcc6d5982a0c7a18730be88abbd7d05163 trades=2 volume=$354
+13:53:00 [scan]     features computed in 0.54s
+13:53:00 [scan]   wallet  63/100: 0x9876c27ffa63fea05b24b54e554e8b6c435d5976 trades=2 volume=$351
+13:53:01 [scan]     features computed in 0.56s
+13:53:01 [scan]   wallet  64/100: 0x2df0697497a821ea0a1cd398a91a676742fe0a84 trades=9 volume=$348
+13:53:01 [scan]     features computed in 0.57s
+13:53:01 [scan]   wallet  65/100: 0x401ee31e9ebf9ab9f6315cd95faca5f950436fc9 trades=5 volume=$346
+13:53:02 [scan]     features computed in 0.56s
+13:53:02 [scan]   wallet  66/100: 0x279c5de35108afc30b99f09e595555b428e92b82 trades=23 volume=$344
+13:53:03 [scan]     features computed in 0.66s
+13:53:03 [scan]   wallet  67/100: 0x83590360a687e0d78870c6de1794bac88fc23962 trades=2 volume=$334
+13:53:03 [scan]     features computed in 0.55s
+13:53:03 [scan]   wallet  68/100: 0xfce2ed606cc28b0bd24a3e6a8f1fd7385088b679 trades=1 volume=$332
+13:53:04 [scan]     features computed in 0.56s
+13:53:04 [scan]   wallet  69/100: 0x65b59d58bb4b9be888cf74cb1f6c19584fe7eb61 trades=3 volume=$328
+13:53:04 [scan]     features computed in 0.57s
+13:53:04 [scan]   wallet  70/100: 0xecb5271853d083c561792d1bc4be8a555ce672d7 trades=1 volume=$327
+13:53:05 [scan]     features computed in 0.56s
+13:53:05 [scan]   wallet  71/100: 0x22205e90fe0c72e6641b895160d82b23c8625db4 trades=2 volume=$327
+13:53:06 [scan]     features computed in 0.66s
+13:53:06 [scan]   wallet  72/100: 0x56caf89cd2ccc218899cb49de88608fc9280e2ce trades=2 volume=$323
+13:53:07 [scan]     features computed in 1.10s
+13:53:07 [scan]   wallet  73/100: 0x1d3edd9a4090082173c1902dd743e57de32dbc45 trades=3 volume=$318
+13:53:07 [scan]     features computed in 0.84s
+13:53:07 [scan]   wallet  74/100: 0x4aad5cadaaa014de83373af12f86cff22214601d trades=2 volume=$305
+13:53:08 [scan]     features computed in 0.79s
+13:53:08 [scan]   wallet  75/100: 0xf743531324c5e9310a306b66cffc55ba5fed35be trades=2 volume=$301
+13:53:09 [scan]     features computed in 0.73s
+13:53:09 [scan]   wallet  76/100: 0xd5b97d08ec6098407bfbf66c2786ccc9967fe44e trades=1 volume=$300
+13:53:10 [scan]     features computed in 0.59s
+13:53:10 [scan]   wallet  77/100: 0xfaae04d9bc15dc68db0d7022677df54c3387907e trades=1 volume=$300
+13:53:10 [scan]     features computed in 0.55s
+13:53:10 [scan]   wallet  78/100: 0xdf58dc03a5c18a3ecbdc8c13ed6ca1959db7d02d trades=2 volume=$298
+13:53:11 [scan]     features computed in 0.55s
+13:53:11 [scan]   wallet  79/100: 0x584dd12ce0a2c916f531dce0a256e0577d1b67c3 trades=2 volume=$295
+13:53:11 [scan]     features computed in 0.55s
+13:53:11 [scan]   wallet  80/100: 0x5529bb3ddb164c1b1781ed58a5c3b4c2d02686d2 trades=1 volume=$292
+13:53:12 [scan]     features computed in 0.59s
+13:53:12 [scan]   wallet  81/100: 0xbab2abe867bac5456a2e2abd7f119453c793a1f3 trades=2 volume=$281
+13:53:12 [scan]     features computed in 0.57s
+13:53:12 [scan]   wallet  82/100: 0xf1e986fcdeae17af4f22dd24c20b97571e7c8cc6 trades=2 volume=$277
+13:53:13 [scan]     features computed in 0.75s
+13:53:13 [scan]   wallet  83/100: 0x3d76077f8393e781765efa9d887a9f23a9330a53 trades=1 volume=$268
+13:53:14 [scan]     features computed in 0.65s
+13:53:14 [scan]   wallet  84/100: 0x5526e3cb8da66852e4a1e1e891733f353e042336 trades=2 volume=$267
+13:53:14 [scan]     features computed in 0.61s
+13:53:14 [scan]   wallet  85/100: 0x0e7b207fe08f0fd2fb68a12b7ff044187ec7eba3 trades=2 volume=$264
+13:53:15 [scan]     features computed in 0.59s
+13:53:15 [scan]   wallet  86/100: 0xb172768339577fb37fbb1a2570c9acc79baace39 trades=2 volume=$262
+13:53:16 [scan]     features computed in 0.80s
+13:53:16 [scan]   wallet  87/100: 0xe94bf89e66b852d60866667bddf7bff9dad65abe trades=3 volume=$257
+13:53:16 [scan]     features computed in 0.60s
+13:53:16 [scan]   wallet  88/100: 0x86a642f6ee9888795c62a43ec9ca175927bc1ac6 trades=1 volume=$255
+13:53:17 [scan]     features computed in 0.56s
+13:53:17 [scan]   wallet  89/100: 0x502fd57b04a4f5bdc1968b1c24acef936122d624 trades=1 volume=$250
+13:53:18 [scan]     features computed in 0.66s
+13:53:18 [scan]   wallet  90/100: 0x1674b8c2c92c24d14e1c6a4b3475afb4e8291422 trades=3 volume=$245
+13:53:18 [scan]     features computed in 0.57s
+13:53:18 [scan]   wallet  91/100: 0x95fb71cb28dfb4c00924570fe402a66080c0b663 trades=2 volume=$244
+13:53:19 [scan]     features computed in 0.58s
+13:53:19 [scan]   wallet  92/100: 0x8c3475f4af38ffac81551ae073e09c56d3a00fd2 trades=2 volume=$243
+13:53:19 [scan]     features computed in 0.63s
+13:53:19 [scan]   wallet  93/100: 0x50f4e56a862c248f66690a2cfea33e7784375e6a trades=2 volume=$242
+13:53:20 [scan]     features computed in 0.59s
+13:53:20 [scan]   wallet  94/100: 0x66068dfebd29a6248bc50c9d0dae142d9f30fa0e trades=1 volume=$240
+13:53:21 [scan]     features computed in 0.63s
+13:53:21 [scan]   wallet  95/100: 0x64a8a8e3ca9ed5598d05985cf007cad0199a4fd1 trades=2 volume=$232
+13:53:21 [scan]     features computed in 0.65s
+13:53:21 [scan]   wallet  96/100: 0x81835c06e226ad712d433159c68b0017181a5216 trades=2 volume=$232
+13:53:22 [scan]     features computed in 0.68s
+13:53:22 [scan]   wallet  97/100: 0xf9cdf771771ea35fdef77a80ae2a1906d74eba57 trades=2 volume=$231
+13:53:23 [scan]     features computed in 0.84s
+13:53:23 [scan]   wallet  98/100: 0x09c399c8d055ae6c2f8c2d8708c35f99af988e89 trades=2 volume=$226
+13:53:23 [scan]     features computed in 0.67s
+13:53:23 [scan]   wallet  99/100: 0xf91862df312137297ee559b682369dcd0e8b51bb trades=2 volume=$225
+13:53:24 [scan]     features computed in 0.68s
+13:53:24 [scan]   wallet 100/100: 0x1035cea4f9dd35b407ca320e3cfe8af9e2d73421 trades=2 volume=$222
+13:53:25 [scan]     features computed in 0.61s
+13:53:25 [scan]   features: computed 100 wallets in 74.6s, saved to cache/features_30feat/strait-of-hormuz-traffic-returns-to-normal-by-july-31.parquet
+13:53:25 [scan]   scoring: 2/100 flagged at threshold 0.7
+13:53:25 [scan]     FLAGGED  0xe94bf89e66b852d60866667bddf7bff9dad65abe  pred_prob=0.869  volume=$257
+13:53:25 [scan]     FLAGGED  0xfaae04d9bc15dc68db0d7022677df54c3387907e  pred_prob=0.760  volume=$300
+13:53:25 [scan]   market done in 87.5s: 2 flagged
+13:53:25 [scan] 
+13:53:25 [scan] ============================================================
+13:53:25 [scan] market 3/5: us-iran-nuclear-deal-by-may-31-974
+13:53:25 [scan] ============================================================
+13:53:25 [scan]   resolved: tokens=2 closed=False duration=30.6d
+13:53:25 [scan]   events: fetching (recursive-split, both tokens, both sides)...
+[polycluster:us-iran-nuclear-deal-by-may-31-974] get_orderfilled_events: 2 token(s), window=[1777430458, 1780077205] (2646747s)
+[polycluster:us-iran-nuclear-deal-by-may-31-974]   (1/4) token 1/2 side=maker: starting...
+[polycluster:us-iran-nuclear-deal-by-may-31-974]     d=0 side=maker [1777430458, 1780077205] (2646747s): 0 rows in 0.17s -> done
+[polycluster:us-iran-nuclear-deal-by-may-31-974]   (1/4) token 1/2 side=maker: 0 rows in 0.2s
+[polycluster:us-iran-nuclear-deal-by-may-31-974]   (2/4) token 1/2 side=taker: starting...
+[polycluster:us-iran-nuclear-deal-by-may-31-974]     d=0 side=taker [1777430458, 1780077205] (2646747s): 0 rows in 0.17s -> done
+[polycluster:us-iran-nuclear-deal-by-may-31-974]   (2/4) token 1/2 side=taker: 0 rows in 0.2s
+[polycluster:us-iran-nuclear-deal-by-may-31-974]   (3/4) token 2/2 side=maker: starting...
+[polycluster:us-iran-nuclear-deal-by-may-31-974]     d=0 side=maker [1777430458, 1780077205] (2646747s): 0 rows in 0.21s -> done
+[polycluster:us-iran-nuclear-deal-by-may-31-974]   (3/4) token 2/2 side=maker: 0 rows in 0.2s
+[polycluster:us-iran-nuclear-deal-by-may-31-974]   (4/4) token 2/2 side=taker: starting...
+[polycluster:us-iran-nuclear-deal-by-may-31-974]     d=0 side=taker [1777430458, 1780077205] (2646747s): 0 rows in 0.15s -> done
+[polycluster:us-iran-nuclear-deal-by-may-31-974]   (4/4) token 2/2 side=taker: 0 rows in 0.2s
+[polycluster:us-iran-nuclear-deal-by-may-31-974] get_orderfilled_events: done, 0 unique rows in 0.7s
+[polycluster:us-iran-nuclear-deal-by-may-31-974] subgraph returned 0 events; falling back to Polymarket Data API
+[data-api] fetched 500 trades (offset=0)
+[data-api] fetched 1000 trades (offset=500)
+[data-api] fetched 1500 trades (offset=1000)
+[data-api] fetched 2000 trades (offset=1500)
+[data-api] fetched 2500 trades (offset=2000)
+[data-api] fetched 3000 trades (offset=2500)
+13:53:27 [scan]   events: fetched 3000 in 1.7s
+13:53:27 [scan]   events: cached to cache/events/us-iran-nuclear-deal-by-may-31-974.pkl
+13:53:27 [scan]   wallets: 1627 total, taking top 100 by volume
+13:53:27 [scan]   market: closed=False, final_outcome_yes=None
+13:53:27 [scan]   wallet   1/100: 0x0000000000000000000000000000000000000000 trades=3000 volume=$417,557
+13:53:40 [scan]     features computed in 13.28s
+13:53:40 [scan]   wallet   2/100: 0x334b261e6ab81287841c1e8c9326a149b8bfd971 trades=23 volume=$54,169
+13:53:41 [scan]     features computed in 0.79s
+13:53:41 [scan]   wallet   3/100: 0x5f176a980de5b25f89f17473e5e8adef565c519e trades=1 volume=$28,500
+13:53:41 [scan]     features computed in 0.60s
+13:53:41 [scan]   wallet   4/100: 0x28aaedcb77f232fed5fb97131d8d16bc2d708f75 trades=3 volume=$20,585
+13:53:42 [scan]     features computed in 0.62s
+13:53:42 [scan]   wallet   5/100: 0x8a98109fb0f1d87d9bfcb4486ba3587b95c51b92 trades=270 volume=$18,605
+13:53:43 [scan]     features computed in 1.17s
+13:53:43 [scan]   wallet   6/100: 0x614dc8d3542c12103d2c6a3553fd761e391d1546 trades=11 volume=$17,655
+13:53:44 [scan]     features computed in 0.68s
+13:53:44 [scan]   wallet   7/100: 0xbacd00c9080a82ded56f504ee8810af732b0ab35 trades=13 volume=$16,536
+13:53:45 [scan]     features computed in 0.89s
+13:53:45 [scan]   wallet   8/100: 0x8150b6ce47520e5a151cf518ee7e49e2695fa80e trades=1 volume=$16,000
+13:53:45 [scan]     features computed in 0.68s
+13:53:45 [scan]   wallet   9/100: 0x24c8cf69a0e0a17eee21f69d29752bfa32e823e1 trades=5 volume=$13,350
+13:53:46 [scan]     features computed in 0.67s
+13:53:46 [scan]   wallet  10/100: 0x0271aff8899597a2fbdbbef6ea3a0d2044a93763 trades=3 volume=$11,888
+13:53:47 [scan]     features computed in 0.68s
+13:53:47 [scan]   wallet  11/100: 0xcbbc4c8802f6d061504c9d670a181508cf42ea5a trades=3 volume=$10,140
+13:53:47 [scan]     features computed in 0.68s
+13:53:47 [scan]   wallet  12/100: 0xb3bc0eee029eb22d83d0b3789d2f97ddfc21d296 trades=1 volume=$9,681
+13:53:48 [scan]     features computed in 0.66s
+13:53:48 [scan]   wallet  13/100: 0xfc2f4f50ce2f6045d35558a5e2d8d4b2ac6610c7 trades=10 volume=$7,713
+13:53:49 [scan]     features computed in 0.71s
+13:53:49 [scan]   wallet  14/100: 0x7820259d8711598488f09617b900667d50225723 trades=6 volume=$6,870
+13:53:49 [scan]     features computed in 0.76s
+13:53:49 [scan]   wallet  15/100: 0x506bce138df20695c03cd5a59a937499fb00b0fe trades=10 volume=$5,707
+13:53:50 [scan]     features computed in 0.80s
+13:53:50 [scan]   wallet  16/100: 0xfffadf38a520cd5a0035ff52d7fceb436a08864b trades=1 volume=$5,017
+13:53:51 [scan]     features computed in 0.71s
+13:53:51 [scan]   wallet  17/100: 0x02388370985ec313bcc199911073f91f52b6eb0b trades=38 volume=$4,865
+13:53:52 [scan]     features computed in 1.04s
+13:53:52 [scan]   wallet  18/100: 0x417d94483aad61e3fcf065718b6cd9808c5f9de4 trades=4 volume=$4,418
+13:53:53 [scan]     features computed in 0.76s
+13:53:53 [scan]   wallet  19/100: 0xda66ddc4529eb7ac68add4eca06c37cdcde03f38 trades=1 volume=$4,042
+13:53:54 [scan]     features computed in 0.76s
+13:53:54 [scan]   wallet  20/100: 0xeca0c0888e34df59589c67fbe53dc7f298b5e8f8 trades=5 volume=$3,774
+13:53:54 [scan]     features computed in 0.84s
+13:53:54 [scan]   wallet  21/100: 0xa82b0e89cf734e2fa70cbd52ca65c77d64595220 trades=16 volume=$3,248
+13:53:55 [scan]     features computed in 0.72s
+13:53:55 [scan]   wallet  22/100: 0x3c593aeb73ebdadbc9ce76d4264a6a2af4011766 trades=1 volume=$3,121
+13:53:56 [scan]     features computed in 0.60s
+13:53:56 [scan]   wallet  23/100: 0xe617861a96631d7cefdb1ad43e95c33b5946f251 trades=2 volume=$3,000
+13:53:56 [scan]     features computed in 0.61s
+13:53:56 [scan]   wallet  24/100: 0x0182de4cf995819a63f63800fb1d161e53365e6a trades=1 volume=$2,989
+13:53:57 [scan]     features computed in 0.60s
+13:53:57 [scan]   wallet  25/100: 0xf4a88314195a3b86b477c8622e658d371ab1cef5 trades=1 volume=$2,968
+13:53:58 [scan]     features computed in 0.61s
+13:53:58 [scan]   wallet  26/100: 0x54b56146656e7eef9da02b3a030c18e06e924b31 trades=15 volume=$2,744
+13:53:58 [scan]     features computed in 0.68s
+13:53:58 [scan]   wallet  27/100: 0x9641771865c5d77a2a259bdde4cafc4d7e995002 trades=5 volume=$2,729
+13:53:59 [scan]     features computed in 0.62s
+13:53:59 [scan]   wallet  28/100: 0xf0f86cdb6872730ca12c84ff8b014a539b8c325f trades=5 volume=$2,317
+13:54:00 [scan]     features computed in 0.75s
+13:54:00 [scan]   wallet  29/100: 0xd301897411ee180ef936f172eca80d6dd5822a29 trades=1 volume=$2,300
+13:54:00 [scan]     features computed in 0.63s
+13:54:00 [scan]   wallet  30/100: 0x08458f7e9d2858027de579e4c3ca305475496b6f trades=3 volume=$2,274
+13:54:01 [scan]     features computed in 0.61s
+13:54:01 [scan]   wallet  31/100: 0x3f23b30667c4a380115bffd90c8ffb4d955327cb trades=2 volume=$2,125
+13:54:01 [scan]     features computed in 0.64s
+13:54:01 [scan]   wallet  32/100: 0xc84f7e76ec28ef20e7773b7b4926bfb7378be0c5 trades=1 volume=$2,109
+13:54:02 [scan]     features computed in 0.62s
+13:54:02 [scan]   wallet  33/100: 0x048215305cbcf7cc790735bf00119551d75c6b0a trades=2 volume=$1,894
+13:54:03 [scan]     features computed in 0.63s
+13:54:03 [scan]   wallet  34/100: 0xb1197584bdc1b2af385767a0a3014dd86dae8d46 trades=14 volume=$1,893
+13:54:04 [scan]     features computed in 0.77s
+13:54:04 [scan]   wallet  35/100: 0xa7d2119a2379311081df679641bc97f148a17c9e trades=1 volume=$1,811
+13:54:04 [scan]     features computed in 0.62s
+13:54:04 [scan]   wallet  36/100: 0xc6393f5177345cf7b9d9f3fbb782fd72da00c5a2 trades=3 volume=$1,807
+13:54:05 [scan]     features computed in 0.71s
+13:54:05 [scan]   wallet  37/100: 0x4d774ef602fd62869a20ae91ed6bf93f7fd6af31 trades=2 volume=$1,730
+13:54:05 [scan]     features computed in 0.65s
+13:54:05 [scan]   wallet  38/100: 0xe7387473b067235436884d16799777cf279edf65 trades=1 volume=$1,621
+13:54:06 [scan]     features computed in 0.66s
+13:54:06 [scan]   wallet  39/100: 0xd5d75539d4914aadfafd042c10141e5f45e44952 trades=5 volume=$1,613
+13:54:07 [scan]     features computed in 0.64s
+13:54:07 [scan]   wallet  40/100: 0x8233768a4f1379ed370987d4eff2130dfd4bdf36 trades=1 volume=$1,600
+13:54:08 [scan]     features computed in 0.80s
+13:54:08 [scan]   wallet  41/100: 0x4eb19ab1a866bcc12e7e7bd7d468a3c68a244547 trades=1 volume=$1,479
+13:54:08 [scan]     features computed in 0.80s
+13:54:08 [scan]   wallet  42/100: 0x58c6a0116e790ebf1569604efa3edaddcfeed759 trades=1 volume=$1,477
+13:54:09 [scan]     features computed in 0.85s
+13:54:09 [scan]   wallet  43/100: 0xe9076a87c5ed90ef16e6fe6529c943baeca0cff6 trades=16 volume=$1,411
+13:54:10 [scan]     features computed in 0.80s
+13:54:10 [scan]   wallet  44/100: 0x8963b73b5073df78790256e5fb7ba8d6172cde64 trades=1 volume=$1,390
+13:54:11 [scan]     features computed in 0.67s
+13:54:11 [scan]   wallet  45/100: 0x453ae5e896ea243f332ed97c1c77bf2888ce81d2 trades=30 volume=$1,341
+13:54:12 [scan]     features computed in 0.93s
+13:54:12 [scan]   wallet  46/100: 0xe3d176f5eb48cd7c370236020cb6baee37a4d312 trades=2 volume=$1,330
+13:54:12 [scan]     features computed in 0.68s
+13:54:12 [scan]   wallet  47/100: 0xb57f32b266272366152b86901b218ac8c5d26ceb trades=1 volume=$1,200
+13:54:13 [scan]     features computed in 0.67s
+13:54:13 [scan]   wallet  48/100: 0xd69dac3f5dc1652701c1c730e63e14736d860374 trades=1 volume=$1,196
+13:54:14 [scan]     features computed in 0.68s
+13:54:14 [scan]   wallet  49/100: 0xd426adbc3c4461c86099c26221c877f20e42334a trades=2 volume=$1,117
+13:54:14 [scan]     features computed in 0.68s
+13:54:14 [scan]   wallet  50/100: 0xa03201c619f89158f3e57f48bf0304cf70a7679e trades=5 volume=$1,050
+13:54:15 [scan]     features computed in 0.71s
+13:54:15 [scan]   wallet  51/100: 0x7a3c613f4db5ec4f6f9cb8583ba45fd2fe41977c trades=5 volume=$1,050
+13:54:16 [scan]     features computed in 0.73s
+13:54:16 [scan]   wallet  52/100: 0x77335719f5c46f2539a8814c3cb0404a44790223 trades=2 volume=$1,010
+13:54:17 [scan]     features computed in 0.81s
+13:54:17 [scan]   wallet  53/100: 0xd8c18c730ec4ec15d776c15cf2e4a38bca0916c0 trades=2 volume=$1,009
+13:54:17 [scan]     features computed in 0.71s
+13:54:17 [scan]   wallet  54/100: 0x9690d9f51b618222c29567c3b39aac2935a5f2d5 trades=3 volume=$1,005
+13:54:18 [scan]     features computed in 0.71s
+13:54:18 [scan]   wallet  55/100: 0xfc1f2cdad82b15b8191b9985dd1ac70441bca246 trades=4 volume=$1,000
+13:54:19 [scan]     features computed in 0.72s
+13:54:19 [scan]   wallet  56/100: 0x49aa37eaa5cddd680069254d2a4f4254f4f8917a trades=2 volume=$986
+13:54:19 [scan]     features computed in 0.70s
+13:54:19 [scan]   wallet  57/100: 0xce5fcb7940135fa07628b26f71a48ed31ff91912 trades=3 volume=$959
+13:54:20 [scan]     features computed in 0.72s
+13:54:20 [scan]   wallet  58/100: 0xe8a2057abd53d285f7bea590b8f1dff1f04454c2 trades=7 volume=$950
+13:54:21 [scan]     features computed in 0.76s
+13:54:21 [scan]   wallet  59/100: 0x5ad2aa77406c78c6f14cb4ee8469f2fc5d2a3a5d trades=2 volume=$941
+13:54:22 [scan]     features computed in 0.71s
+13:54:22 [scan]   wallet  60/100: 0x88e2b1b6c7847828fc91af43aba2fee07fb07489 trades=1 volume=$932
+13:54:22 [scan]     features computed in 0.70s
+13:54:22 [scan]   wallet  61/100: 0x6debcda3ccc008512151afe37bc3676e5e50eb68 trades=1 volume=$908
+13:54:23 [scan]     features computed in 0.68s
+13:54:23 [scan]   wallet  62/100: 0xb51b3beffd13cde071ed799e70a7b0b598e8b4d9 trades=14 volume=$835
+13:54:24 [scan]     features computed in 0.77s
+13:54:24 [scan]   wallet  63/100: 0xd67ba35aef659c872377a5ac2becb7ada7f85780 trades=4 volume=$817
+13:54:24 [scan]     features computed in 0.69s
+13:54:24 [scan]   wallet  64/100: 0x5f88abaa08e8450f8a7c582165cba13df085da69 trades=2 volume=$800
+13:54:25 [scan]     features computed in 0.68s
+13:54:25 [scan]   wallet  65/100: 0xe64e2072870219b2ff9490f2e7aee6b1d007c86f trades=1 volume=$788
+13:54:26 [scan]     features computed in 0.70s
+13:54:26 [scan]   wallet  66/100: 0x2e87ce8a92707ecd55832568891f457884243534 trades=3 volume=$778
+13:54:27 [scan]     features computed in 0.72s
+13:54:27 [scan]   wallet  67/100: 0x6c472c42eac19a5b0cb31758423606995af8bcb4 trades=2 volume=$747
+13:54:27 [scan]     features computed in 0.78s
+13:54:27 [scan]   wallet  68/100: 0xa8d33888275723ed37447ab1cc06cabb711902e4 trades=2 volume=$731
+13:54:28 [scan]     features computed in 0.76s
+13:54:28 [scan]   wallet  69/100: 0x9e5940f7664ea4f2df4813a6a205c579b018ff78 trades=2 volume=$720
+13:54:29 [scan]     features computed in 0.75s
+13:54:29 [scan]   wallet  70/100: 0x5297f1e1d0f0584537af763652a0a5f874037b99 trades=8 volume=$707
+13:54:30 [scan]     features computed in 0.75s
+13:54:30 [scan]   wallet  71/100: 0x0dc5a561af3e3d14bec8b8fc7ef2c0776252a303 trades=1 volume=$700
+13:54:30 [scan]     features computed in 0.69s
+13:54:30 [scan]   wallet  72/100: 0x43a6d60de9824e8ed8b0a2d851f49fcaf1e38b32 trades=2 volume=$655
+13:54:31 [scan]     features computed in 0.70s
+13:54:31 [scan]   wallet  73/100: 0x6ca1509d6b37b1cc68ebdadd69144a8c93ef0a54 trades=1 volume=$633
+13:54:32 [scan]     features computed in 0.70s
+13:54:32 [scan]   wallet  74/100: 0x4e8deac8c35ff5321fe8a0a9fb6dfc4b0bbf3b13 trades=4 volume=$620
+13:54:32 [scan]     features computed in 0.72s
+13:54:32 [scan]   wallet  75/100: 0xdf903ee52261f475ee5a02f9189acdb7cdba41f0 trades=2 volume=$609
+13:54:33 [scan]     features computed in 0.70s
+13:54:33 [scan]   wallet  76/100: 0x7db2ee2b58c0eb9dc908d0b261852a37002c3ce5 trades=5 volume=$602
+13:54:34 [scan]     features computed in 0.83s
+13:54:34 [scan]   wallet  77/100: 0xcfaeddb1310704f16d1f2b956d712b8c209b9ded trades=2 volume=$598
+13:54:35 [scan]     features computed in 0.70s
+13:54:35 [scan]   wallet  78/100: 0x72cb21bcb53cc87a782984654c23e763f6630f84 trades=1 volume=$598
+13:54:35 [scan]     features computed in 0.70s
+13:54:35 [scan]   wallet  79/100: 0xff9152ac8cb6260419ea8940248177083aceab3a trades=3 volume=$567
+13:54:36 [scan]     features computed in 0.70s
+13:54:36 [scan]   wallet  80/100: 0xbde3e2c2b72948e8e8cd4ce56df40de98de46019 trades=1 volume=$550
+13:54:37 [scan]     features computed in 0.70s
+13:54:37 [scan]   wallet  81/100: 0x10fc6c4395bc1690ee6b79a1f0e93a1a0b6b9606 trades=2 volume=$521
+13:54:37 [scan]     features computed in 0.70s
+13:54:37 [scan]   wallet  82/100: 0x78cc6987a25d57e367fd4eb19df27612393bc56e trades=1 volume=$500
+13:54:38 [scan]     features computed in 0.68s
+13:54:38 [scan]   wallet  83/100: 0xefde9ff487fae209ab6e3157a8acb4276f9c783d trades=1 volume=$499
+13:54:39 [scan]     features computed in 0.68s
+13:54:39 [scan]   wallet  84/100: 0xb388faa077c5ec88afde0bf6c534a5a2b3a1134b trades=1 volume=$497
+13:54:39 [scan]     features computed in 0.67s
+13:54:39 [scan]   wallet  85/100: 0xcc2620f9e3cb4498e8aea556764ec341357932ca trades=1 volume=$494
+13:54:40 [scan]     features computed in 0.68s
+13:54:40 [scan]   wallet  86/100: 0x4478d7bd8a295691ac84f60a5ec2b47e122102a4 trades=1 volume=$481
+13:54:41 [scan]     features computed in 0.69s
+13:54:41 [scan]   wallet  87/100: 0x69c96d22e1be6f6cd9fa32bb45f5fd5b7b423b29 trades=5 volume=$480
+13:54:42 [scan]     features computed in 0.73s
+13:54:42 [scan]   wallet  88/100: 0x73bd6fe5e63170e591e08b0705176b90e90924eb trades=1 volume=$450
+13:54:42 [scan]     features computed in 0.81s
+13:54:42 [scan]   wallet  89/100: 0x7c07c5c0a89351f039841e1cef1a24dd9f41af36 trades=1 volume=$450
+13:54:43 [scan]     features computed in 0.73s
+13:54:43 [scan]   wallet  90/100: 0xa20aa87bc8e6938739e57e80638cfeaa23abd92d trades=1 volume=$434
+13:54:44 [scan]     features computed in 0.71s
+13:54:44 [scan]   wallet  91/100: 0x279c5de35108afc30b99f09e595555b428e92b82 trades=32 volume=$433
+13:54:45 [scan]     features computed in 0.86s
+13:54:45 [scan]   wallet  92/100: 0xa8c63f775ddbbe66b56614191747def3021444e8 trades=1 volume=$428
+13:54:45 [scan]     features computed in 0.77s
+13:54:45 [scan]   wallet  93/100: 0x09811a0e6d90b4514905203322cb863d53daf923 trades=1 volume=$422
+13:54:46 [scan]     features computed in 0.88s
+13:54:46 [scan]   wallet  94/100: 0x0487e8a5e55adc1397f07d69f642856acddb33bd trades=1 volume=$410
+13:54:47 [scan]     features computed in 0.74s
+13:54:47 [scan]   wallet  95/100: 0x12d6cccfc7470a3f4bafc53599a4779cbf2cf2a8 trades=1 volume=$400
+13:54:48 [scan]     features computed in 0.82s
+13:54:48 [scan]   wallet  96/100: 0xa1ff95f5a95ee4ff5f325c3ffcae62a9584c9a1d trades=1 volume=$400
+13:54:49 [scan]     features computed in 0.89s
+13:54:49 [scan]   wallet  97/100: 0x34ab676b682e8132484a1c041f2c67706f063eb5 trades=1 volume=$394
+13:54:50 [scan]     features computed in 0.75s
+13:54:50 [scan]   wallet  98/100: 0xfe1f92e2afcc700ddaa87d158ac08e4d0ffac113 trades=1 volume=$380
+13:54:50 [scan]     features computed in 0.88s
+13:54:50 [scan]   wallet  99/100: 0x3d1ddc7d17ad7bb6e6f23acae0018b68a6e90886 trades=1 volume=$377
+13:54:51 [scan]     features computed in 0.79s
+13:54:51 [scan]   wallet 100/100: 0x0b13ffcfaa14fdf81196a961e1c5750b697a5957 trades=3 volume=$368
+13:54:52 [scan]     features computed in 0.75s
+13:54:52 [scan]   features: computed 100 wallets in 85.4s, saved to cache/features_30feat/us-iran-nuclear-deal-by-may-31-974.parquet
+13:54:52 [scan]   scoring: 0/100 flagged at threshold 0.7
+13:54:52 [scan]   market done in 87.4s: 0 flagged
+13:54:52 [scan] 
+13:54:52 [scan] ============================================================
+13:54:52 [scan] market 4/5: us-iran-nuclear-deal-by-june-30
+13:54:52 [scan] ============================================================
+13:54:52 [scan]   resolved: tokens=2 closed=False duration=162.8d
+13:54:52 [scan]   events: fetching (recursive-split, both tokens, both sides)...
+[polycluster:us-iran-nuclear-deal-by-june-30] get_orderfilled_events: 2 token(s), window=[1766011693, 1780077292] (14065599s)
+[polycluster:us-iran-nuclear-deal-by-june-30]   (1/4) token 1/2 side=maker: starting...
+[polycluster:us-iran-nuclear-deal-by-june-30]     d=0 side=maker [1766011693, 1780077292] (14065599s): 1000 rows in 0.52s -> saturated, splitting at 1773044492
+[polycluster:us-iran-nuclear-deal-by-june-30]     d=1 side=maker [1766011693, 1773044492] (7032799s): 1000 rows in 0.52s -> saturated, splitting at 1769528092
+[polycluster:us-iran-nuclear-deal-by-june-30]     d=2 side=maker [1766011693, 1769528092] (3516399s): 80 rows in 0.19s -> done
+[polycluster:us-iran-nuclear-deal-by-june-30]     d=2 side=maker [1769528093, 1773044492] (3516399s): 1000 rows in 0.47s -> saturated, splitting at 1771286292
+[polycluster:us-iran-nuclear-deal-by-june-30]     d=3 side=maker [1769528093, 1771286292] (1758199s): 1000 rows in 0.47s -> saturated, splitting at 1770407192
+[polycluster:us-iran-nuclear-deal-by-june-30]     d=4 side=maker [1769528093, 1770407192] (879099s): 425 rows in 0.36s -> done
+[polycluster:us-iran-nuclear-deal-by-june-30]     d=4 side=maker [1770407193, 1771286292] (879099s): 786 rows in 0.35s -> done
+[polycluster:us-iran-nuclear-deal-by-june-30]     d=3 side=maker [1771286293, 1773044492] (1758199s): 1000 rows in 0.48s -> saturated, splitting at 1772165392
+[polycluster:us-iran-nuclear-deal-by-june-30]     d=4 side=maker [1771286293, 1772165392] (879099s): 554 rows in 0.63s -> done
+[polycluster:us-iran-nuclear-deal-by-june-30]     d=4 side=maker [1772165393, 1773044492] (879099s): 1000 rows in 0.61s -> saturated, splitting at 1772604942
+[polycluster:us-iran-nuclear-deal-by-june-30]     d=5 side=maker [1772165393, 1772604942] (439549s): 794 rows in 0.49s -> done
+[polycluster:us-iran-nuclear-deal-by-june-30]     d=5 side=maker [1772604943, 1773044492] (439549s): 338 rows in 0.41s -> done
+[polycluster:us-iran-nuclear-deal-by-june-30]     d=1 side=maker [1773044493, 1780077292] (7032799s): 1000 rows in 0.73s -> saturated, splitting at 1776560892
+[polycluster:us-iran-nuclear-deal-by-june-30]     d=2 side=maker [1773044493, 1776560892] (3516399s): 1000 rows in 0.58s -> saturated, splitting at 1774802692
+[polycluster:us-iran-nuclear-deal-by-june-30]     d=3 side=maker [1773044493, 1774802692] (1758199s): 980 rows in 0.54s -> done
+[polycluster:us-iran-nuclear-deal-by-june-30]     d=3 side=maker [1774802693, 1776560892] (1758199s): 1000 rows in 0.55s -> saturated, splitting at 1775681792
+[polycluster:us-iran-nuclear-deal-by-june-30]     d=4 side=maker [1774802693, 1775681792] (879099s): 483 rows in 0.34s -> done
+[polycluster:us-iran-nuclear-deal-by-june-30]     d=4 side=maker [1775681793, 1776560892] (879099s): 1000 rows in 0.42s -> saturated, splitting at 1776121342
+[polycluster:us-iran-nuclear-deal-by-june-30]     d=5 side=maker [1775681793, 1776121342] (439549s): 585 rows in 0.36s -> done
+[polycluster:us-iran-nuclear-deal-by-june-30]     d=5 side=maker [1776121343, 1776560892] (439549s): 762 rows in 3.47s -> done
+[polycluster:us-iran-nuclear-deal-by-june-30]     d=2 side=maker [1776560893, 1780077292] (3516399s): 1000 rows in 0.58s -> saturated, splitting at 1778319092
+[polycluster:us-iran-nuclear-deal-by-june-30]     d=3 side=maker [1776560893, 1778319092] (1758199s): 1000 rows in 0.48s -> saturated, splitting at 1777439992
+[polycluster:us-iran-nuclear-deal-by-june-30]     d=4 side=maker [1776560893, 1777439992] (879099s): 1000 rows in 0.48s -> saturated, splitting at 1777000442
+[polycluster:us-iran-nuclear-deal-by-june-30]     d=5 side=maker [1776560893, 1777000442] (439549s): 799 rows in 0.47s -> done
+[polycluster:us-iran-nuclear-deal-by-june-30]     d=5 side=maker [1777000443, 1777439992] (439549s): 390 rows in 0.42s -> done
+[polycluster:us-iran-nuclear-deal-by-june-30]     d=4 side=maker [1777439993, 1778319092] (879099s): 0 rows in 0.18s -> done
+[polycluster:us-iran-nuclear-deal-by-june-30]     d=3 side=maker [1778319093, 1780077292] (1758199s): 0 rows in 0.21s -> done
+[polycluster:us-iran-nuclear-deal-by-june-30]   (1/4) token 1/2 side=maker: 6976 rows in 15.3s
+[polycluster:us-iran-nuclear-deal-by-june-30]   (2/4) token 1/2 side=taker: starting...
+[polycluster:us-iran-nuclear-deal-by-june-30]     d=0 side=taker [1766011693, 1780077292] (14065599s): 1000 rows in 0.44s -> saturated, splitting at 1773044492
+[polycluster:us-iran-nuclear-deal-by-june-30]     d=1 side=taker [1766011693, 1773044492] (7032799s): 1000 rows in 0.48s -> saturated, splitting at 1769528092
+[polycluster:us-iran-nuclear-deal-by-june-30]     d=2 side=taker [1766011693, 1769528092] (3516399s): 120 rows in 0.29s -> done
+[polycluster:us-iran-nuclear-deal-by-june-30]     d=2 side=taker [1769528093, 1773044492] (3516399s): 1000 rows in 0.47s -> saturated, splitting at 1771286292
+[polycluster:us-iran-nuclear-deal-by-june-30]     d=3 side=taker [1769528093, 1771286292] (1758199s): 1000 rows in 7.45s -> saturated, splitting at 1770407192
+[polycluster:us-iran-nuclear-deal-by-june-30]     d=4 side=taker [1769528093, 1770407192] (879099s): 596 rows in 0.41s -> done
+[polycluster:us-iran-nuclear-deal-by-june-30]     d=4 side=taker [1770407193, 1771286292] (879099s): 1000 rows in 0.46s -> saturated, splitting at 1770846742
+[polycluster:us-iran-nuclear-deal-by-june-30]     d=5 side=taker [1770407193, 1770846742] (439549s): 858 rows in 0.40s -> done
+[polycluster:us-iran-nuclear-deal-by-june-30]     d=5 side=taker [1770846743, 1771286292] (439549s): 330 rows in 0.41s -> done
+[polycluster:us-iran-nuclear-deal-by-june-30]     d=3 side=taker [1771286293, 1773044492] (1758199s): 1000 rows in 0.49s -> saturated, splitting at 1772165392
+[polycluster:us-iran-nuclear-deal-by-june-30]     d=4 side=taker [1771286293, 1772165392] (879099s): 649 rows in 0.34s -> done
+[polycluster:us-iran-nuclear-deal-by-june-30]     d=4 side=taker [1772165393, 1773044492] (879099s): 1000 rows in 0.48s -> saturated, splitting at 1772604942
+[polycluster:us-iran-nuclear-deal-by-june-30]     d=5 side=taker [1772165393, 1772604942] (439549s): 985 rows in 0.46s -> done
+[polycluster:us-iran-nuclear-deal-by-june-30]     d=5 side=taker [1772604943, 1773044492] (439549s): 357 rows in 0.41s -> done
+[polycluster:us-iran-nuclear-deal-by-june-30]     d=1 side=taker [1773044493, 1780077292] (7032799s): 1000 rows in 0.52s -> saturated, splitting at 1776560892
+[polycluster:us-iran-nuclear-deal-by-june-30]     d=2 side=taker [1773044493, 1776560892] (3516399s): 1000 rows in 0.48s -> saturated, splitting at 1774802692
+[polycluster:us-iran-nuclear-deal-by-june-30]     d=3 side=taker [1773044493, 1774802692] (1758199s): 1000 rows in 0.47s -> saturated, splitting at 1773923592
+[polycluster:us-iran-nuclear-deal-by-june-30]     d=4 side=taker [1773044493, 1773923592] (879099s): 401 rows in 0.46s -> done
+[polycluster:us-iran-nuclear-deal-by-june-30]     d=4 side=taker [1773923593, 1774802692] (879099s): 641 rows in 0.37s -> done
+[polycluster:us-iran-nuclear-deal-by-june-30]     d=3 side=taker [1774802693, 1776560892] (1758199s): 1000 rows in 0.55s -> saturated, splitting at 1775681792
+[polycluster:us-iran-nuclear-deal-by-june-30]     d=4 side=taker [1774802693, 1775681792] (879099s): 773 rows in 0.57s -> done
+[polycluster:us-iran-nuclear-deal-by-june-30]     d=4 side=taker [1775681793, 1776560892] (879099s): 1000 rows in 0.54s -> saturated, splitting at 1776121342
+[polycluster:us-iran-nuclear-deal-by-june-30]     d=5 side=taker [1775681793, 1776121342] (439549s): 825 rows in 0.58s -> done
+[polycluster:us-iran-nuclear-deal-by-june-30]     d=5 side=taker [1776121343, 1776560892] (439549s): 955 rows in 0.61s -> done
+[polycluster:us-iran-nuclear-deal-by-june-30]     d=2 side=taker [1776560893, 1780077292] (3516399s): 1000 rows in 0.53s -> saturated, splitting at 1778319092
+[polycluster:us-iran-nuclear-deal-by-june-30]     d=3 side=taker [1776560893, 1778319092] (1758199s): 1000 rows in 0.43s -> saturated, splitting at 1777439992
+[polycluster:us-iran-nuclear-deal-by-june-30]     d=4 side=taker [1776560893, 1777439992] (879099s): 1000 rows in 0.61s -> saturated, splitting at 1777000442
+[polycluster:us-iran-nuclear-deal-by-june-30]     d=5 side=taker [1776560893, 1777000442] (439549s): 1000 rows in 0.71s -> saturated, splitting at 1776780667
+[polycluster:us-iran-nuclear-deal-by-june-30]     d=6 side=taker [1776560893, 1776780667] (219774s): 430 rows in 0.39s -> done
+[polycluster:us-iran-nuclear-deal-by-june-30]     d=6 side=taker [1776780668, 1777000442] (219774s): 609 rows in 0.41s -> done
+[polycluster:us-iran-nuclear-deal-by-june-30]     d=5 side=taker [1777000443, 1777439992] (439549s): 408 rows in 0.40s -> done
+[polycluster:us-iran-nuclear-deal-by-june-30]     d=4 side=taker [1777439993, 1778319092] (879099s): 0 rows in 0.22s -> done
+[polycluster:us-iran-nuclear-deal-by-june-30]     d=3 side=taker [1778319093, 1780077292] (1758199s): 0 rows in 0.19s -> done
+[polycluster:us-iran-nuclear-deal-by-june-30]   (2/4) token 1/2 side=taker: 8937 rows in 22.1s
+[polycluster:us-iran-nuclear-deal-by-june-30]   (3/4) token 2/2 side=maker: starting...
+[polycluster:us-iran-nuclear-deal-by-june-30] [INFO] timeout on [1766011693, 1780077292] for side=maker; splitting into [1766011693, 1773044492] and [1773044493, 1780077292]
+[polycluster:us-iran-nuclear-deal-by-june-30]     d=1 side=maker [1766011693, 1773044492] (7032799s): 1000 rows in 8.44s -> saturated, splitting at 1769528092
+[polycluster:us-iran-nuclear-deal-by-june-30]     d=2 side=maker [1766011693, 1769528092] (3516399s): 133 rows in 0.88s -> done
+[polycluster:us-iran-nuclear-deal-by-june-30]     d=2 side=maker [1769528093, 1773044492] (3516399s): 1000 rows in 0.44s -> saturated, splitting at 1771286292
+[polycluster:us-iran-nuclear-deal-by-june-30]     d=3 side=maker [1769528093, 1771286292] (1758199s): 689 rows in 0.41s -> done
+[polycluster:us-iran-nuclear-deal-by-june-30]     d=3 side=maker [1771286293, 1773044492] (1758199s): 1000 rows in 0.47s -> saturated, splitting at 1772165392
+[polycluster:us-iran-nuclear-deal-by-june-30]     d=4 side=maker [1771286293, 1772165392] (879099s): 454 rows in 0.37s -> done
+[polycluster:us-iran-nuclear-deal-by-june-30]     d=4 side=maker [1772165393, 1773044492] (879099s): 833 rows in 0.48s -> done
+[polycluster:us-iran-nuclear-deal-by-june-30]     d=1 side=maker [1773044493, 1780077292] (7032799s): 1000 rows in 0.44s -> saturated, splitting at 1776560892
+[polycluster:us-iran-nuclear-deal-by-june-30]     d=2 side=maker [1773044493, 1776560892] (3516399s): 1000 rows in 0.57s -> saturated, splitting at 1774802692
+[polycluster:us-iran-nuclear-deal-by-june-30]     d=3 side=maker [1773044493, 1774802692] (1758199s): 465 rows in 0.35s -> done
+[polycluster:us-iran-nuclear-deal-by-june-30]     d=3 side=maker [1774802693, 1776560892] (1758199s): 1000 rows in 0.42s -> saturated, splitting at 1775681792
+[polycluster:us-iran-nuclear-deal-by-june-30]     d=4 side=maker [1774802693, 1775681792] (879099s): 429 rows in 0.35s -> done
+[polycluster:us-iran-nuclear-deal-by-june-30]     d=4 side=maker [1775681793, 1776560892] (879099s): 1000 rows in 0.59s -> saturated, splitting at 1776121342
+[polycluster:us-iran-nuclear-deal-by-june-30]     d=5 side=maker [1775681793, 1776121342] (439549s): 343 rows in 0.33s -> done
+[polycluster:us-iran-nuclear-deal-by-june-30]     d=5 side=maker [1776121343, 1776560892] (439549s): 707 rows in 0.37s -> done
+[polycluster:us-iran-nuclear-deal-by-june-30]     d=2 side=maker [1776560893, 1780077292] (3516399s): 1000 rows in 0.53s -> saturated, splitting at 1778319092
+[polycluster:us-iran-nuclear-deal-by-june-30]     d=3 side=maker [1776560893, 1778319092] (1758199s): 1000 rows in 0.46s -> saturated, splitting at 1777439992
+[polycluster:us-iran-nuclear-deal-by-june-30]     d=4 side=maker [1776560893, 1777439992] (879099s): 1000 rows in 0.42s -> saturated, splitting at 1777000442
+[polycluster:us-iran-nuclear-deal-by-june-30]     d=5 side=maker [1776560893, 1777000442] (439549s): 840 rows in 0.46s -> done
+[polycluster:us-iran-nuclear-deal-by-june-30]     d=5 side=maker [1777000443, 1777439992] (439549s): 411 rows in 0.35s -> done
+[polycluster:us-iran-nuclear-deal-by-june-30]     d=4 side=maker [1777439993, 1778319092] (879099s): 0 rows in 0.17s -> done
+[polycluster:us-iran-nuclear-deal-by-june-30]     d=3 side=maker [1778319093, 1780077292] (1758199s): 0 rows in 0.17s -> done
+[polycluster:us-iran-nuclear-deal-by-june-30]   (3/4) token 2/2 side=maker: 5304 rows in 19.7s
+[polycluster:us-iran-nuclear-deal-by-june-30]   (4/4) token 2/2 side=taker: starting...
+[polycluster:us-iran-nuclear-deal-by-june-30]     d=0 side=taker [1766011693, 1780077292] (14065599s): 1000 rows in 0.58s -> saturated, splitting at 1773044492
+[polycluster:us-iran-nuclear-deal-by-june-30]     d=1 side=taker [1766011693, 1773044492] (7032799s): 1000 rows in 0.47s -> saturated, splitting at 1769528092
+[polycluster:us-iran-nuclear-deal-by-june-30]     d=2 side=taker [1766011693, 1769528092] (3516399s): 198 rows in 0.27s -> done
+[polycluster:us-iran-nuclear-deal-by-june-30]     d=2 side=taker [1769528093, 1773044492] (3516399s): 1000 rows in 0.53s -> saturated, splitting at 1771286292
+[polycluster:us-iran-nuclear-deal-by-june-30]     d=3 side=taker [1769528093, 1771286292] (1758199s): 1000 rows in 0.48s -> saturated, splitting at 1770407192
+[polycluster:us-iran-nuclear-deal-by-june-30]     d=4 side=taker [1769528093, 1770407192] (879099s): 686 rows in 0.35s -> done
+[34m[polycluster:us-iran-nuclear-deal-by-june-30] heartbeat: 1 min elapsed[0m
+[polycluster:us-iran-nuclear-deal-by-june-30]     d=4 side=taker [1770407193, 1771286292] (879099s): 691 rows in 0.47s -> done
+[polycluster:us-iran-nuclear-deal-by-june-30]     d=3 side=taker [1771286293, 1773044492] (1758199s): 1000 rows in 0.55s -> saturated, splitting at 1772165392
+[polycluster:us-iran-nuclear-deal-by-june-30]     d=4 side=taker [1771286293, 1772165392] (879099s): 644 rows in 0.37s -> done
+[polycluster:us-iran-nuclear-deal-by-june-30]     d=4 side=taker [1772165393, 1773044492] (879099s): 975 rows in 0.92s -> done
+[polycluster:us-iran-nuclear-deal-by-june-30]     d=1 side=taker [1773044493, 1780077292] (7032799s): 1000 rows in 4.08s -> saturated, splitting at 1776560892
+[polycluster:us-iran-nuclear-deal-by-june-30]     d=2 side=taker [1773044493, 1776560892] (3516399s): 1000 rows in 0.53s -> saturated, splitting at 1774802692
+[polycluster:us-iran-nuclear-deal-by-june-30]     d=3 side=taker [1773044493, 1774802692] (1758199s): 458 rows in 0.36s -> done
+[polycluster:us-iran-nuclear-deal-by-june-30]     d=3 side=taker [1774802693, 1776560892] (1758199s): 1000 rows in 0.63s -> saturated, splitting at 1775681792
+[polycluster:us-iran-nuclear-deal-by-june-30]     d=4 side=taker [1774802693, 1775681792] (879099s): 735 rows in 0.47s -> done
+[polycluster:us-iran-nuclear-deal-by-june-30]     d=4 side=taker [1775681793, 1776560892] (879099s): 1000 rows in 0.49s -> saturated, splitting at 1776121342
+[polycluster:us-iran-nuclear-deal-by-june-30]     d=5 side=taker [1775681793, 1776121342] (439549s): 619 rows in 0.40s -> done
+[polycluster:us-iran-nuclear-deal-by-june-30]     d=5 side=taker [1776121343, 1776560892] (439549s): 864 rows in 0.59s -> done
+[polycluster:us-iran-nuclear-deal-by-june-30]     d=2 side=taker [1776560893, 1780077292] (3516399s): 1000 rows in 0.55s -> saturated, splitting at 1778319092
+[polycluster:us-iran-nuclear-deal-by-june-30]     d=3 side=taker [1776560893, 1778319092] (1758199s): 1000 rows in 0.54s -> saturated, splitting at 1777439992
+[polycluster:us-iran-nuclear-deal-by-june-30]     d=4 side=taker [1776560893, 1777439992] (879099s): 1000 rows in 4.46s -> saturated, splitting at 1777000442
+[polycluster:us-iran-nuclear-deal-by-june-30]     d=5 side=taker [1776560893, 1777000442] (439549s): 1000 rows in 0.47s -> saturated, splitting at 1776780667
+[polycluster:us-iran-nuclear-deal-by-june-30]     d=6 side=taker [1776560893, 1776780667] (219774s): 536 rows in 0.42s -> done
+[polycluster:us-iran-nuclear-deal-by-june-30]     d=6 side=taker [1776780668, 1777000442] (219774s): 517 rows in 0.36s -> done
+[polycluster:us-iran-nuclear-deal-by-june-30]     d=5 side=taker [1777000443, 1777439992] (439549s): 431 rows in 0.35s -> done
+[polycluster:us-iran-nuclear-deal-by-june-30]     d=4 side=taker [1777439993, 1778319092] (879099s): 0 rows in 0.16s -> done
+[polycluster:us-iran-nuclear-deal-by-june-30]     d=3 side=taker [1778319093, 1780077292] (1758199s): 0 rows in 0.17s -> done
+[polycluster:us-iran-nuclear-deal-by-june-30]   (4/4) token 2/2 side=taker: 7354 rows in 20.1s
+[polycluster:us-iran-nuclear-deal-by-june-30] get_orderfilled_events: done, 28571 unique rows in 77.3s
+13:56:09 [scan]   events: fetched 28571 in 77.3s
+13:56:10 [scan]   events: cached to cache/events/us-iran-nuclear-deal-by-june-30.pkl
+13:56:10 [scan]   wallets: 3111 total, taking top 100 by volume
+13:56:10 [scan]   market: closed=False, final_outcome_yes=None
+13:56:10 [scan]   wallet   1/100: 0x4bfb41d5b3570defd03c39a9a4d8de6bd8b8982e trades=10153 volume=$664,330
+13:56:56 [scan]     features computed in 45.65s
+13:56:56 [scan]   wallet   2/100: 0xfc2f4f50ce2f6045d35558a5e2d8d4b2ac6610c7 trades=722 volume=$124,801
+13:57:02 [scan]     features computed in 5.99s
+13:57:02 [scan]   wallet   3/100: 0xbaa2bcb5439e985ce4ccf815b4700027d1b92c73 trades=488 volume=$82,103
+13:57:07 [scan]     features computed in 5.44s
+13:57:07 [scan]   wallet   4/100: 0x6d9fc316c3b8377060a44b852ba664adbfd59790 trades=495 volume=$61,561
+13:57:14 [scan]     features computed in 6.67s
+13:57:14 [scan]   wallet   5/100: 0x05e26c775ecfe91b897d47f134c1bf5900ca6e12 trades=104 volume=$56,290
+13:57:18 [scan]     features computed in 4.16s
+13:57:18 [scan]   wallet   6/100: 0x52f9c45a6fa8182649067bef26209878b935e1c7 trades=281 volume=$52,311
+13:57:23 [scan]     features computed in 4.58s
+13:57:23 [scan]   wallet   7/100: 0xc8ab97a9089a9ff7e6ef0688e6e591a066946418 trades=558 volume=$50,348
+13:57:28 [scan]     features computed in 5.77s
+13:57:28 [scan]   wallet   8/100: 0x765d8f05b331f2a7d49e7b887a53fdbfafc40929 trades=22 volume=$41,857
+13:57:32 [scan]     features computed in 3.87s
+13:57:32 [scan]   wallet   9/100: 0xfd88805b5206417d66127ffd96679e22c0794037 trades=120 volume=$32,190
+13:57:37 [scan]     features computed in 4.32s
+13:57:37 [scan]   wallet  10/100: 0x5fbda3012b33020fd58265779b2836575d8cfb37 trades=13 volume=$27,321
+13:57:40 [scan]     features computed in 3.20s
+13:57:40 [scan]   wallet  11/100: 0x8929a63143fba9416c8e0d3c96388b429c47733e trades=572 volume=$26,674
+13:57:45 [scan]     features computed in 4.77s
+13:57:45 [scan]   wallet  12/100: 0x162f6fff88a52864f2ecc9833e58089d5254798d trades=140 volume=$23,447
+13:57:49 [scan]     features computed in 4.08s
+13:57:49 [scan]   wallet  13/100: 0x6b0ebbef2630b9a0da35594bf7ddd1911246e3ea trades=1328 volume=$23,170
+13:57:55 [scan]     features computed in 6.50s
+13:57:55 [scan]   wallet  14/100: 0x8b404b3d7ef227378c95d4a9c60d1362a7d78ab4 trades=157 volume=$22,782
+13:57:59 [scan]     features computed in 3.60s
+13:57:59 [scan]   wallet  15/100: 0xf99f21209545865c45961f413b93b8a2c46b8742 trades=158 volume=$22,497
+13:58:03 [scan]     features computed in 4.04s
+13:58:03 [scan]   wallet  16/100: 0x4ef7e2e97735a144c35c04bf22bcac184d3221be trades=235 volume=$21,512
+13:58:07 [scan]     features computed in 4.07s
+13:58:07 [scan]   wallet  17/100: 0x21ffd2b7a212a6f277ed3eca1a9f8efcbca90d71 trades=619 volume=$21,158
+13:58:12 [scan]     features computed in 5.37s
+13:58:12 [scan]   wallet  18/100: 0x25257a6a89dba93dd0c536b6279365632a4eb919 trades=54 volume=$20,791
+13:58:16 [scan]     features computed in 3.52s
+13:58:16 [scan]   wallet  19/100: 0xc7e53ac4a7c76d6df8b794de2e7d0794265d2d3a trades=114 volume=$20,048
+13:58:20 [scan]     features computed in 3.88s
+13:58:20 [scan]   wallet  20/100: 0xc89dc66e04aa7cd9a38334cca48abf3ad45bb1f1 trades=71 volume=$19,704
+13:58:24 [scan]     features computed in 4.39s
+13:58:24 [scan]   wallet  21/100: 0x4c2da46b289847e3e8377c6f4ca3d520c620f8ae trades=114 volume=$18,322
+13:58:31 [scan]     features computed in 6.97s
+13:58:31 [scan]   wallet  22/100: 0xdbade4c82fb72780a0db9a38f821d8671aba9c95 trades=18 volume=$15,878
+13:58:36 [scan]     features computed in 4.81s
+13:58:36 [scan]   wallet  23/100: 0xa65c87d5fa12469300aaa71e6237af2f2d147997 trades=85 volume=$13,912
+13:58:40 [scan]     features computed in 4.27s
+13:58:40 [scan]   wallet  24/100: 0x8597ca63e722d6216bfc3057591fdc67ec49daee trades=55 volume=$13,786
+13:58:44 [scan]     features computed in 4.31s
+13:58:44 [scan]   wallet  25/100: 0x52b74441def3510e1839eadac7875423c0b54597 trades=36 volume=$13,643
+13:58:49 [scan]     features computed in 4.44s
+13:58:49 [scan]   wallet  26/100: 0xf27de6607cbd15be1133619b9807ff63fb86e6d3 trades=314 volume=$13,447
+13:58:55 [scan]     features computed in 5.77s
+13:58:55 [scan]   wallet  27/100: 0xd426adbc3c4461c86099c26221c877f20e42334a trades=282 volume=$13,081
+13:59:01 [scan]     features computed in 6.12s
+13:59:01 [scan]   wallet  28/100: 0xa9ed38f8fc1feacb5fb79214d022f6044126b115 trades=54 volume=$12,417
+13:59:05 [scan]     features computed in 3.93s
+13:59:05 [scan]   wallet  29/100: 0x9690d9f51b618222c29567c3b39aac2935a5f2d5 trades=48 volume=$12,203
+13:59:08 [scan]     features computed in 3.54s
+13:59:08 [scan]   wallet  30/100: 0x4bbe10ba5b7f6df147c0dae17b46c44a6e562cf3 trades=13 volume=$11,658
+13:59:12 [scan]     features computed in 3.77s
+13:59:12 [scan]   wallet  31/100: 0xa125bf85558fcea40cf0b969101e0025b14600ab trades=53 volume=$11,597
+13:59:16 [scan]     features computed in 3.97s
+13:59:16 [scan]   wallet  32/100: 0x166a49699aba5d7a9ce3142450062deedf83d7ed trades=249 volume=$11,383
+13:59:21 [scan]     features computed in 5.04s
+13:59:21 [scan]   wallet  33/100: 0xbacd00c9080a82ded56f504ee8810af732b0ab35 trades=168 volume=$10,984
+13:59:26 [scan]     features computed in 5.03s
+13:59:26 [scan]   wallet  34/100: 0x4e84ce1599d3d0272932a729c2a3310b734bef69 trades=936 volume=$10,945
+13:59:34 [scan]     features computed in 7.64s
+13:59:34 [scan]   wallet  35/100: 0x54e4e0c5a81e664b37fd0bf906969b4507e270b0 trades=89 volume=$10,920
+13:59:38 [scan]     features computed in 4.07s
+13:59:38 [scan]   wallet  36/100: 0xa60e25dcbd3477287fcd65168854b991877ed332 trades=25 volume=$10,769
+13:59:42 [scan]     features computed in 3.88s
+13:59:42 [scan]   wallet  37/100: 0xf1b29b5ad60ca3243e383d83dc4c8eeec40fa321 trades=66 volume=$10,547
+13:59:46 [scan]     features computed in 4.19s
+13:59:46 [scan]   wallet  38/100: 0xc15700bb8059622268598014618f89057ff2728c trades=71 volume=$10,439
+13:59:50 [scan]     features computed in 3.93s
+13:59:50 [scan]   wallet  39/100: 0x5060b41a1be40a63b7da2075e42479b29157a780 trades=63 volume=$10,173
+13:59:54 [scan]     features computed in 4.44s
+13:59:54 [scan]   wallet  40/100: 0xa206f73ff9d1312ab989507ca16c72645a8b2cad trades=24 volume=$10,073
+13:59:58 [scan]     features computed in 3.68s
+13:59:58 [scan]   wallet  41/100: 0x4e25605fd905e9972efc0f4d8814530c655cd7a7 trades=105 volume=$9,959
+14:00:02 [scan]     features computed in 4.37s
+14:00:02 [scan]   wallet  42/100: 0x48afe8fbde091ff3e616901dc92ef20862c289cc trades=87 volume=$9,875
+14:00:06 [scan]     features computed in 3.87s
+14:00:06 [scan]   wallet  43/100: 0x449c7483aade15b5c4772fab7becc60a1c20879e trades=91 volume=$9,843
+14:00:10 [scan]     features computed in 4.15s
+14:00:10 [scan]   wallet  44/100: 0xf9b71663d723d28fa455db659098e1dacde860a4 trades=47 volume=$9,470
+14:00:14 [scan]     features computed in 3.65s
+14:00:14 [scan]   wallet  45/100: 0x04902c7046da0f93f29d070b00f9366a165ac81f trades=32 volume=$9,349
+14:00:18 [scan]     features computed in 4.12s
+14:00:18 [scan]   wallet  46/100: 0x75d1b199a96801338e67a6efaa35c0028ea87a5f trades=240 volume=$9,102
+14:00:22 [scan]     features computed in 4.08s
+14:00:22 [scan]   wallet  47/100: 0x9d84ce0306f8551e02efef1680475fc0f1dc1344 trades=399 volume=$8,338
+14:00:28 [scan]     features computed in 5.50s
+14:00:28 [scan]   wallet  48/100: 0x27db6ea9051c6e2d68a8ff1fc2984e764c73e863 trades=42 volume=$7,975
+14:00:32 [scan]     features computed in 4.02s
+14:00:32 [scan]   wallet  49/100: 0x8a98109fb0f1d87d9bfcb4486ba3587b95c51b92 trades=336 volume=$7,966
+14:00:36 [scan]     features computed in 4.86s
+14:00:36 [scan]   wallet  50/100: 0x872e0b272a382555b38da0f84af413b8b3b5e58f trades=103 volume=$7,864
+14:00:40 [scan]     features computed in 3.97s
+14:00:40 [scan]   wallet  51/100: 0xa5e3044fd953605f9407d58c76e48fd75a394d7e trades=380 volume=$7,706
+14:00:45 [scan]     features computed in 4.61s
+14:00:45 [scan]   wallet  52/100: 0x24ce79dcc6e0f4795de998fa4dfb06b5d66657e9 trades=57 volume=$7,666
+14:00:49 [scan]     features computed in 3.82s
+14:00:49 [scan]   wallet  53/100: 0xd14aa86fa6cac2e09edd9944f5c0c0d48634a8ad trades=101 volume=$7,622
+14:00:53 [scan]     features computed in 3.81s
+14:00:53 [scan]   wallet  54/100: 0x54b56146656e7eef9da02b3a030c18e06e924b31 trades=80 volume=$7,611
+14:00:57 [scan]     features computed in 4.37s
+14:00:57 [scan]   wallet  55/100: 0x5739ddf8672627ce076eff5f444610a250075f1a trades=21 volume=$7,545
+14:01:00 [scan]     features computed in 3.19s
+14:01:00 [scan]   wallet  56/100: 0xadd181d7e094191ea2827a00447510b65f90a4a3 trades=77 volume=$7,469
+14:01:03 [scan]     features computed in 3.25s
+14:01:03 [scan]   wallet  57/100: 0x076ca0207aaa48365da2eb6a917edcbdee5e4e7b trades=155 volume=$7,363
+14:01:07 [scan]     features computed in 3.23s
+14:01:07 [scan]   wallet  58/100: 0x158a12f1bf4d315001da1efbdf08977d9bca03fc trades=145 volume=$7,263
+14:01:11 [scan]     features computed in 3.86s
+14:01:11 [scan]   wallet  59/100: 0x4478d7bd8a295691ac84f60a5ec2b47e122102a4 trades=32 volume=$7,221
+14:01:14 [scan]     features computed in 3.16s
+14:01:14 [scan]   wallet  60/100: 0x5fdf53c267dc00e8e97f30e9eec169fede0228a2 trades=29 volume=$7,117
+14:01:17 [scan]     features computed in 3.27s
+14:01:17 [scan]   wallet  61/100: 0x6f7b549e2537dd052e54f1b2cb2ffc18750b62de trades=19 volume=$6,774
+14:01:20 [scan]     features computed in 3.17s
+14:01:20 [scan]   wallet  62/100: 0xac4a1fabdac2438d6afa2a9e8e83845310a0bf1e trades=217 volume=$6,704
+14:01:24 [scan]     features computed in 3.41s
+14:01:24 [scan]   wallet  63/100: 0x3a86226f3c57e9845c7acb09c0b28413cc3c4216 trades=42 volume=$6,689
+14:01:27 [scan]     features computed in 3.47s
+14:01:27 [scan]   wallet  64/100: 0x22dbd51e1a4e10fff072fa24300238c64033190f trades=148 volume=$6,606
+14:01:31 [scan]     features computed in 4.02s
+14:01:31 [scan]   wallet  65/100: 0x85d575c99b977e9e39543747c859c83b727aaece trades=8 volume=$6,535
+14:01:34 [scan]     features computed in 3.18s
+14:01:34 [scan]   wallet  66/100: 0x7523cafcee7bcf2db9a79d80e0d79b88a9a54c4c trades=8 volume=$6,500
+14:01:38 [scan]     features computed in 3.54s
+14:01:38 [scan]   wallet  67/100: 0x32d1623dddbd4841a98da71e47f0436d2ef2b949 trades=81 volume=$6,436
+14:01:41 [scan]     features computed in 3.65s
+14:01:41 [scan]   wallet  68/100: 0x1b824fc89b8b8dcc3929b2bcb7ceeddc2f737a36 trades=111 volume=$6,099
+14:01:46 [scan]     features computed in 4.30s
+14:01:46 [scan]   wallet  69/100: 0x7420b565f900abc90eb30db403bfe4d3fb1426e2 trades=75 volume=$5,971
+14:01:49 [scan]     features computed in 3.57s
+14:01:49 [scan]   wallet  70/100: 0xde7be6d489bce070a959e0cb813128ae659b5f4b trades=16 volume=$5,867
+14:01:53 [scan]     features computed in 3.54s
+14:01:53 [scan]   wallet  71/100: 0xc97b0b2a2547bb3ed57167092ef8a6e816c347e5 trades=20 volume=$5,811
+14:01:56 [scan]     features computed in 3.36s
+14:01:56 [scan]   wallet  72/100: 0x9ca119b8cd7bdb890aecf1ff3b0f6e3a45cc13b5 trades=50 volume=$5,778
+14:02:00 [scan]     features computed in 3.30s
+14:02:00 [scan]   wallet  73/100: 0xab4f7829405390bf6bf7c7af74159bfc8842552f trades=49 volume=$5,599
+14:02:03 [scan]     features computed in 3.77s
+14:02:03 [scan]   wallet  74/100: 0x0c84fb52569258eaa507757d529b06c034a989f6 trades=26 volume=$5,529
+14:02:08 [scan]     features computed in 4.57s
+14:02:08 [scan]   wallet  75/100: 0xa2417925070121ed571d23cb846aebcaa2d745f7 trades=41 volume=$5,450
+14:02:14 [scan]     features computed in 6.07s
+14:02:14 [scan]   wallet  76/100: 0x682c92615993fd1f75cdfe101efdc1a8adcb17ae trades=1109 volume=$5,277
+14:02:27 [scan]     features computed in 13.15s
+14:02:27 [scan]   wallet  77/100: 0x35bbbad2415fe5e39b12da9a316cdc80b022009b trades=42 volume=$5,247
+14:02:30 [scan]     features computed in 3.14s
+14:02:30 [scan]   wallet  78/100: 0xf797d4d1c038d1eb0593edae0e66bf8e4b2e0bf2 trades=42 volume=$5,241
+14:02:34 [scan]     features computed in 3.38s
+14:02:34 [scan]   wallet  79/100: 0x88f397e11dfba51faf461aca814539c3ce7abaa8 trades=128 volume=$5,008
+14:02:37 [scan]     features computed in 3.75s
+14:02:37 [scan]   wallet  80/100: 0x63c652270a37e53a170303b6b264a2aa835743a5 trades=39 volume=$4,992
+14:02:41 [scan]     features computed in 3.33s
+14:02:41 [scan]   wallet  81/100: 0x02388370985ec313bcc199911073f91f52b6eb0b trades=165 volume=$4,759
+14:02:45 [scan]     features computed in 3.83s
+14:02:45 [scan]   wallet  82/100: 0x1a186be8d4725fcb1872e30597eafaa981856ffa trades=43 volume=$4,644
+14:02:48 [scan]     features computed in 3.71s
+14:02:48 [scan]   wallet  83/100: 0xfd71cfddf01c7da62c66929c8b4235274263d70d trades=16 volume=$4,627
+14:02:52 [scan]     features computed in 3.67s
+14:02:52 [scan]   wallet  84/100: 0x0c36bbf36fb5baa8bedea0dd6c1e28ac1743207d trades=48 volume=$4,604
+14:02:56 [scan]     features computed in 4.45s
+14:02:56 [scan]   wallet  85/100: 0xed1c42ecfd89409f76d73435621f7f90ac5ec962 trades=17 volume=$4,604
+14:03:01 [scan]     features computed in 4.29s
+14:03:01 [scan]   wallet  86/100: 0x9b6fce29d890c77230ad4fdc2b85eae29d250e5f trades=55 volume=$4,592
+14:03:04 [scan]     features computed in 3.79s
+14:03:04 [scan]   wallet  87/100: 0x7c3db723f1d4d8cb9c550095203b686cb11e5c6b trades=113 volume=$4,564
+14:03:08 [scan]     features computed in 3.85s
+14:03:08 [scan]   wallet  88/100: 0x958d9cd4068fa578781073c2d66099865e543501 trades=201 volume=$4,561
+14:03:12 [scan]     features computed in 4.11s
+14:03:12 [scan]   wallet  89/100: 0xbd69c93f156ab64dc262a2082d64037a11b6e123 trades=24 volume=$4,560
+14:03:16 [scan]     features computed in 3.28s
+14:03:16 [scan]   wallet  90/100: 0x7d607701278238ed55b82f6bc06536343b6203d8 trades=30 volume=$4,547
+14:03:19 [scan]     features computed in 3.68s
+14:03:19 [scan]   wallet  91/100: 0xcf19c420814435ffb1c459588208ed23a7ee6402 trades=32 volume=$4,501
+14:03:25 [scan]     features computed in 5.41s
+14:03:25 [scan]   wallet  92/100: 0xf238b10d0465232a48b9427b75a2628d5ae4eb51 trades=10 volume=$4,354
+14:03:30 [scan]     features computed in 5.14s
+14:03:30 [scan]   wallet  93/100: 0xe2ec54d4c6bc9e8a339f2849ac16ca8ce76c4c7f trades=60 volume=$4,279
+14:03:34 [scan]     features computed in 4.14s
+14:03:34 [scan]   wallet  94/100: 0x784feec38475dc47e63c3a16cbd24b905dab5df9 trades=45 volume=$4,236
+14:03:38 [scan]     features computed in 4.40s
+14:03:38 [scan]   wallet  95/100: 0x32fe2fd22a4713c7635049b0193b586cebe8eb6f trades=48 volume=$4,116
+14:03:42 [scan]     features computed in 3.41s
+14:03:42 [scan]   wallet  96/100: 0xa0bca9bdd8540da95060ed1fafb78aa03835d428 trades=81 volume=$4,030
+14:03:46 [scan]     features computed in 3.68s
+14:03:46 [scan]   wallet  97/100: 0x06ac70013cd0c7992ec830ad5df9f7f66d5b79ec trades=6 volume=$3,978
+14:03:50 [scan]     features computed in 4.03s
+14:03:50 [scan]   wallet  98/100: 0x0b9d9c3bb66645c0fe62e9d496f5f07cae058201 trades=41 volume=$3,953
+14:03:54 [scan]     features computed in 4.11s
+14:03:54 [scan]   wallet  99/100: 0x071b7262678191c1ed956f42888bb507bd9ad08d trades=20 volume=$3,881
+14:03:57 [scan]     features computed in 3.29s
+14:03:57 [scan]   wallet 100/100: 0x1347def50363349d5dcb14b4532ef6594355a287 trades=15 volume=$3,859
+14:04:00 [scan]     features computed in 3.30s
+14:04:00 [scan]   features: computed 100 wallets in 470.2s, saved to cache/features_30feat/us-iran-nuclear-deal-by-june-30.parquet
+14:04:01 [scan]   scoring: 4/100 flagged at threshold 0.7
+14:04:01 [scan]     FLAGGED  0xde7be6d489bce070a959e0cb813128ae659b5f4b  pred_prob=0.990  volume=$5,867
+14:04:01 [scan]     FLAGGED  0x5739ddf8672627ce076eff5f444610a250075f1a  pred_prob=0.876  volume=$7,545
+14:04:01 [scan]     FLAGGED  0xdbade4c82fb72780a0db9a38f821d8671aba9c95  pred_prob=0.780  volume=$15,878
+14:04:01 [scan]     FLAGGED  0x1b824fc89b8b8dcc3929b2bcb7ceeddc2f737a36  pred_prob=0.762  volume=$6,099
+14:04:01 [scan]   market done in 548.4s: 4 flagged
+14:04:01 [scan] 
+14:04:01 [scan] ============================================================
+14:04:01 [scan] market 5/5: will-the-us-reopen-its-embassy-in-iran-in-2026
+14:04:01 [scan] ============================================================
+14:04:01 [scan]   resolved: tokens=2 closed=False duration=88.9d
+14:04:01 [scan]   events: fetching (recursive-split, both tokens, both sides)...
+[polycluster:will-the-us-reopen-its-embassy-in-iran-i] get_orderfilled_events: 2 token(s), window=[1772395719, 1780077841] (7682122s)
+[polycluster:will-the-us-reopen-its-embassy-in-iran-i]   (1/4) token 1/2 side=maker: starting...
+[polycluster:will-the-us-reopen-its-embassy-in-iran-i]     d=0 side=maker [1772395719, 1780077841] (7682122s): 407 rows in 0.43s -> done
+[polycluster:will-the-us-reopen-its-embassy-in-iran-i]   (1/4) token 1/2 side=maker: 407 rows in 0.4s
+[polycluster:will-the-us-reopen-its-embassy-in-iran-i]   (2/4) token 1/2 side=taker: starting...
+[polycluster:will-the-us-reopen-its-embassy-in-iran-i]     d=0 side=taker [1772395719, 1780077841] (7682122s): 532 rows in 0.36s -> done
+[polycluster:will-the-us-reopen-its-embassy-in-iran-i]   (2/4) token 1/2 side=taker: 532 rows in 0.4s
+[polycluster:will-the-us-reopen-its-embassy-in-iran-i]   (3/4) token 2/2 side=maker: starting...
+[polycluster:will-the-us-reopen-its-embassy-in-iran-i]     d=0 side=maker [1772395719, 1780077841] (7682122s): 285 rows in 0.35s -> done
+[polycluster:will-the-us-reopen-its-embassy-in-iran-i]   (3/4) token 2/2 side=maker: 285 rows in 0.3s
+[polycluster:will-the-us-reopen-its-embassy-in-iran-i]   (4/4) token 2/2 side=taker: starting...
+[polycluster:will-the-us-reopen-its-embassy-in-iran-i]     d=0 side=taker [1772395719, 1780077841] (7682122s): 356 rows in 2.09s -> done
+[polycluster:will-the-us-reopen-its-embassy-in-iran-i]   (4/4) token 2/2 side=taker: 356 rows in 2.1s
+[polycluster:will-the-us-reopen-its-embassy-in-iran-i] get_orderfilled_events: done, 1580 unique rows in 3.2s
+14:04:04 [scan]   events: fetched 1580 in 3.2s
+14:04:04 [scan]   events: cached to cache/events/will-the-us-reopen-its-embassy-in-iran-in-2026.pkl
+14:04:04 [scan]   wallets: 324 total, taking top 100 by volume
+14:04:04 [scan]   market: closed=False, final_outcome_yes=None
+14:04:04 [scan]   wallet   1/100: 0x4bfb41d5b3570defd03c39a9a4d8de6bd8b8982e trades=590 volume=$38,538
+14:04:06 [scan]     features computed in 2.19s
+14:04:06 [scan]   wallet   2/100: 0xbf444f6416f4a65e6c48d8fcadb7b49666a94d45 trades=38 volume=$5,024
+14:04:07 [scan]     features computed in 0.54s
+14:04:07 [scan]   wallet   3/100: 0xda9b03badde953167e7a861092b391580306fa50 trades=90 volume=$4,013
+14:04:07 [scan]     features computed in 0.56s
+14:04:07 [scan]   wallet   4/100: 0xdc394af7800ffe029351559f714e7cbd1e378ad8 trades=36 volume=$3,381
+14:04:08 [scan]     features computed in 0.85s
+14:04:08 [scan]   wallet   5/100: 0x12202a47a8615777bc10605bad51465c4992741a trades=12 volume=$2,701
+14:04:09 [scan]     features computed in 0.39s
+14:04:09 [scan]   wallet   6/100: 0x72b2d0ffab41c12727fdfe52e530320d50325548 trades=100 volume=$2,334
+14:04:10 [scan]     features computed in 1.01s
+14:04:10 [scan]   wallet   7/100: 0x3b1aec955760b8fdc95df144f994baef760199f7 trades=11 volume=$2,292
+14:04:10 [scan]     features computed in 0.33s
+14:04:10 [scan]   wallet   8/100: 0x9bf8d80f65c89faaf7146c8949b3667092f6c7af trades=9 volume=$2,178
+14:04:10 [scan]     features computed in 0.30s
+14:04:10 [scan]   wallet   9/100: 0xb7ef580a13f0463561170074bece5fb7bbd3812c trades=39 volume=$2,151
+14:04:11 [scan]     features computed in 0.68s
+14:04:11 [scan]   wallet  10/100: 0xbd14da5083afdef8518339c2c1b7b19a491576b4 trades=33 volume=$2,120
+14:04:11 [scan]     features computed in 0.33s
+14:04:11 [scan]   wallet  11/100: 0xcabd302ac62d6c809faf57d97427a20df5f63764 trades=7 volume=$1,942
+14:04:11 [scan]     features computed in 0.28s
+14:04:11 [scan]   wallet  12/100: 0xaefa95b5494d29bf9ac2c6e41db9bcd1711ff98e trades=7 volume=$1,908
+14:04:12 [scan]     features computed in 0.39s
+14:04:12 [scan]   wallet  13/100: 0x420fb27ad4d3f1ef7bc16aad12426b2d93019090 trades=39 volume=$1,743
+14:04:12 [scan]     features computed in 0.59s
+14:04:12 [scan]   wallet  14/100: 0x7270ce164903ab8d66d0358ba003c78235dbadd3 trades=7 volume=$1,646
+14:04:13 [scan]     features computed in 0.28s
+14:04:13 [scan]   wallet  15/100: 0x2d38cc7399b36fb05bbe8dd48f5952e927e3e898 trades=7 volume=$1,404
+14:04:13 [scan]     features computed in 0.28s
+14:04:13 [scan]   wallet  16/100: 0xf0210eb6f5d5b20a411b163e0348309b63fb0da3 trades=10 volume=$1,304
+14:04:13 [scan]     features computed in 0.33s
+14:04:13 [scan]   wallet  17/100: 0xa465a520c557ed253b755581fa1a2abf75936b06 trades=14 volume=$1,274
+14:04:14 [scan]     features computed in 0.36s
+14:04:14 [scan]   wallet  18/100: 0xe472ce6be1fb4673d6155de37e414ead8bace7eb trades=11 volume=$1,216
+14:04:14 [scan]     features computed in 0.31s
+14:04:14 [scan]   wallet  19/100: 0x98927cacc59af5891322aac59648f2c24a950a7b trades=5 volume=$1,208
+14:04:14 [scan]     features computed in 0.27s
+14:04:14 [scan]   wallet  20/100: 0xc8ab97a9089a9ff7e6ef0688e6e591a066946418 trades=16 volume=$1,185
+14:04:15 [scan]     features computed in 0.37s
+14:04:15 [scan]   wallet  21/100: 0xcacf8f4b3135fd0b125eac3044068b5d6717115e trades=6 volume=$1,108
+14:04:15 [scan]     features computed in 0.27s
+14:04:15 [scan]   wallet  22/100: 0x30872e116d80cbc4f8cb41096204a207bca8f8fb trades=4 volume=$1,090
+14:04:15 [scan]     features computed in 0.34s
+14:04:15 [scan]   wallet  23/100: 0x88c4919de76e526d55a32c1f8afb439dd1f1129a trades=7 volume=$1,049
+14:04:16 [scan]     features computed in 0.36s
+14:04:16 [scan]   wallet  24/100: 0x266f3e4f9b826f28f565a25794ce9f74809a9f85 trades=25 volume=$1,009
+14:04:16 [scan]     features computed in 0.32s
+14:04:16 [scan]   wallet  25/100: 0x169a4a0c00e3808af80dd5038c32107befa055e4 trades=6 volume=$1,002
+14:04:16 [scan]     features computed in 0.53s
+14:04:16 [scan]   wallet  26/100: 0x8ec54affa458a9c63783a43dd7e010bc57a265a8 trades=66 volume=$1,001
+14:04:17 [scan]     features computed in 0.50s
+14:04:17 [scan]   wallet  27/100: 0xf8086d684f46e1e96f564c86c3faa535dfeb6e99 trades=33 volume=$976
+14:04:17 [scan]     features computed in 0.41s
+14:04:17 [scan]   wallet  28/100: 0x168fd7301811b13e0596c4725fe6507884249e00 trades=12 volume=$950
+14:04:18 [scan]     features computed in 0.33s
+14:04:18 [scan]   wallet  29/100: 0x0666d7ccd4957c1873871e6e7b8ff1604d779fa3 trades=6 volume=$942
+14:04:18 [scan]     features computed in 0.27s
+14:04:18 [scan]   wallet  30/100: 0x6b0ebbef2630b9a0da35594bf7ddd1911246e3ea trades=112 volume=$903
+14:04:19 [scan]     features computed in 0.64s
+14:04:19 [scan]   wallet  31/100: 0x635d4ea180ca206cb2ae9c02bfbe93583b195025 trades=11 volume=$865
+14:04:19 [scan]     features computed in 0.38s
+14:04:19 [scan]   wallet  32/100: 0x48b7e95cef1270aa22760d069f8f0fe14be5f103 trades=8 volume=$849
+14:04:19 [scan]     features computed in 0.29s
+14:04:19 [scan]   wallet  33/100: 0x78ba7e3fe42d9a4a50a1a550ea72c604b4bcf02d trades=9 volume=$748
+14:04:20 [scan]     features computed in 0.31s
+14:04:20 [scan]   wallet  34/100: 0xaaa134a3b12f8579689cbd44c3df3a02d3ba827b trades=4 volume=$744
+14:04:20 [scan]     features computed in 0.26s
+14:04:20 [scan]   wallet  35/100: 0x12c2a80266dbd07def1733ee19dc5b443655aa71 trades=11 volume=$736
+14:04:20 [scan]     features computed in 0.26s
+14:04:20 [scan]   wallet  36/100: 0x4fd8082eac8aed928f3c7dd203a09569123e0d38 trades=7 volume=$729
+14:04:20 [scan]     features computed in 0.28s
+14:04:20 [scan]   wallet  37/100: 0xc602e34792d9a5e129f3404daef2df43d1d37fc1 trades=16 volume=$709
+14:04:21 [scan]     features computed in 0.31s
+14:04:21 [scan]   wallet  38/100: 0x21454352253122c806282430e5edbf8b7c851e5d trades=4 volume=$692
+14:04:21 [scan]     features computed in 0.29s
+14:04:21 [scan]   wallet  39/100: 0x3b7b554d9cbfb82566e15d44e312c47516ac2d1a trades=6 volume=$691
+14:04:21 [scan]     features computed in 0.30s
+14:04:21 [scan]   wallet  40/100: 0xcdbfdac42aeac5837d105e255c1131e7bf751926 trades=16 volume=$672
+14:04:22 [scan]     features computed in 0.39s
+14:04:22 [scan]   wallet  41/100: 0x8729ebacb166c6f5a02f770a477c6f0b7583d3f8 trades=6 volume=$667
+14:04:22 [scan]     features computed in 0.31s
+14:04:22 [scan]   wallet  42/100: 0x21111a938ca0f0d57ae8c3c045150cfb494b667f trades=8 volume=$646
+14:04:22 [scan]     features computed in 0.28s
+14:04:22 [scan]   wallet  43/100: 0xbcac21c84c3899e689a7a392bc272e2fc006f545 trades=4 volume=$628
+14:04:23 [scan]     features computed in 0.29s
+14:04:23 [scan]   wallet  44/100: 0x7e35a2a8cfd1eb1e69dacd043206db5a787f1a6c trades=15 volume=$611
+14:04:23 [scan]     features computed in 0.34s
+14:04:23 [scan]   wallet  45/100: 0x3e7e9a7fcbc41c8b847c2d968223375b03cc7dfd trades=4 volume=$592
+14:04:23 [scan]     features computed in 0.30s
+14:04:23 [scan]   wallet  46/100: 0xd824b8bf5805302e0d477aca87dd6c15effb528b trades=2 volume=$578
+14:04:23 [scan]     features computed in 0.26s
+14:04:23 [scan]   wallet  47/100: 0x21ffd2b7a212a6f277ed3eca1a9f8efcbca90d71 trades=15 volume=$536
+14:04:24 [scan]     features computed in 0.43s
+14:04:24 [scan]   wallet  48/100: 0xdc619eb4b71ba8c0142895ac1f5bf5048becbb40 trades=23 volume=$520
+14:04:24 [scan]     features computed in 0.35s
+14:04:24 [scan]   wallet  49/100: 0x581d4108ba018d56e573f424c2971c16efe1b2e3 trades=18 volume=$515
+14:04:25 [scan]     features computed in 0.41s
+14:04:25 [scan]   wallet  50/100: 0xa0bca9bdd8540da95060ed1fafb78aa03835d428 trades=9 volume=$507
+14:04:25 [scan]     features computed in 0.26s
+14:04:25 [scan]   wallet  51/100: 0xd035fd5f4d6bec4a73dc2fc11fe35c13c3acf165 trades=62 volume=$506
+14:04:25 [scan]     features computed in 0.42s
+14:04:25 [scan]   wallet  52/100: 0x370c671980712b4014fc6900766c0c6c66923eb1 trades=34 volume=$483
+14:04:26 [scan]     features computed in 0.41s
+14:04:26 [scan]   wallet  53/100: 0x1989363ef9b37fc2999d5002aeb048ea8f1e4c55 trades=7 volume=$478
+14:04:26 [scan]     features computed in 0.26s
+14:04:26 [scan]   wallet  54/100: 0xac4a1fabdac2438d6afa2a9e8e83845310a0bf1e trades=9 volume=$465
+14:04:26 [scan]     features computed in 0.41s
+14:04:26 [scan]   wallet  55/100: 0xe23b29408015a53249709a4e8331f9358c89f147 trades=50 volume=$445
+14:04:27 [scan]     features computed in 0.39s
+14:04:27 [scan]   wallet  56/100: 0xc89589a0e1d982e61b9705a807b561f4e9f99bfa trades=4 volume=$416
+14:04:27 [scan]     features computed in 0.28s
+14:04:27 [scan]   wallet  57/100: 0x6f6afe7d0d0f660291ae43c3d295f11eb0173a2d trades=3 volume=$414
+14:04:27 [scan]     features computed in 0.29s
+14:04:27 [scan]   wallet  58/100: 0x29ea86a38dc0a96173afcdc938f2580a4540701e trades=15 volume=$396
+14:04:28 [scan]     features computed in 0.38s
+14:04:28 [scan]   wallet  59/100: 0xbf499de98d83cccf9eb0aa4f1cb0a1b228126cfe trades=4 volume=$396
+14:04:28 [scan]     features computed in 0.30s
+14:04:28 [scan]   wallet  60/100: 0x320f1f00bd1709c9f705f4754ac2a29855be2261 trades=7 volume=$392
+14:04:29 [scan]     features computed in 0.44s
+14:04:29 [scan]   wallet  61/100: 0xefddc1d3285d0fe1b9f2aa06e04901f527a08370 trades=19 volume=$389
+14:04:29 [scan]     features computed in 0.61s
+14:04:29 [scan]   wallet  62/100: 0xc624cccd414dc90ea329f06cf535fafa40d2ee24 trades=14 volume=$374
+14:04:30 [scan]     features computed in 0.66s
+14:04:30 [scan]   wallet  63/100: 0x5f22e0ef06bc81e40dca9c133d041da11e2b6112 trades=40 volume=$365
+14:04:30 [scan]     features computed in 0.67s
+14:04:30 [scan]   wallet  64/100: 0x0b4f78c47e80d9432fb0d3c6c64ee0bae3be3b33 trades=6 volume=$333
+14:04:31 [scan]     features computed in 0.27s
+14:04:31 [scan]   wallet  65/100: 0x62d5e0849f52164adfcf1c91f8e4c9c931ca76ea trades=7 volume=$319
+14:04:31 [scan]     features computed in 0.29s
+14:04:31 [scan]   wallet  66/100: 0xbeb2bfdd49760ee27693596b8cfa3f9aca29376d trades=7 volume=$315
+14:04:31 [scan]     features computed in 0.37s
+14:04:31 [scan]   wallet  67/100: 0x118418e8af3a8441ea5e0268ad4ae8b6cb761b67 trades=4 volume=$313
+14:04:32 [scan]     features computed in 0.30s
+14:04:32 [scan]   wallet  68/100: 0x0f24d2d0b69c886a0ff3d0cf3db7d97e3da7a7fc trades=10 volume=$310
+14:04:32 [scan]     features computed in 0.29s
+14:04:32 [scan]   wallet  69/100: 0x0241cff5a144ff6633bad6cbad7cff90f37b162a trades=4 volume=$302
+14:04:32 [scan]     features computed in 0.26s
+14:04:32 [scan]   wallet  70/100: 0x522658d3a48a309ee9421bf4cc9d6173b6b4b4f5 trades=27 volume=$299
+14:04:33 [scan]     features computed in 0.30s
+14:04:33 [scan]   wallet  71/100: 0x5065ffbaf339a42e962a3c09b6c813f0fe6efdbb trades=15 volume=$297
+14:04:33 [scan]     features computed in 0.38s
+14:04:33 [scan]   wallet  72/100: 0x5339c9da744ff14e978081f99c2309c4d5529da3 trades=6 volume=$296
+14:04:33 [scan]     features computed in 0.50s
+14:04:33 [scan]   wallet  73/100: 0x952b6c168765ce7a895ef1bfb2c47e9b4089edfa trades=8 volume=$283
+14:04:34 [scan]     features computed in 0.26s
+14:04:34 [scan]   wallet  74/100: 0x07bcd0c8580799ef9bedc69b2d0456a86e17b413 trades=27 volume=$275
+14:04:34 [scan]     features computed in 0.48s
+14:04:34 [scan]   wallet  75/100: 0x73d7099e4079bdd9c5f5ab0c05758e2de4aa11b2 trades=14 volume=$272
+14:04:35 [scan]     features computed in 0.36s
+14:04:35 [scan]   wallet  76/100: 0xd6eef76188c7068719ac881460b7431e1ae137a2 trades=38 volume=$270
+14:04:35 [scan]     features computed in 0.36s
+14:04:35 [scan]   wallet  77/100: 0xd5096a5aa76e07884fafd91557a1cf55762ed6b7 trades=3 volume=$252
+14:04:35 [scan]     features computed in 0.26s
+14:04:35 [scan]   wallet  78/100: 0x942032de011e054219323a29bbe81be73066b86c trades=9 volume=$250
+14:04:35 [scan]     features computed in 0.29s
+14:04:35 [scan]   wallet  79/100: 0x4ba3478e46081fa8b22515e1110b49f8f20e27e2 trades=20 volume=$238
+14:04:36 [scan]     features computed in 0.31s
+14:04:36 [scan]   wallet  80/100: 0xaf5999177e885ece5ec29b7374af05de39f89f6e trades=3 volume=$237
+14:04:36 [scan]     features computed in 0.26s
+14:04:36 [scan]   wallet  81/100: 0x3a37b4d476c35b481276b31b8989487fa311141a trades=7 volume=$235
+14:04:36 [scan]     features computed in 0.26s
+14:04:36 [scan]   wallet  82/100: 0xd524f59d2915f2c5baeb73ce325985612b012acc trades=1 volume=$234
+14:04:37 [scan]     features computed in 0.25s
+14:04:37 [scan]   wallet  83/100: 0xd80d0465577d88c0f609daa8fb9b90eec2aeb42b trades=2 volume=$228
+14:04:37 [scan]     features computed in 0.26s
+14:04:37 [scan]   wallet  84/100: 0x75935d040cd2795bdebb692210f9753e63fce677 trades=8 volume=$225
+14:04:37 [scan]     features computed in 0.28s
+14:04:37 [scan]   wallet  85/100: 0xc722c1a1a0bfddf4e0edb3286f7ebce127221334 trades=12 volume=$223
+14:04:37 [scan]     features computed in 0.30s
+14:04:37 [scan]   wallet  86/100: 0xb5e25c4d781854ea4ac0f3c4b55f81b5991ee599 trades=4 volume=$215
+14:04:38 [scan]     features computed in 0.36s
+14:04:38 [scan]   wallet  87/100: 0x57ab144fae9e0076d7a76be89015ff28125a434b trades=3 volume=$209
+14:04:38 [scan]     features computed in 0.30s
+14:04:38 [scan]   wallet  88/100: 0x540a372a428c1556fd140d6f4e2e9ba4094e64c9 trades=10 volume=$209
+14:04:38 [scan]     features computed in 0.30s
+14:04:38 [scan]   wallet  89/100: 0xae469cce865971172e6ee540ac0c17c1d18ba663 trades=5 volume=$204
+14:04:39 [scan]     features computed in 0.29s
+14:04:39 [scan]   wallet  90/100: 0x95074f700f93bdf6e62fc965e0832064c0877b04 trades=12 volume=$196
+14:04:39 [scan]     features computed in 0.64s
+14:04:39 [scan]   wallet  91/100: 0xf0b0ef1d6320c6be896b4c9c54dd74407e7f8cab trades=9 volume=$196
+14:04:40 [scan]     features computed in 0.35s
+14:04:40 [scan]   wallet  92/100: 0x834bce6aa8b40c4915d9a6e4722d140709ee089a trades=2 volume=$195
+14:04:40 [scan]     features computed in 0.50s
+14:04:40 [scan]   wallet  93/100: 0xc71b43cf1a6c9f79743bdf5e15a763d93d7ce265 trades=13 volume=$188
+14:04:41 [scan]     features computed in 0.42s
+14:04:41 [scan]   wallet  94/100: 0x5829b85680ced1a68916e750d373b904feb7e46b trades=3 volume=$184
+14:04:41 [scan]     features computed in 0.28s
+14:04:41 [scan]   wallet  95/100: 0xf726abf89bdb34a19bc43525dc9926bd3925bcfe trades=69 volume=$182
+14:04:42 [scan]     features computed in 0.83s
+14:04:42 [scan]   wallet  96/100: 0x16f0ed7900a91fcf16440b3e0983015e23293fe6 trades=2 volume=$181
+14:04:42 [scan]     features computed in 0.31s
+14:04:42 [scan]   wallet  97/100: 0xbacd00c9080a82ded56f504ee8810af732b0ab35 trades=1 volume=$180
+14:04:42 [scan]     features computed in 0.43s
+14:04:42 [scan]   wallet  98/100: 0x9f618d317475b9de09ba44b9809ea98dae4fc03e trades=3 volume=$179
+14:04:43 [scan]     features computed in 0.28s
+14:04:43 [scan]   wallet  99/100: 0x0e9780168de83ffec37b59b7ef06d5f3b4f52ccf trades=6 volume=$178
+14:04:43 [scan]     features computed in 0.33s
+14:04:43 [scan]   wallet 100/100: 0x92fca5524905f01a476d18fe0fa833b41063566c trades=4 volume=$175
+14:04:43 [scan]     features computed in 0.35s
+14:04:43 [scan]   features: computed 100 wallets in 39.3s, saved to cache/features_30feat/will-the-us-reopen-its-embassy-in-iran-in-2026.parquet
+14:04:43 [scan]   scoring: 12/100 flagged at threshold 0.7
+14:04:43 [scan]     FLAGGED  0xa465a520c557ed253b755581fa1a2abf75936b06  pred_prob=0.984  volume=$1,274
+14:04:43 [scan]     FLAGGED  0x581d4108ba018d56e573f424c2971c16efe1b2e3  pred_prob=0.883  volume=$515
+14:04:43 [scan]     FLAGGED  0x3e7e9a7fcbc41c8b847c2d968223375b03cc7dfd  pred_prob=0.881  volume=$592
+14:04:43 [scan]     FLAGGED  0x07bcd0c8580799ef9bedc69b2d0456a86e17b413  pred_prob=0.847  volume=$275
+14:04:43 [scan]     FLAGGED  0xd524f59d2915f2c5baeb73ce325985612b012acc  pred_prob=0.813  volume=$234
+14:04:43 [scan]     FLAGGED  0x48b7e95cef1270aa22760d069f8f0fe14be5f103  pred_prob=0.808  volume=$849
+14:04:43 [scan]     FLAGGED  0xd80d0465577d88c0f609daa8fb9b90eec2aeb42b  pred_prob=0.733  volume=$228
+14:04:43 [scan]     FLAGGED  0xd824b8bf5805302e0d477aca87dd6c15effb528b  pred_prob=0.733  volume=$578
+14:04:43 [scan]     FLAGGED  0xc624cccd414dc90ea329f06cf535fafa40d2ee24  pred_prob=0.719  volume=$374
+14:04:43 [scan]     FLAGGED  0xbacd00c9080a82ded56f504ee8810af732b0ab35  pred_prob=0.715  volume=$180
+14:04:43 [scan]     FLAGGED  0xbf444f6416f4a65e6c48d8fcadb7b49666a94d45  pred_prob=0.713  volume=$5,024
+14:04:43 [scan]     FLAGGED  0x95074f700f93bdf6e62fc965e0832064c0877b04  pred_prob=0.702  volume=$196
+14:04:43 [scan]   market done in 42.8s: 12 flagged
+14:04:43 [scan] 
+14:04:43 [scan] ============================================================
+14:04:43 [scan] SUMMARY
+14:04:43 [scan] ============================================================
+14:04:43 [scan]   will-russia-capture-all-of-hryshyne-by-april-30: scored=100, flagged=0
+14:04:43 [scan]   strait-of-hormuz-traffic-returns-to-normal-by-july-31: scored=100, flagged=2
+14:04:43 [scan]   us-iran-nuclear-deal-by-may-31-974: scored=100, flagged=0
+14:04:43 [scan]   us-iran-nuclear-deal-by-june-30: scored=100, flagged=4
+14:04:43 [scan]   will-the-us-reopen-its-embassy-in-iran-in-2026: scored=100, flagged=12
+14:04:43 [scan] TOTAL FLAGGED: 18 users across 5 markets
+14:04:43 [scan] log saved to scan_markets_20260529_135100.log

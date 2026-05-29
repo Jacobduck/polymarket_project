@@ -1,0 +1,40 @@
+[speed2] params: page_size=100, min_window=60
+[speed2] resolving slug='will-zelenskyy-wear-a-suit-before-july'...
+[speed2] resolved in 0.09s: 2 token(s), closed=True, window=[1747953080, 1752021039] (47.1d)
+[speed2] starting fetch (full lifetime, both tokens, both sides)...
+[polycluster:will-zelenskyy-wear-a-suit-before-july] get_orderfilled_events: 2 token(s), window=[1747953080, 1752021039] (4067959s)
+[polycluster:will-zelenskyy-wear-a-suit-before-july]   (1/4) token 1/2 side=maker: starting...
+[polycluster:will-zelenskyy-wear-a-suit-before-july]     d=0 side=maker [1747953080, 1752021039] (4067959s): 100 rows in 0.37s -> saturated, splitting at 1749987059
+[polycluster:will-zelenskyy-wear-a-suit-before-july]     d=1 side=maker [1747953080, 1749987059] (2033979s): 100 rows in 0.31s -> saturated, splitting at 1748970069
+[polycluster:will-zelenskyy-wear-a-suit-before-july]     d=2 side=maker [1747953080, 1748970069] (1016989s): 100 rows in 0.26s -> saturated, splitting at 1748461574
+[polycluster:will-zelenskyy-wear-a-suit-before-july]     d=3 side=maker [1747953080, 1748461574] (508494s): 32 rows in 0.16s -> done
+[polycluster:will-zelenskyy-wear-a-suit-before-july]     d=3 side=maker [1748461575, 1748970069] (508494s): 100 rows in 0.30s -> saturated, splitting at 1748715822
+[polycluster:will-zelenskyy-wear-a-suit-before-july]     d=4 side=maker [1748461575, 1748715822] (254247s): 100 rows in 0.18s -> saturated, splitting at 1748588698
+[polycluster:will-zelenskyy-wear-a-suit-before-july]     d=5 side=maker [1748461575, 1748588698] (127123s): 100 rows in 0.15s -> saturated, splitting at 1748525136
+[polycluster:will-zelenskyy-wear-a-suit-before-july]     d=6 side=maker [1748461575, 1748525136] (63561s): 3 rows in 0.15s -> done
+[polycluster:will-zelenskyy-wear-a-suit-before-july]     d=6 side=maker [1748525137, 1748588698] (63561s): 100 rows in 0.25s -> saturated, splitting at 1748556917
+[polycluster:will-zelenskyy-wear-a-suit-before-july]     d=7 side=maker [1748525137, 1748556917] (31780s): 100 rows in 0.16s -> saturated, splitting at 1748541027
+[polycluster:will-zelenskyy-wear-a-suit-before-july]     d=8 side=maker [1748525137, 1748541027] (15890s): 64 rows in 0.17s -> done
+[polycluster:will-zelenskyy-wear-a-suit-before-july]     d=8 side=maker [1748541028, 1748556917] (15889s): 53 rows in 0.16s -> done
+[polycluster:will-zelenskyy-wear-a-suit-before-july]     d=7 side=maker [1748556918, 1748588698] (31780s): 28 rows in 0.16s -> done
+[polycluster:will-zelenskyy-wear-a-suit-before-july]     d=5 side=maker [1748588699, 1748715822] (127123s): 37 rows in 0.19s -> done
+[polycluster:will-zelenskyy-wear-a-suit-before-july]     d=4 side=maker [1748715823, 1748970069] (254246s): 100 rows in 0.19s -> saturated, splitting at 1748842946
+[polycluster:will-zelenskyy-wear-a-suit-before-july]     d=5 side=maker [1748715823, 1748842946] (127123s): 74 rows in 0.16s -> done
+[polycluster:will-zelenskyy-wear-a-suit-before-july]     d=5 side=maker [1748842947, 1748970069] (127122s): 100 rows in 0.18s -> saturated, splitting at 1748906508
+[polycluster:will-zelenskyy-wear-a-suit-before-july]     d=6 side=maker [1748842947, 1748906508] (63561s): 49 rows in 0.17s -> done
+[polycluster:will-zelenskyy-wear-a-suit-before-july]     d=6 side=maker [1748906509, 1748970069] (63560s): 64 rows in 0.18s -> done
+[polycluster:will-zelenskyy-wear-a-suit-before-july]     d=2 side=maker [1748970070, 1749987059] (1016989s): 100 rows in 0.27s -> saturated, splitting at 1749478564
+[polycluster:will-zelenskyy-wear-a-suit-before-july]     d=3 side=maker [1748970070, 1749478564] (508494s): 100 rows in 0.18s -> saturated, splitting at 1749224317
+[polycluster:will-zelenskyy-wear-a-suit-before-july]     d=4 side=maker [1748970070, 1749224317] (254247s): 62 rows in 0.16s -> done
+[polycluster:will-zelenskyy-wear-a-suit-before-july]     d=4 side=maker [1749224318, 1749478564] (254246s): 53 rows in 0.16s -> done
+[polycluster:will-zelenskyy-wear-a-suit-before-july]     d=3 side=maker [1749478565, 1749987059] (508494s): 51 rows in 0.18s -> done
+[polycluster:will-zelenskyy-wear-a-suit-before-july]     d=1 side=maker [1749987060, 1752021039] (2033979s): 100 rows in 0.37s -> saturated, splitting at 1751004049
+[polycluster:will-zelenskyy-wear-a-suit-before-july]     d=2 side=maker [1749987060, 1751004049] (1016989s): 100 rows in 0.24s -> saturated, splitting at 1750495554
+[polycluster:will-zelenskyy-wear-a-suit-before-july]     d=3 side=maker [1749987060, 1750495554] (508494s): 100 rows in 0.16s -> saturated, splitting at 1750241307
+[polycluster:will-zelenskyy-wear-a-suit-before-july]     d=4 side=maker [1749987060, 1750241307] (254247s): 54 rows in 0.17s -> done
+[polycluster:will-zelenskyy-wear-a-suit-before-july]     d=4 side=maker [1750241308, 1750495554] (254246s): 97 rows in 0.27s -> done
+[polycluster:will-zelenskyy-wear-a-suit-before-july]     d=3 side=maker [1750495555, 1751004049] (508494s): 100 rows in 0.24s -> saturated, splitting at 1750749802
+
+
+
+"""760 seconds"""

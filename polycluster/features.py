@@ -1055,6 +1055,7 @@ def compute_markout_features(
     price_scale_alpha: float = 1.5,
     max_price_weight: float = 8.0,
     eps: float = 0.0,
+    feature_filter: set[str] | None = None,
 ) -> dict[str, float]:
     """Adjusted markout in YES-space over a grid of horizons / lookbacks.
 
@@ -1097,6 +1098,19 @@ def compute_markout_features(
         horizon_sec = h_frac * market_lifetime
         for lb_frac in lookback_fracs:
             lookback_sec = lb_frac * market_lifetime
+            tag = f"h{h_frac:.3f}_lb{lb_frac:.3f}".replace(".", "p")
+
+            if feature_filter is not None:
+                pair_keys = {
+                    f"buy_markout_adj_mean_{tag}",
+                    f"buy_markout_adj_median_{tag}",
+                    f"buy_markout_adj_grosswt_{tag}",
+                    f"sell_markout_adj_mean_{tag}",
+                    f"sell_markout_adj_median_{tag}",
+                    f"sell_markout_adj_grosswt_{tag}",
+                }
+                if not (pair_keys & feature_filter):
+                    continue
 
             buy_scores: list[float] = []
             buy_tokens: list[float] = []
@@ -1138,7 +1152,6 @@ def compute_markout_features(
                 sell_scores.append(score)
                 sell_tokens.append(float(row["token_amount"]))
 
-            tag = f"h{h_frac:.3f}_lb{lb_frac:.3f}".replace(".", "p")
             out[f"buy_markout_adj_mean_{tag}"] = (
                 float(np.mean(buy_scores)) if buy_scores else np.nan
             )
@@ -1830,6 +1843,25 @@ def build_market_volume_df_from_orderfilled(
 # Per-(wallet, market) orchestrator
 # ---------------------------------------------------------------------------
 
+_MARKOUTS1_FEATURE_NAMES = frozenset(
+    f"{side}_markout_{stat}_{h}s"
+    for side in ("buy", "sell")
+    for stat in ("mean", "median")
+    for h in (300, 3600, 21600, 86400)
+)
+
+_CONTRARIAN_FEATURE_NAMES = frozenset({
+    "cash_at_low_price_frac",
+    "buy_cash_at_low_price_frac",
+    "sell_cash_at_high_price_frac",
+    "cash_against_recent_trend_frac",
+    "buy_cash_against_recent_downtrend_frac",
+    "sell_cash_against_recent_uptrend_frac",
+    "recent_trend_mean_for_buys",
+    "recent_trend_mean_for_sells",
+})
+
+
 def compute_market_user_features(
     parsed_trades: list[dict],
     history_df: pd.DataFrame,
@@ -1839,6 +1871,7 @@ def compute_market_user_features(
     final_outcome_yes: int | float | None = None,
     major_move_time: float | None = None,
     major_move_kwargs: dict[str, Any] | None = None,
+    feature_filter: set[str] | None = None,
     low_price_quantile: float = 0.25,
     recent_trend_lookback_sec: int = 21600,
     flat_move_threshold: float = 0.03,
@@ -1935,8 +1968,13 @@ def compute_market_user_features(
         final_outcome_yes=final_outcome_yes,
     ))
 
-    feats.update(compute_markout_features(trades_df=trades_df, history_df=hist))
-    feats.update(compute_markout_features1(trades_df=trades_df, history_df=hist))
+    feats.update(compute_markout_features(
+        trades_df=trades_df,
+        history_df=hist,
+        feature_filter=feature_filter,
+    ))
+    if feature_filter is None or (_MARKOUTS1_FEATURE_NAMES & feature_filter):
+        feats.update(compute_markout_features1(trades_df=trades_df, history_df=hist))
 
     feats.update(compute_realized_pnl_features(
         trades_df=trades_df,
@@ -1953,13 +1991,14 @@ def compute_market_user_features(
         early_time_frac=early_time_frac,
     ))
 
-    feats.update(compute_contrarian_price_features(
-        trades_df=trades_df,
-        history_df=hist,
-        low_price_quantile=low_price_quantile,
-        recent_trend_lookback_sec=recent_trend_lookback_sec,
-        flat_move_threshold=flat_move_threshold,
-    ))
+    if feature_filter is None or (_CONTRARIAN_FEATURE_NAMES & feature_filter):
+        feats.update(compute_contrarian_price_features(
+            trades_df=trades_df,
+            history_df=hist,
+            low_price_quantile=low_price_quantile,
+            recent_trend_lookback_sec=recent_trend_lookback_sec,
+            flat_move_threshold=flat_move_threshold,
+        ))
 
     feats.update(compute_extreme_inventory_and_day_features(
         trades_df=trades_df,
@@ -1997,6 +2036,7 @@ def get_user_features(
     final_outcome_yes: int | float | None = None,
     major_move_time: float | None = None,
     major_move_kwargs: dict[str, Any] | None = None,
+    feature_filter: set[str] | None = None,
     low_price_quantile: float = 0.25,
     recent_trend_lookback_sec: int = 21600,
     flat_move_threshold: float = 0.03,
@@ -2087,6 +2127,7 @@ def get_user_features(
             final_outcome_yes=final_outcome_yes,
             major_move_time=major_move_time,
             major_move_kwargs=major_move_kwargs,
+            feature_filter=feature_filter,
             low_price_quantile=low_price_quantile,
             recent_trend_lookback_sec=recent_trend_lookback_sec,
             flat_move_threshold=flat_move_threshold,

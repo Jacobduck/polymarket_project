@@ -225,3 +225,14 @@ toward "only flag if confident."""
 """build a better model and iterate"""
 """feature: similarity between markets"""
 """precision (no false accusations) or recall (catch everyone)"""
+
+
+
+"""Model	ROC-AUC	PR-AUC	TP / FP / FN	Precision	Recall
+319-feat	0.9492	0.8399	-	-	-
+30-feat (new)	0.9469	0.8362	17 / 8 / 6	0.68	0.74
+50-feat	0.9341	0.8305	18 / 7 / 5	0.72	0.78
+14-feat	0.8900	0.6744	13 / 8 / 10	0.62	0.57"""
+
+
+"""SMOTE. Synthetic Minority Over-sampling TEchnique. Instead of duplicating insiders, it generates synthetic insiders by interpolating between real ones in feature space — so the model sees a balanced training set."""
