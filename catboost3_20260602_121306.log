@@ -1,0 +1,369 @@
+[cb3] run timestamp = 20260602_121306
+[cb3] logging to catboost3_20260602_121306.log
+[cb3] loading cache/training_data.parquet
+[cb3] full shape=(793, 322)  positives=117  negatives=676
+[cb3] using top-10 features from cb_insider_30feat_latest.meta.json:
+   1. adaptive_markout_raw_grosswt_h0p070
+   2. unrealized_edge_per_open_token
+   3. adaptive_markout_raw_grosswt_h0p010
+   4. adaptive_markout_raw_grosswt_h0p150
+   5. unrealized_edge_per_open_token_sqrt
+   6. buy_markout_adj_grosswt_h0p070_lb0p150
+   7. adaptive_markout_raw_grosswt_h0p200
+   8. buy_markout_adj_grosswt_h0p030_lb0p200
+   9. high_sell_nonflattening_cash_frac_pctl90
+  10. realized_pnl_per_closing_trade
+[cb3] markets total: 29  (train=23, val=5, test=1)
+[cb3] market order (oldest -> newest), split assignment:
+  train  2025-07-07  will-microstrategy-purchase-bitcoin-july-1-7
+  train  2025-07-28  will-microstrategy-hold-620k-btc-before-august
+  train  2025-09-26  openai-social-app-in-2025
+  train  2025-10-09  will-mara-corina-machado-win-the-nobel-peace-prize-in-2025
+  train  2025-10-10  will-yulia-navalnaya-win-the-nobel-peace-prize-in-2025
+  train  2025-10-18  openai-browser-in-2025
+  train  2025-10-19  openai-browser-by-october-31
+  train  2025-11-17  microstrategy-announces-1000-btc-purchase-november-11-17
+  train  2025-11-30  will-microstrategy-announce-holding-650k-btc-by-november-30
+  train  2025-12-06  will-stable-launch-a-token-in-2025
+  train  2025-12-08  microstrategy-announces-1000-btc-purchase-december-2-8
+  train  2025-12-11  will-openai-release-a-new-frontier-model-by-december-13-683
+  train  2025-12-17  will-draftkings-launch-a-prediction-market-in-2025
+  train  2025-12-22  will-microstrategy-announce-a-bitcoin-purchase-december-16-22
+  train  2025-12-27  microstrategy-sell-any-bitcoin-in-2025
+  train  2025-12-28  will-aztec-launch-a-token-in-2025
+  train  2025-12-28  will-microstrategy-hold-680k-btc-by-december-31
+  train  2025-12-29  will-lighter-perform-an-airdrop-by-december-31
+  train  2026-02-09  will-cardi-b-perform-during-the-super-bowl-lx-halftime-show
+  train  2026-02-09  will-karol-g-perform-during-the-super-bowl-lx-halftime-show
+  train  2026-02-26  will-axiom-be-accused-of-insider-trading
+  train  2026-02-27  will-us-or-israel-strike-iran-by-february-28-2026-766
+  train  2026-02-27  us-strikes-iran-by-february-28-2026-227-967-547-688-589-491-592-418-452-924-384-915-464-672-196-157-993-596-269-535-381-391-471-256-988-997-296-225-762-973-292-827-345-182-558-215-794-879-189-761
+  test   2026-02-28  us-strikes-iran-by-march-1-2026-492
+  val    2026-02-28  khamenei-out-as-supreme-leader-of-iran-by-march-31
+  val    2026-03-13  nothing-ever-happens-microstrategy
+  val    2026-03-15  will-microstrategy-announce-holding-740k-btc-by-march-31
+  val    NaT         us-x-iran-ceasefire-by-april-7
+  val    NaT         will-openai-release-a-new-frontier-model-on-december-11
+[cb3] row distribution (total n=793, pos=117, overall pos rate=14.75%):
+  train  n= 487  (61.41% of total)  pos= 73  (14.99% pos rate within split)
+  val    n=  61  ( 7.69% of total)  pos=  9  (14.75% pos rate within split)
+  test   n= 245  (30.90% of total)  pos= 35  (14.29% pos rate within split)
+[cb3] running 5-fold expanding-window CV on 23 train markets
+  fold 1: train_mks=8 (rows=57, pos=10) val_mks=3 (rows=76, pos=12)  ROC-AUC=0.5527  PR-AUC=0.2037  best_iter=2
+  fold 2: train_mks=11 (rows=133, pos=22) val_mks=3 (rows=49, pos=7)  ROC-AUC=0.8299  PR-AUC=0.6692  best_iter=0
+  fold 3: train_mks=14 (rows=182, pos=29) val_mks=3 (rows=18, pos=3)  ROC-AUC=0.7556  PR-AUC=0.4722  best_iter=16
+  fold 4: train_mks=17 (rows=200, pos=32) val_mks=3 (rows=21, pos=3)  ROC-AUC=0.7593  PR-AUC=0.5076  best_iter=1
+  fold 5: train_mks=20 (rows=221, pos=35) val_mks=3 (rows=266, pos=38)  ROC-AUC=0.9092  PR-AUC=0.5384  best_iter=146
+[cb3] CV ROC-AUC = 0.7613 ± 0.1184  (over 5 usable folds)
+[cb3] CV PR-AUC  = 0.4782 ± 0.1526
+[cb3] final train scale_pos_weight = 2.000  (auto-balanced would be 5.671)
+0:	learn: 0.7124350	test: 0.7607690	best: 0.7607690 (0)	total: 2.06ms	remaining: 4.11s
+100:	learn: 0.9316942	test: 0.8137410	best: 0.8395324 (26)	total: 90.4ms	remaining: 1.7s
+Stopped by overfitting detector  (75 iterations wait)
+
+bestTest = 0.8395324482
+bestIteration = 26
+
+Shrink model to first 27 iterations.
+[cb3] fit in 0.11s  best_iter=26 / 2000
+
+[cb3] calibration: sigmoid(1.819 * raw_prob -2.114)  (fit on val)
+[cb3] raw  prob range  train=[0.035, 0.807]  val=[0.051, 0.752]  test=[0.039, 0.807]
+[cb3] cal. prob range  train=[0.114, 0.344]  val=[0.117, 0.322]  test=[0.115, 0.344]
+
+[cb3] metrics per split (overfit check: train >> val => overfit):
+[cb3] train  n= 487 pos= 73  ROC-AUC=0.9276  PR-AUC=0.7211  P=0.8421  R=0.4384  F1=0.5766  (thr=0.3)
+[cb3] val    n=  61 pos=  9  ROC-AUC=0.9060  PR-AUC=0.7794  P=1.0000  R=0.1111  F1=0.2000  (thr=0.3)
+[cb3] test   n= 245 pos= 35  ROC-AUC=0.9947  PR-AUC=0.9661  P=0.8750  R=1.0000  F1=0.9333  (thr=0.3)
+
+[cb3] PR-AUC gap train-val = -0.0583  (big positive = overfit train)
+[cb3] PR-AUC gap val-test  = -0.1867  (big positive = overfit val via early stopping)
+
+[cb3] classification metrics @ fixed thr=0.3:
+  train  P=0.8421  R=0.4384  F1=0.5766  (TP=32, FP=6, FN=41, TN=408)
+  val    P=1.0000  R=0.1111  F1=0.2000  (TP=1, FP=0, FN=8, TN=52)
+  test   P=0.8750  R=1.0000  F1=0.9333  (TP=35, FP=5, FN=0, TN=205)
+[cb3] curves saved to catboost3_20260602_121306_curves.png
+
+[cb3] TEST predictions grouped by unique calibrated prob (desc).
+[cb3] each row below = one point on the PR/ROC curve.
+[cb3] 144 unique probs across 245 rows => curve has 144 points (tied rows collapse into one).
+[cb3]  step  cal_prob  raw_prob  n_in_tie  pos  neg  cum_tp  cum_fp  prec   recall
+[cb3]     1    0.3440    0.8068        1      0    1       0       1  0.000   0.000
+[cb3]     2    0.3271    0.7651       31     31    0      31       1  0.969   0.886
+[cb3]            tied:  label=1  wallet=0x95bd107886bd48d6737029603e3db242fb781652
+[cb3]            tied:  label=1  wallet=0x943117ea8e3f5b160e158c1c4b1786fee5d3e5a0
+[cb3]            tied:  label=1  wallet=0x344c5073e9b152a95d9f42767ac084a87fad68ab
+[cb3]            tied:  label=1  wallet=0x45f402894f550357ff1d5db385c93bb9e480dd79
+[cb3]            tied:  label=1  wallet=0xb7200eb4ffc3ea4bde0ef28110238bd9f539c414
+[cb3]            tied:  label=1  wallet=0xa34d11f372e8a87acc87e3beabb32e2fe7f9ee4d
+[cb3]            tied:  label=1  wallet=0xf37af11e538c6eba3ddcea540ee54ca35c6354f8
+[cb3]            tied:  label=1  wallet=0xab54f4b400bd8015e206a74f8d89362cf8eee856
+[cb3]            tied:  label=1  wallet=0xfffee3116390fc9415956617ed048d26c7c1b424
+[cb3]            tied:  label=1  wallet=0xdad42409cf398c9149c50217e4dc4a039d9dec0b
+[cb3]            tied:  label=1  wallet=0x421b26a47bb5136d045190d7870095eb29498469
+[cb3]            tied:  label=1  wallet=0xe1bdfa52bc9342115bbf1d41d04b8cf0bcd8f5a7
+[cb3]            tied:  label=1  wallet=0xe85f1414171cd41707dc7b256bd3db269f94a28c
+[cb3]            tied:  label=1  wallet=0x65387d3235b2fd6ac3587df1fff2c2de2f98e523
+[cb3]            tied:  label=1  wallet=0x3e545810f8b95dd0fcf4114b0246a0dbb40ad1c5
+[cb3]            tied:  label=1  wallet=0xeb1cdc2f267723b577cd0d1441fe5db05d440f79
+[cb3]            tied:  label=1  wallet=0xf1a1bcf248a0dc05bec474c229f490db00106f24
+[cb3]            tied:  label=1  wallet=0x8e588259e06da665020dac0e4958301a2089579e
+[cb3]            tied:  label=1  wallet=0x244cde3e010a8eb27f0ff588476091bd3d73f1dc
+[cb3]            tied:  label=1  wallet=0x62730fede68ebedfb510e6f38da2aa2eca081741
+[cb3]            tied:  label=1  wallet=0xcb8ed92b702a0f2397f8cda9e4925867b7b9135e
+[cb3]            tied:  label=1  wallet=0xf1d54d55b7568e6e4c20867ccf377555cd947ffc
+[cb3]            tied:  label=1  wallet=0x6130238e132bd12ba92244568815c2f7fe4fc5c1
+[cb3]            tied:  label=1  wallet=0x22d0803925702b81d038c9b3f3aa77a3727f218f
+[cb3]            tied:  label=1  wallet=0x79963fd69baccad9bb8ab51ddfbf1f13e0630e13
+[cb3]            tied:  label=1  wallet=0x82ed2416f0a49cc02fb529b00c03582598d17cc3
+[cb3]            tied:  label=1  wallet=0x1270fccb862f069b80181dcedf7be31ec6cfc2c8
+[cb3]            tied:  label=1  wallet=0x2b6072aa2255e3a95154180076771417e3dc0b9e
+[cb3]            tied:  label=1  wallet=0x26ecf4f4a01bf39ce98144ef9aeddf28e9548f54
+[cb3]            tied:  label=1  wallet=0xdcce3bfa065cf5ca9a0acfe83d6ecd8279d10a15
+[cb3]            tied:  label=1  wallet=0xeee545e9706a03e73c5d17632e2bbb6f1096cce1
+[cb3]     3    0.3219    0.7521        2      2    0      33       1  0.971   0.943
+[cb3]     4    0.3163    0.7379        1      0    1      33       2  0.943   0.943
+[cb3]     5    0.3150    0.7348        1      0    1      33       3  0.917   0.943
+[cb3]     6    0.3117    0.7262        1      1    0      34       3  0.919   0.971
+[cb3]     7    0.3089    0.7192        1      1    0      35       3  0.921   1.000
+[cb3]     8    0.3082    0.7173        2      0    2      35       5  0.875   1.000
+[cb3]     9    0.2909    0.6720        1      0    1      35       6  0.854   1.000
+[cb3]    10    0.2659    0.6034        1      0    1      35       7  0.833   1.000
+[cb3]    11    0.2598    0.5863        5      0    5      35      12  0.745   1.000
+[cb3]            tied:  label=0  wallet=0xb4d0807e3447a8ac6dc52f51070d4e7caa6fa1c5
+[cb3]            tied:  label=0  wallet=0x0ffcfdffec108e9869698f69c62c82eca210e5a7
+[cb3]            tied:  label=0  wallet=0x10b0d2a23eed5184fe43d452bca85d063f6b9b5e
+[cb3]            tied:  label=0  wallet=0x13ff290849c6fef06efde63dfe643e62767716a3
+[cb3]            tied:  label=0  wallet=0x131bcf98856e2ac178509b3a5e7a891ac06597c3
+[cb3]    12    0.2595    0.5854        1      0    1      35      13  0.729   1.000
+[cb3]    13    0.2566    0.5769        1      0    1      35      14  0.714   1.000
+[cb3]    14    0.2455    0.5444        1      0    1      35      15  0.700   1.000
+[cb3]    15    0.2384    0.5234        1      0    1      35      16  0.686   1.000
+[cb3]    16    0.2371    0.5195        1      0    1      35      17  0.673   1.000
+[cb3]    17    0.2342    0.5105        1      0    1      35      18  0.660   1.000
+[cb3]    18    0.2327    0.5058        1      0    1      35      19  0.648   1.000
+[cb3]    19    0.2292    0.4950        2      0    2      35      21  0.625   1.000
+[cb3]    20    0.2282    0.4918        1      0    1      35      22  0.614   1.000
+[cb3]    21    0.2252    0.4825        1      0    1      35      23  0.603   1.000
+[cb3]    22    0.2248    0.4814        1      0    1      35      24  0.593   1.000
+[cb3]    23    0.2217    0.4715        1      0    1      35      25  0.583   1.000
+[cb3]    24    0.2205    0.4677        1      0    1      35      26  0.574   1.000
+[cb3]    25    0.2058    0.4193        1      0    1      35      27  0.565   1.000
+[cb3]    26    0.2042    0.4140        1      0    1      35      28  0.556   1.000
+[cb3]    27    0.1978    0.3921        1      0    1      35      29  0.547   1.000
+[cb3]    28    0.1970    0.3893        1      0    1      35      30  0.538   1.000
+[cb3]    29    0.1964    0.3873        2      0    2      35      32  0.522   1.000
+[cb3]    30    0.1924    0.3732        1      0    1      35      33  0.515   1.000
+[cb3]    31    0.1921    0.3723        1      0    1      35      34  0.507   1.000
+[cb3]    32    0.1895    0.3631        1      0    1      35      35  0.500   1.000
+[cb3]    33    0.1887    0.3602        1      0    1      35      36  0.493   1.000
+[cb3]    34    0.1873    0.3550        2      0    2      35      38  0.479   1.000
+[cb3]    35    0.1863    0.3514        1      0    1      35      39  0.473   1.000
+[cb3]    36    0.1857    0.3492        2      0    2      35      41  0.461   1.000
+[cb3]    37    0.1849    0.3462        1      0    1      35      42  0.455   1.000
+[cb3]    38    0.1804    0.3296        1      0    1      35      43  0.449   1.000
+[cb3]    39    0.1783    0.3219        1      0    1      35      44  0.443   1.000
+[cb3]    40    0.1757    0.3120        1      0    1      35      45  0.438   1.000
+[cb3]    41    0.1712    0.2950        1      0    1      35      46  0.432   1.000
+[cb3]    42    0.1709    0.2937        1      0    1      35      47  0.427   1.000
+[cb3]    43    0.1706    0.2923        1      0    1      35      48  0.422   1.000
+[cb3]    44    0.1646    0.2689        1      0    1      35      49  0.417   1.000
+[cb3]    45    0.1644    0.2679        1      0    1      35      50  0.412   1.000
+[cb3]    46    0.1635    0.2643        1      0    1      35      51  0.407   1.000
+[cb3]    47    0.1625    0.2605        1      0    1      35      52  0.402   1.000
+[cb3]    48    0.1621    0.2586        1      0    1      35      53  0.398   1.000
+[cb3]    49    0.1616    0.2566        1      0    1      35      54  0.393   1.000
+[cb3]    50    0.1611    0.2549        1      0    1      35      55  0.389   1.000
+[cb3]    51    0.1592    0.2469        1      0    1      35      56  0.385   1.000
+[cb3]    52    0.1587    0.2447        1      0    1      35      57  0.380   1.000
+[cb3]    53    0.1569    0.2376        1      0    1      35      58  0.376   1.000
+[cb3]    54    0.1543    0.2265        1      0    1      35      59  0.372   1.000
+[cb3]    55    0.1535    0.2231        1      0    1      35      60  0.368   1.000
+[cb3]    56    0.1526    0.2195        1      0    1      35      61  0.365   1.000
+[cb3]    57    0.1516    0.2151        1      0    1      35      62  0.361   1.000
+[cb3]    58    0.1515    0.2148        1      0    1      35      63  0.357   1.000
+[cb3]    59    0.1476    0.1980        1      0    1      35      64  0.354   1.000
+[cb3]    60    0.1475    0.1975        2      0    2      35      66  0.347   1.000
+[cb3]    61    0.1470    0.1950        1      0    1      35      67  0.343   1.000
+[cb3]    62    0.1456    0.1890        1      0    1      35      68  0.340   1.000
+[cb3]    63    0.1453    0.1875        1      0    1      35      69  0.337   1.000
+[cb3]    64    0.1450    0.1865        1      0    1      35      70  0.333   1.000
+[cb3]    65    0.1450    0.1864        1      0    1      35      71  0.330   1.000
+[cb3]    66    0.1438    0.1813        1      0    1      35      72  0.327   1.000
+[cb3]    67    0.1431    0.1779        1      0    1      35      73  0.324   1.000
+[cb3]    68    0.1428    0.1768        1      0    1      35      74  0.321   1.000
+[cb3]    69    0.1421    0.1734        2      0    2      35      76  0.315   1.000
+[cb3]    70    0.1416    0.1710        1      0    1      35      77  0.312   1.000
+[cb3]    71    0.1407    0.1671        2      0    2      35      79  0.307   1.000
+[cb3]    72    0.1403    0.1654        1      0    1      35      80  0.304   1.000
+[cb3]    73    0.1398    0.1629        1      0    1      35      81  0.302   1.000
+[cb3]    74    0.1397    0.1624        1      0    1      35      82  0.299   1.000
+[cb3]    75    0.1384    0.1565        1      0    1      35      83  0.297   1.000
+[cb3]    76    0.1384    0.1564        1      0    1      35      84  0.294   1.000
+[cb3]    77    0.1380    0.1549        6      0    6      35      90  0.280   1.000
+[cb3]            tied:  label=0  wallet=0x9c4abb471fa36400db43d5fa221c680bf2f24896
+[cb3]            tied:  label=0  wallet=0x062b87fc5c1433b79e350c0f558753db63979a6b
+[cb3]            tied:  label=0  wallet=0xe6ef1d940d84acbb25ce574eb16613db0894418d
+[cb3]            tied:  label=0  wallet=0xf45082a309088f99e1e2a227a4911c2a2b018eb3
+[cb3]            tied:  label=0  wallet=0x2d4e90768c7ae9661acca6b16e605eba3e70edb0
+[cb3]            tied:  label=0  wallet=0x82c762fb547c4d02f41c9baef2258b4f0751e125
+[cb3]    78    0.1379    0.1542        1      0    1      35      91  0.278   1.000
+[cb3]    79    0.1377    0.1535        1      0    1      35      92  0.276   1.000
+[cb3]    80    0.1373    0.1517        1      0    1      35      93  0.273   1.000
+[cb3]    81    0.1373    0.1516        1      0    1      35      94  0.271   1.000
+[cb3]    82    0.1368    0.1489        1      0    1      35      95  0.269   1.000
+[cb3]    83    0.1367    0.1487        1      0    1      35      96  0.267   1.000
+[cb3]    84    0.1364    0.1471        1      0    1      35      97  0.265   1.000
+[cb3]    85    0.1363    0.1469        1      0    1      35      98  0.263   1.000
+[cb3]    86    0.1361    0.1457        1      0    1      35      99  0.261   1.000
+[cb3]    87    0.1360    0.1453        1      0    1      35     100  0.259   1.000
+[cb3]    88    0.1356    0.1435        1      0    1      35     101  0.257   1.000
+[cb3]    89    0.1355    0.1431        2      0    2      35     103  0.254   1.000
+[cb3]    90    0.1351    0.1412        4      0    4      35     107  0.246   1.000
+[cb3]            tied:  label=0  wallet=0x5fef666811668d1352ebd8687d68ad2315a95840
+[cb3]            tied:  label=0  wallet=0xdb4b7bf7a5d084bb089ba81a4646e57340180b46
+[cb3]            tied:  label=0  wallet=0xe0afeb157a0b7e76ce7dde16daa1f265b0362dec
+[cb3]            tied:  label=0  wallet=0x06da66efe045ab24e87cdfe0b70b23b2edc2f2ed
+[cb3]    91    0.1341    0.1365        1      0    1      35     108  0.245   1.000
+[cb3]    92    0.1337    0.1345        3      0    3      35     111  0.240   1.000
+[cb3]            tied:  label=0  wallet=0xe4e6aa2f9eb66b76d372d80cd91f6bc592d04bd4
+[cb3]            tied:  label=0  wallet=0x0a793254e040027c5d1ca0c2f87cda8e22228e05
+[cb3]            tied:  label=0  wallet=0xdb657fd8dc9a21a28432104b655908b5aa23a419
+[cb3]    93    0.1335    0.1338        2      0    2      35     113  0.236   1.000
+[cb3]    94    0.1334    0.1332        1      0    1      35     114  0.235   1.000
+[cb3]    95    0.1334    0.1332        1      0    1      35     115  0.233   1.000
+[cb3]    96    0.1333    0.1327        1      0    1      35     116  0.232   1.000
+[cb3]    97    0.1332    0.1323        1      0    1      35     117  0.230   1.000
+[cb3]    98    0.1330    0.1312        2      0    2      35     119  0.227   1.000
+[cb3]    99    0.1328    0.1305        4      0    4      35     123  0.222   1.000
+[cb3]            tied:  label=0  wallet=0xd8e4d149e4860908e319286783defecb0604ea77
+[cb3]            tied:  label=0  wallet=0xf3aaa1993611a22a9a0626abe021c4bfec28d6d6
+[cb3]            tied:  label=0  wallet=0xe85fbb5dfa5e35fd27b8bddda5aa22bc621d8b0f
+[cb3]            tied:  label=0  wallet=0x2760925a2d2d05728c8d701f73eaabee99c9ef06
+[cb3]   100    0.1326    0.1292        2      0    2      35     125  0.219   1.000
+[cb3]   101    0.1319    0.1258        1      0    1      35     126  0.217   1.000
+[cb3]   102    0.1316    0.1243        1      0    1      35     127  0.216   1.000
+[cb3]   103    0.1307    0.1203        1      0    1      35     128  0.215   1.000
+[cb3]   104    0.1307    0.1200        1      0    1      35     129  0.213   1.000
+[cb3]   105    0.1300    0.1168        1      0    1      35     130  0.212   1.000
+[cb3]   106    0.1298    0.1159        3      0    3      35     133  0.208   1.000
+[cb3]            tied:  label=0  wallet=0xfc8dce60c93690dd7a22b0024693294f0afe55c5
+[cb3]            tied:  label=0  wallet=0xc115985a2ec1a736a5b8212a6ad41c5568ba7b4a
+[cb3]            tied:  label=0  wallet=0x0800af6d3a2afc1b427b415baffbf11eab752fec
+[cb3]   107    0.1296    0.1148        1      0    1      35     134  0.207   1.000
+[cb3]   108    0.1296    0.1147        1      0    1      35     135  0.206   1.000
+[cb3]   109    0.1292    0.1130        1      0    1      35     136  0.205   1.000
+[cb3]   110    0.1291    0.1123        1      0    1      35     137  0.203   1.000
+[cb3]   111    0.1290    0.1117        1      0    1      35     138  0.202   1.000
+[cb3]   112    0.1289    0.1117        1      0    1      35     139  0.201   1.000
+[cb3]   113    0.1283    0.1087        1      0    1      35     140  0.200   1.000
+[cb3]   114    0.1283    0.1083        1      0    1      35     141  0.199   1.000
+[cb3]   115    0.1280    0.1072        1      0    1      35     142  0.198   1.000
+[cb3]   116    0.1278    0.1059        1      0    1      35     143  0.197   1.000
+[cb3]   117    0.1277    0.1056        1      0    1      35     144  0.196   1.000
+[cb3]   118    0.1277    0.1053        1      0    1      35     145  0.194   1.000
+[cb3]   119    0.1276    0.1052        1      0    1      35     146  0.193   1.000
+[cb3]   120    0.1276    0.1050        1      0    1      35     147  0.192   1.000
+[cb3]   121    0.1275    0.1046        1      0    1      35     148  0.191   1.000
+[cb3]   122    0.1272    0.1030        1      0    1      35     149  0.190   1.000
+[cb3]   123    0.1271    0.1027        1      0    1      35     150  0.189   1.000
+[cb3]   124    0.1268    0.1013        2      0    2      35     152  0.187   1.000
+[cb3]   125    0.1268    0.1009        1      0    1      35     153  0.186   1.000
+[cb3]   126    0.1267    0.1004        1      0    1      35     154  0.185   1.000
+[cb3]   127    0.1261    0.0977        1      0    1      35     155  0.184   1.000
+[cb3]   128    0.1257    0.0955        1      0    1      35     156  0.183   1.000
+[cb3]   129    0.1257    0.0954        1      0    1      35     157  0.182   1.000
+[cb3]   130    0.1251    0.0926        1      0    1      35     158  0.181   1.000
+[cb3]   131    0.1249    0.0917        1      0    1      35     159  0.180   1.000
+[cb3]   132    0.1240    0.0871        1      0    1      35     160  0.179   1.000
+[cb3]   133    0.1230    0.0821        2      0    2      35     162  0.178   1.000
+[cb3]   134    0.1220    0.0770        1      0    1      35     163  0.177   1.000
+[cb3]   135    0.1204    0.0687        1      0    1      35     164  0.176   1.000
+[cb3]   136    0.1192    0.0622        1      0    1      35     165  0.175   1.000
+[cb3]   137    0.1171    0.0513       14      0   14      35     179  0.164   1.000
+[cb3]            tied:  label=0  wallet=0x24836f8deba0a3f7d10328ffa78e4281d5fe6f2f
+[cb3]            tied:  label=0  wallet=0xdde758b9ce87ee0e2a91c4f2f8705d5de950b868
+[cb3]            tied:  label=0  wallet=0xfd2b1925b4131dda1fdd4b6292e0339649b5de02
+[cb3]            tied:  label=0  wallet=0x2beac05bd6b6e4a264eec239eea79af3be46df24
+[cb3]            tied:  label=0  wallet=0x5e002167ca1d6f4e423b4fb44d360f051d107dc5
+[cb3]            tied:  label=0  wallet=0xd0e70259b30341bec5ad1c3c073aa077f37b7ef4
+[cb3]            tied:  label=0  wallet=0xe492cfff541fa99e6ab02bbbb31ab740ece48309
+[cb3]            tied:  label=0  wallet=0x7c6a5008a0dec812b3200229968889a5c185a406
+[cb3]            tied:  label=0  wallet=0xd44c2de98e5b4e2d3b9d23a9cde790f693511223
+[cb3]            tied:  label=0  wallet=0x47088683f8a65fcda4239f4d30f856c6d44c7835
+[cb3]            tied:  label=0  wallet=0x575f9fb0b758d52e93342def50d678e300fc5b78
+[cb3]            tied:  label=0  wallet=0xaa4696d5b52e75333946d47e667d0b9a060e5b29
+[cb3]            tied:  label=0  wallet=0x042876159be6d7b9bf89abd83e05f83a7177ae98
+[cb3]            tied:  label=0  wallet=0x9cc5bd222e6020a7e86f10c791c25df613c36714
+[cb3]   138    0.1171    0.0513        1      0    1      35     180  0.163   1.000
+[cb3]   139    0.1171    0.0511        6      0    6      35     186  0.158   1.000
+[cb3]            tied:  label=0  wallet=0xfd0b63ed8d68738e4905abc4097e9a63510ba6be
+[cb3]            tied:  label=0  wallet=0x60b41cf81fc908cd755e4cd7f06e2db611fad140
+[cb3]            tied:  label=0  wallet=0x0aae5c4ec45339a64a1dd2fe4ba98c2a19eb251c
+[cb3]            tied:  label=0  wallet=0x16bd7cc71f6da1e77d1d8255677abc75b9bae288
+[cb3]            tied:  label=0  wallet=0x803f5027e592523b51fd1aa8c509991d7c4bf6ed
+[cb3]            tied:  label=0  wallet=0x1f85e6e3e41e5f1fe03f6cf22a52ae4e352ea51b
+[cb3]   140    0.1169    0.0503       16      0   16      35     202  0.148   1.000
+[cb3]            tied:  label=0  wallet=0x770569d15dfdc4ad5c3a0ec204032812cc85a442
+[cb3]            tied:  label=0  wallet=0xcb2ff2840a6b5abffe7071b35ecdd24891200eb7
+[cb3]            tied:  label=0  wallet=0x4fdbbc57bc50f1abf77d3e68bb26e83080e90b12
+[cb3]            tied:  label=0  wallet=0x18d422264f629f07d78a75bc5aef7d14ba11af03
+[cb3]            tied:  label=0  wallet=0x7858d06794cfc352518ec992284aa2431b7b1cbd
+[cb3]            tied:  label=0  wallet=0x8159e504042305104d507bea55ee644e76eff32b
+[cb3]            tied:  label=0  wallet=0xf80f12c256e97029057760c224524aef5d167868
+[cb3]            tied:  label=0  wallet=0x770ee3a1d4c6839ac52bcb7f838c0e83c86ab559
+[cb3]            tied:  label=0  wallet=0xfe23f3506b5aa11e0f4df534faf641433064937b
+[cb3]            tied:  label=0  wallet=0x171eda69c3857c363f38c954e20dc9039d7be046
+[cb3]            tied:  label=0  wallet=0xd2f8885d33a00bac50ecb68cc100d7638759071e
+[cb3]            tied:  label=0  wallet=0x0de44e5e476c731b9ca5671e7882e6098a462d29
+[cb3]            tied:  label=0  wallet=0xc922b1202995e6b34697e76e1881d56ca2652a8c
+[cb3]            tied:  label=0  wallet=0x8cf4d3bd0f849bdd39ce68889259d9a584e65608
+[cb3]            tied:  label=0  wallet=0x48da00a574fa77b8c734377db640cc7c26980419
+[cb3]            tied:  label=0  wallet=0xed521bba9cb56cc65ed25a54ed93eb6026e29e9c
+[cb3]   141    0.1162    0.0464        3      0    3      35     205  0.146   1.000
+[cb3]            tied:  label=0  wallet=0x63c652270a37e53a170303b6b264a2aa835743a5
+[cb3]            tied:  label=0  wallet=0x095dcfb123a4bc035ee6b0d624bab0cc964352cf
+[cb3]            tied:  label=0  wallet=0xd62840cf26fab216a46c5c9e9920487098e243c1
+[cb3]   142    0.1156    0.0432        1      0    1      35     206  0.145   1.000
+[cb3]   143    0.1155    0.0426        3      0    3      35     209  0.143   1.000
+[cb3]            tied:  label=0  wallet=0x470a1f47c3fb22f5e4e70c778d20ccbf1928e36c
+[cb3]            tied:  label=0  wallet=0xda25ac7b9d3984fb984ce247c2065ed719576998
+[cb3]            tied:  label=0  wallet=0x2ae085ed72ebf5beb536ce7e73a6f4c2e57cbc70
+[cb3]   144    0.1147    0.0386        1      0    1      35     210  0.143   1.000
+
+[cb3] TEST confusion matrix @ thr=0.3
+[[205   5]
+ [  0  35]]
+
+              precision    recall  f1-score   support
+
+           0     1.0000    0.9762    0.9880       210
+           1     0.8750    1.0000    0.9333        35
+
+    accuracy                         0.9796       245
+   macro avg     0.9375    0.9881    0.9606       245
+weighted avg     0.9821    0.9796    0.9801       245
+
+[cb3] feature importances:
+  15.3060  realized_pnl_per_closing_trade
+  14.3049  adaptive_markout_raw_grosswt_h0p150
+  12.8282  unrealized_edge_per_open_token_sqrt
+  11.7261  buy_markout_adj_grosswt_h0p030_lb0p200
+  10.5828  unrealized_edge_per_open_token
+   8.8450  buy_markout_adj_grosswt_h0p070_lb0p150
+   7.5279  adaptive_markout_raw_grosswt_h0p200
+   6.7179  high_sell_nonflattening_cash_frac_pctl90
+   6.4472  adaptive_markout_raw_grosswt_h0p010
+   5.7138  adaptive_markout_raw_grosswt_h0p070
+
+[cb3] saved cache/models/cb_insider_10feat_v2_20260602_121306.joblib
+[cb3] saved cache/models/cb_insider_10feat_v2_20260602_121306.calibrator.joblib
+[cb3] saved cache/models/cb_insider_10feat_v2_20260602_121306.meta.json
+[cb3] copied -> cache/models/cb_insider_10feat_v2_latest.joblib
+[cb3] copied -> cache/models/cb_insider_10feat_v2_latest.calibrator.joblib
+[cb3] copied -> cache/models/cb_insider_10feat_v2_latest.meta.json
+
+[cb3] comparison vs catboost2 (30-feat, same pipeline):
+  30-feat v2:  ROC-AUC=0.9827  PR-AUC=0.8564
+  10-feat v2:  ROC-AUC=0.9947  PR-AUC=0.9661

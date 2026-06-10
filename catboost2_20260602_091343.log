@@ -1,0 +1,131 @@
+[cb2] run timestamp = 20260602_091343
+[cb2] logging to catboost2_20260602_091343.log
+[cb2] loading cache/training_data.parquet
+[cb2] full shape=(793, 322)  positives=117  negatives=676
+[cb2] using top-30 features from cb_insider_30feat_latest.meta.json
+[cb2] 2 markets without terminal_start_ts routed into val: ['us-x-iran-ceasefire-by-april-7', 'will-openai-release-a-new-frontier-model-on-december-11']
+[cb2] markets total: 29  (train=16, val=7, test=6)
+[cb2] market order (oldest -> newest), split assignment:
+  train  2025-07-07  will-microstrategy-purchase-bitcoin-july-1-7
+  train  2025-07-28  will-microstrategy-hold-620k-btc-before-august
+  train  2025-09-26  openai-social-app-in-2025
+  train  2025-10-09  will-mara-corina-machado-win-the-nobel-peace-prize-in-2025
+  train  2025-10-10  will-yulia-navalnaya-win-the-nobel-peace-prize-in-2025
+  train  2025-10-18  openai-browser-in-2025
+  train  2025-10-19  openai-browser-by-october-31
+  train  2025-11-17  microstrategy-announces-1000-btc-purchase-november-11-17
+  train  2025-11-30  will-microstrategy-announce-holding-650k-btc-by-november-30
+  train  2025-12-06  will-stable-launch-a-token-in-2025
+  train  2025-12-08  microstrategy-announces-1000-btc-purchase-december-2-8
+  train  2025-12-11  will-openai-release-a-new-frontier-model-by-december-13-683
+  train  2025-12-17  will-draftkings-launch-a-prediction-market-in-2025
+  train  2025-12-22  will-microstrategy-announce-a-bitcoin-purchase-december-16-22
+  train  2025-12-27  microstrategy-sell-any-bitcoin-in-2025
+  train  2025-12-28  will-aztec-launch-a-token-in-2025
+  val    2025-12-28  will-microstrategy-hold-680k-btc-by-december-31
+  val    2025-12-29  will-lighter-perform-an-airdrop-by-december-31
+  val    2026-02-09  will-cardi-b-perform-during-the-super-bowl-lx-halftime-show
+  val    2026-02-09  will-karol-g-perform-during-the-super-bowl-lx-halftime-show
+  val    2026-02-26  will-axiom-be-accused-of-insider-trading
+  test   2026-02-27  will-us-or-israel-strike-iran-by-february-28-2026-766
+  test   2026-02-27  us-strikes-iran-by-february-28-2026-227-967-547-688-589-491-592-418-452-924-384-915-464-672-196-157-993-596-269-535-381-391-471-256-988-997-296-225-762-973-292-827-345-182-558-215-794-879-189-761
+  test   2026-02-28  us-strikes-iran-by-march-1-2026-492
+  test   2026-02-28  khamenei-out-as-supreme-leader-of-iran-by-march-31
+  test   2026-03-13  nothing-ever-happens-microstrategy
+  test   2026-03-15  will-microstrategy-announce-holding-740k-btc-by-march-31
+  val    NaT         us-x-iran-ceasefire-by-april-7
+  val    NaT         will-openai-release-a-new-frontier-model-on-december-11
+[cb2] row distribution (total n=793, pos=117, overall pos rate=14.75%):
+  train  n= 193  (24.34% of total)  pos= 31  (16.06% pos rate within split)
+  val    n= 112  (14.12% of total)  pos= 16  (14.29% pos rate within split)
+  test   n= 488  (61.54% of total)  pos= 70  (14.34% pos rate within split)
+[cb2] running 5-fold expanding-window CV on 16 train markets
+  fold 1: train_mks=6 (rows=43, pos=8) val_mks=2 (rows=14, pos=2)  ROC-AUC=0.7500  PR-AUC=0.6250  best_iter=1
+  fold 2: train_mks=8 (rows=57, pos=10) val_mks=2 (rows=34, pos=6)  ROC-AUC=0.4643  PR-AUC=0.1765  best_iter=0
+  fold 3: train_mks=10 (rows=91, pos=16) val_mks=2 (rows=49, pos=7)  ROC-AUC=0.9218  PR-AUC=0.5620  best_iter=15
+  fold 4: train_mks=12 (rows=140, pos=23) val_mks=2 (rows=42, pos=6)  ROC-AUC=0.8287  PR-AUC=0.3242  best_iter=0
+  fold 5: train_mks=14 (rows=182, pos=29) val_mks=2 (rows=11, pos=2)  ROC-AUC=0.6111  PR-AUC=0.3750  best_iter=12
+[cb2] CV ROC-AUC = 0.7152 ± 0.1616  (over 5 usable folds)
+[cb2] CV PR-AUC  = 0.4126 ± 0.1627
+[cb2] final train scale_pos_weight = 2.000  (auto-balanced would be 5.226)
+0:	learn: 0.6800315	test: 0.7471955	best: 0.7471955 (0)	total: 651us	remaining: 1.3s
+Stopped by overfitting detector  (75 iterations wait)
+
+bestTest = 0.8458848201
+bestIteration = 7
+
+Shrink model to first 8 iterations.
+[cb2] fit in 0.07s  best_iter=7 / 2000
+
+[cb2] calibration: sigmoid(1.901 * raw_prob -2.411)  (fit on val)
+[cb2] raw  prob range  train=[0.208, 0.565]  val=[0.218, 0.550]  test=[0.209, 0.574]
+[cb2] cal. prob range  train=[0.118, 0.208]  val=[0.120, 0.203]  test=[0.118, 0.211]
+
+[cb2] metrics per split (overfit check: train >> val => overfit):
+[cb2] train  n= 193 pos= 31  ROC-AUC=0.9205  PR-AUC=0.6686
+[cb2] val    n= 112 pos= 16  ROC-AUC=0.9180  PR-AUC=0.7742
+[cb2] test   n= 488 pos= 70  ROC-AUC=0.9723  PR-AUC=0.8700
+
+[cb2] PR-AUC gap train-val = -0.1057  (big positive = overfit train)
+[cb2] PR-AUC gap val-test  = -0.0958  (big positive = overfit val via early stopping)
+
+[cb2] classification metrics @ fixed thr=0.8:
+  train  P=0.0000  R=0.0000  F1=0.0000  (TP=0, FP=0, FN=31, TN=162)
+  val    P=0.0000  R=0.0000  F1=0.0000  (TP=0, FP=0, FN=16, TN=96)
+  test   P=0.0000  R=0.0000  F1=0.0000  (TP=0, FP=0, FN=70, TN=418)
+
+[cb2] TEST confusion matrix @ thr=0.8
+[[418   0]
+ [ 70   0]]
+
+              precision    recall  f1-score   support
+
+           0     0.8566    1.0000    0.9227       418
+           1     0.0000    0.0000    0.0000        70
+
+    accuracy                         0.8566       488
+   macro avg     0.4283    0.5000    0.4614       488
+weighted avg     0.7337    0.8566    0.7904       488
+
+[cb2] feature importances:
+  11.6066  position_flip_rate
+  10.7139  unrealized_edge_per_open_token
+   7.6835  buy_markout_adj_grosswt_h0p030_lb0p200
+   7.6212  derisk_0p75_time_position_mean
+   7.0482  realized_win_rate_closing_trades
+   6.8746  adaptive_markout_raw_grosswt_h0p030
+   5.9954  adaptive_markout_raw_grosswt_h0p070
+   5.9289  active_day_frac
+   5.5419  adaptive_plus_realized_alpha0p25_h0p030
+   4.7873  adaptive_plus_realized_alpha0p5_h0p070
+   4.0736  n_distinct_buy_days
+   3.9249  buy_markout_adj_mean_h0p200_lb0p200
+   3.1679  sell_markout_adj_median_h0p150_lb0p010
+   3.0836  sell_markout_adj_median_h0p030_lb0p070
+   2.9701  adaptive_markout_raw_grosswt_h0p200
+   2.7554  adaptive_markout_raw_grosswt_h0p010
+   2.0198  time_to_major_move_pct_of_market
+   1.9563  buy_markout_adj_grosswt_h0p070_lb0p150
+   0.9390  realized_pnl_per_closing_trade
+   0.7300  high_sell_nonflattening_cash_frac_pctl90
+   0.5778  buy_markout_adj_grosswt_h0p010_lb0p030
+   0.0000  adaptive_markout_raw_grosswt_h0p150
+   0.0000  unrealized_edge_per_open_token_sqrt
+   0.0000  buy_markout_adj_grosswt_h0p030_lb0p010
+   0.0000  buy_markout_adj_mean_h0p200_lb0p030
+   0.0000  major_move_time_remaining_pct
+   0.0000  realized_edge_grosswt
+   0.0000  n_low_buy_building_trades
+   0.0000  realized_pnl_total
+   0.0000  sell_markout_adj_median_h0p150_lb0p200
+
+[cb2] saved cache/models/cb_insider_30feat_v2_20260602_091343.joblib
+[cb2] saved cache/models/cb_insider_30feat_v2_20260602_091343.calibrator.joblib
+[cb2] saved cache/models/cb_insider_30feat_v2_20260602_091343.meta.json
+[cb2] copied -> cache/models/cb_insider_30feat_v2_latest.joblib
+[cb2] copied -> cache/models/cb_insider_30feat_v2_latest.calibrator.joblib
+[cb2] copied -> cache/models/cb_insider_30feat_v2_latest.meta.json
+
+[cb2] comparison vs prior CatBoost (random 80/20 split):
+  prior (rnd 80/20): ROC-AUC=0.9578  PR-AUC=0.8893
+  v2 (time-ordered test): ROC-AUC=0.9723  PR-AUC=0.8700

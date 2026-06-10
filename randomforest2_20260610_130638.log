@@ -1,0 +1,360 @@
+[rf2] run timestamp = 20260610_130638
+[rf2] logging to randomforest2_20260610_130638.log
+[rf2] loading cache/training_data.parquet
+[rf2] full shape=(793, 322)  positives=117  negatives=676
+[rf2] using top-10 features from cb_insider_30feat_latest.meta.json:
+   1. adaptive_markout_raw_grosswt_h0p070
+   2. unrealized_edge_per_open_token
+   3. adaptive_markout_raw_grosswt_h0p010
+   4. adaptive_markout_raw_grosswt_h0p150
+   5. unrealized_edge_per_open_token_sqrt
+   6. buy_markout_adj_grosswt_h0p070_lb0p150
+   7. adaptive_markout_raw_grosswt_h0p200
+   8. buy_markout_adj_grosswt_h0p030_lb0p200
+   9. high_sell_nonflattening_cash_frac_pctl90
+  10. realized_pnl_per_closing_trade
+[rf2] markets total: 29  (train=23, val=5, test=1)
+[rf2] market order (oldest -> newest), split assignment:
+  train  2025-07-07  will-microstrategy-purchase-bitcoin-july-1-7
+  train  2025-07-28  will-microstrategy-hold-620k-btc-before-august
+  train  2025-09-26  openai-social-app-in-2025
+  train  2025-10-09  will-mara-corina-machado-win-the-nobel-peace-prize-in-2025
+  train  2025-10-10  will-yulia-navalnaya-win-the-nobel-peace-prize-in-2025
+  train  2025-10-18  openai-browser-in-2025
+  train  2025-10-19  openai-browser-by-october-31
+  train  2025-11-17  microstrategy-announces-1000-btc-purchase-november-11-17
+  train  2025-11-30  will-microstrategy-announce-holding-650k-btc-by-november-30
+  train  2025-12-06  will-stable-launch-a-token-in-2025
+  train  2025-12-08  microstrategy-announces-1000-btc-purchase-december-2-8
+  train  2025-12-11  will-openai-release-a-new-frontier-model-by-december-13-683
+  train  2025-12-17  will-draftkings-launch-a-prediction-market-in-2025
+  train  2025-12-22  will-microstrategy-announce-a-bitcoin-purchase-december-16-22
+  train  2025-12-27  microstrategy-sell-any-bitcoin-in-2025
+  train  2025-12-28  will-aztec-launch-a-token-in-2025
+  train  2025-12-28  will-microstrategy-hold-680k-btc-by-december-31
+  train  2025-12-29  will-lighter-perform-an-airdrop-by-december-31
+  train  2026-02-09  will-cardi-b-perform-during-the-super-bowl-lx-halftime-show
+  train  2026-02-09  will-karol-g-perform-during-the-super-bowl-lx-halftime-show
+  train  2026-02-26  will-axiom-be-accused-of-insider-trading
+  train  2026-02-27  will-us-or-israel-strike-iran-by-february-28-2026-766
+  train  2026-02-27  us-strikes-iran-by-february-28-2026-227-967-547-688-589-491-592-418-452-924-384-915-464-672-196-157-993-596-269-535-381-391-471-256-988-997-296-225-762-973-292-827-345-182-558-215-794-879-189-761
+  test   2026-02-28  us-strikes-iran-by-march-1-2026-492
+  val    2026-02-28  khamenei-out-as-supreme-leader-of-iran-by-march-31
+  val    2026-03-13  nothing-ever-happens-microstrategy
+  val    2026-03-15  will-microstrategy-announce-holding-740k-btc-by-march-31
+  val    NaT         us-x-iran-ceasefire-by-april-7
+  val    NaT         will-openai-release-a-new-frontier-model-on-december-11
+[rf2] row distribution (total n=793, pos=117, overall pos rate=14.75%):
+  train  n= 487  (61.41% of total)  pos= 73  (14.99% pos rate within split)
+  val    n=  61  ( 7.69% of total)  pos=  9  (14.75% pos rate within split)
+  test   n= 245  (30.90% of total)  pos= 35  (14.29% pos rate within split)
+[rf2] running 5-fold expanding-window CV on 23 train markets
+  fold 1: train_mks=8 (rows=57, pos=10) val_mks=3 (rows=76, pos=12)  ROC-AUC=0.6426  PR-AUC=0.3911
+  fold 2: train_mks=11 (rows=133, pos=22) val_mks=3 (rows=49, pos=7)  ROC-AUC=0.8248  PR-AUC=0.6025
+  fold 3: train_mks=14 (rows=182, pos=29) val_mks=3 (rows=18, pos=3)  ROC-AUC=0.7444  PR-AUC=0.6111
+  fold 4: train_mks=17 (rows=200, pos=32) val_mks=3 (rows=21, pos=3)  ROC-AUC=0.7222  PR-AUC=0.6032
+  fold 5: train_mks=20 (rows=221, pos=35) val_mks=3 (rows=266, pos=38)  ROC-AUC=0.8191  PR-AUC=0.3459
+[rf2] CV ROC-AUC = 0.7506 ± 0.0674  (over 5 usable folds)
+[rf2] CV PR-AUC  = 0.5108 ± 0.1171
+[rf2] final positive class weight = 2.000  (auto-balanced would be 5.671)
+[rf2] fit in 0.42s  n_estimators=300
+
+[rf2] prob range  train=[0.000, 1.000]  val=[0.000, 0.817]  test=[0.000, 0.930]
+
+[rf2] metrics per split (overfit check: train >> val => overfit):
+[rf2] train  n= 487 pos= 73  ROC-AUC=0.9990  PR-AUC=0.9923  P=0.9865  R=1.0000  F1=0.9932  (thr=0.5)
+[rf2] val    n=  61 pos=  9  ROC-AUC=0.8632  PR-AUC=0.7294  P=1.0000  R=0.3333  F1=0.5000  (thr=0.5)
+[rf2] test   n= 245 pos= 35  ROC-AUC=0.9959  PR-AUC=0.9702  P=0.7609  R=1.0000  F1=0.8642  (thr=0.5)
+
+[rf2] PR-AUC gap train-val = +0.2630  (big positive = overfit train)
+[rf2] PR-AUC gap val-test  = -0.2408  (big positive = overfit val)
+
+[rf2] classification metrics @ fixed thr=0.5:
+  train  P=0.9865  R=1.0000  F1=0.9932  (TP=73, FP=1, FN=0, TN=413)
+  val    P=1.0000  R=0.3333  F1=0.5000  (TP=3, FP=0, FN=6, TN=52)
+  test   P=0.7609  R=1.0000  F1=0.8642  (TP=35, FP=11, FN=0, TN=199)
+[rf2] curves saved to randomforest2_20260610_130638_curves.png
+
+[rf2] TEST predictions, one row per wallet, sorted by prob desc.
+[rf2]  rank  prob    label  cum_tp  cum_fp  prec   recall  wallet
+[rf2]     1    0.9300    1        1       0  1.000   0.029  0xf1a1bcf248a0dc05bec474c229f490db00106f24
+[rf2]     2    0.9300    1        2       0  1.000   0.057  0x2b6072aa2255e3a95154180076771417e3dc0b9e
+[rf2]     3    0.9267    1        3       0  1.000   0.086  0xab54f4b400bd8015e206a74f8d89362cf8eee856
+[rf2]     4    0.9267    1        4       0  1.000   0.114  0x943117ea8e3f5b160e158c1c4b1786fee5d3e5a0
+[rf2]     5    0.9267    1        5       0  1.000   0.143  0xe85f1414171cd41707dc7b256bd3db269f94a28c
+[rf2]     6    0.9267    1        6       0  1.000   0.171  0xeb1cdc2f267723b577cd0d1441fe5db05d440f79
+[rf2]     7    0.9267    1        7       0  1.000   0.200  0xb7200eb4ffc3ea4bde0ef28110238bd9f539c414
+[rf2]     8    0.9267    1        8       0  1.000   0.229  0x344c5073e9b152a95d9f42767ac084a87fad68ab
+[rf2]     9    0.9267    1        9       0  1.000   0.257  0xdcce3bfa065cf5ca9a0acfe83d6ecd8279d10a15
+[rf2]    10    0.9233    1       10       0  1.000   0.286  0x62730fede68ebedfb510e6f38da2aa2eca081741
+[rf2]    11    0.9233    1       11       0  1.000   0.314  0xcb8ed92b702a0f2397f8cda9e4925867b7b9135e
+[rf2]    12    0.9200    1       12       0  1.000   0.343  0x95bd107886bd48d6737029603e3db242fb781652
+[rf2]    13    0.9167    1       13       0  1.000   0.371  0xe1bdfa52bc9342115bbf1d41d04b8cf0bcd8f5a7
+[rf2]    14    0.9133    1       14       0  1.000   0.400  0x79963fd69baccad9bb8ab51ddfbf1f13e0630e13
+[rf2]    15    0.9133    1       15       0  1.000   0.429  0x6130238e132bd12ba92244568815c2f7fe4fc5c1
+[rf2]    16    0.9133    1       16       0  1.000   0.457  0x1270fccb862f069b80181dcedf7be31ec6cfc2c8
+[rf2]    17    0.9133    1       17       0  1.000   0.486  0xa34d11f372e8a87acc87e3beabb32e2fe7f9ee4d
+[rf2]    18    0.9100    1       18       0  1.000   0.514  0xdad42409cf398c9149c50217e4dc4a039d9dec0b
+[rf2]    19    0.9100    1       19       0  1.000   0.543  0x82ed2416f0a49cc02fb529b00c03582598d17cc3
+[rf2]    20    0.9100    1       20       0  1.000   0.571  0xf37af11e538c6eba3ddcea540ee54ca35c6354f8
+[rf2]    21    0.9100    0       20       1  0.952   0.571  0x1b740123415b0dccff0ee15e199b3508dcb2778c
+[rf2]    22    0.9067    1       21       1  0.955   0.600  0x26ecf4f4a01bf39ce98144ef9aeddf28e9548f54
+[rf2]    23    0.9033    1       22       1  0.957   0.629  0x22d0803925702b81d038c9b3f3aa77a3727f218f
+[rf2]    24    0.8967    1       23       1  0.958   0.657  0xf1d54d55b7568e6e4c20867ccf377555cd947ffc
+[rf2]    25    0.8900    1       24       1  0.960   0.686  0xfffee3116390fc9415956617ed048d26c7c1b424
+[rf2]    26    0.8900    1       25       1  0.962   0.714  0x3e545810f8b95dd0fcf4114b0246a0dbb40ad1c5
+[rf2]    27    0.8833    1       26       1  0.963   0.743  0x65387d3235b2fd6ac3587df1fff2c2de2f98e523
+[rf2]    28    0.8833    1       27       1  0.964   0.771  0x45f402894f550357ff1d5db385c93bb9e480dd79
+[rf2]    29    0.8800    0       27       2  0.931   0.771  0x0ef76ca8d226473cdef7c17c20c07c05d7059ae8
+[rf2]    30    0.8733    1       28       2  0.933   0.800  0xeee545e9706a03e73c5d17632e2bbb6f1096cce1
+[rf2]    31    0.8700    1       29       2  0.935   0.829  0x8e588259e06da665020dac0e4958301a2089579e
+[rf2]    32    0.8667    1       30       2  0.938   0.857  0x421b26a47bb5136d045190d7870095eb29498469
+[rf2]    33    0.8567    1       31       2  0.939   0.886  0x244cde3e010a8eb27f0ff588476091bd3d73f1dc
+[rf2]    34    0.7900    1       32       2  0.941   0.914  0x4ec2f11d2893eb1bc3bab7449910540c93adf7ec
+[rf2]    35    0.7833    1       33       2  0.943   0.943  0x5e0b017aef88af84fb3897fecce7413c6754981a
+[rf2]    36    0.7067    0       33       3  0.917   0.943  0xa67b468c188a5cc7ad8c9659dfd00210cddac941
+[rf2]    37    0.6900    0       33       4  0.892   0.943  0x097ac31be4864bff96838d0aec3eeb30c0ab7041
+[rf2]    38    0.6867    1       34       4  0.895   0.971  0xb390ae2cc3fd8cb2670a62129faeb775faee106c
+[rf2]    39    0.6733    0       34       5  0.872   0.971  0x6bc74c392c320cfe10d5be61db978a58c8444ad4
+[rf2]    40    0.6400    1       35       5  0.875   1.000  0xc0292a841a0c9a7320aa39075cffcf1b8f64f705
+[rf2]    41    0.6400    0       35       6  0.854   1.000  0x37d10ffb61998561c5f9fb941c42c952d8fb4e28
+[rf2]    42    0.5800    0       35       7  0.833   1.000  0xce785a5ee27cefae536575b5adc89114e62e8093
+[rf2]    43    0.5633    0       35       8  0.814   1.000  0x1a57513f0dcb0789fedb13174252b28e5dc5c02b
+[rf2]    44    0.5567    0       35       9  0.795   1.000  0x0ffcfdffec108e9869698f69c62c82eca210e5a7
+[rf2]    45    0.5567    0       35      10  0.778   1.000  0x10b0d2a23eed5184fe43d452bca85d063f6b9b5e
+[rf2]    46    0.5567    0       35      11  0.761   1.000  0xb4d0807e3447a8ac6dc52f51070d4e7caa6fa1c5
+[rf2]    47    0.4967    0       35      12  0.745   1.000  0x131bcf98856e2ac178509b3a5e7a891ac06597c3
+[rf2]    48    0.4867    0       35      13  0.729   1.000  0x237ec57d6bdc6c8517f745d08183c016ba0c403c
+[rf2]    49    0.4756    0       35      14  0.714   1.000  0x470e177a6cb992fcc0b6086b91d46a6d45f68fb6
+[rf2]    50    0.4700    0       35      15  0.700   1.000  0xe16ff104a4116cf3a834cd23b3f3391132d66d1f
+[rf2]    51    0.4533    0       35      16  0.686   1.000  0xc433b9da33c17b1b256eac027873b923d054478e
+[rf2]    52    0.4433    0       35      17  0.673   1.000  0xdbb4a207c02e3f05c4ce1b02e7c934b086cbafe9
+[rf2]    53    0.4400    0       35      18  0.660   1.000  0x13ff290849c6fef06efde63dfe643e62767716a3
+[rf2]    54    0.4233    0       35      19  0.648   1.000  0xfadf8833dfb222ab3da48d27d69353762606dda0
+[rf2]    55    0.4033    0       35      20  0.636   1.000  0x58804ec98542e15e2764b3acb09ff413f2dd18a0
+[rf2]    56    0.3900    0       35      21  0.625   1.000  0xf5be02858d86213b0ac7fc7afbaf12fd5f26195a
+[rf2]    57    0.3867    0       35      22  0.614   1.000  0xf769c6390f6d564fe4859effbddb682c62660114
+[rf2]    58    0.3867    0       35      23  0.603   1.000  0xb05dd86107a3809d6d148fe1f68da0351e40bc1a
+[rf2]    59    0.3833    0       35      24  0.593   1.000  0x4be1a0489801a5a5a9a41024b13f4a6182ee3fea
+[rf2]    60    0.3667    0       35      25  0.583   1.000  0x0f214043fe6d32f8692a302270e2ce460a523d6e
+[rf2]    61    0.3667    0       35      26  0.574   1.000  0x394ea9fc98dc616575a47975b36483777a3d23d2
+[rf2]    62    0.3400    0       35      27  0.565   1.000  0xda2d327a9dd25f8460d0576e1facc3ce95da1cee
+[rf2]    63    0.3333    0       35      28  0.556   1.000  0x06dcaa14f57d8a0573f5dc5940565e6de667af59
+[rf2]    64    0.3300    0       35      29  0.547   1.000  0xe168b5394c715b1714b5093d22c681556d3ee559
+[rf2]    65    0.3300    0       35      30  0.538   1.000  0x4e25605fd905e9972efc0f4d8814530c655cd7a7
+[rf2]    66    0.3267    0       35      31  0.530   1.000  0xc89dc66e04aa7cd9a38334cca48abf3ad45bb1f1
+[rf2]    67    0.3033    0       35      32  0.522   1.000  0xeff07c97c491e11e6ab7a6f4520e61f8fa5c1210
+[rf2]    68    0.2900    0       35      33  0.515   1.000  0x702226b14b65b1c8d05ff51759e095f09932f64e
+[rf2]    69    0.2867    0       35      34  0.507   1.000  0x951417b7773e19f60d9a581b661a028ccffbeaf1
+[rf2]    70    0.2733    0       35      35  0.500   1.000  0xe8f348dae364517f0ee9bbeac2928460335dd930
+[rf2]    71    0.2633    0       35      36  0.493   1.000  0x83708188bb141ae02eb081e4f7131f7b2da9f352
+[rf2]    72    0.2600    0       35      37  0.486   1.000  0xd3ae24a39cf21417de88b79ed72b6d28a6385b63
+[rf2]    73    0.2533    0       35      38  0.479   1.000  0xae0f21790d847393dcc4da8b4d15f72ff84cf647
+[rf2]    74    0.2500    0       35      39  0.473   1.000  0x0329d8856892b29f995245d6bc3bb7ef1b443d96
+[rf2]    75    0.2333    0       35      40  0.467   1.000  0x1424a9e0a0def5a86c3c6cffbd8b6c65e1b12c7f
+[rf2]    76    0.2300    0       35      41  0.461   1.000  0x77b0b896910b3388e01708521d1f92d1f5c2ba0b
+[rf2]    77    0.2267    0       35      42  0.455   1.000  0xd27b644fe8e7246246cadcacd974f4af8d8a3966
+[rf2]    78    0.2233    0       35      43  0.449   1.000  0xab79b07cf7f7a864f3417997b758cc0a4ae24bff
+[rf2]    79    0.2200    0       35      44  0.443   1.000  0x80b6ec922b7c39c044f487c47779ca8bed8d878c
+[rf2]    80    0.2067    0       35      45  0.438   1.000  0x05548d347cd9c7fd5d8b985590436704024b4514
+[rf2]    81    0.1967    0       35      46  0.432   1.000  0xd9edd8c428fd3ce72e1c0be6b126bddc8fdfbc2e
+[rf2]    82    0.1867    0       35      47  0.427   1.000  0x4ad6f0f4e0799bf87b7fec2595b7cd6be5cebf78
+[rf2]    83    0.1867    0       35      48  0.422   1.000  0x75935d040cd2795bdebb692210f9753e63fce677
+[rf2]    84    0.1733    0       35      49  0.417   1.000  0x3ecfd2f2df0ef9ed14aa715daa614946b045c870
+[rf2]    85    0.1700    0       35      50  0.412   1.000  0xdaefcd102d9f3e1626cf49302b65c9073d5ee647
+[rf2]    86    0.1476    0       35      51  0.407   1.000  0xc7f9a6a9597b0bf2bd4ee1235b3d6d227293c491
+[rf2]    87    0.1333    0       35      52  0.402   1.000  0x19c97e57baf0b2443fdd607c76ed203943e7b2ce
+[rf2]    88    0.1300    0       35      53  0.398   1.000  0x7e80fca8bf7a3e61fd8d2bd7f5e585fec457f17a
+[rf2]    89    0.1300    0       35      54  0.393   1.000  0xddfe9c1985dabc00a483197262a0959d2e754c2e
+[rf2]    90    0.1233    0       35      55  0.389   1.000  0x58fab4517584b6111af0c011a4e643361e3f1b44
+[rf2]    91    0.1143    0       35      56  0.385   1.000  0x741f827ce3986563261675f03448991b15d1f6ca
+[rf2]    92    0.1133    0       35      57  0.380   1.000  0x1bcd6d6ac07a22838618e95ab3d8fef55b9abb7e
+[rf2]    93    0.1100    0       35      58  0.376   1.000  0xbbfe015f178cbd59deb5643dd4888d53d5b5c0ad
+[rf2]    94    0.1067    0       35      59  0.372   1.000  0xf45082a309088f99e1e2a227a4911c2a2b018eb3
+[rf2]    95    0.1067    0       35      60  0.368   1.000  0x1521b47bf0c41f6b7fd3ad41cdec566812c8f23e
+[rf2]    96    0.0933    0       35      61  0.365   1.000  0x5b6331e7ff0831a3fe2ed12004747db1a9c911a4
+[rf2]    97    0.0867    0       35      62  0.361   1.000  0x074aad8084b71edd6a0eab63caed39d66603511d
+[rf2]    98    0.0833    0       35      63  0.357   1.000  0x8f9bda594242a62008870f1d632352b889116c25
+[rf2]    99    0.0833    0       35      64  0.354   1.000  0x7926492b3f086db8ff8e349d1037bea1650c1e34
+[rf2]   100    0.0810    0       35      65  0.350   1.000  0x4a3e9c85342f50e89a51dd6c4e97d34558d0ac1c
+[rf2]   101    0.0800    0       35      66  0.347   1.000  0x3a44416fe65918647226c32e5bfd147b34260196
+[rf2]   102    0.0800    0       35      67  0.343   1.000  0xda406e9cb4c0c357ff7fef0c0d1e97341b898142
+[rf2]   103    0.0733    0       35      68  0.340   1.000  0xe7461927f98f994568411e25e1a3e401f30aff6a
+[rf2]   104    0.0733    0       35      69  0.337   1.000  0x230725d75ed7da05caffbc16cdbfeaa288db1b45
+[rf2]   105    0.0700    0       35      70  0.333   1.000  0xf33d2aab3dd3af01829f5bbaafd8ab6511cbc852
+[rf2]   106    0.0700    0       35      71  0.330   1.000  0xdb4b7bf7a5d084bb089ba81a4646e57340180b46
+[rf2]   107    0.0633    0       35      72  0.327   1.000  0x5fef666811668d1352ebd8687d68ad2315a95840
+[rf2]   108    0.0600    0       35      73  0.324   1.000  0xe397a5077002d4d857e08574033c806a2c9360b6
+[rf2]   109    0.0567    0       35      74  0.321   1.000  0x81e0d0c6817669629a58ea8b08d2eb1b93492c3b
+[rf2]   110    0.0567    0       35      75  0.318   1.000  0xa50c5c5d7834e665def9f85309dbf957d644f75d
+[rf2]   111    0.0533    0       35      76  0.315   1.000  0xdf409ebc2cda86c98f3abf7666ff4bdc01ff38b8
+[rf2]   112    0.0500    0       35      77  0.312   1.000  0xeecbf295fb74c4a0a767a0efcf95ac280da86166
+[rf2]   113    0.0500    0       35      78  0.310   1.000  0x6acee3c318f3e3aad88803bfe224b309746095a9
+[rf2]   114    0.0500    0       35      79  0.307   1.000  0x69ea0d77ef34f1acb03aaed901df7620fc4215cd
+[rf2]   115    0.0500    0       35      80  0.304   1.000  0xbdf4b123270d5ef58a8d69ceb5ac2fdd883b59b4
+[rf2]   116    0.0500    0       35      81  0.302   1.000  0x11aa25a1a88f199aec54b54a6b7ff747c369c2f8
+[rf2]   117    0.0500    0       35      82  0.299   1.000  0xc2fef07ca5c2ade7b204660ea8a7e487d20c71d6
+[rf2]   118    0.0467    0       35      83  0.297   1.000  0x200febf6368ca9db8b8d1c809d5d7b088b22fe99
+[rf2]   119    0.0467    0       35      84  0.294   1.000  0xaface7aac5c1ea428eda2772437ce74142154a84
+[rf2]   120    0.0410    0       35      85  0.292   1.000  0x6195e441d616bc6fe41b7344e2027f91e5c54570
+[rf2]   121    0.0410    0       35      86  0.289   1.000  0x22535f30260f9e0bb2603f45d8847caedc7cf8e2
+[rf2]   122    0.0410    0       35      87  0.287   1.000  0x50b0b5be14f256bf15c63ae78b33be7214b27dc5
+[rf2]   123    0.0400    0       35      88  0.285   1.000  0x31ca2fdf162e6fb34a6d77837053c9ced1b035ce
+[rf2]   124    0.0400    0       35      89  0.282   1.000  0x57e862cc576dde007bace893b51ba5c38085057e
+[rf2]   125    0.0367    0       35      90  0.280   1.000  0xa51d9879dc7a35378fc8f9f7487ffb2ea3f3b897
+[rf2]   126    0.0367    0       35      91  0.278   1.000  0x37a4754aa02b17da40499266c10e474268f91631
+[rf2]   127    0.0367    0       35      92  0.276   1.000  0x811fe35b4ccfb689a8bf2e144498f358ae7516e3
+[rf2]   128    0.0367    0       35      93  0.273   1.000  0xa32ae354b32cc0b69f067850a747b4091a5f36d4
+[rf2]   129    0.0367    0       35      94  0.271   1.000  0x33acd201d6b02982b3a95b975b331bc225649334
+[rf2]   130    0.0333    0       35      95  0.269   1.000  0xabdb30e2a40513f2c40fa48ab3702456786773da
+[rf2]   131    0.0333    0       35      96  0.267   1.000  0xb8b7f00fc9a15e062550f3c83844aab463300c0c
+[rf2]   132    0.0300    0       35      97  0.265   1.000  0x1c0ad0fcf5356497560f585dc6b3d33f2b3dcbc9
+[rf2]   133    0.0300    0       35      98  0.263   1.000  0x9d3ff469e93195b3fc753f38fb2f6072ffbbf19b
+[rf2]   134    0.0300    0       35      99  0.261   1.000  0xc360b7771fe7c63139076a6f9e8c34b773badbb2
+[rf2]   135    0.0300    0       35     100  0.259   1.000  0x6f01eec19cc6523b741677ed870b0ac04cd7558f
+[rf2]   136    0.0300    0       35     101  0.257   1.000  0x999f3c7a1ec4c6b876fdc5f43aff0e8718b1da43
+[rf2]   137    0.0300    0       35     102  0.255   1.000  0xcf8a41bf14bea62c6bf86366406e751b8eb6eadd
+[rf2]   138    0.0267    0       35     103  0.254   1.000  0xab46266fe8ed5c0cf795dc16627ae05629592296
+[rf2]   139    0.0233    0       35     104  0.252   1.000  0x1a4f110a2813daef17d72170f97b6dabb9d69b0c
+[rf2]   140    0.0233    0       35     105  0.250   1.000  0x23f77ff9e8eab8a6db75b4ed803497de4fa8547f
+[rf2]   141    0.0133    0       35     106  0.248   1.000  0x0d0f7444f6601a09e75e9a523d8a6684fa4757d9
+[rf2]   142    0.0133    0       35     107  0.246   1.000  0x9642bd30d320cad7878f642566f9f5b91fc9d2ab
+[rf2]   143    0.0100    0       35     108  0.245   1.000  0x94bde001e4a00152490c60bebe2aab120e8c6184
+[rf2]   144    0.0076    0       35     109  0.243   1.000  0x21cd32cb22b75bc61cb80fe2fbf05bb84cdbf07c
+[rf2]   145    0.0067    0       35     110  0.241   1.000  0x82c762fb547c4d02f41c9baef2258b4f0751e125
+[rf2]   146    0.0067    0       35     111  0.240   1.000  0x06da66efe045ab24e87cdfe0b70b23b2edc2f2ed
+[rf2]   147    0.0067    0       35     112  0.238   1.000  0x11a556a8d63c65516bc2369edff97becc94d2770
+[rf2]   148    0.0067    0       35     113  0.236   1.000  0x74240608a5c09179445169e2deb23a4285d1a54f
+[rf2]   149    0.0033    0       35     114  0.235   1.000  0x9c65e79218de1bd8c4aad0fbdb69397f8f931cde
+[rf2]   150    0.0033    0       35     115  0.233   1.000  0x03e41e837f2a9f1e50e68aa8054ab4a38dd3a504
+[rf2]   151    0.0033    0       35     116  0.232   1.000  0xd44c2de98e5b4e2d3b9d23a9cde790f693511223
+[rf2]   152    0.0033    0       35     117  0.230   1.000  0x5ce19758652a0519790b68e25f204f82f7bd62fa
+[rf2]   153    0.0033    0       35     118  0.229   1.000  0x2707f2e693b3d20b5a17b603c532571108140afa
+[rf2]   154    0.0033    0       35     119  0.227   1.000  0x2f0994255febc5e67adaa43f245d99e674a6d942
+[rf2]   155    0.0033    0       35     120  0.226   1.000  0xc8ab97a9089a9ff7e6ef0688e6e591a066946418
+[rf2]   156    0.0033    0       35     121  0.224   1.000  0x63c652270a37e53a170303b6b264a2aa835743a5
+[rf2]   157    0.0033    0       35     122  0.223   1.000  0xe0afeb157a0b7e76ce7dde16daa1f265b0362dec
+[rf2]   158    0.0033    0       35     123  0.222   1.000  0x22c030983521343a420500050dcb9ee115420267
+[rf2]   159    0.0033    0       35     124  0.220   1.000  0x6d5d83165b0c80a4ef13f01e3ba08602c7990ee8
+[rf2]   160    0.0000    0       35     125  0.219   1.000  0x535ec2dccf77489cc0d1453f088344a2995fccd9
+[rf2]   161    0.0000    0       35     126  0.217   1.000  0x0800af6d3a2afc1b427b415baffbf11eab752fec
+[rf2]   162    0.0000    0       35     127  0.216   1.000  0x770569d15dfdc4ad5c3a0ec204032812cc85a442
+[rf2]   163    0.0000    0       35     128  0.215   1.000  0xa5ed94eb047a584083361bdbe81f83e3934d7b21
+[rf2]   164    0.0000    0       35     129  0.213   1.000  0x0aae5c4ec45339a64a1dd2fe4ba98c2a19eb251c
+[rf2]   165    0.0000    0       35     130  0.212   1.000  0x82c39bebf8837e68e8d85e6ddac8e17a1d09764c
+[rf2]   166    0.0000    0       35     131  0.211   1.000  0x882e3b3f40a9e6c8b597dffc72d0d87dc95be757
+[rf2]   167    0.0000    0       35     132  0.210   1.000  0xa175b0752987ff88f111079095180df1a488a36f
+[rf2]   168    0.0000    0       35     133  0.208   1.000  0x1c266db0f8529b1f25b77123e9c0c918ac2f6e31
+[rf2]   169    0.0000    0       35     134  0.207   1.000  0xd62840cf26fab216a46c5c9e9920487098e243c1
+[rf2]   170    0.0000    0       35     135  0.206   1.000  0x4e617ec97e179213f7b4b751d706713453fb82ee
+[rf2]   171    0.0000    0       35     136  0.205   1.000  0xc02147dee42356b7a4edbb1c35ac4ffa95f61fa8
+[rf2]   172    0.0000    0       35     137  0.203   1.000  0xe39783f92ee0985f1ab5fe514030f946825abfcb
+[rf2]   173    0.0000    0       35     138  0.202   1.000  0x5e002167ca1d6f4e423b4fb44d360f051d107dc5
+[rf2]   174    0.0000    0       35     139  0.201   1.000  0xe492cfff541fa99e6ab02bbbb31ab740ece48309
+[rf2]   175    0.0000    0       35     140  0.200   1.000  0xf80f12c256e97029057760c224524aef5d167868
+[rf2]   176    0.0000    0       35     141  0.199   1.000  0xfc8dce60c93690dd7a22b0024693294f0afe55c5
+[rf2]   177    0.0000    0       35     142  0.198   1.000  0x4ffb4c1c052e680c4901feccc519cfc74c29933a
+[rf2]   178    0.0000    0       35     143  0.197   1.000  0xd0e70259b30341bec5ad1c3c073aa077f37b7ef4
+[rf2]   179    0.0000    0       35     144  0.196   1.000  0x60b41cf81fc908cd755e4cd7f06e2db611fad140
+[rf2]   180    0.0000    0       35     145  0.194   1.000  0xb59b573ffc4aea5a5cf6360d5c258e784363916b
+[rf2]   181    0.0000    0       35     146  0.193   1.000  0x095dcfb123a4bc035ee6b0d624bab0cc964352cf
+[rf2]   182    0.0000    0       35     147  0.192   1.000  0xc160930494d473fe72671eb81e9458ebb37571ac
+[rf2]   183    0.0000    0       35     148  0.191   1.000  0xf3aaa1993611a22a9a0626abe021c4bfec28d6d6
+[rf2]   184    0.0000    0       35     149  0.190   1.000  0x8ca197428f70eed0c0e34d08b9c04e58b69c0c54
+[rf2]   185    0.0000    0       35     150  0.189   1.000  0x770ee3a1d4c6839ac52bcb7f838c0e83c86ab559
+[rf2]   186    0.0000    0       35     151  0.188   1.000  0x16bd7cc71f6da1e77d1d8255677abc75b9bae288
+[rf2]   187    0.0000    0       35     152  0.187   1.000  0x47088683f8a65fcda4239f4d30f856c6d44c7835
+[rf2]   188    0.0000    0       35     153  0.186   1.000  0xcb2ff2840a6b5abffe7071b35ecdd24891200eb7
+[rf2]   189    0.0000    0       35     154  0.185   1.000  0x803f5027e592523b51fd1aa8c509991d7c4bf6ed
+[rf2]   190    0.0000    0       35     155  0.184   1.000  0x9c4abb471fa36400db43d5fa221c680bf2f24896
+[rf2]   191    0.0000    0       35     156  0.183   1.000  0x4fdbbc57bc50f1abf77d3e68bb26e83080e90b12
+[rf2]   192    0.0000    0       35     157  0.182   1.000  0xdb1b125189913bf03405e74cbf47273b4466efb5
+[rf2]   193    0.0000    0       35     158  0.181   1.000  0x7c6a5008a0dec812b3200229968889a5c185a406
+[rf2]   194    0.0000    0       35     159  0.180   1.000  0xbe3d34441e4fd5f3c69c5a00e694376e37964dc6
+[rf2]   195    0.0000    0       35     160  0.179   1.000  0xd2f8885d33a00bac50ecb68cc100d7638759071e
+[rf2]   196    0.0000    0       35     161  0.179   1.000  0xe4e6aa2f9eb66b76d372d80cd91f6bc592d04bd4
+[rf2]   197    0.0000    0       35     162  0.178   1.000  0x48da00a574fa77b8c734377db640cc7c26980419
+[rf2]   198    0.0000    0       35     163  0.177   1.000  0xa7b5bf2089e3de036ae68425461407343466fa78
+[rf2]   199    0.0000    0       35     164  0.176   1.000  0x00ae235ae56a988331104bc5753f2dee196ed68f
+[rf2]   200    0.0000    0       35     165  0.175   1.000  0xda25ac7b9d3984fb984ce247c2065ed719576998
+[rf2]   201    0.0000    0       35     166  0.174   1.000  0x2760925a2d2d05728c8d701f73eaabee99c9ef06
+[rf2]   202    0.0000    0       35     167  0.173   1.000  0x171eda69c3857c363f38c954e20dc9039d7be046
+[rf2]   203    0.0000    0       35     168  0.172   1.000  0xfc2f4f50ce2f6045d35558a5e2d8d4b2ac6610c7
+[rf2]   204    0.0000    0       35     169  0.172   1.000  0xf67f72df65797a85dc9fd44d57adfe5b7b4a31cf
+[rf2]   205    0.0000    0       35     170  0.171   1.000  0x9cc5bd222e6020a7e86f10c791c25df613c36714
+[rf2]   206    0.0000    0       35     171  0.170   1.000  0xf29560ea2bdb539ae8546a42e24040d9b18c508f
+[rf2]   207    0.0000    0       35     172  0.169   1.000  0xefaf0cc43dd5970e01485217d1dabe5158d76289
+[rf2]   208    0.0000    0       35     173  0.168   1.000  0x685e556c2559da06aa59ab0d70c727285cd63fd7
+[rf2]   209    0.0000    0       35     174  0.167   1.000  0xfe23f3506b5aa11e0f4df534faf641433064937b
+[rf2]   210    0.0000    0       35     175  0.167   1.000  0xfd2b1925b4131dda1fdd4b6292e0339649b5de02
+[rf2]   211    0.0000    0       35     176  0.166   1.000  0xdb657fd8dc9a21a28432104b655908b5aa23a419
+[rf2]   212    0.0000    0       35     177  0.165   1.000  0xe85fbb5dfa5e35fd27b8bddda5aa22bc621d8b0f
+[rf2]   213    0.0000    0       35     178  0.164   1.000  0x575f9fb0b758d52e93342def50d678e300fc5b78
+[rf2]   214    0.0000    0       35     179  0.164   1.000  0xd6d3ac4eff7a84993e8c63078603f9e551a5161c
+[rf2]   215    0.0000    0       35     180  0.163   1.000  0x1872ca13e77040190750bea62767df466b189ba9
+[rf2]   216    0.0000    0       35     181  0.162   1.000  0xfd0b63ed8d68738e4905abc4097e9a63510ba6be
+[rf2]   217    0.0000    0       35     182  0.161   1.000  0xa54dcc04bdca68f6cf4fbf1e74e393da842b18bf
+[rf2]   218    0.0000    0       35     183  0.161   1.000  0x6470814e64f3085fe4586cd4939cbf985b53aac7
+[rf2]   219    0.0000    0       35     184  0.160   1.000  0x0de44e5e476c731b9ca5671e7882e6098a462d29
+[rf2]   220    0.0000    0       35     185  0.159   1.000  0x042876159be6d7b9bf89abd83e05f83a7177ae98
+[rf2]   221    0.0000    0       35     186  0.158   1.000  0xaa4696d5b52e75333946d47e667d0b9a060e5b29
+[rf2]   222    0.0000    0       35     187  0.158   1.000  0xefc9a3d319adf4ba1259feb39bbd28dddcb0a0b9
+[rf2]   223    0.0000    0       35     188  0.157   1.000  0x1f85e6e3e41e5f1fe03f6cf22a52ae4e352ea51b
+[rf2]   224    0.0000    0       35     189  0.156   1.000  0x8cf4d3bd0f849bdd39ce68889259d9a584e65608
+[rf2]   225    0.0000    0       35     190  0.156   1.000  0xe6ef1d940d84acbb25ce574eb16613db0894418d
+[rf2]   226    0.0000    0       35     191  0.155   1.000  0xc922b1202995e6b34697e76e1881d56ca2652a8c
+[rf2]   227    0.0000    0       35     192  0.154   1.000  0x0a793254e040027c5d1ca0c2f87cda8e22228e05
+[rf2]   228    0.0000    0       35     193  0.154   1.000  0x062b87fc5c1433b79e350c0f558753db63979a6b
+[rf2]   229    0.0000    0       35     194  0.153   1.000  0xcd6be6693e2bc11150d397caa9e6f7c6744b68f5
+[rf2]   230    0.0000    0       35     195  0.152   1.000  0x2beac05bd6b6e4a264eec239eea79af3be46df24
+[rf2]   231    0.0000    0       35     196  0.152   1.000  0xd8e4d149e4860908e319286783defecb0604ea77
+[rf2]   232    0.0000    0       35     197  0.151   1.000  0xc115985a2ec1a736a5b8212a6ad41c5568ba7b4a
+[rf2]   233    0.0000    0       35     198  0.150   1.000  0xed521bba9cb56cc65ed25a54ed93eb6026e29e9c
+[rf2]   234    0.0000    0       35     199  0.150   1.000  0x2d4e90768c7ae9661acca6b16e605eba3e70edb0
+[rf2]   235    0.0000    0       35     200  0.149   1.000  0x2ae085ed72ebf5beb536ce7e73a6f4c2e57cbc70
+[rf2]   236    0.0000    0       35     201  0.148   1.000  0x7858d06794cfc352518ec992284aa2431b7b1cbd
+[rf2]   237    0.0000    0       35     202  0.148   1.000  0x66d609dbda9df641eff684190a01182f6de450c7
+[rf2]   238    0.0000    0       35     203  0.147   1.000  0x174b27fef5e1c06ed52c1ddff29720b23cb65a55
+[rf2]   239    0.0000    0       35     204  0.146   1.000  0x5ecde7348ea5100af4360dd7a6e0a3fb1d420787
+[rf2]   240    0.0000    0       35     205  0.146   1.000  0xdde758b9ce87ee0e2a91c4f2f8705d5de950b868
+[rf2]   241    0.0000    0       35     206  0.145   1.000  0xa9e37dc9a42a5bd083e584dbbcde6723033c706f
+[rf2]   242    0.0000    0       35     207  0.145   1.000  0x24836f8deba0a3f7d10328ffa78e4281d5fe6f2f
+[rf2]   243    0.0000    0       35     208  0.144   1.000  0x8159e504042305104d507bea55ee644e76eff32b
+[rf2]   244    0.0000    0       35     209  0.143   1.000  0x470a1f47c3fb22f5e4e70c778d20ccbf1928e36c
+[rf2]   245    0.0000    0       35     210  0.143   1.000  0x18d422264f629f07d78a75bc5aef7d14ba11af03
+
+[rf2] TEST confusion matrix @ thr=0.5
+[[199  11]
+ [  0  35]]
+
+              precision    recall  f1-score   support
+
+           0     1.0000    0.9476    0.9731       210
+           1     0.7609    1.0000    0.8642        35
+
+    accuracy                         0.9551       245
+   macro avg     0.8804    0.9738    0.9187       245
+weighted avg     0.9658    0.9551    0.9575       245
+
+[rf2] feature importances (mean decrease in impurity):
+   0.1430  unrealized_edge_per_open_token_sqrt
+   0.1335  adaptive_markout_raw_grosswt_h0p010
+   0.1321  adaptive_markout_raw_grosswt_h0p070
+   0.1276  buy_markout_adj_grosswt_h0p070_lb0p150
+   0.1011  adaptive_markout_raw_grosswt_h0p200
+   0.0992  adaptive_markout_raw_grosswt_h0p150
+   0.0965  buy_markout_adj_grosswt_h0p030_lb0p200
+   0.0936  unrealized_edge_per_open_token
+   0.0609  realized_pnl_per_closing_trade
+   0.0124  high_sell_nonflattening_cash_frac_pctl90
+
+[rf2] saved cache/models/rf_insider_10feat_v2_20260610_130638.joblib
+[rf2] saved cache/models/rf_insider_10feat_v2_20260610_130638.meta.json
+[rf2] copied -> cache/models/rf_insider_10feat_v2_latest.joblib
+[rf2] copied -> cache/models/rf_insider_10feat_v2_latest.meta.json
+
+[rf2] comparison vs other models (test-set ROC-AUC / PR-AUC):
+  cb  10-feat v2 (same feats)        ROC-AUC=0.9947  PR-AUC=0.9661
+  cb  30-feat v2                     ROC-AUC=0.9827  PR-AUC=0.8564
+  rf  30-feat (notebook 80/20)       ROC-AUC=0.9340  PR-AUC=0.8348
+  rf  10-feat v2 (this run)          ROC-AUC=0.9959  PR-AUC=0.9702

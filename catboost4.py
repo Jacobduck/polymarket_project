@@ -1,40 +1,18 @@
-"""Train CatBoost with train/val/test split + time-ordered grouped CV.
+"""Train CatBoost on the top-10 features with tree depth = 2.
 
-The dataset is dominated by two very large iran-themed markets at the
-tail (iran-feb-28: 189 rows, iran-mar-1: 245 rows -- 55% of all rows
-between them). A clean 60/20/20 by either market count or row count
-puts test either too small or too big. Compromise:
-
-  - Test  = single newest large market (``us-strikes-iran-by-march-1-2026-492``)
-  - Train = every market that resolves BEFORE the test market
-  - Val   = the rest (small markets newer than train but not in test,
-            plus NaT-timestamp markets)
-
-This preserves no-look-ahead (train all resolves before test) and gives
-a test set big enough to evaluate (245 rows, 35 positives) without
-swallowing the dataset.
-
-Within train, runs 5-fold expanding-window ``TimeSeriesSplit`` over the
-(few) time-ordered train markets. No row from a single market is split
-across train/val within a fold.
-
-Features = top-30 by gain from ``xgb_insider_latest`` (same list already used
-by ``cb_insider_30feat_latest``).
-
-Predicted probabilities are post-hoc calibrated via Platt scaling
-(``LogisticRegression`` fit on the val set's raw probs vs. labels).
-Classification threshold is fixed at ``THRESHOLD`` (default 0.80) applied to
-the *calibrated* probability: a row is flagged as an insider iff
-``calibrator.predict_proba(model.predict_proba(X)[:, 1]) >= THRESHOLD``.
+Identical to ``catboost3.py`` except ``depth=2`` (vs 4). Everything else --
+top-10 feature set, time-ordered grouped train/val/test split, TimeSeriesSplit
+CV on train, Platt calibration on val, fixed threshold, PR/ROC scatter plots,
+sorted-prediction log -- is unchanged.
 
 Outputs:
-  cache/models/cb_insider_30feat_v2_<ts>.joblib              (CatBoost model)
-  cache/models/cb_insider_30feat_v2_<ts>.calibrator.joblib   (sklearn LR)
-  cache/models/cb_insider_30feat_v2_<ts>.meta.json
-  cache/models/cb_insider_30feat_v2_latest.joblib            (copies)
-  cache/models/cb_insider_30feat_v2_latest.calibrator.joblib
-  cache/models/cb_insider_30feat_v2_latest.meta.json
-  catboost2_<ts>.log                                         (full stdout+stderr)
+  cache/models/cb_insider_10feat_v2_d2_<ts>.joblib              (CatBoost model)
+  cache/models/cb_insider_10feat_v2_d2_<ts>.calibrator.joblib   (sklearn LR)
+  cache/models/cb_insider_10feat_v2_d2_<ts>.meta.json
+  cache/models/cb_insider_10feat_v2_d2_latest.joblib            (copies)
+  cache/models/cb_insider_10feat_v2_d2_latest.calibrator.joblib
+  cache/models/cb_insider_10feat_v2_d2_latest.meta.json
+  catboost4_<ts>.log                                            (full stdout+stderr)
 """
 
 from __future__ import annotations
@@ -69,15 +47,16 @@ MODEL_DIR = CACHE / "models"
 MODEL_DIR.mkdir(parents=True, exist_ok=True)
 
 FEATURE_SOURCE_META = MODEL_DIR / "cb_insider_30feat_latest.meta.json"
+TOP_K = 10
 
 LABEL_COL = "is_insider"
 GROUP_COL = "market_slug"
 TIME_COL = "terminal_start_ts"
-THRESHOLD = 0.30  # classify row as insider iff predicted prob >= THRESHOLD
+THRESHOLD = 0.30
 RANDOM_STATE = 42
 
 LOG_DIR = Path(".")
-LOG_PREFIX = "catboost2"
+LOG_PREFIX = "catboost4"
 
 TEST_MARKETS: tuple[str, ...] = (
     "us-strikes-iran-by-march-1-2026-492",
@@ -88,37 +67,32 @@ N_CV_FOLDS = 5
 MAX_ITERATIONS = 2000
 EARLY_STOPPING_ROUNDS = 75
 
-# scale_pos_weight: None = auto-balanced (n_neg / n_pos), float = fixed.
-# We use 2.0 (better PR-AUC than auto-balanced 5.2); calibration handles
-# the score-scale problem so the absolute raw-score range no longer matters.
 SCALE_POS_WEIGHT_OVERRIDE: float | None = 2.0
 
 
-def get_top_30_features() -> list[str]:
-    """Pull the same top-30 feature list used by cb_insider_30feat_latest."""
+def get_top_features() -> list[str]:
+    """Top-K (=10) features from cb_insider_30feat_latest.meta.json.
+
+    The 30-feature list is already sorted by xgb gain, so the first K
+    entries are the top-K by that ranking.
+    """
     with open(FEATURE_SOURCE_META) as f:
         meta = json.load(f)
     feats = meta["features"]
-    if len(feats) != 30:
+    if len(feats) < TOP_K:
         raise SystemExit(
-            f"expected 30 features in {FEATURE_SOURCE_META}, got {len(feats)}"
+            f"need {TOP_K} features in {FEATURE_SOURCE_META}, got {len(feats)}"
         )
-    print(f"[cb2] using top-30 features from {FEATURE_SOURCE_META.name}")
-    return feats
+    top = feats[:TOP_K]
+    print(f"[cb4] using top-{TOP_K} features from {FEATURE_SOURCE_META.name}:")
+    for i, name in enumerate(top, 1):
+        print(f"  {i:2d}. {name}")
+    return top
 
 
 def split_markets_by_time(
     df: pd.DataFrame,
 ) -> tuple[list[str], list[str], list[str], pd.DataFrame]:
-    """Return (train_markets, val_markets, test_markets, market_order_df).
-
-    Assigns markets to splits:
-      - test  = TEST_MARKETS (pinned, see module docstring)
-      - train = every market resolving before the OLDEST test market
-                (by median ``terminal_start_ts``)
-      - val   = every other market (small newer markets not in test,
-                plus NaT-timestamp markets)
-    """
     market_stats = (
         df.groupby(GROUP_COL)
         .agg(median_ts=(TIME_COL, "median"), n_rows=(LABEL_COL, "size"))
@@ -173,14 +147,6 @@ def cv_on_train(
     feature_cols: list[str],
     train_market_order: list[str],
 ) -> dict:
-    """Expanding-window CV over time-ordered training markets.
-
-    Each fold:
-      - train rows = rows whose market is in the older block
-      - val rows   = rows whose market is in the next block
-
-    No market is split across the two sides -> no within-market leakage.
-    """
     n_markets = len(train_market_order)
     splitter = TimeSeriesSplit(n_splits=N_CV_FOLDS)
 
@@ -188,7 +154,7 @@ def cv_on_train(
     pr_aucs: list[float] = []
     fold_summaries: list[dict] = []
 
-    print(f"[cb2] running {N_CV_FOLDS}-fold expanding-window CV on "
+    print(f"[cb4] running {N_CV_FOLDS}-fold expanding-window CV on "
           f"{n_markets} train markets")
     for fold_idx, (train_mk_idx, val_mk_idx) in enumerate(
         splitter.split(np.arange(n_markets)), start=1
@@ -213,7 +179,7 @@ def cv_on_train(
 
         model = CatBoostClassifier(
             iterations=MAX_ITERATIONS,
-            depth=4,
+            depth=2,
             learning_rate=0.05,
             l2_leaf_reg=1.0,
             subsample=0.9,
@@ -226,10 +192,6 @@ def cv_on_train(
             allow_writing_files=False,
             verbose=0,
         )
-        # Use a tiny tail of train as the early-stopping signal (last 15% by
-        # market order). We don't peek at val markets here -- that would leak
-        # val info into the fold's training. Skip early stopping if too few
-        # positives to make the signal meaningful.
         n_tail = max(1, int(round(len(train_mks) * 0.20)))
         es_mks = train_mks[-n_tail:]
         inner_train_mks = train_mks[:-n_tail]
@@ -286,10 +248,10 @@ def cv_on_train(
         "pr_auc_std": float(np.std(pr_aucs)) if pr_aucs else float("nan"),
         "n_folds_with_metric": len(roc_aucs),
     }
-    print(f"[cb2] CV ROC-AUC = {summary['roc_auc_mean']:.4f} "
+    print(f"[cb4] CV ROC-AUC = {summary['roc_auc_mean']:.4f} "
           f"± {summary['roc_auc_std']:.4f}  "
           f"(over {summary['n_folds_with_metric']} usable folds)")
-    print(f"[cb2] CV PR-AUC  = {summary['pr_auc_mean']:.4f} "
+    print(f"[cb4] CV PR-AUC  = {summary['pr_auc_mean']:.4f} "
           f"± {summary['pr_auc_std']:.4f}")
     return summary
 
@@ -308,7 +270,7 @@ def eval_split(
     out["precision"] = cls["precision"]
     out["recall"] = cls["recall"]
     out["f1"] = cls["f1"]
-    print(f"[cb2] {label:5s}  n={out['n']:4d} pos={out['n_positives']:3d}  "
+    print(f"[cb4] {label:5s}  n={out['n']:4d} pos={out['n_positives']:3d}  "
           f"ROC-AUC={out['roc_auc']:.4f}  PR-AUC={out['pr_auc']:.4f}  "
           f"P={cls['precision']:.4f}  R={cls['recall']:.4f}  "
           f"F1={cls['f1']:.4f}  (thr={thr})")
@@ -320,13 +282,6 @@ def plot_curves(
     out_path: Path,
     threshold: float,
 ) -> None:
-    """Save a 2-panel figure: ROC curves (left) and PR curves (right).
-
-    ``splits`` is a list of ``(label, y, proba)`` triples (one per split).
-    Each split is drawn as one line in each panel, annotated with its
-    AUC in the legend. The operating point at ``threshold`` is marked on
-    the PR curve.
-    """
     fig, (ax_roc, ax_pr) = plt.subplots(1, 2, figsize=(12, 5))
     colors = {"train": "#1f77b4", "val": "#ff7f0e", "test": "#2ca02c"}
 
@@ -351,8 +306,6 @@ def plot_curves(
             label=f"{label}  AUC={pr_auc:.4f}",
         )
 
-        # Operating point: where pr_thr first crosses threshold.
-        # pr_thr is one element shorter than prec/rec, and is increasing.
         idx = int(np.searchsorted(pr_thr, threshold))
         if 0 <= idx < len(rec):
             ax_pr.scatter(
@@ -388,8 +341,6 @@ def plot_curves(
 
 
 class Tee:
-    """Mirror writes to multiple streams (stdout + log file)."""
-
     def __init__(self, *streams):
         self.streams = streams
 
@@ -436,27 +387,27 @@ def main() -> None:
     finally:
         sys.stdout, sys.stderr = saved_stdout, saved_stderr
         log_file.close()
-        print(f"[cb2] log written to {log_path}")
+        print(f"[cb4] log written to {log_path}")
 
 
 def _main(ts: str, log_path: Path) -> None:
-    print(f"[cb2] run timestamp = {ts}")
-    print(f"[cb2] logging to {log_path}")
-    print(f"[cb2] loading {TRAIN_PARQUET}")
+    print(f"[cb4] run timestamp = {ts}")
+    print(f"[cb4] logging to {log_path}")
+    print(f"[cb4] loading {TRAIN_PARQUET}")
     df = pd.read_parquet(TRAIN_PARQUET)
-    print(f"[cb2] full shape={df.shape}  "
+    print(f"[cb4] full shape={df.shape}  "
           f"positives={int((df[LABEL_COL] == 1).sum())}  "
           f"negatives={int((df[LABEL_COL] == 0).sum())}")
 
-    feature_cols = get_top_30_features()
+    feature_cols = get_top_features()
     missing = [c for c in feature_cols if c not in df.columns]
     if missing:
         raise SystemExit(f"missing feature columns: {missing}")
 
     train_mks, val_mks, test_mks, market_order = split_markets_by_time(df)
-    print(f"[cb2] markets total: {len(market_order)}  "
+    print(f"[cb4] markets total: {len(market_order)}  "
           f"(train={len(train_mks)}, val={len(val_mks)}, test={len(test_mks)})")
-    print("[cb2] market order (oldest -> newest), split assignment:")
+    print("[cb4] market order (oldest -> newest), split assignment:")
     for _, r in market_order.iterrows():
         date_str = r["date"].strftime("%Y-%m-%d") if pd.notna(r["date"]) else "NaT       "
         print(f"  {r['split']:5s}  {date_str}  {r[GROUP_COL]}")
@@ -472,7 +423,7 @@ def _main(ts: str, log_path: Path) -> None:
         + int((df_test[LABEL_COL] == 1).sum())
     )
     pos_rate_total = 100 * pos_total / max(n_total, 1)
-    print(f"[cb2] row distribution (total n={n_total}, pos={pos_total}, "
+    print(f"[cb4] row distribution (total n={n_total}, pos={pos_total}, "
           f"overall pos rate={pos_rate_total:.2f}%):")
     for label, sub in [("train", df_train), ("val", df_val), ("test", df_test)]:
         n = len(sub)
@@ -499,12 +450,12 @@ def _main(ts: str, log_path: Path) -> None:
         if SCALE_POS_WEIGHT_OVERRIDE is not None
         else auto_spw
     )
-    print(f"[cb2] final train scale_pos_weight = {scale_pos_weight:.3f}  "
+    print(f"[cb4] final train scale_pos_weight = {scale_pos_weight:.3f}  "
           f"(auto-balanced would be {auto_spw:.3f})")
 
     model = CatBoostClassifier(
         iterations=MAX_ITERATIONS,
-        depth=4,
+        depth=2,
         learning_rate=0.05,
         l2_leaf_reg=1.0,
         subsample=0.9,
@@ -527,7 +478,7 @@ def _main(ts: str, log_path: Path) -> None:
         verbose=100,
     )
     best_iter = int(model.get_best_iteration() or 0)
-    print(f"[cb2] fit in {time.time() - t0:.2f}s  best_iter={best_iter} / "
+    print(f"[cb4] fit in {time.time() - t0:.2f}s  best_iter={best_iter} / "
           f"{MAX_ITERATIONS}")
     print()
 
@@ -535,12 +486,11 @@ def _main(ts: str, log_path: Path) -> None:
     proba_val_raw = model.predict_proba(X_val)[:, 1]
     proba_test_raw = model.predict_proba(X_test)[:, 1]
 
-    # Platt-scaling calibrator: fit on val so test stays unseen.
     calibrator = LogisticRegression(C=1.0, solver="lbfgs")
     calibrator.fit(proba_val_raw.reshape(-1, 1), y_val.values)
     cal_coef = float(calibrator.coef_[0][0])
     cal_intercept = float(calibrator.intercept_[0])
-    print(f"[cb2] calibration: sigmoid({cal_coef:.3f} * raw_prob "
+    print(f"[cb4] calibration: sigmoid({cal_coef:.3f} * raw_prob "
           f"{cal_intercept:+.3f})  (fit on val)")
 
     proba_train = calibrator.predict_proba(proba_train_raw.reshape(-1, 1))[:, 1]
@@ -549,13 +499,13 @@ def _main(ts: str, log_path: Path) -> None:
 
     def _rng(a: np.ndarray) -> str:
         return f"[{a.min():.3f}, {a.max():.3f}]"
-    print(f"[cb2] raw  prob range  train={_rng(proba_train_raw)}  "
+    print(f"[cb4] raw  prob range  train={_rng(proba_train_raw)}  "
           f"val={_rng(proba_val_raw)}  test={_rng(proba_test_raw)}")
-    print(f"[cb2] cal. prob range  train={_rng(proba_train)}  "
+    print(f"[cb4] cal. prob range  train={_rng(proba_train)}  "
           f"val={_rng(proba_val)}  test={_rng(proba_test)}")
     print()
 
-    print("[cb2] metrics per split (overfit check: train >> val => overfit):")
+    print("[cb4] metrics per split (overfit check: train >> val => overfit):")
     train_metrics = eval_split(proba_train, y_train.values, "train", THRESHOLD)
     val_metrics = eval_split(proba_val, y_val.values, "val", THRESHOLD)
     test_metrics = eval_split(proba_test, y_test.values, "test", THRESHOLD)
@@ -563,9 +513,9 @@ def _main(ts: str, log_path: Path) -> None:
 
     train_val_gap = train_metrics["pr_auc"] - val_metrics["pr_auc"]
     val_test_gap = val_metrics["pr_auc"] - test_metrics["pr_auc"]
-    print(f"[cb2] PR-AUC gap train-val = {train_val_gap:+.4f}  "
+    print(f"[cb4] PR-AUC gap train-val = {train_val_gap:+.4f}  "
           f"(big positive = overfit train)")
-    print(f"[cb2] PR-AUC gap val-test  = {val_test_gap:+.4f}  "
+    print(f"[cb4] PR-AUC gap val-test  = {val_test_gap:+.4f}  "
           f"(big positive = overfit val via early stopping)")
 
     train_cls = classification_metrics(y_train.values, proba_train, THRESHOLD)
@@ -573,7 +523,7 @@ def _main(ts: str, log_path: Path) -> None:
     test_cls = classification_metrics(y_test.values, proba_test, THRESHOLD)
 
     print()
-    print(f"[cb2] classification metrics @ fixed thr={THRESHOLD}:")
+    print(f"[cb4] classification metrics @ fixed thr={THRESHOLD}:")
     for label, m in [("train", train_cls), ("val", val_cls), ("test", test_cls)]:
         print(f"  {label:5s}  P={m['precision']:.4f}  R={m['recall']:.4f}  "
               f"F1={m['f1']:.4f}  "
@@ -589,53 +539,32 @@ def _main(ts: str, log_path: Path) -> None:
         curves_path,
         THRESHOLD,
     )
-    print(f"[cb2] curves saved to {curves_path}")
+    print(f"[cb4] curves saved to {curves_path}")
     print()
 
-    print(f"[cb2] TEST predictions grouped by unique calibrated prob (desc).")
-    n_unique = len(np.unique(proba_test))
-    print(f"[cb2] each row below = one point on the PR/ROC curve.")
-    print(f"[cb2] {n_unique} unique probs across {len(proba_test)} rows "
-          f"=> curve has {n_unique} points (tied rows collapse into one).")
-    print(f"[cb2]  step  cal_prob  raw_prob  n_in_tie  pos  neg  "
-          f"cum_tp  cum_fp  prec   recall")
+    print(f"[cb4] TEST predictions, one row per wallet, sorted by cal_prob desc.")
+    print(f"[cb4]  rank  cal_prob  raw_prob  label  cum_tp  cum_fp  prec   recall  wallet")
     order = np.argsort(-proba_test)
     wallets_test = df_test["wallet"].values if "wallet" in df_test.columns else None
     y_arr = y_test.values
     n_pos_test = int((y_arr == 1).sum())
     cum_tp = 0
     cum_fp = 0
-    step = 0
-    i = 0
-    n = len(order)
-    while i < n:
-        # find the run of rows tied at the same calibrated probability
-        cur_prob = proba_test[order[i]]
-        j = i
-        while j < n and proba_test[order[j]] == cur_prob:
-            j += 1
-        group_idx = order[i:j]
-        n_in_tie = len(group_idx)
-        n_pos = int((y_arr[group_idx] == 1).sum())
-        n_neg = n_in_tie - n_pos
-        cum_tp += n_pos
-        cum_fp += n_neg
+    for rank, k in enumerate(order, start=1):
+        lab = int(y_arr[k])
+        if lab == 1:
+            cum_tp += 1
+        else:
+            cum_fp += 1
         prec = cum_tp / max(cum_tp + cum_fp, 1)
         rec = cum_tp / max(n_pos_test, 1)
-        step += 1
-        raw_prob = proba_test_raw[group_idx[0]]
-        print(f"[cb2]  {step:>4}    {cur_prob:.4f}    {raw_prob:.4f}    "
-              f"{n_in_tie:>5}    {n_pos:>3}  {n_neg:>3}    {cum_tp:>4}    "
-              f"{cum_fp:>4}  {prec:.3f}   {rec:.3f}")
-        # for big tied groups print the wallets too so user can investigate
-        if n_in_tie >= 3 and wallets_test is not None:
-            for k in group_idx:
-                lab = int(y_arr[k])
-                print(f"[cb2]            tied:  label={lab}  wallet={wallets_test[k]}")
-        i = j
+        wallet_str = wallets_test[k] if wallets_test is not None else ""
+        print(f"[cb4]  {rank:>4}    {proba_test[k]:.4f}    "
+              f"{proba_test_raw[k]:.4f}    {lab}     {cum_tp:>4}    "
+              f"{cum_fp:>4}  {prec:.3f}   {rec:.3f}  {wallet_str}")
     print()
 
-    print(f"[cb2] TEST confusion matrix @ thr={THRESHOLD}")
+    print(f"[cb4] TEST confusion matrix @ thr={THRESHOLD}")
     pred_test = (proba_test >= THRESHOLD).astype(int)
     print(confusion_matrix(y_test, pred_test))
     print()
@@ -646,13 +575,13 @@ def _main(ts: str, log_path: Path) -> None:
         key=lambda kv: kv[1],
         reverse=True,
     )
-    print("[cb2] feature importances:")
+    print("[cb4] feature importances:")
     for name, imp in importances:
         print(f"  {imp:7.4f}  {name}")
 
-    model_path = MODEL_DIR / f"cb_insider_30feat_v2_{ts}.joblib"
-    meta_path = MODEL_DIR / f"cb_insider_30feat_v2_{ts}.meta.json"
-    calibrator_path = MODEL_DIR / f"cb_insider_30feat_v2_{ts}.calibrator.joblib"
+    model_path = MODEL_DIR / f"cb_insider_10feat_v2_d2_{ts}.joblib"
+    meta_path = MODEL_DIR / f"cb_insider_10feat_v2_d2_{ts}.meta.json"
+    calibrator_path = MODEL_DIR / f"cb_insider_10feat_v2_d2_{ts}.calibrator.joblib"
     joblib.dump(model, model_path)
     joblib.dump(calibrator, calibrator_path)
 
@@ -678,7 +607,7 @@ def _main(ts: str, log_path: Path) -> None:
         "test_markets": test_mks,
         "n_features": len(feature_cols),
         "features": feature_cols,
-        "feature_selection": f"top 30 from {FEATURE_SOURCE_META.name}",
+        "feature_selection": f"top {TOP_K} from {FEATURE_SOURCE_META.name}",
         "scale_pos_weight": scale_pos_weight,
         "threshold": THRESHOLD,
         "calibrator_file": calibrator_path.name,
@@ -690,7 +619,7 @@ def _main(ts: str, log_path: Path) -> None:
         },
         "model_params": {
             "iterations": MAX_ITERATIONS,
-            "depth": 4,
+            "depth": 2,
             "learning_rate": 0.05,
             "l2_leaf_reg": 1.0,
             "subsample": 0.9,
@@ -713,7 +642,6 @@ def _main(ts: str, log_path: Path) -> None:
             "test": {**test_metrics, "classification_at_threshold": test_cls},
             "train_val_pr_auc_gap": float(train_val_gap),
             "val_test_pr_auc_gap": float(val_test_gap),
-            # legacy keys for parity with prior meta schemas
             "roc_auc": test_metrics["roc_auc"],
             "pr_auc": test_metrics["pr_auc"],
         },
@@ -724,31 +652,37 @@ def _main(ts: str, log_path: Path) -> None:
     with open(meta_path, "w") as f:
         json.dump(meta, f, indent=2)
 
-    latest_model = MODEL_DIR / "cb_insider_30feat_v2_latest.joblib"
-    latest_meta = MODEL_DIR / "cb_insider_30feat_v2_latest.meta.json"
-    latest_calibrator = MODEL_DIR / "cb_insider_30feat_v2_latest.calibrator.joblib"
+    latest_model = MODEL_DIR / "cb_insider_10feat_v2_d2_latest.joblib"
+    latest_meta = MODEL_DIR / "cb_insider_10feat_v2_d2_latest.meta.json"
+    latest_calibrator = MODEL_DIR / "cb_insider_10feat_v2_d2_latest.calibrator.joblib"
     shutil.copy(model_path, latest_model)
     shutil.copy(meta_path, latest_meta)
     shutil.copy(calibrator_path, latest_calibrator)
 
     print()
-    print(f"[cb2] saved {model_path}")
-    print(f"[cb2] saved {calibrator_path}")
-    print(f"[cb2] saved {meta_path}")
-    print(f"[cb2] copied -> {latest_model}")
-    print(f"[cb2] copied -> {latest_calibrator}")
-    print(f"[cb2] copied -> {latest_meta}")
+    print(f"[cb4] saved {model_path}")
+    print(f"[cb4] saved {calibrator_path}")
+    print(f"[cb4] saved {meta_path}")
+    print(f"[cb4] copied -> {latest_model}")
+    print(f"[cb4] copied -> {latest_calibrator}")
+    print(f"[cb4] copied -> {latest_meta}")
     print()
-    print("[cb2] comparison vs prior CatBoost (random 80/20 split):")
+    print("[cb4] comparison vs catboost2 (30-feat) and catboost3 (10-feat, depth=4):")
     try:
-        with open(MODEL_DIR / "cb_insider_30feat_latest.meta.json") as f:
+        with open(MODEL_DIR / "cb_insider_30feat_v2_latest.meta.json") as f:
             prior = json.load(f).get("metrics", {})
-        print(f"  prior (rnd 80/20): ROC-AUC={prior.get('roc_auc', 0):.4f}  "
+        print(f"  30-feat v2 (cb2, d=4):  ROC-AUC={prior.get('roc_auc', 0):.4f}  "
               f"PR-AUC={prior.get('pr_auc', 0):.4f}")
     except FileNotFoundError:
         pass
-    print(f"  v2 (time-ordered test): "
-          f"ROC-AUC={test_metrics['roc_auc']:.4f}  "
+    try:
+        with open(MODEL_DIR / "cb_insider_10feat_v2_latest.meta.json") as f:
+            prior_cb3 = json.load(f).get("metrics", {})
+        print(f"  10-feat v2 (cb3, d=4):  ROC-AUC={prior_cb3.get('roc_auc', 0):.4f}  "
+              f"PR-AUC={prior_cb3.get('pr_auc', 0):.4f}")
+    except FileNotFoundError:
+        pass
+    print(f"  10-feat v2 (cb4, d=2):  ROC-AUC={test_metrics['roc_auc']:.4f}  "
           f"PR-AUC={test_metrics['pr_auc']:.4f}")
 
 

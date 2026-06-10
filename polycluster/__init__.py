@@ -248,3 +248,25 @@ toward "only flag if confident."""
 """create a validation set, maybe try finding new insiders"""
 """have models with less parameters (features and parameters are not the same)"""
 """have a validation set to compare the overfitting and results of the different models"""
+
+
+"""maybe try to reduce the number of features to 20 or even 10 (right now there are too many paramters (not features, parameters ie weights in the catboost model))"""
+"""add cross validation"""
+"""see what happens if we reduce the depth of trees"""
+"""try fine tuning xgboost"""
+""""add metadata features"""
+"""add the 30 or so remaining insider rows to the cache"""
+"""try random forest again"""
+
+
+"""metric	rf 10-feat	cb 10-feat	cb 30-feat
+CV PR-AUC	0.51 ± 0.12	0.48 ± 0.15	0.54 ± 0.20
+VAL PR-AUC	0.73	0.78	0.83
+TEST PR-AUC	0.97	0.97	0.86"""
+
+"""try fine tuning xgboost"""
+"""add the 30 or so remaining insider rows to the cache, or find more confirmed insiders"""
+"""then run the model on more market participants, and then feed the flagged (wallet, market) pairs into another model 
+that only considers the wallet's metadata. That gives a final score"""
+"""then check those guys with a high final score to see if they are really insiders"""
+"""try another type of cross validation (where you choose the folds differently)"""

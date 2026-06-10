@@ -1,0 +1,371 @@
+[cb4] run timestamp = 20260610_150513
+[cb4] logging to catboost4_20260610_150513.log
+[cb4] loading cache/training_data.parquet
+[cb4] full shape=(793, 322)  positives=117  negatives=676
+[cb4] using top-10 features from cb_insider_30feat_latest.meta.json:
+   1. adaptive_markout_raw_grosswt_h0p070
+   2. unrealized_edge_per_open_token
+   3. adaptive_markout_raw_grosswt_h0p010
+   4. adaptive_markout_raw_grosswt_h0p150
+   5. unrealized_edge_per_open_token_sqrt
+   6. buy_markout_adj_grosswt_h0p070_lb0p150
+   7. adaptive_markout_raw_grosswt_h0p200
+   8. buy_markout_adj_grosswt_h0p030_lb0p200
+   9. high_sell_nonflattening_cash_frac_pctl90
+  10. realized_pnl_per_closing_trade
+[cb4] markets total: 29  (train=23, val=5, test=1)
+[cb4] market order (oldest -> newest), split assignment:
+  train  2025-07-07  will-microstrategy-purchase-bitcoin-july-1-7
+  train  2025-07-28  will-microstrategy-hold-620k-btc-before-august
+  train  2025-09-26  openai-social-app-in-2025
+  train  2025-10-09  will-mara-corina-machado-win-the-nobel-peace-prize-in-2025
+  train  2025-10-10  will-yulia-navalnaya-win-the-nobel-peace-prize-in-2025
+  train  2025-10-18  openai-browser-in-2025
+  train  2025-10-19  openai-browser-by-october-31
+  train  2025-11-17  microstrategy-announces-1000-btc-purchase-november-11-17
+  train  2025-11-30  will-microstrategy-announce-holding-650k-btc-by-november-30
+  train  2025-12-06  will-stable-launch-a-token-in-2025
+  train  2025-12-08  microstrategy-announces-1000-btc-purchase-december-2-8
+  train  2025-12-11  will-openai-release-a-new-frontier-model-by-december-13-683
+  train  2025-12-17  will-draftkings-launch-a-prediction-market-in-2025
+  train  2025-12-22  will-microstrategy-announce-a-bitcoin-purchase-december-16-22
+  train  2025-12-27  microstrategy-sell-any-bitcoin-in-2025
+  train  2025-12-28  will-aztec-launch-a-token-in-2025
+  train  2025-12-28  will-microstrategy-hold-680k-btc-by-december-31
+  train  2025-12-29  will-lighter-perform-an-airdrop-by-december-31
+  train  2026-02-09  will-cardi-b-perform-during-the-super-bowl-lx-halftime-show
+  train  2026-02-09  will-karol-g-perform-during-the-super-bowl-lx-halftime-show
+  train  2026-02-26  will-axiom-be-accused-of-insider-trading
+  train  2026-02-27  will-us-or-israel-strike-iran-by-february-28-2026-766
+  train  2026-02-27  us-strikes-iran-by-february-28-2026-227-967-547-688-589-491-592-418-452-924-384-915-464-672-196-157-993-596-269-535-381-391-471-256-988-997-296-225-762-973-292-827-345-182-558-215-794-879-189-761
+  test   2026-02-28  us-strikes-iran-by-march-1-2026-492
+  val    2026-02-28  khamenei-out-as-supreme-leader-of-iran-by-march-31
+  val    2026-03-13  nothing-ever-happens-microstrategy
+  val    2026-03-15  will-microstrategy-announce-holding-740k-btc-by-march-31
+  val    NaT         us-x-iran-ceasefire-by-april-7
+  val    NaT         will-openai-release-a-new-frontier-model-on-december-11
+[cb4] row distribution (total n=793, pos=117, overall pos rate=14.75%):
+  train  n= 487  (61.41% of total)  pos= 73  (14.99% pos rate within split)
+  val    n=  61  ( 7.69% of total)  pos=  9  (14.75% pos rate within split)
+  test   n= 245  (30.90% of total)  pos= 35  (14.29% pos rate within split)
+[cb4] running 5-fold expanding-window CV on 23 train markets
+  fold 1: train_mks=8 (rows=57, pos=10) val_mks=3 (rows=76, pos=12)  ROC-AUC=0.6901  PR-AUC=0.3316  best_iter=7
+  fold 2: train_mks=11 (rows=133, pos=22) val_mks=3 (rows=49, pos=7)  ROC-AUC=0.8963  PR-AUC=0.7369  best_iter=5
+  fold 3: train_mks=14 (rows=182, pos=29) val_mks=3 (rows=18, pos=3)  ROC-AUC=0.6222  PR-AUC=0.4444  best_iter=1
+  fold 4: train_mks=17 (rows=200, pos=32) val_mks=3 (rows=21, pos=3)  ROC-AUC=0.6019  PR-AUC=0.2063  best_iter=0
+  fold 5: train_mks=20 (rows=221, pos=35) val_mks=3 (rows=266, pos=38)  ROC-AUC=0.9241  PR-AUC=0.6407  best_iter=136
+[cb4] CV ROC-AUC = 0.7469 ± 0.1368  (over 5 usable folds)
+[cb4] CV PR-AUC  = 0.4720 ± 0.1948
+[cb4] final train scale_pos_weight = 2.000  (auto-balanced would be 5.671)
+0:	learn: 0.6475187	test: 0.5794273	best: 0.5794273 (0)	total: 808us	remaining: 1.61s
+100:	learn: 0.8281051	test: 0.7907272	best: 0.8406035 (49)	total: 45.4ms	remaining: 854ms
+Stopped by overfitting detector  (75 iterations wait)
+
+bestTest = 0.8406035192
+bestIteration = 49
+
+Shrink model to first 50 iterations.
+[cb4] fit in 0.06s  best_iter=49 / 2000
+
+[cb4] calibration: sigmoid(1.989 * raw_prob -2.113)  (fit on val)
+[cb4] raw  prob range  train=[0.051, 0.836]  val=[0.058, 0.775]  test=[0.054, 0.820]
+[cb4] cal. prob range  train=[0.118, 0.389]  val=[0.119, 0.361]  test=[0.119, 0.382]
+
+[cb4] metrics per split (overfit check: train >> val => overfit):
+[cb4] train  n= 487 pos= 73  ROC-AUC=0.9108  PR-AUC=0.6858  P=0.8140  R=0.4795  F1=0.6034  (thr=0.3)
+[cb4] val    n=  61 pos=  9  ROC-AUC=0.9006  PR-AUC=0.7853  P=1.0000  R=0.2222  F1=0.3636  (thr=0.3)
+[cb4] test   n= 245 pos= 35  ROC-AUC=0.9928  PR-AUC=0.9314  P=0.8537  R=1.0000  F1=0.9211  (thr=0.3)
+
+[cb4] PR-AUC gap train-val = -0.0995  (big positive = overfit train)
+[cb4] PR-AUC gap val-test  = -0.1461  (big positive = overfit val via early stopping)
+
+[cb4] classification metrics @ fixed thr=0.3:
+  train  P=0.8140  R=0.4795  F1=0.6034  (TP=35, FP=8, FN=38, TN=406)
+  val    P=1.0000  R=0.2222  F1=0.3636  (TP=2, FP=0, FN=7, TN=52)
+  test   P=0.8537  R=1.0000  F1=0.9211  (TP=35, FP=6, FN=0, TN=204)
+[cb4] curves saved to catboost4_20260610_150513_curves.png
+
+[cb4] TEST predictions, one row per wallet, sorted by cal_prob desc.
+[cb4]  rank  cal_prob  raw_prob  label  cum_tp  cum_fp  prec   recall  wallet
+[cb4]     1    0.3817    0.8201    0        0       1  0.000   0.000  0x1b740123415b0dccff0ee15e199b3508dcb2778c
+[cb4]     2    0.3792    0.8147    1        1       1  0.500   0.029  0x95bd107886bd48d6737029603e3db242fb781652
+[cb4]     3    0.3792    0.8147    1        2       1  0.667   0.057  0xab54f4b400bd8015e206a74f8d89362cf8eee856
+[cb4]     4    0.3792    0.8147    1        3       1  0.750   0.086  0xdad42409cf398c9149c50217e4dc4a039d9dec0b
+[cb4]     5    0.3792    0.8147    1        4       1  0.800   0.114  0xeb1cdc2f267723b577cd0d1441fe5db05d440f79
+[cb4]     6    0.3792    0.8147    1        5       1  0.833   0.143  0xcb8ed92b702a0f2397f8cda9e4925867b7b9135e
+[cb4]     7    0.3792    0.8147    1        6       1  0.857   0.171  0x62730fede68ebedfb510e6f38da2aa2eca081741
+[cb4]     8    0.3792    0.8147    1        7       1  0.875   0.200  0xf1a1bcf248a0dc05bec474c229f490db00106f24
+[cb4]     9    0.3792    0.8147    1        8       1  0.889   0.229  0x22d0803925702b81d038c9b3f3aa77a3727f218f
+[cb4]    10    0.3792    0.8147    1        9       1  0.900   0.257  0x2b6072aa2255e3a95154180076771417e3dc0b9e
+[cb4]    11    0.3792    0.8147    1       10       1  0.909   0.286  0xe85f1414171cd41707dc7b256bd3db269f94a28c
+[cb4]    12    0.3746    0.8050    1       11       1  0.917   0.314  0xe1bdfa52bc9342115bbf1d41d04b8cf0bcd8f5a7
+[cb4]    13    0.3746    0.8050    1       12       1  0.923   0.343  0xa34d11f372e8a87acc87e3beabb32e2fe7f9ee4d
+[cb4]    14    0.3746    0.8050    1       13       1  0.929   0.371  0x344c5073e9b152a95d9f42767ac084a87fad68ab
+[cb4]    15    0.3746    0.8050    1       14       1  0.933   0.400  0xdcce3bfa065cf5ca9a0acfe83d6ecd8279d10a15
+[cb4]    16    0.3746    0.8050    1       15       1  0.938   0.429  0x1270fccb862f069b80181dcedf7be31ec6cfc2c8
+[cb4]    17    0.3730    0.8015    1       16       1  0.941   0.457  0xf37af11e538c6eba3ddcea540ee54ca35c6354f8
+[cb4]    18    0.3730    0.8015    1       17       1  0.944   0.486  0x943117ea8e3f5b160e158c1c4b1786fee5d3e5a0
+[cb4]    19    0.3688    0.7925    0       17       2  0.895   0.486  0x0ef76ca8d226473cdef7c17c20c07c05d7059ae8
+[cb4]    20    0.3683    0.7913    1       18       2  0.900   0.514  0x6130238e132bd12ba92244568815c2f7fe4fc5c1
+[cb4]    21    0.3683    0.7913    1       19       2  0.905   0.543  0x45f402894f550357ff1d5db385c93bb9e480dd79
+[cb4]    22    0.3683    0.7913    1       20       2  0.909   0.571  0x3e545810f8b95dd0fcf4114b0246a0dbb40ad1c5
+[cb4]    23    0.3683    0.7913    1       21       2  0.913   0.600  0x65387d3235b2fd6ac3587df1fff2c2de2f98e523
+[cb4]    24    0.3683    0.7913    1       22       2  0.917   0.629  0xf1d54d55b7568e6e4c20867ccf377555cd947ffc
+[cb4]    25    0.3683    0.7913    1       23       2  0.920   0.657  0x8e588259e06da665020dac0e4958301a2089579e
+[cb4]    26    0.3683    0.7913    1       24       2  0.923   0.686  0x79963fd69baccad9bb8ab51ddfbf1f13e0630e13
+[cb4]    27    0.3683    0.7913    1       25       2  0.926   0.714  0x82ed2416f0a49cc02fb529b00c03582598d17cc3
+[cb4]    28    0.3683    0.7913    1       26       2  0.929   0.743  0x244cde3e010a8eb27f0ff588476091bd3d73f1dc
+[cb4]    29    0.3683    0.7913    1       27       2  0.931   0.771  0xb7200eb4ffc3ea4bde0ef28110238bd9f539c414
+[cb4]    30    0.3683    0.7913    1       28       2  0.933   0.800  0x26ecf4f4a01bf39ce98144ef9aeddf28e9548f54
+[cb4]    31    0.3683    0.7913    1       29       2  0.935   0.829  0x421b26a47bb5136d045190d7870095eb29498469
+[cb4]    32    0.3683    0.7913    1       30       2  0.938   0.857  0xfffee3116390fc9415956617ed048d26c7c1b424
+[cb4]    33    0.3683    0.7913    1       31       2  0.939   0.886  0xeee545e9706a03e73c5d17632e2bbb6f1096cce1
+[cb4]    34    0.3608    0.7751    1       32       2  0.941   0.914  0x5e0b017aef88af84fb3897fecce7413c6754981a
+[cb4]    35    0.3608    0.7751    1       33       2  0.943   0.943  0x4ec2f11d2893eb1bc3bab7449910540c93adf7ec
+[cb4]    36    0.3608    0.7751    1       34       2  0.944   0.971  0xb390ae2cc3fd8cb2670a62129faeb775faee106c
+[cb4]    37    0.3557    0.7639    1       35       2  0.946   1.000  0xc0292a841a0c9a7320aa39075cffcf1b8f64f705
+[cb4]    38    0.3520    0.7558    0       35       3  0.921   1.000  0xa67b468c188a5cc7ad8c9659dfd00210cddac941
+[cb4]    39    0.3434    0.7368    0       35       4  0.897   1.000  0x37d10ffb61998561c5f9fb941c42c952d8fb4e28
+[cb4]    40    0.3434    0.7368    0       35       5  0.875   1.000  0x470e177a6cb992fcc0b6086b91d46a6d45f68fb6
+[cb4]    41    0.3222    0.6886    0       35       6  0.854   1.000  0x097ac31be4864bff96838d0aec3eeb30c0ab7041
+[cb4]    42    0.2851    0.6003    0       35       7  0.833   1.000  0x237ec57d6bdc6c8517f745d08183c016ba0c403c
+[cb4]    43    0.2839    0.5975    0       35       8  0.814   1.000  0xce785a5ee27cefae536575b5adc89114e62e8093
+[cb4]    44    0.2836    0.5967    0       35       9  0.795   1.000  0x6bc74c392c320cfe10d5be61db978a58c8444ad4
+[cb4]    45    0.2833    0.5960    0       35      10  0.778   1.000  0xab79b07cf7f7a864f3417997b758cc0a4ae24bff
+[cb4]    46    0.2804    0.5888    0       35      11  0.761   1.000  0x1a57513f0dcb0789fedb13174252b28e5dc5c02b
+[cb4]    47    0.2729    0.5698    0       35      12  0.745   1.000  0xeff07c97c491e11e6ab7a6f4520e61f8fa5c1210
+[cb4]    48    0.2686    0.5588    0       35      13  0.729   1.000  0x13ff290849c6fef06efde63dfe643e62767716a3
+[cb4]    49    0.2686    0.5588    0       35      14  0.714   1.000  0xf5be02858d86213b0ac7fc7afbaf12fd5f26195a
+[cb4]    50    0.2686    0.5588    0       35      15  0.700   1.000  0x0ffcfdffec108e9869698f69c62c82eca210e5a7
+[cb4]    51    0.2686    0.5588    0       35      16  0.686   1.000  0xb4d0807e3447a8ac6dc52f51070d4e7caa6fa1c5
+[cb4]    52    0.2686    0.5588    0       35      17  0.673   1.000  0x10b0d2a23eed5184fe43d452bca85d063f6b9b5e
+[cb4]    53    0.2686    0.5588    0       35      18  0.660   1.000  0x131bcf98856e2ac178509b3a5e7a891ac06597c3
+[cb4]    54    0.2686    0.5588    0       35      19  0.648   1.000  0x58804ec98542e15e2764b3acb09ff413f2dd18a0
+[cb4]    55    0.2665    0.5535    0       35      20  0.636   1.000  0xe16ff104a4116cf3a834cd23b3f3391132d66d1f
+[cb4]    56    0.2581    0.5318    0       35      21  0.625   1.000  0xda2d327a9dd25f8460d0576e1facc3ce95da1cee
+[cb4]    57    0.2547    0.5228    0       35      22  0.614   1.000  0xb05dd86107a3809d6d148fe1f68da0351e40bc1a
+[cb4]    58    0.2542    0.5215    0       35      23  0.603   1.000  0xfadf8833dfb222ab3da48d27d69353762606dda0
+[cb4]    59    0.2462    0.5001    0       35      24  0.593   1.000  0x1bcd6d6ac07a22838618e95ab3d8fef55b9abb7e
+[cb4]    60    0.2357    0.4710    0       35      25  0.583   1.000  0x58fab4517584b6111af0c011a4e643361e3f1b44
+[cb4]    61    0.2296    0.4539    0       35      26  0.574   1.000  0xe8f348dae364517f0ee9bbeac2928460335dd930
+[cb4]    62    0.2286    0.4510    0       35      27  0.565   1.000  0x0f214043fe6d32f8692a302270e2ce460a523d6e
+[cb4]    63    0.2279    0.4490    0       35      28  0.556   1.000  0x1521b47bf0c41f6b7fd3ad41cdec566812c8f23e
+[cb4]    64    0.2278    0.4489    0       35      29  0.547   1.000  0x77b0b896910b3388e01708521d1f92d1f5c2ba0b
+[cb4]    65    0.2256    0.4424    0       35      30  0.538   1.000  0xc89dc66e04aa7cd9a38334cca48abf3ad45bb1f1
+[cb4]    66    0.2216    0.4309    0       35      31  0.530   1.000  0x80b6ec922b7c39c044f487c47779ca8bed8d878c
+[cb4]    67    0.2128    0.4048    0       35      32  0.522   1.000  0x0329d8856892b29f995245d6bc3bb7ef1b443d96
+[cb4]    68    0.2124    0.4037    0       35      33  0.515   1.000  0x19c97e57baf0b2443fdd607c76ed203943e7b2ce
+[cb4]    69    0.2102    0.3971    0       35      34  0.507   1.000  0xd3ae24a39cf21417de88b79ed72b6d28a6385b63
+[cb4]    70    0.2070    0.3873    0       35      35  0.500   1.000  0x951417b7773e19f60d9a581b661a028ccffbeaf1
+[cb4]    71    0.2058    0.3834    0       35      36  0.493   1.000  0xd9edd8c428fd3ce72e1c0be6b126bddc8fdfbc2e
+[cb4]    72    0.2025    0.3734    0       35      37  0.486   1.000  0x4be1a0489801a5a5a9a41024b13f4a6182ee3fea
+[cb4]    73    0.1980    0.3592    0       35      38  0.479   1.000  0xa50c5c5d7834e665def9f85309dbf957d644f75d
+[cb4]    74    0.1979    0.3588    0       35      39  0.473   1.000  0x074aad8084b71edd6a0eab63caed39d66603511d
+[cb4]    75    0.1968    0.3556    0       35      40  0.467   1.000  0x394ea9fc98dc616575a47975b36483777a3d23d2
+[cb4]    76    0.1958    0.3524    0       35      41  0.461   1.000  0x06dcaa14f57d8a0573f5dc5940565e6de667af59
+[cb4]    77    0.1881    0.3273    0       35      42  0.455   1.000  0x1424a9e0a0def5a86c3c6cffbd8b6c65e1b12c7f
+[cb4]    78    0.1872    0.3243    0       35      43  0.449   1.000  0xd27b644fe8e7246246cadcacd974f4af8d8a3966
+[cb4]    79    0.1847    0.3159    0       35      44  0.443   1.000  0xdbb4a207c02e3f05c4ce1b02e7c934b086cbafe9
+[cb4]    80    0.1803    0.3013    0       35      45  0.438   1.000  0xddfe9c1985dabc00a483197262a0959d2e754c2e
+[cb4]    81    0.1770    0.2898    0       35      46  0.432   1.000  0xe397a5077002d4d857e08574033c806a2c9360b6
+[cb4]    82    0.1766    0.2884    0       35      47  0.427   1.000  0xdaefcd102d9f3e1626cf49302b65c9073d5ee647
+[cb4]    83    0.1735    0.2778    0       35      48  0.422   1.000  0xf33d2aab3dd3af01829f5bbaafd8ab6511cbc852
+[cb4]    84    0.1683    0.2593    0       35      49  0.417   1.000  0xdf409ebc2cda86c98f3abf7666ff4bdc01ff38b8
+[cb4]    85    0.1677    0.2571    0       35      50  0.412   1.000  0x5b6331e7ff0831a3fe2ed12004747db1a9c911a4
+[cb4]    86    0.1677    0.2571    0       35      51  0.407   1.000  0x7e80fca8bf7a3e61fd8d2bd7f5e585fec457f17a
+[cb4]    87    0.1650    0.2475    0       35      52  0.402   1.000  0xc2fef07ca5c2ade7b204660ea8a7e487d20c71d6
+[cb4]    88    0.1642    0.2444    0       35      53  0.398   1.000  0x3ecfd2f2df0ef9ed14aa715daa614946b045c870
+[cb4]    89    0.1622    0.2370    0       35      54  0.393   1.000  0x83708188bb141ae02eb081e4f7131f7b2da9f352
+[cb4]    90    0.1613    0.2336    0       35      55  0.389   1.000  0xc433b9da33c17b1b256eac027873b923d054478e
+[cb4]    91    0.1573    0.2186    0       35      56  0.385   1.000  0xae0f21790d847393dcc4da8b4d15f72ff84cf647
+[cb4]    92    0.1543    0.2071    0       35      57  0.380   1.000  0x6acee3c318f3e3aad88803bfe224b309746095a9
+[cb4]    93    0.1537    0.2047    0       35      58  0.376   1.000  0x69ea0d77ef34f1acb03aaed901df7620fc4215cd
+[cb4]    94    0.1510    0.1945    0       35      59  0.372   1.000  0xf769c6390f6d564fe4859effbddb682c62660114
+[cb4]    95    0.1505    0.1922    0       35      60  0.368   1.000  0x4e25605fd905e9972efc0f4d8814530c655cd7a7
+[cb4]    96    0.1479    0.1820    0       35      61  0.365   1.000  0xabdb30e2a40513f2c40fa48ab3702456786773da
+[cb4]    97    0.1452    0.1712    0       35      62  0.361   1.000  0xc360b7771fe7c63139076a6f9e8c34b773badbb2
+[cb4]    98    0.1448    0.1698    0       35      63  0.357   1.000  0x6195e441d616bc6fe41b7344e2027f91e5c54570
+[cb4]    99    0.1420    0.1582    0       35      64  0.354   1.000  0x7926492b3f086db8ff8e349d1037bea1650c1e34
+[cb4]   100    0.1419    0.1577    0       35      65  0.350   1.000  0x4ad6f0f4e0799bf87b7fec2595b7cd6be5cebf78
+[cb4]   101    0.1417    0.1568    0       35      66  0.347   1.000  0x702226b14b65b1c8d05ff51759e095f09932f64e
+[cb4]   102    0.1405    0.1518    0       35      67  0.343   1.000  0x57e862cc576dde007bace893b51ba5c38085057e
+[cb4]   103    0.1394    0.1473    0       35      68  0.340   1.000  0x741f827ce3986563261675f03448991b15d1f6ca
+[cb4]   104    0.1374    0.1389    0       35      69  0.337   1.000  0xa32ae354b32cc0b69f067850a747b4091a5f36d4
+[cb4]   105    0.1367    0.1357    0       35      70  0.333   1.000  0xcf8a41bf14bea62c6bf86366406e751b8eb6eadd
+[cb4]   106    0.1359    0.1326    0       35      71  0.330   1.000  0xb8b7f00fc9a15e062550f3c83844aab463300c0c
+[cb4]   107    0.1349    0.1281    0       35      72  0.327   1.000  0x05548d347cd9c7fd5d8b985590436704024b4514
+[cb4]   108    0.1346    0.1269    0       35      73  0.324   1.000  0x22535f30260f9e0bb2603f45d8847caedc7cf8e2
+[cb4]   109    0.1344    0.1263    0       35      74  0.321   1.000  0x50b0b5be14f256bf15c63ae78b33be7214b27dc5
+[cb4]   110    0.1342    0.1253    0       35      75  0.318   1.000  0x811fe35b4ccfb689a8bf2e144498f358ae7516e3
+[cb4]   111    0.1338    0.1237    0       35      76  0.315   1.000  0x33acd201d6b02982b3a95b975b331bc225649334
+[cb4]   112    0.1338    0.1235    0       35      77  0.312   1.000  0x75935d040cd2795bdebb692210f9753e63fce677
+[cb4]   113    0.1333    0.1214    0       35      78  0.310   1.000  0x3a44416fe65918647226c32e5bfd147b34260196
+[cb4]   114    0.1320    0.1158    0       35      79  0.307   1.000  0xda406e9cb4c0c357ff7fef0c0d1e97341b898142
+[cb4]   115    0.1319    0.1150    0       35      80  0.304   1.000  0xc7f9a6a9597b0bf2bd4ee1235b3d6d227293c491
+[cb4]   116    0.1317    0.1144    0       35      81  0.302   1.000  0xbdf4b123270d5ef58a8d69ceb5ac2fdd883b59b4
+[cb4]   117    0.1314    0.1130    0       35      82  0.299   1.000  0xaface7aac5c1ea428eda2772437ce74142154a84
+[cb4]   118    0.1308    0.1104    0       35      83  0.297   1.000  0xe7461927f98f994568411e25e1a3e401f30aff6a
+[cb4]   119    0.1304    0.1084    0       35      84  0.294   1.000  0x66d609dbda9df641eff684190a01182f6de450c7
+[cb4]   120    0.1304    0.1084    0       35      85  0.292   1.000  0x11aa25a1a88f199aec54b54a6b7ff747c369c2f8
+[cb4]   121    0.1302    0.1076    0       35      86  0.289   1.000  0x9642bd30d320cad7878f642566f9f5b91fc9d2ab
+[cb4]   122    0.1296    0.1051    0       35      87  0.287   1.000  0xe168b5394c715b1714b5093d22c681556d3ee559
+[cb4]   123    0.1283    0.0990    0       35      88  0.285   1.000  0xdb1b125189913bf03405e74cbf47273b4466efb5
+[cb4]   124    0.1283    0.0990    0       35      89  0.282   1.000  0x200febf6368ca9db8b8d1c809d5d7b088b22fe99
+[cb4]   125    0.1283    0.0990    0       35      90  0.280   1.000  0xa9e37dc9a42a5bd083e584dbbcde6723033c706f
+[cb4]   126    0.1283    0.0990    0       35      91  0.278   1.000  0x0a793254e040027c5d1ca0c2f87cda8e22228e05
+[cb4]   127    0.1283    0.0990    0       35      92  0.276   1.000  0xdb657fd8dc9a21a28432104b655908b5aa23a419
+[cb4]   128    0.1283    0.0990    0       35      93  0.273   1.000  0xe4e6aa2f9eb66b76d372d80cd91f6bc592d04bd4
+[cb4]   129    0.1276    0.0960    0       35      94  0.271   1.000  0x8f9bda594242a62008870f1d632352b889116c25
+[cb4]   130    0.1273    0.0945    0       35      95  0.269   1.000  0x4a3e9c85342f50e89a51dd6c4e97d34558d0ac1c
+[cb4]   131    0.1273    0.0945    0       35      96  0.267   1.000  0x5ce19758652a0519790b68e25f204f82f7bd62fa
+[cb4]   132    0.1271    0.0937    0       35      97  0.265   1.000  0xe0afeb157a0b7e76ce7dde16daa1f265b0362dec
+[cb4]   133    0.1264    0.0907    0       35      98  0.263   1.000  0x6470814e64f3085fe4586cd4939cbf985b53aac7
+[cb4]   134    0.1263    0.0903    0       35      99  0.261   1.000  0x2d4e90768c7ae9661acca6b16e605eba3e70edb0
+[cb4]   135    0.1263    0.0900    0       35     100  0.259   1.000  0x06da66efe045ab24e87cdfe0b70b23b2edc2f2ed
+[cb4]   136    0.1259    0.0882    0       35     101  0.257   1.000  0xa54dcc04bdca68f6cf4fbf1e74e393da842b18bf
+[cb4]   137    0.1258    0.0880    0       35     102  0.255   1.000  0xa51d9879dc7a35378fc8f9f7487ffb2ea3f3b897
+[cb4]   138    0.1257    0.0872    0       35     103  0.254   1.000  0x22c030983521343a420500050dcb9ee115420267
+[cb4]   139    0.1256    0.0867    0       35     104  0.252   1.000  0xe6ef1d940d84acbb25ce574eb16613db0894418d
+[cb4]   140    0.1255    0.0863    0       35     105  0.250   1.000  0x535ec2dccf77489cc0d1453f088344a2995fccd9
+[cb4]   141    0.1253    0.0854    0       35     106  0.248   1.000  0x82c762fb547c4d02f41c9baef2258b4f0751e125
+[cb4]   142    0.1253    0.0854    0       35     107  0.246   1.000  0xdb4b7bf7a5d084bb089ba81a4646e57340180b46
+[cb4]   143    0.1249    0.0837    0       35     108  0.245   1.000  0x6f01eec19cc6523b741677ed870b0ac04cd7558f
+[cb4]   144    0.1248    0.0834    0       35     109  0.243   1.000  0x4ffb4c1c052e680c4901feccc519cfc74c29933a
+[cb4]   145    0.1247    0.0830    0       35     110  0.241   1.000  0xcd6be6693e2bc11150d397caa9e6f7c6744b68f5
+[cb4]   146    0.1247    0.0826    0       35     111  0.240   1.000  0x81e0d0c6817669629a58ea8b08d2eb1b93492c3b
+[cb4]   147    0.1246    0.0823    0       35     112  0.238   1.000  0x9c4abb471fa36400db43d5fa221c680bf2f24896
+[cb4]   148    0.1245    0.0820    0       35     113  0.236   1.000  0x230725d75ed7da05caffbc16cdbfeaa288db1b45
+[cb4]   149    0.1244    0.0813    0       35     114  0.235   1.000  0xf45082a309088f99e1e2a227a4911c2a2b018eb3
+[cb4]   150    0.1242    0.0805    0       35     115  0.233   1.000  0x21cd32cb22b75bc61cb80fe2fbf05bb84cdbf07c
+[cb4]   151    0.1241    0.0800    0       35     116  0.232   1.000  0x82c39bebf8837e68e8d85e6ddac8e17a1d09764c
+[cb4]   152    0.1241    0.0800    0       35     117  0.230   1.000  0xefaf0cc43dd5970e01485217d1dabe5158d76289
+[cb4]   153    0.1239    0.0793    0       35     118  0.229   1.000  0xf67f72df65797a85dc9fd44d57adfe5b7b4a31cf
+[cb4]   154    0.1239    0.0789    0       35     119  0.227   1.000  0x1a4f110a2813daef17d72170f97b6dabb9d69b0c
+[cb4]   155    0.1238    0.0788    0       35     120  0.226   1.000  0xe39783f92ee0985f1ab5fe514030f946825abfcb
+[cb4]   156    0.1237    0.0781    0       35     121  0.224   1.000  0xf29560ea2bdb539ae8546a42e24040d9b18c508f
+[cb4]   157    0.1231    0.0754    0       35     122  0.223   1.000  0xc8ab97a9089a9ff7e6ef0688e6e591a066946418
+[cb4]   158    0.1231    0.0754    0       35     123  0.222   1.000  0x5fef666811668d1352ebd8687d68ad2315a95840
+[cb4]   159    0.1224    0.0719    0       35     124  0.220   1.000  0x9c65e79218de1bd8c4aad0fbdb69397f8f931cde
+[cb4]   160    0.1223    0.0719    0       35     125  0.219   1.000  0x999f3c7a1ec4c6b876fdc5f43aff0e8718b1da43
+[cb4]   161    0.1223    0.0718    0       35     126  0.217   1.000  0xd6d3ac4eff7a84993e8c63078603f9e551a5161c
+[cb4]   162    0.1222    0.0712    0       35     127  0.216   1.000  0xefc9a3d319adf4ba1259feb39bbd28dddcb0a0b9
+[cb4]   163    0.1221    0.0707    0       35     128  0.215   1.000  0x1c0ad0fcf5356497560f585dc6b3d33f2b3dcbc9
+[cb4]   164    0.1221    0.0706    0       35     129  0.213   1.000  0x2707f2e693b3d20b5a17b603c532571108140afa
+[cb4]   165    0.1220    0.0701    0       35     130  0.212   1.000  0x9d3ff469e93195b3fc753f38fb2f6072ffbbf19b
+[cb4]   166    0.1219    0.0699    0       35     131  0.211   1.000  0x2760925a2d2d05728c8d701f73eaabee99c9ef06
+[cb4]   167    0.1219    0.0699    0       35     132  0.210   1.000  0x0800af6d3a2afc1b427b415baffbf11eab752fec
+[cb4]   168    0.1219    0.0699    0       35     133  0.208   1.000  0xd8e4d149e4860908e319286783defecb0604ea77
+[cb4]   169    0.1217    0.0689    0       35     134  0.207   1.000  0x062b87fc5c1433b79e350c0f558753db63979a6b
+[cb4]   170    0.1216    0.0685    0       35     135  0.206   1.000  0x1c266db0f8529b1f25b77123e9c0c918ac2f6e31
+[cb4]   171    0.1216    0.0683    0       35     136  0.205   1.000  0x37a4754aa02b17da40499266c10e474268f91631
+[cb4]   172    0.1216    0.0683    0       35     137  0.203   1.000  0x6d5d83165b0c80a4ef13f01e3ba08602c7990ee8
+[cb4]   173    0.1215    0.0680    0       35     138  0.202   1.000  0xbbfe015f178cbd59deb5643dd4888d53d5b5c0ad
+[cb4]   174    0.1215    0.0678    0       35     139  0.201   1.000  0x5ecde7348ea5100af4360dd7a6e0a3fb1d420787
+[cb4]   175    0.1215    0.0677    0       35     140  0.200   1.000  0xc02147dee42356b7a4edbb1c35ac4ffa95f61fa8
+[cb4]   176    0.1214    0.0675    0       35     141  0.199   1.000  0xf3aaa1993611a22a9a0626abe021c4bfec28d6d6
+[cb4]   177    0.1214    0.0675    0       35     142  0.198   1.000  0xc115985a2ec1a736a5b8212a6ad41c5568ba7b4a
+[cb4]   178    0.1214    0.0675    0       35     143  0.197   1.000  0xfc8dce60c93690dd7a22b0024693294f0afe55c5
+[cb4]   179    0.1214    0.0675    0       35     144  0.196   1.000  0x1872ca13e77040190750bea62767df466b189ba9
+[cb4]   180    0.1214    0.0675    0       35     145  0.194   1.000  0xe85fbb5dfa5e35fd27b8bddda5aa22bc621d8b0f
+[cb4]   181    0.1213    0.0669    0       35     146  0.193   1.000  0x47088683f8a65fcda4239f4d30f856c6d44c7835
+[cb4]   182    0.1213    0.0669    0       35     147  0.192   1.000  0x575f9fb0b758d52e93342def50d678e300fc5b78
+[cb4]   183    0.1213    0.0669    0       35     148  0.191   1.000  0x042876159be6d7b9bf89abd83e05f83a7177ae98
+[cb4]   184    0.1213    0.0669    0       35     149  0.190   1.000  0x2beac05bd6b6e4a264eec239eea79af3be46df24
+[cb4]   185    0.1213    0.0669    0       35     150  0.189   1.000  0x24836f8deba0a3f7d10328ffa78e4281d5fe6f2f
+[cb4]   186    0.1213    0.0669    0       35     151  0.188   1.000  0xe492cfff541fa99e6ab02bbbb31ab740ece48309
+[cb4]   187    0.1213    0.0669    0       35     152  0.187   1.000  0x5e002167ca1d6f4e423b4fb44d360f051d107dc5
+[cb4]   188    0.1213    0.0669    0       35     153  0.186   1.000  0x23f77ff9e8eab8a6db75b4ed803497de4fa8547f
+[cb4]   189    0.1213    0.0668    0       35     154  0.185   1.000  0x00ae235ae56a988331104bc5753f2dee196ed68f
+[cb4]   190    0.1211    0.0658    0       35     155  0.184   1.000  0x4e617ec97e179213f7b4b751d706713453fb82ee
+[cb4]   191    0.1210    0.0656    0       35     156  0.183   1.000  0xa5ed94eb047a584083361bdbe81f83e3934d7b21
+[cb4]   192    0.1208    0.0648    0       35     157  0.182   1.000  0xab46266fe8ed5c0cf795dc16627ae05629592296
+[cb4]   193    0.1208    0.0648    0       35     158  0.181   1.000  0x31ca2fdf162e6fb34a6d77837053c9ced1b035ce
+[cb4]   194    0.1208    0.0646    0       35     159  0.180   1.000  0xb59b573ffc4aea5a5cf6360d5c258e784363916b
+[cb4]   195    0.1206    0.0635    0       35     160  0.179   1.000  0xd0e70259b30341bec5ad1c3c073aa077f37b7ef4
+[cb4]   196    0.1205    0.0631    0       35     161  0.179   1.000  0x94bde001e4a00152490c60bebe2aab120e8c6184
+[cb4]   197    0.1205    0.0631    0       35     162  0.178   1.000  0xeecbf295fb74c4a0a767a0efcf95ac280da86166
+[cb4]   198    0.1204    0.0624    0       35     163  0.177   1.000  0xa175b0752987ff88f111079095180df1a488a36f
+[cb4]   199    0.1204    0.0624    0       35     164  0.176   1.000  0x8ca197428f70eed0c0e34d08b9c04e58b69c0c54
+[cb4]   200    0.1203    0.0622    0       35     165  0.175   1.000  0x882e3b3f40a9e6c8b597dffc72d0d87dc95be757
+[cb4]   201    0.1201    0.0612    0       35     166  0.174   1.000  0xfc2f4f50ce2f6045d35558a5e2d8d4b2ac6610c7
+[cb4]   202    0.1201    0.0612    0       35     167  0.173   1.000  0x2f0994255febc5e67adaa43f245d99e674a6d942
+[cb4]   203    0.1200    0.0607    0       35     168  0.172   1.000  0x174b27fef5e1c06ed52c1ddff29720b23cb65a55
+[cb4]   204    0.1200    0.0606    0       35     169  0.172   1.000  0xdde758b9ce87ee0e2a91c4f2f8705d5de950b868
+[cb4]   205    0.1200    0.0606    0       35     170  0.171   1.000  0x2ae085ed72ebf5beb536ce7e73a6f4c2e57cbc70
+[cb4]   206    0.1200    0.0606    0       35     171  0.170   1.000  0xaa4696d5b52e75333946d47e667d0b9a060e5b29
+[cb4]   207    0.1200    0.0606    0       35     172  0.169   1.000  0x9cc5bd222e6020a7e86f10c791c25df613c36714
+[cb4]   208    0.1200    0.0606    0       35     173  0.168   1.000  0xfd2b1925b4131dda1fdd4b6292e0339649b5de02
+[cb4]   209    0.1200    0.0606    0       35     174  0.167   1.000  0xd44c2de98e5b4e2d3b9d23a9cde790f693511223
+[cb4]   210    0.1200    0.0606    0       35     175  0.167   1.000  0x7c6a5008a0dec812b3200229968889a5c185a406
+[cb4]   211    0.1200    0.0606    0       35     176  0.166   1.000  0x470a1f47c3fb22f5e4e70c778d20ccbf1928e36c
+[cb4]   212    0.1199    0.0604    0       35     177  0.165   1.000  0xbe3d34441e4fd5f3c69c5a00e694376e37964dc6
+[cb4]   213    0.1197    0.0592    0       35     178  0.164   1.000  0x03e41e837f2a9f1e50e68aa8054ab4a38dd3a504
+[cb4]   214    0.1197    0.0592    0       35     179  0.164   1.000  0x74240608a5c09179445169e2deb23a4285d1a54f
+[cb4]   215    0.1196    0.0590    0       35     180  0.163   1.000  0x0d0f7444f6601a09e75e9a523d8a6684fa4757d9
+[cb4]   216    0.1193    0.0576    0       35     181  0.162   1.000  0x11a556a8d63c65516bc2369edff97becc94d2770
+[cb4]   217    0.1193    0.0575    0       35     182  0.161   1.000  0x770ee3a1d4c6839ac52bcb7f838c0e83c86ab559
+[cb4]   218    0.1193    0.0575    0       35     183  0.161   1.000  0xcb2ff2840a6b5abffe7071b35ecdd24891200eb7
+[cb4]   219    0.1193    0.0575    0       35     184  0.160   1.000  0x770569d15dfdc4ad5c3a0ec204032812cc85a442
+[cb4]   220    0.1193    0.0575    0       35     185  0.159   1.000  0x16bd7cc71f6da1e77d1d8255677abc75b9bae288
+[cb4]   221    0.1193    0.0575    0       35     186  0.158   1.000  0x60b41cf81fc908cd755e4cd7f06e2db611fad140
+[cb4]   222    0.1193    0.0575    0       35     187  0.158   1.000  0xf80f12c256e97029057760c224524aef5d167868
+[cb4]   223    0.1193    0.0575    0       35     188  0.157   1.000  0x803f5027e592523b51fd1aa8c509991d7c4bf6ed
+[cb4]   224    0.1193    0.0575    0       35     189  0.156   1.000  0x4fdbbc57bc50f1abf77d3e68bb26e83080e90b12
+[cb4]   225    0.1193    0.0575    0       35     190  0.156   1.000  0x18d422264f629f07d78a75bc5aef7d14ba11af03
+[cb4]   226    0.1193    0.0575    0       35     191  0.155   1.000  0x0aae5c4ec45339a64a1dd2fe4ba98c2a19eb251c
+[cb4]   227    0.1193    0.0575    0       35     192  0.154   1.000  0x095dcfb123a4bc035ee6b0d624bab0cc964352cf
+[cb4]   228    0.1193    0.0575    0       35     193  0.154   1.000  0xd62840cf26fab216a46c5c9e9920487098e243c1
+[cb4]   229    0.1193    0.0575    0       35     194  0.153   1.000  0xc922b1202995e6b34697e76e1881d56ca2652a8c
+[cb4]   230    0.1193    0.0575    0       35     195  0.152   1.000  0x1f85e6e3e41e5f1fe03f6cf22a52ae4e352ea51b
+[cb4]   231    0.1193    0.0575    0       35     196  0.152   1.000  0x0de44e5e476c731b9ca5671e7882e6098a462d29
+[cb4]   232    0.1193    0.0575    0       35     197  0.151   1.000  0x48da00a574fa77b8c734377db640cc7c26980419
+[cb4]   233    0.1193    0.0575    0       35     198  0.150   1.000  0xfe23f3506b5aa11e0f4df534faf641433064937b
+[cb4]   234    0.1193    0.0575    0       35     199  0.150   1.000  0xfd0b63ed8d68738e4905abc4097e9a63510ba6be
+[cb4]   235    0.1193    0.0575    0       35     200  0.149   1.000  0x7858d06794cfc352518ec992284aa2431b7b1cbd
+[cb4]   236    0.1193    0.0575    0       35     201  0.148   1.000  0xd2f8885d33a00bac50ecb68cc100d7638759071e
+[cb4]   237    0.1193    0.0575    0       35     202  0.148   1.000  0x171eda69c3857c363f38c954e20dc9039d7be046
+[cb4]   238    0.1193    0.0575    0       35     203  0.147   1.000  0x63c652270a37e53a170303b6b264a2aa835743a5
+[cb4]   239    0.1193    0.0575    0       35     204  0.146   1.000  0xed521bba9cb56cc65ed25a54ed93eb6026e29e9c
+[cb4]   240    0.1193    0.0575    0       35     205  0.146   1.000  0x8cf4d3bd0f849bdd39ce68889259d9a584e65608
+[cb4]   241    0.1193    0.0575    0       35     206  0.145   1.000  0x8159e504042305104d507bea55ee644e76eff32b
+[cb4]   242    0.1192    0.0570    0       35     207  0.145   1.000  0xda25ac7b9d3984fb984ce247c2065ed719576998
+[cb4]   243    0.1186    0.0540    0       35     208  0.144   1.000  0xc160930494d473fe72671eb81e9458ebb37571ac
+[cb4]   244    0.1186    0.0540    0       35     209  0.143   1.000  0x685e556c2559da06aa59ab0d70c727285cd63fd7
+[cb4]   245    0.1186    0.0540    0       35     210  0.143   1.000  0xa7b5bf2089e3de036ae68425461407343466fa78
+
+[cb4] TEST confusion matrix @ thr=0.3
+[[204   6]
+ [  0  35]]
+
+              precision    recall  f1-score   support
+
+           0     1.0000    0.9714    0.9855       210
+           1     0.8537    1.0000    0.9211        35
+
+    accuracy                         0.9755       245
+   macro avg     0.9268    0.9857    0.9533       245
+weighted avg     0.9791    0.9755    0.9763       245
+
+[cb4] feature importances:
+  22.0159  adaptive_markout_raw_grosswt_h0p200
+  16.7557  adaptive_markout_raw_grosswt_h0p070
+  13.6044  unrealized_edge_per_open_token
+  10.7894  buy_markout_adj_grosswt_h0p070_lb0p150
+   9.2294  adaptive_markout_raw_grosswt_h0p010
+   8.6287  adaptive_markout_raw_grosswt_h0p150
+   7.9871  buy_markout_adj_grosswt_h0p030_lb0p200
+   6.0292  unrealized_edge_per_open_token_sqrt
+   4.2047  realized_pnl_per_closing_trade
+   0.7554  high_sell_nonflattening_cash_frac_pctl90
+
+[cb4] saved cache/models/cb_insider_10feat_v2_d2_20260610_150513.joblib
+[cb4] saved cache/models/cb_insider_10feat_v2_d2_20260610_150513.calibrator.joblib
+[cb4] saved cache/models/cb_insider_10feat_v2_d2_20260610_150513.meta.json
+[cb4] copied -> cache/models/cb_insider_10feat_v2_d2_latest.joblib
+[cb4] copied -> cache/models/cb_insider_10feat_v2_d2_latest.calibrator.joblib
+[cb4] copied -> cache/models/cb_insider_10feat_v2_d2_latest.meta.json
+
+[cb4] comparison vs catboost2 (30-feat) and catboost3 (10-feat, depth=4):
+  30-feat v2 (cb2, d=4):  ROC-AUC=0.9827  PR-AUC=0.8564
+  10-feat v2 (cb3, d=4):  ROC-AUC=0.9947  PR-AUC=0.9661
+  10-feat v2 (cb4, d=2):  ROC-AUC=0.9928  PR-AUC=0.9314
