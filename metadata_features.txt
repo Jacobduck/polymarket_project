@@ -1,0 +1,131 @@
+METADATA LAYER FEATURES
+========================
+
+These features describe a wallet's broader footprint on Polymarket (and
+the EOA that funded it), rather than its behavior on one specific
+market. They feed the second-stage "metadata" model whose probability is
+combined with the per-(wallet, market) behavioral model.
+
+EVALUATION TIME ("as-of time")
+------------------------------
+For each (wallet, market) row, every feature is computed AS OF the
+wallet's first TRADE timestamp on that market. Any activity, deposit, or
+sibling-wallet creation that happens after that timestamp is dropped.
+This prevents future information from leaking into features.
+
+DATA SOURCES
+------------
+- data-api.polymarket.com /activity?user=<wallet>
+    Returns TRADE and REDEEM rows. One call per wallet, paginated.
+    Fields used: timestamp, type, slug, side, size, usdcSize, outcomeIndex.
+- gamma-api.polymarket.com /markets/slug/<slug>
+    Provides market.start_ts (acceptingOrdersTimestamp).
+- Polygonscan API key, routed through Etherscan v2
+  (api.etherscan.io/v2/api?chainid=137).
+    Polygonscan's standalone v1 endpoint was retired in 2025; the
+    same key now works against Etherscan's unified v2 endpoint.
+    Used for USDC transfer history on Polygon. Requires
+    POLYGONSCAN_API_KEY env var (ETHERSCAN_API_KEY also accepted as a
+    fallback). Features that need on-chain data return NaN if the key
+    is missing.
+- cache/known_insider_pairs.json
+    Confirmed insider wallets, used for funder graph signal.
+
+FEATURE LIST
+============
+
+1.  n_markets_traded
+    Count of distinct slugs in the wallet's TRADE activity with
+    timestamp <= as_of_ts. Includes the current market.
+
+2.  wallet_age_seconds
+    as_of_ts - first_deposit_ts, where first_deposit_ts is the
+    timestamp of the wallet's first incoming USDC transfer on Polygon
+    (Polygonscan tokentx, sort=asc). NaN without API key or if the
+    wallet has never received USDC.
+
+3.  market_age_seconds
+    as_of_ts - market.start_ts. Always >= 0 since as_of_ts is by
+    definition after the market opened.
+
+4.  wallet_to_market_age_ratio
+    wallet_age_seconds / max(market_age_seconds, 1).
+    < 1 means the wallet was created AFTER the market opened.
+
+5.  wallet_minus_market_age_seconds
+    Signed difference wallet_age_seconds - market_age_seconds.
+    Complements the ratio and handles the case where market_age is tiny.
+
+6.  winrate
+    Fraction of distinct markets where the wallet's realized PnL > 0,
+    among ALL markets the wallet has traded by as_of_ts (current
+    market included). Realized PnL per market uses the simple net cash
+    flow:
+        pnl = sum(SELL usdcSize) + sum(REDEEM usdcSize)
+              - sum(BUY usdcSize)
+    over activity rows with timestamp <= as_of_ts for that market.
+    NaN if the wallet has traded zero markets.
+
+7.  avg_bet_size_usdc
+    Mean usdcSize across all TRADE rows with timestamp <= as_of_ts.
+
+8.  median_bet_size_usdc
+    Median usdcSize across the same set.
+
+9.  total_bet_size_usdc
+    Sum of usdcSize across the same set (lifetime gross notional).
+
+10. n_wallets_same_funder
+    Number of distinct addresses that have received outgoing USDC
+    transfers from this wallet's funder (the sender of the wallet's
+    first incoming USDC deposit), restricted to recipient timestamps
+    <= as_of_ts. Includes the wallet itself.
+    Capped at 1000 recipients; if the cap is hit the funder is treated
+    as a CEX/relayer and this feature is set to NaN.
+    NaN without API key.
+
+11. n_other_wallets_same_funder
+    max(0, n_wallets_same_funder - 1). NaN if (10) is NaN.
+
+12. herfindahl_index_markets
+    Sum_i (volume_i / total_volume)^2 where volume_i = total usdcSize
+    on market i across the wallet's TRADE activity with
+    timestamp <= as_of_ts. Range [1/n, 1]. 1 = single-market wallet.
+    0 if total_volume = 0.
+
+13. is_first_market
+    1 if the current market is the only market the wallet has traded
+    by as_of_ts, else 0.
+
+14. time_since_first_deposit_to_first_trade_seconds
+    Equivalent to wallet_age_seconds (kept as a separate explicit name
+    for interpretability — the metadata answer to "how long after
+    funding did this wallet make its first trade in THIS market").
+
+15. lifetime_volume_share_on_market
+    sum(usdcSize on current market by as_of_ts) /
+    sum(usdcSize on all markets by as_of_ts).
+    Range [0, 1]. 1 = wallet only exists for this market.
+
+16. pnl_sharpe
+    mean(per_market_pnl) / std(per_market_pnl) across all markets
+    traded by as_of_ts (same set as #6). NaN if fewer than 2 markets
+    or if std = 0.
+
+17. funder_flagged_wallet_count
+    Among the recipients counted in (10), how many appear in
+    cache/known_insider_pairs.json. Counts the wallet itself if it is
+    flagged. NaN if (10) is NaN.
+
+CAVEATS
+-------
+- The data-api /activity endpoint pages newest-first; we cap at 10,000
+  rows per wallet. Wallets with very long histories (CEX hot wallets,
+  pro bots) may be truncated at the oldest end.
+- Etherscan v2 free tier is rate-limited (5 calls/sec). The polycluster
+  metadata module caches each wallet's funder lookup and each funder's
+  sibling-wallet list to disk under cache/metadata/.
+- The "funder" heuristic (first USDC sender) is correct for typical
+  Polymarket proxies funded by a single EOA. It is fragile for wallets
+  funded via bridges or aggregators, where the immediate sender is a
+  contract rather than the real owner.

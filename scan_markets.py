@@ -19,6 +19,7 @@ from __future__ import annotations
 
 import json
 import logging
+import os
 import pickle
 import sys
 import time
@@ -31,6 +32,10 @@ import xgboost as xgb
 from polycluster.events import get_market_orderfilled_events
 from polycluster.features import compute_market_user_features
 from polycluster.markets import get_market_by_slug
+from polycluster.metadata import (
+    METADATA_FEATURE_COLUMNS,
+    compute_metadata_features,
+)
 from polycluster.parsing import (
     build_history_df_from_orderfilled,
     parse_orderfilled_events,
@@ -40,6 +45,7 @@ CACHE = Path("cache")
 EVENTS_DIR = CACHE / "events"
 FEATURES_DIR = CACHE / "features_30feat"
 MODEL_DIR = CACHE / "models"
+KNOWN_INSIDER_JSON = CACHE / "known_insider_pairs.json"
 
 MODEL_PATH = MODEL_DIR / "xgb_insider_30feat_latest.json"
 META_PATH = MODEL_DIR / "xgb_insider_30feat_latest.meta.json"
@@ -82,6 +88,22 @@ def load_model() -> tuple[xgb.XGBClassifier, list[str]]:
     return model, features
 
 
+def load_flagged_wallets() -> set[str]:
+    """Known-insider wallet addresses, for the funder-graph signal."""
+    if not KNOWN_INSIDER_JSON.exists():
+        return set()
+    with open(KNOWN_INSIDER_JSON) as f:
+        pairs = json.load(f)
+    return {p["wallet"].lower() for p in pairs}
+
+
+def resolve_polygonscan_key() -> str | None:
+    """Polygonscan/Etherscan API key for the on-chain metadata features."""
+    return os.environ.get("POLYGONSCAN_API_KEY") or os.environ.get(
+        "ETHERSCAN_API_KEY"
+    )
+
+
 def fetch_or_load_events(slug: str, market):
     EVENTS_DIR.mkdir(parents=True, exist_ok=True)
     pkl = EVENTS_DIR / f"{slug}.pkl"
@@ -108,6 +130,8 @@ def compute_features_for_market(
     market,
     events: list[dict],
     model_features: list[str],
+    flagged_wallets: set[str],
+    api_key: str | None,
 ) -> pd.DataFrame:
     FEATURES_DIR.mkdir(parents=True, exist_ok=True)
     parquet = FEATURES_DIR / f"{slug}.parquet"
@@ -166,6 +190,29 @@ def compute_features_for_market(
         row: dict = {"wallet": wallet, "volume": volume, "n_trades": len(trades)}
         for c in model_features:
             row[c] = feats.get(c, np.nan)
+
+        # Metadata features, computed as-of the wallet's first trade on this
+        # market (same leakage cutoff as metadata_layer.py). On-chain
+        # features (wallet age / funder / siblings) are NaN without an API
+        # key; per-wallet/per-funder lookups are cached under cache/metadata/.
+        trade_ts = [int(t["timestamp"]) for t in trades if t.get("timestamp") is not None]
+        as_of_ts = min(trade_ts) if trade_ts else None
+        try:
+            meta_feats = compute_metadata_features(
+                wallet.lower(),
+                slug,
+                int(market.start_ts),
+                as_of_ts=as_of_ts,
+                api_key=api_key,
+                flagged_wallets=flagged_wallets,
+            )
+            for c in METADATA_FEATURE_COLUMNS:
+                row[c] = meta_feats.get(c, np.nan)
+        except Exception as exc:
+            logging.warning(f"    metadata failed: {type(exc).__name__}: {exc}")
+            for c in METADATA_FEATURE_COLUMNS:
+                row[c] = np.nan
+
         rows.append(row)
         logging.info(f"    features computed in {elapsed:.2f}s")
 
@@ -220,6 +267,15 @@ def main() -> None:
     model, features_30 = load_model()
     logging.info(f"loaded 30-feat model with {len(features_30)} features")
 
+    flagged_wallets = load_flagged_wallets()
+    api_key = resolve_polygonscan_key()
+    logging.info(f"loaded {len(flagged_wallets)} flagged wallets for funder signal")
+    if not api_key:
+        logging.warning(
+            "POLYGONSCAN_API_KEY not set; on-chain metadata features "
+            "(wallet age / funder / siblings) will cache as NaN"
+        )
+
     summary: list[tuple[str, int, int]] = []
     for i, slug in enumerate(MARKET_SLUGS, 1):
         logging.info("")
@@ -236,7 +292,9 @@ def main() -> None:
                 f"duration={duration_days:.1f}d"
             )
             events = fetch_or_load_events(slug, market)
-            df = compute_features_for_market(slug, market, events, features_30)
+            df = compute_features_for_market(
+                slug, market, events, features_30, flagged_wallets, api_key
+            )
             df, n_flagged = score_and_flag(df, model, features_30, slug)
             elapsed = time.time() - t_market
             logging.info(f"  market done in {elapsed:.1f}s: {n_flagged} flagged")

@@ -264,9 +264,43 @@ CV PR-AUC	0.51 ± 0.12	0.48 ± 0.15	0.54 ± 0.20
 VAL PR-AUC	0.73	0.78	0.83
 TEST PR-AUC	0.97	0.97	0.86"""
 
+
+
 """try fine tuning xgboost"""
 """add the 30 or so remaining insider rows to the cache, or find more confirmed insiders"""
 """then run the model on more market participants, and then feed the flagged (wallet, market) pairs into another model 
 that only considers the wallet's metadata. That gives a final score"""
+"""metadata: number of different markets the user trades in, age of the wallet compared to age of the market, winrate,
+number of wallets attached to the same user, bet size across markets etc"""
 """then check those guys with a high final score to see if they are really insiders"""
-"""try another type of cross validation (where you choose the folds differently)"""
+"""try another type of cross validation (where you choose the folds differently, like one fold per market), to understand why CV is under test score"""
+"""reduce the number of trees for random forest, and fine tune the tree depths"""
+"""maybe add a third layer with images and feed to an LLM"""
+"""when you feed all market participants to the two layers of models, say you get 200 doubly flagged, you 
+can train a new model only on those new 200, and then test with your master list, so you know there is not much overfitting."""
+"""find a way use columbia supercomputers"""
+"""change the train, val, test sets because test is too easy right now (only one market in it, maybe add a few more)"""
+"""build and cache another dataset with different non-insider rows"""
+
+
+"""more insiders to check:"""
+
+"""0x31a56e9e690c621ed21de08cb559e9524cdb8ed9""" #maduro-out-by-january-31-2026-318 #will-the-us-invade-venezuela-by-january-31-2026 #us-forces-in-venezuela-by-january-31-2026 #trump-invokes-war-powers-against-venezuela-by-january-31-134-583
+"""0xa72db1749e9ac2379d49a3c12708325ed17febd4""" #maduro-out-by-january-31-2026-318
+"""0xee50a31c3f5a7c77824b12a941a54388a2827ed6""" #will-d4vd-be-the-1-searched-person-on-google-this-year #will-d4vd-rank-in-googles-top-5-most-searched-people-of-2025 #will-bianca-censori-be-the-1-searched-person-on-google-this-year #	will-bianca-censori-rank-in-googles-top-5-most-searched-people-of-2025 #will-pope-leo-xiv-be-the-1-searched-person-on-google-this-year #will-donald-trump-be-the-1-searched-person-on-google-this-year #will-zohran-mamdani-be-the-2-searched-person-on-google-this-year #gemini-3pt0-flash-released-by-december-15
+"""0x4dfd481c16d9995b809780fd8a9808e8689f6e4a""" #khamenei-out-as-supreme-leader-of-iran-by-january-31 #khamenei-out-as-supreme-leader-of-iran-by-march-31 #us-strikes-iran-by-march-1-2026-492
+"""0x14ae1d1679fc048eaafadea39646755d528a0459""" #lighter-market-cap-fdv-1b-one-day-after-launch #will-lighter-perform-an-airdrop-by-december-31
+"""0xfe6eee00d36717359578ddb4d6e091d56bc9074e""" #iran-closes-its-airspace-by-may-29
+"""0x7f1329ade2ec162c6f8791dad99125e0dc49801c""" #will-trump-pardon-changpeng-zhao-in-2025-162-949-658
+""""""
+
+
+"""no need to do two different layers, just add the features to the first model"""
+"""test random forests on different test sets"""
+"""try to take out some of the iranian insider rows so it corrups less (iranian case is too extreme)"""
+"""train randomforest and xgboost on normal + metadat features, then feed entire markets to it to find insiders"""
+"""idea: you are limited in your insider rows, but you can choose your non insider rows. 
+find a better way to choose non insider rows. Maybe what you can do is put insider rows that really look like insiders 
+so the model really tries to find what makes insiders different (yuo can also add a first statistical layer to find non-insiders
+that look like insiders)"""
+"""expanding on the top idea, maybe what you can do is just use the model you have now to find flagged non insiders"""
