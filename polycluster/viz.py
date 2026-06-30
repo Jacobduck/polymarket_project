@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Any, Literal, Sequence
+from typing import Any, Literal, Sequence, Union
 
 import matplotlib.pyplot as plt
 import numpy as np
@@ -17,7 +17,7 @@ from polycluster.parsing import (
     parse_orderfilled_events,
 )
 
-VLineSpec = float | int | Sequence[float | int]
+VLineSpec = Union[float, int, Sequence[Union[float, int]]]
 
 
 def _get_marker_sizes(
