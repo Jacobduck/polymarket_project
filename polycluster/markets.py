@@ -8,6 +8,7 @@ of repeatedly poking at the raw JSON response.
 from __future__ import annotations
 
 import json
+import re
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
 from typing import Any
@@ -80,7 +81,14 @@ def _time_str_to_uint256(time_str: str) -> int:
     Returns:
         The corresponding unix timestamp in seconds.
     """
-    time_str = time_str.replace("Z", "+00:00")
+    time_str = time_str.strip().replace("Z", "+00:00")
+    # Python 3.9's datetime.fromisoformat is strict about UTC offsets: it wants
+    # "+00:00", not the "+00" / "+0000" forms some APIs emit (newer Pythons are
+    # lenient). Normalize a trailing colon-less offset to HH:MM.
+    m = re.search(r"([+-]\d{2})(\d{2})?$", time_str)
+    if m:
+        hh, mm = m.group(1), m.group(2) or "00"
+        time_str = time_str[: m.start()] + f"{hh}:{mm}"
     dt = datetime.fromisoformat(time_str)
     return int(dt.timestamp())
 
