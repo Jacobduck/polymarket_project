@@ -150,6 +150,31 @@ def load_model_bundle() -> tuple[xgb.XGBClassifier, object | None, list[str],
     return model, calibrator, features, behavioral, metadata, threshold
 
 
+def apply_calibrator(calibrator, raw) -> np.ndarray:
+    """Apply a Platt (LogisticRegression) calibrator to raw model probs.
+
+    Computes the sigmoid directly from ``coef_``/``intercept_`` instead of
+    calling ``predict_proba``. scikit-learn's ``predict_proba`` internals are
+    version-coupled (the ``multi_class`` attribute was removed in 1.7+), so a
+    calibrator pickled with one version can crash when loaded under another.
+    The direct computation is equivalent for binary Platt scaling and is
+    version-proof. Falls back to ``predict_proba`` if the linear params are
+    unavailable.
+    """
+    raw_arr = np.asarray(raw, dtype=float).ravel()
+    try:
+        coef = np.asarray(calibrator.coef_, dtype=float).ravel()[0]
+        intercept = float(np.asarray(calibrator.intercept_).ravel()[0])
+        z = raw_arr * coef + intercept
+        p1 = 1.0 / (1.0 + np.exp(-z))
+        classes = getattr(calibrator, "classes_", np.array([0, 1]))
+        if len(classes) == 2 and classes[1] == 0:
+            p1 = 1.0 - p1  # positive-class column is classes_[1]
+        return p1
+    except AttributeError:
+        return calibrator.predict_proba(raw_arr.reshape(-1, 1))[:, 1]
+
+
 def load_flagged_wallets() -> set[str]:
     if not KNOWN_INSIDER_JSON.exists():
         return set()
@@ -425,7 +450,7 @@ def main() -> None:
     X = df[features].astype(float)
     raw = model.predict_proba(X)[:, 1]
     if calibrator is not None:
-        proba = calibrator.predict_proba(raw.reshape(-1, 1))[:, 1]
+        proba = apply_calibrator(calibrator, raw)
     else:
         proba = raw
     df["pred_prob_raw"] = raw
