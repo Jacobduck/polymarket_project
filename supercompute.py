@@ -95,12 +95,12 @@ EVENTS_DIR = CACHE / "events"
 MODEL_DIR = CACHE / "models"
 KNOWN_INSIDER_JSON = CACHE / "known_insider_pairs.json"
 
-MODEL_TAG = "xgb_insider_meta_v7"
+MODEL_TAG = "xgb_insider_25ir"
 MODEL_PATH = MODEL_DIR / f"{MODEL_TAG}_latest.json"
 META_PATH = MODEL_DIR / f"{MODEL_TAG}_latest.meta.json"
 CALIBRATOR_PATH = MODEL_DIR / f"{MODEL_TAG}_latest.calibrator.joblib"
 
-DEFAULT_THRESHOLD = 0.15
+DEFAULT_THRESHOLD = 0.1
 
 
 # --------------------------------------------------------------------------- #
@@ -135,7 +135,7 @@ def load_model_bundle() -> tuple[xgb.XGBClassifier, object | None, list[str],
     """
     if not META_PATH.exists() or not MODEL_PATH.exists():
         raise SystemExit(
-            f"missing v7 artifacts: {MODEL_PATH} / {META_PATH}. "
+            f"missing model artifacts: {MODEL_PATH} / {META_PATH}. "
             f"Stage cache/models/{MODEL_TAG}_latest.* onto the cluster."
         )
     with open(META_PATH) as f:
