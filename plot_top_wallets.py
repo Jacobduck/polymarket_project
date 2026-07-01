@@ -94,17 +94,35 @@ def main() -> None:
     df = df.sort_values("pred_prob", ascending=False).reset_index(drop=True)
     logging.info(f"loaded {len(df)} scored wallets")
 
-    # Log EVERY wallet's score (sorted best-first), so the full ranking lives in
-    # the log alongside the top-N plots. pred_prob is the calibrated score;
-    # pred_prob_raw is the model's uncalibrated output.
-    logging.info("-" * 60)
-    logging.info("per-wallet scores (rank | wallet | pred_prob | pred_prob_raw):")
-    for i, row in df.iterrows():
-        logging.info(
-            f"  #{i + 1:>5}  {row['wallet']}  "
-            f"prob={row['pred_prob']:.6f}  raw={row['pred_prob_raw']:.6f}"
+    # Log EVERY wallet's score in the SAME line format supercompute.py uses, so a
+    # plot-only run's log is consistent with a full scan's log (same fields:
+    # vol / trades / first_trade / winrate / n_markets_traded / herfindahl, and a
+    # leading '*' marking flagged wallets). Every field is read straight from the
+    # results CSV; any column an older CSV lacks is shown as n/a, so this still
+    # works on results produced before those columns existed.
+    info_cols = [c for c in ("winrate", "n_markets_traded", "herfindahl_index_markets")
+                 if c in df.columns]
+    has_flag = "flagged" in df.columns
+    logging.info("=" * 60)
+    logging.info(f"per-wallet scores, ranked high->low (showing {len(df)} of {len(df)}):")
+    for i, r in df.iterrows():
+        flag = "*" if (has_flag and r["flagged"] == 1) else " "
+        ft = r.get("first_trade_ts")
+        ft_str = (time.strftime("%Y-%m-%d %H:%M", time.gmtime(int(ft)))
+                  if ft is not None and pd.notna(ft) else "n/a")
+        vol = r.get("volume")
+        vol_str = f"${vol:,.0f}" if vol is not None and pd.notna(vol) else "n/a"
+        ntr = r.get("n_trades")
+        ntr_str = f"{int(ntr)}" if ntr is not None and pd.notna(ntr) else "n/a"
+        extra = "  ".join(
+            f"{c}={r[c]:.3f}" if pd.notna(r[c]) else f"{c}=NaN" for c in info_cols
         )
-    logging.info("-" * 60)
+        logging.info(
+            f"{flag} #{i + 1:<5d} {r['wallet']}  prob={r['pred_prob']:.4f} "
+            f"(raw={r['pred_prob_raw']:.4f})  vol={vol_str}  "
+            f"trades={ntr_str}  first_trade={ft_str}  {extra}"
+        )
+    logging.info("=" * 60)
 
     # --- market + events from cache, rebuild history + trades ----------- #
     market, events = sc.load_market_and_events(slug)
