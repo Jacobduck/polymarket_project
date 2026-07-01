@@ -94,6 +94,18 @@ def main() -> None:
     df = df.sort_values("pred_prob", ascending=False).reset_index(drop=True)
     logging.info(f"loaded {len(df)} scored wallets")
 
+    # Log EVERY wallet's score (sorted best-first), so the full ranking lives in
+    # the log alongside the top-N plots. pred_prob is the calibrated score;
+    # pred_prob_raw is the model's uncalibrated output.
+    logging.info("-" * 60)
+    logging.info("per-wallet scores (rank | wallet | pred_prob | pred_prob_raw):")
+    for i, row in df.iterrows():
+        logging.info(
+            f"  #{i + 1:>5}  {row['wallet']}  "
+            f"prob={row['pred_prob']:.6f}  raw={row['pred_prob_raw']:.6f}"
+        )
+    logging.info("-" * 60)
+
     # --- market + events from cache, rebuild history + trades ----------- #
     market, events = sc.load_market_and_events(slug)
     duration_days = (market.end_ts - market.start_ts) / 86400.0
