@@ -47,6 +47,9 @@ Outputs (in --out-dir, default "."):
   supercompute_<slug8>_<ts>.log
   supercompute_<slug8>_<ts>_results.csv   (every scored wallet)
   supercompute_<slug8>_<ts>_flagged.csv   (flagged wallets only)
+  supercompute_<slug8>_<ts>_plots/        (top-25 wallets' trades on the
+                                           price curve, one rank<NN>_<wallet>.png
+                                           each; rsync this folder to view locally)
 """
 
 from __future__ import annotations
@@ -62,6 +65,11 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 from multiprocessing import Pool
 from pathlib import Path
 
+# Force a headless matplotlib backend BEFORE anything imports pyplot. Insomnia
+# compute nodes have no display; Agg renders straight to PNG files. Must be set
+# before polycluster.viz (which imports pyplot) is imported below.
+os.environ.setdefault("MPLBACKEND", "Agg")
+
 import joblib
 import numpy as np
 import pandas as pd
@@ -76,8 +84,11 @@ from polycluster.metadata import (
 )
 from polycluster.parsing import (
     build_history_df_from_orderfilled,
+    map_trades_to_history,
+    normalize_trades_to_yes_df,
     parse_orderfilled_events,
 )
+from polycluster.viz import plot_user_on_history
 
 CACHE = Path("cache")
 EVENTS_DIR = CACHE / "events"
@@ -342,6 +353,71 @@ def compute_metadata(
 
 
 # --------------------------------------------------------------------------- #
+# Plots — top wallets' trades on the market price curve
+# --------------------------------------------------------------------------- #
+def render_top_wallet_plots(
+    df: pd.DataFrame,
+    wallet_trades_map: dict[str, list],
+    history_df,
+    market,
+    plots_dir: Path,
+    top_n: int = 25,
+) -> int:
+    """Plot each top wallet's trades on the YES-price curve, one PNG per wallet.
+
+    ``df`` is already sorted by ``pred_prob`` descending, so ``df.head(top_n)``
+    are the highest-scored wallets (ranking by calibrated prob == ranking by
+    raw). For each we reuse the already-parsed in-memory trades + history (no
+    network re-fetch), map the trades onto the price history, and render with
+    ``use_trade_price=True`` so markers sit at the wallet's ACTUAL fill price —
+    making off-market fills visually obvious.
+
+    PNGs are written to ``plots_dir`` as ``rank<NN>_<wallet>.png`` (rank-
+    prefixed so a directory listing sorts by score). Each wallet is wrapped in
+    its own try/except: a single bad wallet never aborts the batch.
+
+    Returns the number of PNGs successfully written.
+    """
+    import matplotlib.pyplot as plt
+
+    plots_dir.mkdir(parents=True, exist_ok=True)
+    n_target = min(top_n, len(df))
+    logging.info(f"plots: rendering top {n_target} wallets' trades to {plots_dir}")
+
+    written = 0
+    for i, r in df.head(n_target).iterrows():
+        rank = i + 1
+        wallet = str(r["wallet"])
+        try:
+            trades = wallet_trades_map.get(wallet.lower(), []) or \
+                wallet_trades_map.get(wallet, [])
+            trades_df = normalize_trades_to_yes_df(
+                trades,
+                yes_token=market.yes_token_id,
+                no_token=market.no_token_id,
+            )
+            mapped_df = map_trades_to_history(trades_df, history_df)
+            fig, ax = plot_user_on_history(
+                mapped_df, history_df, use_trade_price=True, show=False,
+            )
+            ax.set_title(
+                f"#{rank}  {wallet}  prob={r['pred_prob']:.4f} "
+                f"(raw={r['pred_prob_raw']:.4f})  {market.slug}"
+            )
+            out_png = plots_dir / f"rank{rank:02d}_{wallet}.png"
+            fig.savefig(out_png, dpi=120, bbox_inches="tight")
+            plt.close(fig)
+            written += 1
+            logging.info(f"plots: wrote {out_png.name} "
+                         f"({len(mapped_df)} trades)")
+        except Exception as exc:  # noqa: BLE001
+            logging.warning(f"plots: failed for #{rank} {wallet}: "
+                            f"{type(exc).__name__}: {exc}")
+    logging.info(f"plots: {written}/{n_target} PNGs written to {plots_dir}")
+    return written
+
+
+# --------------------------------------------------------------------------- #
 # Main
 # --------------------------------------------------------------------------- #
 def parse_args() -> argparse.Namespace:
@@ -516,6 +592,18 @@ def main() -> None:
     df[df["flagged"] == 1][ordered].to_csv(flagged_csv, index=False)
     logging.info(f"wrote {results_csv}")
     logging.info(f"wrote {flagged_csv}")
+
+    # --- plots: top wallets' trades on the price curve ------------------- #
+    # Always render (separate folder from the log/CSVs so it rsyncs cleanly).
+    # Wrapped so a plotting failure never loses the scoring results above.
+    plots_dir = out_dir / f"supercompute_{slug8}_{ts}_plots"
+    try:
+        render_top_wallet_plots(
+            df, wallet_trades_map, history_df, market, plots_dir, top_n=25,
+        )
+    except Exception as exc:  # noqa: BLE001
+        logging.warning(f"plots: batch failed: {type(exc).__name__}: {exc}")
+
     logging.info(f"log saved to {log_path}")
 
 
