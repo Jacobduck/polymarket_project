@@ -353,6 +353,9 @@ def parse_args() -> argparse.Namespace:
                    help="threads for metadata (network) features (default: 8)")
     p.add_argument("--top-n", type=int, default=0,
                    help="score only top-N wallets by volume (0 = every wallet)")
+    p.add_argument("--log-top-n", type=int, default=0,
+                   help="print this many top-scored wallets to the log, ranked "
+                        "high->low (0 = every scored wallet)")
     p.add_argument("--threshold", type=float, default=None,
                    help="flag cutoff on calibrated prob (default: v7's saved 0.15)")
     p.add_argument("--api-key", default=None,
@@ -467,6 +470,29 @@ def main() -> None:
     # human-readable info columns for the log
     info_cols = [c for c in ("winrate", "n_markets_traded", "herfindahl_index_markets")
                  if c in df.columns]
+
+    # --- ranked per-wallet scores in the log ---------------------------- #
+    # df is already sorted by pred_prob descending. Log every scored wallet
+    # (or the top --log-top-n) high->low so the scores are visible in the log
+    # itself, not only in the results CSV. A leading '*' marks flagged wallets.
+    n_log = len(df) if args.log_top_n <= 0 else min(args.log_top_n, len(df))
+    logging.info(f"per-wallet scores, ranked high->low "
+                 f"(showing {n_log} of {len(df)}):")
+    for i, r in df.head(n_log).iterrows():
+        ft = r["first_trade_ts"]
+        ft_str = (time.strftime("%Y-%m-%d %H:%M", time.gmtime(int(ft)))
+                  if pd.notna(ft) else "n/a")
+        flag = "*" if r["flagged"] == 1 else " "
+        extra = "  ".join(
+            f"{c}={r[c]:.3f}" if pd.notna(r[c]) else f"{c}=NaN" for c in info_cols
+        )
+        logging.info(
+            f"{flag} #{i + 1:<5d} {r['wallet']}  prob={r['pred_prob']:.4f} "
+            f"(raw={r['pred_prob_raw']:.4f})  vol=${r['volume']:,.0f}  "
+            f"trades={int(r['n_trades'])}  first_trade={ft_str}  {extra}"
+        )
+    logging.info("=" * 60)
+
     for _, r in df[df["flagged"] == 1].iterrows():
         ft = r["first_trade_ts"]
         ft_str = (time.strftime("%Y-%m-%d %H:%M", time.gmtime(int(ft)))
