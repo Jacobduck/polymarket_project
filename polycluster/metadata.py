@@ -216,9 +216,6 @@ def get_wallet_first_usdc_deposit(
         USDC, or if no API key is available.
     """
     wallet = wallet.lower()
-    key = _resolve_api_key(api_key)
-    if not key:
-        return None
 
     cache_path: Path | None = None
     if cache_dir is not None:
@@ -228,6 +225,11 @@ def get_wallet_first_usdc_deposit(
                 cached = json.load(f)
             return cached or None
         cache_path.parent.mkdir(parents=True, exist_ok=True)
+
+    # Only the live fetch needs credentials; a cached result is served above.
+    key = _resolve_api_key(api_key)
+    if not key:
+        return None
 
     payload = _polygonscan_get(
         key,
@@ -295,8 +297,7 @@ def get_funder_outgoing_wallets(
         funder hit the cap or no API key was available.
     """
     funder = funder.lower()
-    key = _resolve_api_key(api_key)
-    if not key or not funder:
+    if not funder:
         return None
 
     cache_path: Path | None = None
@@ -312,6 +313,10 @@ def get_funder_outgoing_wallets(
         cache_path.parent.mkdir(parents=True, exist_ok=True)
 
     if transfers is None:
+        # Cache miss: only the live fetch needs credentials.
+        key = _resolve_api_key(api_key)
+        if not key:
+            return None
         transfers = []
         page = 1
         per_page = 1000
@@ -505,12 +510,25 @@ def compute_metadata_features(
         pre = activity[activity["timestamp"] <= as_of_ts]
     pre_trades = pre[pre["type"] == "TRADE"] if not pre.empty else pre
 
+    # Full lifetime trade activity (NOT truncated at the wallet's first trade on
+    # this market). The wallet-scale *sizing* and lifetime-volume features below
+    # describe the wallet's overall betting profile; pinning them to as_of_ts
+    # collapsed them to the opening fill, so a whale that enters with a small
+    # probe then loads up (e.g. $35k over 44 fills) read as an $8 bettor. Sizes
+    # carry no outcome/label information, so widening their window is not
+    # look-ahead. Outcome-based features (winrate/pnl_sharpe) and entry-time
+    # features (market concentration, is_first_market, ages) stay pinned below.
+    if activity.empty or "type" not in activity.columns:
+        all_trades = activity.iloc[0:0]
+    else:
+        all_trades = activity[activity["type"] == "TRADE"]
+
     markets_traded = set(pre_trades["slug"].dropna().unique()) if not pre_trades.empty else set()
     n_markets_traded = len(markets_traded)
     out["n_markets_traded"] = float(n_markets_traded)
 
-    if not pre_trades.empty:
-        bet_sizes = pre_trades["usdcSize"].dropna()
+    if not all_trades.empty:
+        bet_sizes = all_trades["usdcSize"].dropna()
     else:
         bet_sizes = pd.Series(dtype=float)
     if not bet_sizes.empty:
@@ -522,6 +540,8 @@ def compute_metadata_features(
         out["median_bet_size_usdc"] = 0.0
         out["total_bet_size_usdc"] = 0.0
 
+    # Market concentration stays an entry-time signal: a fresh wallet fully
+    # concentrated in this one market at entry is itself suspicious (-> 1.0).
     if not pre_trades.empty:
         per_market_vol = pre_trades.groupby("slug")["usdcSize"].sum()
     else:
@@ -530,11 +550,22 @@ def compute_metadata_features(
     if total_vol > 0:
         shares = (per_market_vol / total_vol).to_numpy()
         out["herfindahl_index_markets"] = float(np.sum(shares ** 2))
-        out["lifetime_volume_share_on_market"] = float(
-            per_market_vol.get(market_slug, 0.0) / total_vol
-        )
     else:
         out["herfindahl_index_markets"] = 0.0
+
+    # Lifetime volume share spans the wallet's full history (as its name implies):
+    # this market's volume as a fraction of everything the wallet has ever traded.
+    if not all_trades.empty:
+        lifetime_market_vol = all_trades.groupby("slug")["usdcSize"].sum()
+        lifetime_total_vol = float(lifetime_market_vol.sum())
+    else:
+        lifetime_market_vol = pd.Series(dtype=float)
+        lifetime_total_vol = 0.0
+    if lifetime_total_vol > 0:
+        out["lifetime_volume_share_on_market"] = float(
+            lifetime_market_vol.get(market_slug, 0.0) / lifetime_total_vol
+        )
+    else:
         out["lifetime_volume_share_on_market"] = 0.0
 
     pnls = _per_market_pnl(pre)

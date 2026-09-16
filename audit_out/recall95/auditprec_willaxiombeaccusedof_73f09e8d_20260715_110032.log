@@ -1,0 +1,296 @@
+11:00:32 [auditprec] ========================================================================
+11:00:32 [auditprec] audit_pair_precision starting, log=audit_out/recall95/auditprec_willaxiombeaccusedof_73f09e8d_20260715_110032.log
+11:00:32 [auditprec] wallet=0x73f09e8ded44b82f3388bb5472fc1c41b56d741f
+11:00:32 [auditprec] market=will-axiom-be-accused-of-insider-trading
+11:00:32 [auditprec] objective: max precision s.t. recall >= 0.95 per model
+11:00:32 [auditprec] labelled data: 793 rows, 117 insiders, 29 markets
+11:00:32 [auditprec] models to score: 36
+11:00:32 [auditprec] events: loading market + events from cache cache/events/will-axiom-be-accused-of-insider-trading.pkl
+11:00:32 [auditprec] events: 38370 loaded from cache (offline-ok)
+11:00:33 [auditprec] features: computing 58 behavioral features
+11:00:38 [auditprec] features: computing 17 metadata features (api_key=MISSING -> funder feats NaN)
+11:00:38 [auditprec] pair context: vol=$23,897  n_trades=50  winrate=0.0  herfindahl=0.625000000125
+11:00:42 [auditprec] skip stack_insider_30feat: no predict_proba/decision_function
+11:00:43 [auditprec] ========================================================================
+11:00:43 [auditprec] PER-MODEL (threshold tuned for recall >= 0.95 on held-out test split; maximizing precision)
+11:00:43 [auditprec] ------------------------------------------------------------------------
+11:00:43 [auditprec] MODEL  xgb 20feat v2 (mstr)   [tag=xgb_insider_20feat_v2_mstr, algo=xgb, nf=20]
+11:00:43 [auditprec]   pair model score   : prob=0.8025 (raw=0.8989)
+11:00:43 [auditprec]   tuned threshold    : 0.5570
+11:00:43 [auditprec]   held-out precision : 0.316 @ recall 1.000 (flagged 19 of 42 test rows; 6 true insiders in split)
+11:00:43 [auditprec]   FLAG (tuned)       : ==> FLAGGED insider
+11:00:43 [auditprec]   (saved threshold=0.150 -> default flag=YES)
+11:00:43 [auditprec] ------------------------------------------------------------------------
+11:00:43 [auditprec] MODEL  rf 10b+10m v5 (tuned)   [tag=rf_insider_meta_v5, algo=rf, nf=20]
+11:00:43 [auditprec]   pair model score   : prob=0.7909 (raw=0.7909)
+11:00:43 [auditprec]   tuned threshold    : 0.5533
+11:00:43 [auditprec]   held-out precision : 0.729 @ recall 1.000 (flagged 48 of 245 test rows; 35 true insiders in split)
+11:00:43 [auditprec]   FLAG (tuned)       : ==> FLAGGED insider
+11:00:43 [auditprec]   (saved threshold=0.500 -> default flag=YES)
+11:00:43 [auditprec] ------------------------------------------------------------------------
+11:00:43 [auditprec] MODEL  retrained_rf_insider_25ir   [tag=retrained_rf_insider_25ir, algo=rf, nf=20]
+11:00:43 [auditprec]   pair model score   : prob=0.7583 (raw=0.7583)
+11:00:43 [auditprec]   tuned threshold    : 0.6300
+11:00:43 [auditprec]   held-out precision : 0.805 @ recall 0.971 (flagged 41 of 235 test rows; 34 true insiders in split)
+11:00:43 [auditprec]   FLAG (tuned)       : ==> FLAGGED insider
+11:00:43 [auditprec]   (saved threshold=0.500 -> default flag=YES)
+11:00:43 [auditprec] ------------------------------------------------------------------------
+11:00:43 [auditprec] MODEL  xgb 20feat v2 (stable)   [tag=xgb_insider_20feat_v2_stable, algo=xgb, nf=20]
+11:00:43 [auditprec]   pair model score   : prob=0.6712 (raw=0.7756)
+11:00:43 [auditprec]   tuned threshold    : 0.0376
+11:00:43 [auditprec]   held-out precision : 0.286 @ recall 1.000 (flagged 14 of 20 test rows; 4 true insiders in split)
+11:00:43 [auditprec]   FLAG (tuned)       : ==> FLAGGED insider
+11:00:43 [auditprec]   (saved threshold=0.150 -> default flag=YES)
+11:00:43 [auditprec] ------------------------------------------------------------------------
+11:00:43 [auditprec] MODEL  rf 25ir-hidden (20f)   [tag=rf_insider_25ir, algo=rf, nf=20]
+11:00:43 [auditprec]   pair model score   : prob=0.6543 (raw=0.6543)
+11:00:43 [auditprec]   tuned threshold    : 0.3457
+11:00:43 [auditprec]   held-out precision : 0.673 @ recall 0.971 (flagged 49 of 235 test rows; 34 true insiders in split)
+11:00:43 [auditprec]   FLAG (tuned)       : ==> FLAGGED insider
+11:00:43 [auditprec]   (saved threshold=0.500 -> default flag=YES)
+11:00:43 [auditprec] ------------------------------------------------------------------------
+11:00:43 [auditprec] MODEL  xgb 20b+10m v7   [tag=xgb_insider_meta_v7, algo=xgb, nf=30]
+11:00:43 [auditprec]   pair model score   : prob=0.6126 (raw=0.8967)
+11:00:43 [auditprec]   tuned threshold    : 0.1178
+11:00:43 [auditprec]   held-out precision : 0.773 @ recall 0.971 (flagged 44 of 245 test rows; 35 true insiders in split)
+11:00:43 [auditprec]   FLAG (tuned)       : ==> FLAGGED insider
+11:00:43 [auditprec]   (saved threshold=0.150 -> default flag=YES)
+11:00:43 [auditprec] ------------------------------------------------------------------------
+11:00:43 [auditprec] MODEL  rf 0ir-hidden (20f)   [tag=rf_insider_0ir, algo=rf, nf=20]
+11:00:43 [auditprec]   pair model score   : prob=0.6043 (raw=0.6043)
+11:00:43 [auditprec]   tuned threshold    : 0.1062
+11:00:43 [auditprec]   held-out precision : 0.319 @ recall 1.000 (flagged 47 of 105 test rows; 15 true insiders in split)
+11:00:43 [auditprec]   FLAG (tuned)       : ==> FLAGGED insider
+11:00:43 [auditprec]   (saved threshold=0.500 -> default flag=YES)
+11:00:43 [auditprec] ------------------------------------------------------------------------
+11:00:43 [auditprec] MODEL  xgb 25ir-hidden (30f)   [tag=xgb_insider_25ir, algo=xgb, nf=30]
+11:00:43 [auditprec]   pair model score   : prob=0.5775 (raw=0.8696)
+11:00:43 [auditprec]   tuned threshold    : 0.5190
+11:00:43 [auditprec]   held-out precision : 0.846 @ recall 0.971 (flagged 39 of 235 test rows; 34 true insiders in split)
+11:00:43 [auditprec]   FLAG (tuned)       : ==> FLAGGED insider
+11:00:43 [auditprec]   (saved threshold=0.150 -> default flag=YES)
+11:00:43 [auditprec] ------------------------------------------------------------------------
+11:00:43 [auditprec] MODEL  xgb 0ir-hidden (30f)   [tag=xgb_insider_0ir, algo=xgb, nf=30]
+11:00:43 [auditprec]   pair model score   : prob=0.5632 (raw=0.8846)
+11:00:43 [auditprec]   tuned threshold    : 0.0518
+11:00:43 [auditprec]   held-out precision : 0.268 @ recall 1.000 (flagged 56 of 105 test rows; 15 true insiders in split)
+11:00:43 [auditprec]   FLAG (tuned)       : ==> FLAGGED insider
+11:00:43 [auditprec]   (saved threshold=0.150 -> default flag=YES)
+11:00:43 [auditprec] ------------------------------------------------------------------------
+11:00:43 [auditprec] MODEL  retrained_rf_insider_0ir   [tag=retrained_rf_insider_0ir, algo=rf, nf=20]
+11:00:43 [auditprec]   pair model score   : prob=0.5274 (raw=0.5274)
+11:00:43 [auditprec]   tuned threshold    : 0.1269
+11:00:43 [auditprec]   held-out precision : 0.341 @ recall 1.000 (flagged 44 of 105 test rows; 15 true insiders in split)
+11:00:43 [auditprec]   FLAG (tuned)       : ==> FLAGGED insider
+11:00:43 [auditprec]   (saved threshold=0.500 -> default flag=YES)
+11:00:43 [auditprec] ------------------------------------------------------------------------
+11:00:43 [auditprec] MODEL  xgb 20feat v2 (axiom)   [tag=xgb_insider_20feat_v2_axiom, algo=xgb, nf=20]
+11:00:43 [auditprec]   pair model score   : prob=0.4987 (raw=0.6652)
+11:00:43 [auditprec]   tuned threshold    : 0.1025
+11:00:43 [auditprec]   held-out precision : 0.368 @ recall 1.000 (flagged 19 of 49 test rows; 7 true insiders in split)
+11:00:43 [auditprec]   FLAG (tuned)       : ==> FLAGGED insider
+11:00:43 [auditprec]   (saved threshold=0.150 -> default flag=YES)
+11:00:43 [auditprec] ------------------------------------------------------------------------
+11:00:43 [auditprec] MODEL  xgb 10b+17m v5   [tag=xgb_insider_meta_v5, algo=xgb, nf=27]
+11:00:43 [auditprec]   pair model score   : prob=0.4907 (raw=0.7771)
+11:00:43 [auditprec]   tuned threshold    : 0.4641
+11:00:43 [auditprec]   held-out precision : 0.756 @ recall 0.971 (flagged 45 of 245 test rows; 35 true insiders in split)
+11:00:43 [auditprec]   FLAG (tuned)       : ==> FLAGGED insider
+11:00:43 [auditprec]   (saved threshold=0.150 -> default flag=YES)
+11:00:43 [auditprec] ------------------------------------------------------------------------
+11:00:43 [auditprec] MODEL  retrained_xgb_insider_0ir   [tag=retrained_xgb_insider_0ir, algo=xgb, nf=30]
+11:00:43 [auditprec]   pair model score   : prob=0.4899 (raw=0.8076)
+11:00:43 [auditprec]   tuned threshold    : 0.0571
+11:00:43 [auditprec]   held-out precision : 0.333 @ recall 1.000 (flagged 45 of 105 test rows; 15 true insiders in split)
+11:00:43 [auditprec]   FLAG (tuned)       : ==> FLAGGED insider
+11:00:43 [auditprec]   (saved threshold=0.150 -> default flag=YES)
+11:00:43 [auditprec] ------------------------------------------------------------------------
+11:00:43 [auditprec] MODEL  xgb meta-only v6   [tag=xgb_insider_meta10_v6, algo=xgb, nf=10]
+11:00:43 [auditprec]   pair model score   : prob=0.4825 (raw=0.8826)
+11:00:43 [auditprec]   tuned threshold    : 0.0737
+11:00:43 [auditprec]   held-out precision : 0.548 @ recall 0.971 (flagged 62 of 245 test rows; 35 true insiders in split)
+11:00:43 [auditprec]   FLAG (tuned)       : ==> FLAGGED insider
+11:00:43 [auditprec]   (saved threshold=0.150 -> default flag=YES)
+11:00:43 [auditprec] ------------------------------------------------------------------------
+11:00:43 [auditprec] MODEL  rf 10b+17m v4 (axiom)   [tag=rf_insider_meta_v4, algo=rf, nf=27]
+11:00:43 [auditprec]   pair model score   : prob=0.4567 (raw=0.4567)
+11:00:43 [auditprec]   tuned threshold    : 0.2533
+11:00:43 [auditprec]   held-out precision : 0.438 @ recall 1.000 (flagged 16 of 49 test rows; 7 true insiders in split)
+11:00:43 [auditprec]   FLAG (tuned)       : ==> FLAGGED insider
+11:00:43 [auditprec]   (saved threshold=0.500 -> default flag=no)
+11:00:43 [auditprec] ------------------------------------------------------------------------
+11:00:43 [auditprec] MODEL  retrained_rf_insider_meta_v4   [tag=retrained_rf_insider_meta_v4, algo=rf, nf=27]
+11:00:43 [auditprec]   pair model score   : prob=0.4300 (raw=0.4300)
+11:00:43 [auditprec]   tuned threshold    : 0.2033
+11:00:43 [auditprec]   held-out precision : 0.350 @ recall 1.000 (flagged 20 of 49 test rows; 7 true insiders in split)
+11:00:43 [auditprec]   FLAG (tuned)       : ==> FLAGGED insider
+11:00:43 [auditprec]   (saved threshold=0.500 -> default flag=no)
+11:00:43 [auditprec] ------------------------------------------------------------------------
+11:00:43 [auditprec] MODEL  retrained_xgb_insider_25ir   [tag=retrained_xgb_insider_25ir, algo=xgb, nf=30]
+11:00:43 [auditprec]   pair model score   : prob=0.4245 (raw=0.7690)
+11:00:43 [auditprec]   tuned threshold    : 0.4239
+11:00:43 [auditprec]   held-out precision : 0.825 @ recall 0.971 (flagged 40 of 235 test rows; 34 true insiders in split)
+11:00:43 [auditprec]   FLAG (tuned)       : ==> FLAGGED insider
+11:00:43 [auditprec]   (saved threshold=0.150 -> default flag=YES)
+11:00:43 [auditprec] ------------------------------------------------------------------------
+11:00:43 [auditprec] MODEL  retrained_xgb_insider_meta_v7   [tag=retrained_xgb_insider_meta_v7, algo=xgb, nf=30]
+11:00:43 [auditprec]   pair model score   : prob=0.4230 (raw=0.7221)
+11:00:43 [auditprec]   tuned threshold    : 0.2639
+11:00:43 [auditprec]   held-out precision : 0.756 @ recall 0.971 (flagged 45 of 245 test rows; 35 true insiders in split)
+11:00:43 [auditprec]   FLAG (tuned)       : ==> FLAGGED insider
+11:00:43 [auditprec]   (saved threshold=0.150 -> default flag=YES)
+11:00:43 [auditprec] ------------------------------------------------------------------------
+11:00:43 [auditprec] MODEL  xgb 20feat v2   [tag=xgb_insider_20feat_v2, algo=xgb, nf=20]
+11:00:43 [auditprec]   pair model score   : prob=0.3927 (raw=0.6655)
+11:00:43 [auditprec]   tuned threshold    : 0.1490
+11:00:43 [auditprec]   held-out precision : 0.946 @ recall 1.000 (flagged 37 of 245 test rows; 35 true insiders in split)
+11:00:43 [auditprec]   FLAG (tuned)       : ==> FLAGGED insider
+11:00:43 [auditprec]   (saved threshold=0.150 -> default flag=YES)
+11:00:43 [auditprec] ------------------------------------------------------------------------
+11:00:43 [auditprec] MODEL  xgb 30feat v2   [tag=xgb_insider_30feat_v2, algo=xgb, nf=30]
+11:00:43 [auditprec]   pair model score   : prob=0.3899 (raw=0.7111)
+11:00:43 [auditprec]   tuned threshold    : 0.2454
+11:00:43 [auditprec]   held-out precision : 0.875 @ recall 1.000 (flagged 40 of 245 test rows; 35 true insiders in split)
+11:00:43 [auditprec]   FLAG (tuned)       : ==> FLAGGED insider
+11:00:43 [auditprec]   (saved threshold=0.500 -> default flag=no)
+11:00:43 [auditprec] ------------------------------------------------------------------------
+11:00:43 [auditprec] MODEL  cb 30feat v2   [tag=cb_insider_30feat_v2, algo=cb, nf=30]
+11:00:43 [auditprec]   pair model score   : prob=0.3076 (raw=0.6052)
+11:00:43 [auditprec]   tuned threshold    : 0.2833
+11:00:43 [auditprec]   held-out precision : 0.875 @ recall 1.000 (flagged 40 of 245 test rows; 35 true insiders in split)
+11:00:43 [auditprec]   FLAG (tuned)       : ==> FLAGGED insider
+11:00:43 [auditprec]   (saved threshold=0.300 -> default flag=YES)
+11:00:43 [auditprec] ------------------------------------------------------------------------
+11:00:43 [auditprec] MODEL  retrained_xgb_insider_meta10_v6   [tag=retrained_xgb_insider_meta10_v6, algo=xgb, nf=10]
+11:00:43 [auditprec]   pair model score   : prob=0.2396 (raw=0.5376)
+11:00:43 [auditprec]   tuned threshold    : 0.0603
+11:00:43 [auditprec]   held-out precision : 0.523 @ recall 0.971 (flagged 65 of 245 test rows; 35 true insiders in split)
+11:00:43 [auditprec]   FLAG (tuned)       : ==> FLAGGED insider
+11:00:43 [auditprec]   (saved threshold=0.150 -> default flag=YES)
+11:00:43 [auditprec] ------------------------------------------------------------------------
+11:00:43 [auditprec] MODEL  lgbm 30feat   [tag=lgbm_insider_30feat, algo=lgbm, nf=30]
+11:00:43 [auditprec]   pair model score   : prob=0.9014 (raw=0.9014)
+11:00:43 [auditprec]   tuned threshold    : N/A (no test_markets in meta)
+11:00:43 [auditprec]   (saved threshold=0.500 -> default flag=YES)
+11:00:43 [auditprec] ------------------------------------------------------------------------
+11:00:43 [auditprec] MODEL  logreg 30feat   [tag=lr_insider_30feat, algo=lr, nf=30]
+11:00:43 [auditprec]   pair model score   : prob=0.8674 (raw=0.8674)
+11:00:43 [auditprec]   tuned threshold    : N/A (no test_markets in meta)
+11:00:43 [auditprec]   (saved threshold=0.500 -> default flag=YES)
+11:00:43 [auditprec] ------------------------------------------------------------------------
+11:00:43 [auditprec] MODEL  xgb 50feat   [tag=xgb_insider_50feat, algo=xgb, nf=50]
+11:00:43 [auditprec]   pair model score   : prob=0.8381 (raw=0.8381)
+11:00:43 [auditprec]   tuned threshold    : N/A (no test_markets in meta)
+11:00:43 [auditprec]   (saved threshold=0.500 -> default flag=YES)
+11:00:43 [auditprec] ------------------------------------------------------------------------
+11:00:43 [auditprec] MODEL  retrained_rf_insider_meta_v5   [tag=retrained_rf_insider_meta_v5, algo=rf, nf=20]
+11:00:43 [auditprec]   pair model score   : prob=0.7407 (raw=0.7407)
+11:00:43 [auditprec]   tuned threshold    : 0.8050
+11:00:43 [auditprec]   held-out precision : 0.791 @ recall 0.971 (flagged 43 of 245 test rows; 35 true insiders in split)
+11:00:43 [auditprec]   FLAG (tuned)       :     not flagged
+11:00:43 [auditprec]   (saved threshold=0.500 -> default flag=YES)
+11:00:43 [auditprec] ------------------------------------------------------------------------
+11:00:43 [auditprec] MODEL  rf 10feat v2   [tag=rf_insider_10feat_v2, algo=rf, nf=10]
+11:00:43 [auditprec]   pair model score   : prob=0.4400 (raw=0.4400)
+11:00:43 [auditprec]   tuned threshold    : 0.6867
+11:00:43 [auditprec]   held-out precision : 0.895 @ recall 0.971 (flagged 38 of 245 test rows; 35 true insiders in split)
+11:00:43 [auditprec]   FLAG (tuned)       :     not flagged
+11:00:43 [auditprec]   (saved threshold=0.500 -> default flag=no)
+11:00:43 [auditprec] ------------------------------------------------------------------------
+11:00:43 [auditprec] MODEL  rf 10b+17m v3   [tag=rf_insider_meta_v3, algo=rf, nf=27]
+11:00:43 [auditprec]   pair model score   : prob=0.3800 (raw=0.3800)
+11:00:43 [auditprec]   tuned threshold    : 0.5067
+11:00:43 [auditprec]   held-out precision : 0.778 @ recall 1.000 (flagged 45 of 245 test rows; 35 true insiders in split)
+11:00:43 [auditprec]   FLAG (tuned)       :     not flagged
+11:00:43 [auditprec]   (saved threshold=0.500 -> default flag=no)
+11:00:43 [auditprec] ------------------------------------------------------------------------
+11:00:43 [auditprec] MODEL  xgb 10feat v2   [tag=xgb_insider_10feat_v2, algo=xgb, nf=10]
+11:00:43 [auditprec]   pair model score   : prob=0.3422 (raw=0.5694)
+11:00:43 [auditprec]   tuned threshold    : 0.6434
+11:00:43 [auditprec]   held-out precision : 0.946 @ recall 1.000 (flagged 37 of 245 test rows; 35 true insiders in split)
+11:00:43 [auditprec]   FLAG (tuned)       :     not flagged
+11:00:43 [auditprec]   (saved threshold=0.500 -> default flag=no)
+11:00:43 [auditprec] ------------------------------------------------------------------------
+11:00:43 [auditprec] MODEL  cb 10feat v2 (d2)   [tag=cb_insider_10feat_v2_d2, algo=cb, nf=10]
+11:00:43 [auditprec]   pair model score   : prob=0.2827 (raw=0.5946)
+11:00:43 [auditprec]   tuned threshold    : 0.3557
+11:00:43 [auditprec]   held-out precision : 0.946 @ recall 1.000 (flagged 37 of 245 test rows; 35 true insiders in split)
+11:00:43 [auditprec]   FLAG (tuned)       :     not flagged
+11:00:43 [auditprec]   (saved threshold=0.300 -> default flag=no)
+11:00:43 [auditprec] ------------------------------------------------------------------------
+11:00:43 [auditprec] MODEL  cb 10feat v2   [tag=cb_insider_10feat_v2, algo=cb, nf=10]
+11:00:43 [auditprec]   pair model score   : prob=0.2573 (raw=0.5790)
+11:00:43 [auditprec]   tuned threshold    : 0.3089
+11:00:43 [auditprec]   held-out precision : 0.921 @ recall 1.000 (flagged 38 of 245 test rows; 35 true insiders in split)
+11:00:43 [auditprec]   FLAG (tuned)       :     not flagged
+11:00:43 [auditprec]   (saved threshold=0.300 -> default flag=no)
+11:00:43 [auditprec] ------------------------------------------------------------------------
+11:00:43 [auditprec] MODEL  retrained_rf_insider_meta_v3   [tag=retrained_rf_insider_meta_v3, algo=rf, nf=27]
+11:00:43 [auditprec]   pair model score   : prob=0.2433 (raw=0.2433)
+11:00:43 [auditprec]   tuned threshold    : 0.6233
+11:00:43 [auditprec]   held-out precision : 0.919 @ recall 0.971 (flagged 37 of 245 test rows; 35 true insiders in split)
+11:00:43 [auditprec]   FLAG (tuned)       :     not flagged
+11:00:43 [auditprec]   (saved threshold=0.500 -> default flag=no)
+11:00:43 [auditprec] ------------------------------------------------------------------------
+11:00:43 [auditprec] MODEL  retrained_xgb_insider_meta_v5   [tag=retrained_xgb_insider_meta_v5, algo=xgb, nf=27]
+11:00:43 [auditprec]   pair model score   : prob=0.1865 (raw=0.4448)
+11:00:43 [auditprec]   tuned threshold    : 0.3535
+11:00:43 [auditprec]   held-out precision : 0.833 @ recall 1.000 (flagged 42 of 245 test rows; 35 true insiders in split)
+11:00:43 [auditprec]   FLAG (tuned)       :     not flagged
+11:00:43 [auditprec]   (saved threshold=0.150 -> default flag=YES)
+11:00:43 [auditprec] ------------------------------------------------------------------------
+11:00:43 [auditprec] MODEL  xgb 14feat   [tag=xgb_insider_14feat, algo=xgb, nf=14]
+11:00:43 [auditprec]   pair model score   : prob=0.0621 (raw=0.0621)
+11:00:43 [auditprec]   tuned threshold    : N/A (no test_markets in meta)
+11:00:43 [auditprec]   (saved threshold=0.500 -> default flag=no)
+11:00:43 [auditprec] ------------------------------------------------------------------------
+11:00:43 [auditprec] MODEL  isoforest 30feat   [tag=iso_insider_30feat, algo=iso, nf=30]
+11:00:43 [auditprec]   pair model score   : anomaly=0.0070 (insider-score=-0.0070; higher = more anomalous)
+11:00:43 [auditprec]   tuned threshold    : N/A (no test_markets in meta)
+11:00:43 [auditprec]   (saved threshold=None -> default flag=no)
+11:00:43 [auditprec] ========================================================================
+11:00:43 [auditprec] SUMMARY over 35 models
+11:00:43 [auditprec]   flagged at TUNED thresholds (>= 95% recall): 22/35
+11:00:43 [auditprec]   flagged at SAVED thresholds (for reference)                : 24/35
+11:00:43 [auditprec]   models with no usable test split (threshold left un-tuned): 5
+11:00:43 [auditprec] ---------------------------------------------------------------------------------
+11:00:43 [auditprec] model                       nf    score      raw  tuned_thr   prec    rec  tuned_flag
+11:00:43 [auditprec] ---------------------------------------------------------------------------------
+11:00:43 [auditprec] xgb 20feat v2 (mstr)        20   0.8025   0.8989      0.557   0.32   1.00  YES
+11:00:43 [auditprec] rf 10b+10m v5 (tuned)       20   0.7909   0.7909      0.553   0.73   1.00  YES
+11:00:43 [auditprec] retrained_rf_insider_25ir   20   0.7583   0.7583      0.630   0.80   0.97  YES
+11:00:43 [auditprec] xgb 20feat v2 (stable)      20   0.6712   0.7756      0.038   0.29   1.00  YES
+11:00:43 [auditprec] rf 25ir-hidden (20f)        20   0.6543   0.6543      0.346   0.67   0.97  YES
+11:00:43 [auditprec] xgb 20b+10m v7              30   0.6126   0.8967      0.118   0.77   0.97  YES
+11:00:43 [auditprec] rf 0ir-hidden (20f)         20   0.6043   0.6043      0.106   0.32   1.00  YES
+11:00:43 [auditprec] xgb 25ir-hidden (30f)       30   0.5775   0.8696      0.519   0.85   0.97  YES
+11:00:43 [auditprec] xgb 0ir-hidden (30f)        30   0.5632   0.8846      0.052   0.27   1.00  YES
+11:00:43 [auditprec] retrained_rf_insider_0ir    20   0.5274   0.5274      0.127   0.34   1.00  YES
+11:00:43 [auditprec] xgb 20feat v2 (axiom)       20   0.4987   0.6652      0.103   0.37   1.00  YES
+11:00:43 [auditprec] xgb 10b+17m v5              27   0.4907   0.7771      0.464   0.76   0.97  YES
+11:00:43 [auditprec] retrained_xgb_insider_0ir   30   0.4899   0.8076      0.057   0.33   1.00  YES
+11:00:43 [auditprec] xgb meta-only v6            10   0.4825   0.8826      0.074   0.55   0.97  YES
+11:00:43 [auditprec] rf 10b+17m v4 (axiom)       27   0.4567   0.4567      0.253   0.44   1.00  YES
+11:00:43 [auditprec] retrained_rf_insider_meta_v4  27   0.4300   0.4300      0.203   0.35   1.00  YES
+11:00:43 [auditprec] retrained_xgb_insider_25ir  30   0.4245   0.7690      0.424   0.82   0.97  YES
+11:00:43 [auditprec] retrained_xgb_insider_meta_v7  30   0.4230   0.7221      0.264   0.76   0.97  YES
+11:00:43 [auditprec] xgb 20feat v2               20   0.3927   0.6655      0.149   0.95   1.00  YES
+11:00:43 [auditprec] xgb 30feat v2               30   0.3899   0.7111      0.245   0.88   1.00  YES
+11:00:43 [auditprec] cb 30feat v2                30   0.3076   0.6052      0.283   0.88   1.00  YES
+11:00:43 [auditprec] retrained_xgb_insider_meta10_v6  10   0.2396   0.5376      0.060   0.52   0.97  YES
+11:00:43 [auditprec] lgbm 30feat                 30   0.9014   0.9014        N/A      -      -  N/A
+11:00:43 [auditprec] logreg 30feat               30   0.8674   0.8674        N/A      -      -  N/A
+11:00:43 [auditprec] xgb 50feat                  50   0.8381   0.8381        N/A      -      -  N/A
+11:00:43 [auditprec] retrained_rf_insider_meta_v5  20   0.7407   0.7407      0.805   0.79   0.97  no
+11:00:43 [auditprec] rf 10feat v2                10   0.4400   0.4400      0.687   0.89   0.97  no
+11:00:43 [auditprec] rf 10b+17m v3               27   0.3800   0.3800      0.507   0.78   1.00  no
+11:00:43 [auditprec] xgb 10feat v2               10   0.3422   0.5694      0.643   0.95   1.00  no
+11:00:43 [auditprec] cb 10feat v2 (d2)           10   0.2827   0.5946      0.356   0.95   1.00  no
+11:00:43 [auditprec] cb 10feat v2                10   0.2573   0.5790      0.309   0.92   1.00  no
+11:00:43 [auditprec] retrained_rf_insider_meta_v3  27   0.2433   0.2433      0.623   0.92   0.97  no
+11:00:43 [auditprec] retrained_xgb_insider_meta_v5  27   0.1865   0.4448      0.354   0.83   1.00  no
+11:00:43 [auditprec] xgb 14feat                  14   0.0621   0.0621        N/A      -      -  N/A
+11:00:43 [auditprec] isoforest 30feat            30  -0.0070   0.0070        N/A      -      -  N/A
+11:00:43 [auditprec] =================================================================================
+11:00:43 [auditprec] wrote audit_out/recall95/auditprec_willaxiombeaccusedof_73f09e8d_20260715_110032_models.csv
+11:00:43 [auditprec] log saved to audit_out/recall95/auditprec_willaxiombeaccusedof_73f09e8d_20260715_110032.log

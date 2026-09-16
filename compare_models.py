@@ -26,6 +26,7 @@ Outputs:
 
 from __future__ import annotations
 
+import argparse
 import json
 import glob
 import os
@@ -40,6 +41,7 @@ import numpy as np
 
 MODEL_DIR = Path("cache/models")
 LOG_DIR = Path(".")
+CV_ROC_CACHE = Path("cache/cv_roc_recomputed.json")
 
 # Exact-duplicate / redundant artifacts to skip (identical metrics to a kept one).
 SKIP_TAGS = {
@@ -74,11 +76,23 @@ LABELS = {
     "lr_insider_30feat": "logreg 30feat",
     "iso_insider_30feat": "isoforest 30feat",
     "stack_insider_30feat": "stack 30feat",
+    "rf_insider_25ir": "rf 25ir-hidden (20f)",
+    "rf_insider_0ir": "rf 0ir-hidden (20f)",
+    "xgb_insider_25ir": "xgb 25ir-hidden (30f)",
+    "xgb_insider_0ir": "xgb 0ir-hidden (30f)",
 }
+
+# Iran-experiment models: trained with Iran insider rows hidden from training.
+# They lack "_latest.meta.json" copies, so load their newest timestamped meta.
+NEW_TAGS = ["rf_insider_25ir", "rf_insider_0ir", "xgb_insider_25ir", "xgb_insider_0ir"]
 
 
 def is_metadata(tag: str) -> bool:
     return "meta" in tag
+
+
+def is_new(tag: str) -> bool:
+    return tag in NEW_TAGS
 
 
 def algo(tag: str) -> str:
@@ -86,6 +100,27 @@ def algo(tag: str) -> str:
         if tag.startswith(k):
             return k
     return "other"
+
+
+def _row_from_meta(tag: str, m: dict, new: bool) -> dict:
+    cv = m.get("cv") or {}
+    tun = m.get("tuning") or {}
+    met = m.get("metrics") or {}
+    cv_mean = cv.get("pr_auc_mean")
+    if cv_mean is None:
+        cv_mean = tun.get("best_cv_pr_auc")
+    return {
+        "tag": tag,
+        "label": LABELS.get(tag, tag),
+        "algo": algo(tag),
+        "is_meta": is_metadata(tag),
+        "is_new": new,
+        "n_features": m.get("n_features"),
+        "cv_pr": cv_mean,
+        "cv_std": cv.get("pr_auc_std"),
+        "test_pr": met.get("pr_auc"),
+        "test_roc": met.get("roc_auc"),
+    }
 
 
 def load_models() -> list[dict]:
@@ -99,23 +134,49 @@ def load_models() -> list[dict]:
         except Exception as exc:
             print(f"[cmp] skip {tag}: {exc}")
             continue
-        cv = m.get("cv") or {}
-        tun = m.get("tuning") or {}
-        met = m.get("metrics") or {}
-        cv_mean = cv.get("pr_auc_mean")
-        if cv_mean is None:
-            cv_mean = tun.get("best_cv_pr_auc")
-        rows.append({
-            "tag": tag,
-            "label": LABELS.get(tag, tag),
-            "algo": algo(tag),
-            "is_meta": is_metadata(tag),
-            "n_features": m.get("n_features"),
-            "cv_pr": cv_mean,
-            "cv_std": cv.get("pr_auc_std"),
-            "test_pr": met.get("pr_auc"),
-            "test_roc": met.get("roc_auc"),
-        })
+        rows.append(_row_from_meta(tag, m, new=(tag in NEW_TAGS)))
+
+    # Iran-experiment models: pick the newest timestamped meta per tag
+    # (unless a _latest meta already loaded it above).
+    loaded = {r["tag"] for r in rows}
+    for tag in NEW_TAGS:
+        if tag in loaded:
+            continue
+        cands = [q for q in glob.glob(str(MODEL_DIR / f"{tag}_*.meta.json"))
+                 if "_latest.meta.json" not in q]
+        if not cands:
+            print(f"[cmp] no meta found for new model {tag}")
+            continue
+        p = max(cands, key=os.path.getmtime)
+        try:
+            m = json.load(open(p))
+        except Exception as exc:
+            print(f"[cmp] skip {tag}: {exc}")
+            continue
+        rows.append(_row_from_meta(tag, m, new=True))
+    return rows
+
+
+def apply_roc_metric(rows: list[dict]) -> list[dict]:
+    """Swap each row's CV/test PR-AUC for recomputed ROC-AUC (in place).
+
+    Reads the honest, refit CV ROC-AUC from ``cache/cv_roc_recomputed.json``
+    (keyed by tag; produced by recompute_cv_roc.py under each model's own CV
+    scheme) and the held-out test ROC-AUC from the model meta (metrics.roc_auc,
+    already stored in test_roc). Rows whose tag lacks a recomputed CV ROC drop
+    their cv value so they fall out of the ranking, exactly as PR-mode does for
+    models without a cv block.
+    """
+    if not CV_ROC_CACHE.exists():
+        raise SystemExit(
+            f"[cmp] {CV_ROC_CACHE} not found -- run recompute_cv_roc.py first "
+            "to generate the CV ROC-AUC values for --metric roc.")
+    cvroc = json.load(open(CV_ROC_CACHE))
+    for r in rows:
+        entry = cvroc.get(r["tag"])
+        r["cv_pr"] = entry.get("roc_mean") if entry else None
+        r["cv_std"] = entry.get("roc_std") if entry else None
+        r["test_pr"] = r["test_roc"]
     return rows
 
 
@@ -134,10 +195,10 @@ class Tee:
             s.flush()
 
 
-def print_table(rows: list[dict]) -> None:
+def print_table(rows: list[dict], metric: str = "PR") -> None:
     ranked = sorted(rows, key=lambda r: (r["cv_pr"] is None, -(r["cv_pr"] or -1)))
     print(f"{'model':<24} {'algo':>5} {'meta':>5} {'nf':>4} "
-          f"{'CV-PR':>8} {'±std':>7} {'test-PR':>8} {'test-ROC':>8}")
+          f"{'CV-' + metric:>8} {'±std':>7} {'test-' + metric:>8} {'test-ROC':>8}")
     print("-" * 78)
     for r in ranked:
         cvp = f"{r['cv_pr']:.4f}" if r["cv_pr"] is not None else "   -"
@@ -148,7 +209,7 @@ def print_table(rows: list[dict]) -> None:
               f"{str(r['n_features']):>4} {cvp:>8} {cvs:>7} {tp:>8} {tr:>8}")
 
 
-def recommend(rows: list[dict]) -> tuple[dict, dict, dict]:
+def recommend(rows: list[dict]) -> tuple[dict, dict, dict, dict]:
     with_cv = [r for r in rows if r["cv_pr"] is not None]
     with_test = [r for r in rows if r["test_pr"] is not None]
     best_cv = max(with_cv, key=lambda r: r["cv_pr"])
@@ -161,19 +222,30 @@ def recommend(rows: list[dict]) -> tuple[dict, dict, dict]:
         simple = min(strong, key=lambda r: (r["n_features"], -r["test_pr"]))
     else:
         simple = best_test
-    return best_cv, best_test, simple
+    # CV-based simple = fewest features among models within 0.05 CV PR-AUC of the
+    # best CV model, tie-broken by higher CV PR-AUC.
+    cv_cut = best_cv["cv_pr"] - 0.05
+    strong_cv = [r for r in with_cv if r["cv_pr"] >= cv_cut and r["n_features"] is not None]
+    if strong_cv:
+        simple_cv = min(strong_cv, key=lambda r: (r["n_features"], -r["cv_pr"]))
+    else:
+        simple_cv = best_cv
+    return best_cv, best_test, simple, simple_cv
 
 
-def plot(rows: list[dict], out_path: Path, best_cv, best_test, simple) -> None:
+def plot(rows: list[dict], out_path: Path, best_cv, best_test, simple, simple_cv,
+         metric: str = "PR-AUC") -> None:
     fig = plt.figure(figsize=(15, 11))
     gs = fig.add_gridspec(2, 2, height_ratios=[1.25, 1.0], hspace=0.32, wspace=0.22)
     ax_bar = fig.add_subplot(gs[0, :])
     ax_cvt = fig.add_subplot(gs[1, 0])
     ax_simp = fig.add_subplot(gs[1, 1])
 
-    BLUE, ORANGE = "#1f77b4", "#ff7f0e"
+    BLUE, ORANGE, PURPLE = "#1f77b4", "#ff7f0e", "#9467bd"
 
     def color(r):
+        if r.get("is_new"):
+            return PURPLE
         return ORANGE if r["is_meta"] else BLUE
 
     # ---- Panel A: ranked CV PR-AUC bar chart --------------------------- #
@@ -188,9 +260,10 @@ def plot(rows: list[dict], out_path: Path, best_cv, best_test, simple) -> None:
     ax_bar.set_yticks(y)
     ax_bar.set_yticklabels([f"{r['label']}  (nf={r['n_features']})" for r in cv_rows],
                            fontsize=9)
-    ax_bar.set_xlabel("cross-validated PR-AUC (mean ± std)")
-    ax_bar.set_title("A. Models ranked by CV PR-AUC  "
-                     "(blue = behavioral only, orange = + metadata)",
+    ax_bar.set_xlabel(f"cross-validated {metric} (mean ± std)")
+    ax_bar.set_title(f"A. Models ranked by CV {metric}  "
+                     "(blue = behavioral only, orange = + metadata, "
+                     "purple = Iran-hidden experiment)",
                      fontsize=11, fontweight="bold")
     ax_bar.grid(axis="x", alpha=0.3)
     ax_bar.set_xlim(0, 1.0)
@@ -215,30 +288,40 @@ def plot(rows: list[dict], out_path: Path, best_cv, best_test, simple) -> None:
     ax_cvt.plot(lim, lim, "k--", alpha=0.35, label="CV = test")
     ax_cvt.set_xlim(*lim)
     ax_cvt.set_ylim(*lim)
-    ax_cvt.set_xlabel("CV PR-AUC")
-    ax_cvt.set_ylabel("test PR-AUC")
-    ax_cvt.set_title("B. CV vs test PR-AUC\n(points below dashed line = CV-optimistic)",
+    ax_cvt.set_xlabel(f"CV {metric}")
+    ax_cvt.set_ylabel(f"test {metric}")
+    ax_cvt.set_title(f"B. CV vs test {metric}\n(points below dashed line = CV-optimistic)",
                      fontsize=11, fontweight="bold")
     ax_cvt.grid(alpha=0.3)
-    ax_cvt.legend(loc="lower right", fontsize=8)
+    from matplotlib.lines import Line2D
+    cat_handles = [
+        Line2D([0], [0], marker="o", color="w", markerfacecolor=BLUE,
+               markeredgecolor="black", markersize=9, label="behavioral only"),
+        Line2D([0], [0], marker="o", color="w", markerfacecolor=ORANGE,
+               markeredgecolor="black", markersize=9, label="+ metadata"),
+        Line2D([0], [0], marker="o", color="w", markerfacecolor=PURPLE,
+               markeredgecolor="black", markersize=9, label="Iran-hidden experiment"),
+        Line2D([0], [0], linestyle="--", color="k", alpha=0.35, label="CV = test"),
+    ]
+    ax_cvt.legend(handles=cat_handles, loc="lower right", fontsize=8)
 
-    # ---- Panel C: test PR-AUC vs n_features (simple-model view) -------- #
-    fp = [r for r in rows if r["test_pr"] is not None and r["n_features"] is not None]
+    # ---- Panel C: CV PR-AUC vs n_features (simple-model view) ---------- #
+    fp = [r for r in rows if r["cv_pr"] is not None and r["n_features"] is not None]
     for r in fp:
-        ax_simp.scatter(r["n_features"], r["test_pr"], s=90, color=color(r),
+        ax_simp.scatter(r["n_features"], r["cv_pr"], s=90, color=color(r),
                         edgecolor="black", linewidth=0.5, alpha=0.85, zorder=3)
-        ax_simp.annotate(r["label"], (r["n_features"], r["test_pr"]),
+        ax_simp.annotate(r["label"], (r["n_features"], r["cv_pr"]),
                          fontsize=7, xytext=(4, 3), textcoords="offset points")
-    ax_simp.scatter([simple["n_features"]], [simple["test_pr"]], s=260,
+    ax_simp.scatter([simple_cv["n_features"]], [simple_cv["cv_pr"]], s=260,
                     facecolors="none", edgecolors="red", linewidth=2.2, zorder=4,
-                    label=f"recommended simple: {simple['label']}")
-    ax_simp.scatter([best_test["n_features"]], [best_test["test_pr"]], s=320,
+                    label=f"simplest strong (CV): {simple_cv['label']}")
+    ax_simp.scatter([best_cv["n_features"]], [best_cv["cv_pr"]], s=320,
                     facecolors="none", edgecolors="green", linewidth=2.2, zorder=4,
-                    label=f"best test: {best_test['label']}")
+                    label=f"best CV: {best_cv['label']}")
     ax_simp.set_xscale("log")
     ax_simp.set_xlabel("n_features (log scale)")
-    ax_simp.set_ylabel("test PR-AUC")
-    ax_simp.set_title("C. Test PR-AUC vs model complexity\n(top-left = simple & strong)",
+    ax_simp.set_ylabel(f"CV {metric}")
+    ax_simp.set_title(f"C. CV {metric} vs model complexity\n(top-left = simple & strong)",
                       fontsize=11, fontweight="bold")
     ax_simp.grid(alpha=0.3, which="both")
     ax_simp.legend(loc="lower right", fontsize=8)
@@ -256,40 +339,55 @@ def plot(rows: list[dict], out_path: Path, best_cv, best_test, simple) -> None:
 
 
 def main() -> None:
+    ap = argparse.ArgumentParser(description=__doc__)
+    ap.add_argument("--metric", choices=["pr", "roc"], default="pr",
+                    help="ranking metric: PR-AUC (default) or ROC-AUC "
+                         "(reads recomputed grouped CV ROC from "
+                         "cache/cv_roc_recomputed.json).")
+    args = ap.parse_args()
+    metric = "ROC-AUC" if args.metric == "roc" else "PR-AUC"
+    mshort = "ROC" if args.metric == "roc" else "PR"
+    suffix = "_roc" if args.metric == "roc" else ""
+
     ts = time.strftime("%Y%m%d_%H%M%S")
-    log_path = LOG_DIR / f"model_comparison_{ts}.log"
+    log_path = LOG_DIR / f"model_comparison{suffix}_{ts}.log"
     log_file = open(log_path, "w")
     saved = sys.stdout
     sys.stdout = Tee(saved, log_file)
     try:
         rows = load_models()
-        print(f"[cmp] discovered {len(rows)} models in {MODEL_DIR}")
+        if args.metric == "roc":
+            apply_roc_metric(rows)
+        print(f"[cmp] discovered {len(rows)} models in {MODEL_DIR}  "
+              f"(metric = {metric})")
         print()
-        print_table(rows)
+        print_table(rows, metric=mshort)
 
-        best_cv, best_test, simple = recommend(rows)
+        best_cv, best_test, simple, simple_cv = recommend(rows)
         print()
         print("=" * 78)
         print("RECOMMENDATIONS")
         print("=" * 78)
-        print(f"  BEST by CV PR-AUC : {best_cv['label']:<24} "
+        print(f"  BEST by CV {mshort:<6}: {best_cv['label']:<24} "
               f"CV={best_cv['cv_pr']:.4f}±{(best_cv['cv_std'] or 0):.4f}  "
-              f"test-PR={best_cv['test_pr']}  nf={best_cv['n_features']}")
-        print(f"  BEST by test PR   : {best_test['label']:<24} "
-              f"test-PR={best_test['test_pr']:.4f}  "
+              f"test-{mshort}={best_cv['test_pr']}  nf={best_cv['n_features']}")
+        print(f"  BEST by test {mshort:<4}: {best_test['label']:<24} "
+              f"test-{mshort}={best_test['test_pr']:.4f}  "
               f"test-ROC={best_test['test_roc']:.4f}  "
               f"CV={best_test['cv_pr']}  nf={best_test['n_features']}")
         print(f"  SIMPLE (deploy)   : {simple['label']:<24} "
-              f"test-PR={simple['test_pr']:.4f}  "
+              f"test-{mshort}={simple['test_pr']:.4f}  "
               f"test-ROC={simple['test_roc']:.4f}  nf={simple['n_features']}")
+        print(f"  SIMPLE by CV      : {simple_cv['label']:<24} "
+              f"CV-{mshort}={simple_cv['cv_pr']:.4f}  nf={simple_cv['n_features']}")
         print()
         print("  NOTE: the metadata models top the CV ranking but the behavioral")
         print("  models top the TEST ranking -- the CV ordering inverts on the")
         print("  held-out market, a classic CV-optimism / overfit signal. For")
-        print("  deploying on NEW markets, trust the test-PR leaders.")
+        print(f"  deploying on NEW markets, trust the test-{mshort} leaders.")
 
-        out_png = LOG_DIR / f"model_comparison_{ts}.png"
-        plot(rows, out_png, best_cv, best_test, simple)
+        out_png = LOG_DIR / f"model_comparison{suffix}_{ts}.png"
+        plot(rows, out_png, best_cv, best_test, simple, simple_cv, metric=metric)
         print()
         print(f"[cmp] plot saved to {out_png}")
         print(f"[cmp] log saved to {log_path}")

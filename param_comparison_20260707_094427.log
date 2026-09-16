@@ -1,0 +1,32 @@
+[par] counted parameters for 21 models
+
+model                     algo   nf     params    CV-PR
+--------------------------------------------------------
+logreg 30feat               lr   30         31   0.6006
+cb 10feat v2 (d2)           cb   10        350   0.4720
+cb 10feat v2                cb   10        837   0.4782
+cb 30feat v2                cb   30      1,612   0.5449
+xgb 20feat v2              xgb   20      2,028   0.6534
+xgb 10feat v2              xgb   10      2,204   0.6589
+xgb 20feat v2 (axiom)      xgb   20      2,862   0.6997
+xgb 0ir-hidden (30f)       xgb   30      3,526   0.7529
+rf 10b+10m v5 (tuned)       rf   20      4,220   0.7887
+xgb 30feat v2              xgb   30      4,246   0.6695
+xgb 25ir-hidden (30f)      xgb   30      5,306   0.8363
+xgb 20feat v2 (stable)     xgb   20      5,598   0.7359
+rf 25ir-hidden (20f)        rf   20      7,070   0.7792
+xgb meta-only v6           xgb   10      7,658   0.6406
+rf 0ir-hidden (20f)         rf   20      9,134   0.8081
+xgb 10b+17m v5             xgb   27      9,272   0.8050
+rf 10b+17m v4 (axiom)       rf   27     10,218   0.6812
+xgb 20feat v2 (mstr)       xgb   20     12,762   0.7717
+xgb 20b+10m v7             xgb   30     13,260   0.8289
+rf 10b+17m v3               rf   27     16,972   0.6913
+rf 10feat v2                rf   10     25,686   0.5108
+
+========================================================
+  BEST by CV PR-AUC : xgb 25ir-hidden (30f)    CV=0.8363  params=5,306
+  LEANEST strong    : rf 10b+10m v5 (tuned)    CV=0.7887  params=4,220 (within 0.05 CV of best)
+
+[par] plot saved to param_comparison_20260707_094427.png
+[par] log saved to param_comparison_20260707_094427.log

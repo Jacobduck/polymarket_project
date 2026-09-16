@@ -1,0 +1,35 @@
+[lr-curves] model=lr_insider_30feat  C=0.01  thr=0.5
+[lr-curves] pinned test market(s) = ['us-strikes-iran-by-march-1-2026-492']
+[lr-curves] train: 28 markets, 548 rows, 82 insiders
+[lr-curves] test : 1 market(s), 245 rows, 35 insiders
+
+[train] ROC-AUC = 0.9187   PR-AUC = 0.7155
+[train] confusion matrix @ thr=0.5
+[[400  66]
+ [ 19  63]]
+              precision    recall  f1-score   support
+
+           0     0.9547    0.8584    0.9040       466
+           1     0.4884    0.7683    0.5972        82
+
+    accuracy                         0.8449       548
+   macro avg     0.7215    0.8133    0.7506       548
+weighted avg     0.8849    0.8449    0.8580       548
+
+
+[test] ROC-AUC = 0.9947   PR-AUC = 0.9476
+[test] confusion matrix @ thr=0.5
+[[180  30]
+ [  0  35]]
+              precision    recall  f1-score   support
+
+           0     1.0000    0.8571    0.9231       210
+           1     0.5385    1.0000    0.7000        35
+
+    accuracy                         0.8776       245
+   macro avg     0.7692    0.9286    0.8115       245
+weighted avg     0.9341    0.8776    0.8912       245
+
+
+[lr-curves] curves saved to lr_curves_20260709_135258_curves.png
+[lr-curves] log saved to lr_curves_20260709_135258.log

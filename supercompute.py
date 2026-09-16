@@ -76,6 +76,7 @@ import pandas as pd
 import xgboost as xgb
 
 from polycluster.events import get_market_orderfilled_events
+from polycluster.explain import HAS_SHAP, explain_prediction, format_attributions
 from polycluster.features import compute_market_user_features
 from polycluster.markets import get_market_by_slug
 from polycluster.metadata import (
@@ -95,7 +96,7 @@ EVENTS_DIR = CACHE / "events"
 MODEL_DIR = CACHE / "models"
 KNOWN_INSIDER_JSON = CACHE / "known_insider_pairs.json"
 
-MODEL_TAG = "xgb_insider_25ir"
+MODEL_TAG = "retrained_xgb_insider_25ir"
 MODEL_PATH = MODEL_DIR / f"{MODEL_TAG}_latest.json"
 META_PATH = MODEL_DIR / f"{MODEL_TAG}_latest.meta.json"
 CALIBRATOR_PATH = MODEL_DIR / f"{MODEL_TAG}_latest.calibrator.joblib"
@@ -437,6 +438,11 @@ def parse_args() -> argparse.Namespace:
     p.add_argument("--api-key", default=None,
                    help="Polygonscan/Etherscan key (else uses env var)")
     p.add_argument("--out-dir", default=".", help="where to write log + CSVs")
+    p.add_argument("--shap-top-k", type=int, default=12,
+                   help="SHAP features to log per flagged wallet (0 = disable)")
+    p.add_argument("--shap-log-top-n", type=int, default=0,
+                   help="also log SHAP for this many top-ranked wallets even if "
+                        "not flagged (0 = flagged wallets only)")
     return p.parse_args()
 
 
@@ -547,6 +553,52 @@ def main() -> None:
     info_cols = [c for c in ("winrate", "n_markets_traded", "herfindahl_index_markets")
                  if c in df.columns]
 
+    # per-prediction SHAP: explain *why* a wallet scored high. Computed only for
+    # the wallets we log in detail (flagged + optional top-N) so we never pay the
+    # explainer cost across thousands of wallets.
+    shap_on = args.shap_top_k and args.shap_top_k > 0
+    if shap_on and not HAS_SHAP:
+        logging.warning("shap not installed; per-wallet explanations will use "
+                        "global feature_importances_ fallback")
+
+    def _log_shap(r) -> None:
+        if not shap_on:
+            return
+        try:
+            expl = explain_prediction(
+                model, r[features], features,
+                top_k=args.shap_top_k, logger=logging.getLogger(),
+            )
+            logging.info(format_attributions(expl))
+        except Exception as exc:  # noqa: BLE001
+            logging.warning(f"shap: failed for {r['wallet']}: "
+                            f"{type(exc).__name__}: {exc}")
+
+    def _wallet_line(rank: int, r) -> str:
+        ft = r["first_trade_ts"]
+        ft_str = (time.strftime("%Y-%m-%d %H:%M", time.gmtime(int(ft)))
+                  if pd.notna(ft) else "n/a")
+        flag = "*" if r["flagged"] == 1 else " "
+        extra = "  ".join(
+            f"{c}={r[c]:.3f}" if pd.notna(r[c]) else f"{c}=NaN" for c in info_cols
+        )
+        return (
+            f"{flag} #{rank + 1:<5d} {r['wallet']}  prob={r['pred_prob']:.4f} "
+            f"(raw={r['pred_prob_raw']:.4f})  vol=${r['volume']:,.0f}  "
+            f"trades={int(r['n_trades'])}  first_trade={ft_str}  {extra}"
+        )
+
+    # --- wallets trading > $1,000, ranked high->low --------------------- #
+    # A focused view of the higher-conviction wallets (small-volume noise
+    # filtered out) shown before the full ranked dump. Same fields/format;
+    # the '#' rank is the wallet's position in the overall ranking.
+    over1k = df[df["volume"] > 1000]
+    logging.info(f"wallets with volume > $1,000, ranked high->low "
+                 f"({len(over1k)} of {len(df)}):")
+    for i, r in over1k.iterrows():
+        logging.info(_wallet_line(i, r))
+    logging.info("=" * 60)
+
     # --- ranked per-wallet scores in the log ---------------------------- #
     # df is already sorted by pred_prob descending. Log every scored wallet
     # (or the top --log-top-n) high->low so the scores are visible in the log
@@ -555,18 +607,9 @@ def main() -> None:
     logging.info(f"per-wallet scores, ranked high->low "
                  f"(showing {n_log} of {len(df)}):")
     for i, r in df.head(n_log).iterrows():
-        ft = r["first_trade_ts"]
-        ft_str = (time.strftime("%Y-%m-%d %H:%M", time.gmtime(int(ft)))
-                  if pd.notna(ft) else "n/a")
-        flag = "*" if r["flagged"] == 1 else " "
-        extra = "  ".join(
-            f"{c}={r[c]:.3f}" if pd.notna(r[c]) else f"{c}=NaN" for c in info_cols
-        )
-        logging.info(
-            f"{flag} #{i + 1:<5d} {r['wallet']}  prob={r['pred_prob']:.4f} "
-            f"(raw={r['pred_prob_raw']:.4f})  vol=${r['volume']:,.0f}  "
-            f"trades={int(r['n_trades'])}  first_trade={ft_str}  {extra}"
-        )
+        logging.info(_wallet_line(i, r))
+        if args.shap_log_top_n and i < args.shap_log_top_n:
+            _log_shap(r)
     logging.info("=" * 60)
 
     for _, r in df[df["flagged"] == 1].iterrows():
@@ -581,6 +624,7 @@ def main() -> None:
             f"(raw={r['pred_prob_raw']:.3f})  vol=${r['volume']:,.0f}  "
             f"trades={int(r['n_trades'])}  first_trade={ft_str}  {extra}"
         )
+        _log_shap(r)
 
     # --- write CSVs ------------------------------------------------------ #
     results_csv = out_dir / f"supercompute_{slug8}_{ts}_results.csv"

@@ -304,3 +304,54 @@ find a better way to choose non insider rows. Maybe what you can do is put insid
 so the model really tries to find what makes insiders different (yuo can also add a first statistical layer to find non-insiders
 that look like insiders)"""
 """expanding on the top idea, maybe what you can do is just use the model you have now to find flagged non insiders"""
+
+"""full market scan tried on: #will-d4vd-be-the-1-searched-person-on-google-this-year #will-trump-pardon-changpeng-zhao-in-2025-162-949-658
+#iran-closes-its-airspace-by-may-29 #trump-invokes-war-powers-against-venezuela-by-january-31-134-583 #will-cardi-b-perform-...-halftime-show
+
+#will-axiom-be-accused-of-insider-trading #will-draftkings-launch-a-prediction-market-in-2025 #will-us-or-israel-strike-iran-by-february-28-2026-766"""
+
+"""add the logistic regression to the graphs, so that we can compare"""
+"""try to understand why sometimes probability is so low, and sometimes so high"""
+"""try the other models you have on the real insider you found to see if other models flag it too"""
+"""mettre un filtre sur le volume aussi et plot leurs graphs (trades over price curve)"""
+"""pouvoir expliquer les probabilités, maybe en regardant quelles features étaient dominantes dans le résultat"""
+"""intro, state of the art, présentation du dataset, présentation des modèles et des résultats, présentation des délivrables, viser 10 pages, explication on choice of features"""
+
+
+"""choisir un threshold différent pour chaque modele pour que precision soit à 0.80"""
+
+"""FOUND INSIDERS:
+0xc1259ddd92f58aded52d029e37e3fbbebafaa4c1 on #will-d4vd-be-the-1-searched-person-on-google-this-year (rank 1)
+0x73f09e8ded44b82f3388bb5472fc1c41b56d741f on #will-axiom-be-accused-of-insider-trading (rank 4)
+0xf8b6702ec7cfa90cbd57924acd82a6c2e68085a1 on #will-axiom-be-accused-of-insider-trading (rank 6)
+0x8f7fe67a314e709540474e1f08b683c83b98fb3b on #will-axiom-be-accused-of-insider-trading (rank 7)
+0x2370bd3107d7b5bd55e04a991c613447dc4571cb on #will-us-or-israel-strike-iran-by-february-28-2026-766 (rank 11)
+0xa1308d9aed0bf6bdd0f4f3c43b89d0804bc405dc on #will-us-or-israel-strike-iran-by-february-28-2026-766 (rank 18)
+0x8785662663372eab8d76ae9d850e5c09adca8cc1 on #will-cardi-b-perform-during-the-super-bowl-lx-halftime-show (rank 6)
+
+"""
+
+
+"""produce pr/rec curves for logistic regression, so we can see what it looks like for a model that does not overfit"""
+"""recall > 0.80, best precision for that. So find better thresholds for each model"""
+"""show CV Rec for each model, do same kind of graph"""
+
+
+"""launch the retrained_xg_25 ir on the david market"""
+"""see if small bets disappear (they are obviously not insiders)"""
+"""try to understand why some people that are obviosuly not insiders are flagged"""
+"""do heatmap for random forest models and xgb models sperately, look if you can get rid of some features"""
+"""in overleaf, start with section 5, explaining how you found the data and describing the data (distribution, tendencies etc)"""
+"""section 6 and 7 go together, 8 and 9 go together. 10: what are the limits, how can we make things better"""
+"""do introduction at the end so you can introduce venkat and his arbitrage concepts"""
+""" choose the plots you want to show. For insider plots, show real insider, a faux-positif, and an none insider"""
+
+"""approach > Data sources >"""
+
+
+"""put family of features in Features section"""
+"""put pr recall curves in the Models section, and heatmap"""
+"""in trades on price curves, size of triangle should be proportional to trade size"""
+"""for trades on price curves, show numbers of markets traded, and volume traded beside the graph so it's more convincing"""
+
+"""prepare powerpoint for venkat, 15 minutes, leave first 3 slides empty for vincent. Prepare for wednesday"""

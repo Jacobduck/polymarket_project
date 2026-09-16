@@ -58,7 +58,7 @@ MODEL_DIR.mkdir(parents=True, exist_ok=True)
 
 FEATURE_SOURCE_META = MODEL_DIR / "cb_insider_30feat_latest.meta.json"
 TOP_K = 10
-MODEL_TAG = "xgb_insider_meta_v5"
+MODEL_TAG = __import__("os").environ.get("MODEL_TAG_PREFIX", "") + "xgb_insider_meta_v5"
 
 LABEL_COL = "is_insider"
 GROUP_COL = "market_slug"

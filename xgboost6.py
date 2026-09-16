@@ -55,7 +55,7 @@ TRAIN_PARQUET = CACHE / "training_data_with_metadata.parquet"
 MODEL_DIR = CACHE / "models"
 MODEL_DIR.mkdir(parents=True, exist_ok=True)
 
-MODEL_TAG = "xgb_insider_meta10_v6"
+MODEL_TAG = __import__("os").environ.get("MODEL_TAG_PREFIX", "") + "xgb_insider_meta10_v6"
 
 # Top 10 of the 17 metadata features, ranked by xgb5's gain importance
 # (xgb5 = top-10 behavioral + 17 metadata). This is the metadata-only

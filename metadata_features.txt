@@ -31,6 +31,24 @@ DATA SOURCES
 - cache/known_insider_pairs.json
     Confirmed insider wallets, used for funder graph signal.
 
+TOP 10 USED IN MODELS
+=====================
+Of the 17 features below, only these 10 are fed to the trained models
+(the metadata half of every rf/xgb variant: randomforest5, xgboost7, and
+the 25ir/0ir Iran-experiment models). They are ranked by xgb5 gain
+importance — #1 is the most important:
+
+  1.  herfindahl_index_markets                         (list #12)
+  2.  median_bet_size_usdc                              (list #8)
+  3.  time_since_first_deposit_to_first_trade_seconds   (list #14)
+  4.  wallet_age_seconds                                (list #2)
+  5.  wallet_to_market_age_ratio                        (list #4)
+  6.  avg_bet_size_usdc                                 (list #7)
+  7.  wallet_minus_market_age_seconds                   (list #5)
+  8.  funder_flagged_wallet_count                       (list #17)
+  9.  winrate                                           (list #6)
+  10. n_markets_traded                                  (list #1)
+
 FEATURE LIST
 ============
 

@@ -1,0 +1,47 @@
+[cmp] discovered 27 models in cache/models  (metric = ROC-AUC)
+
+model                     algo  meta   nf   CV-ROC    ±std test-ROC test-ROC
+------------------------------------------------------------------------------
+xgb 25ir-hidden (30f)      xgb False   30   0.9555  0.0251   0.9805   0.9805
+xgb 20b+10m v7             xgb  True   30   0.9540  0.0410   0.9893   0.9893
+xgb 10b+17m v5             xgb  True   27   0.9518  0.0409   0.9882   0.9882
+rf 10b+10m v5 (tuned)       rf  True   20   0.9478  0.0319   0.9718   0.9718
+rf 25ir-hidden (20f)        rf False   20   0.9475  0.0169   0.9800   0.9800
+rf 0ir-hidden (20f)         rf False   20   0.9410  0.0260   0.9400   0.9400
+xgb 0ir-hidden (30f)       xgb False   30   0.9243  0.0300   0.9363   0.9363
+xgb 20feat v2 (mstr)       xgb False   20   0.9218  0.0629   0.8426   0.8426
+xgb meta-only v6           xgb  True   10   0.9155  0.0333   0.9506   0.9506
+rf 10b+17m v3               rf  True   27   0.9114  0.0799   0.9925   0.9925
+xgb 20feat v2 (stable)     xgb False   20   0.9094  0.0668   0.8281   0.8281
+rf 10b+17m v4 (axiom)       rf  True   27   0.9037  0.0762   0.9048   0.9048
+xgb 30feat v2              xgb False   30   0.8932  0.0630   0.9854   0.9854
+logreg 30feat               lr False   30   0.8748  0.0835   0.9338   0.9338
+xgb 10feat v2              xgb False   10   0.8701  0.0756   0.9972   0.9972
+xgb 20feat v2              xgb False   20   0.8671  0.0784   0.9995   0.9995
+xgb 20feat v2 (axiom)      xgb False   20   0.8614  0.1053   0.8912   0.8912
+cb 30feat v2                cb False   30   0.8111  0.1156   0.9827   0.9827
+cb 10feat v2                cb False   10   0.7613  0.1184   0.9947   0.9947
+rf 10feat v2                rf False   10   0.7506  0.0674   0.9959   0.9959
+cb 10feat v2 (d2)           cb False   10   0.7469  0.1368   0.9928   0.9928
+isoforest 30feat           iso False   30        -       -   0.7222   0.7222
+lgbm 30feat               lgbm False   30        -       -   0.9511   0.9511
+stack 30feat             stack False   30        -       -   0.9444   0.9444
+xgb 14feat                 xgb False   14        -       -   0.8900   0.8900
+xgb 50feat                 xgb False   50        -       -   0.9341   0.9341
+xgb all-319feat            xgb False  319        -       -   0.9492   0.9492
+
+==============================================================================
+RECOMMENDATIONS
+==============================================================================
+  BEST by CV ROC   : xgb 25ir-hidden (30f)    CV=0.9555±0.0251  test-ROC=0.9805384840503365  nf=30
+  BEST by test ROC : xgb 20feat v2            test-ROC=0.9995  test-ROC=0.9995  CV=0.8670824587448143  nf=20
+  SIMPLE (deploy)   : xgb 10feat v2            test-ROC=0.9972  test-ROC=0.9972  nf=10
+  SIMPLE by CV      : xgb meta-only v6         CV-ROC=0.9155  nf=10
+
+  NOTE: the metadata models top the CV ranking but the behavioral
+  models top the TEST ranking -- the CV ordering inverts on the
+  held-out market, a classic CV-optimism / overfit signal. For
+  deploying on NEW markets, trust the test-ROC leaders.
+
+[cmp] plot saved to model_comparison_roc_20260709_141327.png
+[cmp] log saved to model_comparison_roc_20260709_141327.log

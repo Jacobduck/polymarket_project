@@ -1,0 +1,500 @@
+[xgb3] run timestamp = 20260616_140106
+[xgb3] logging to xgboost3_20260616_140106.log
+[xgb3] loading cache/training_data.parquet
+[xgb3] full shape=(793, 322)  positives=117  negatives=676
+[xgb3] using top-20 features from cb_insider_30feat_latest.meta.json:
+   1. adaptive_markout_raw_grosswt_h0p070
+   2. unrealized_edge_per_open_token
+   3. adaptive_markout_raw_grosswt_h0p010
+   4. adaptive_markout_raw_grosswt_h0p150
+   5. unrealized_edge_per_open_token_sqrt
+   6. buy_markout_adj_grosswt_h0p070_lb0p150
+   7. adaptive_markout_raw_grosswt_h0p200
+   8. buy_markout_adj_grosswt_h0p030_lb0p200
+   9. high_sell_nonflattening_cash_frac_pctl90
+  10. realized_pnl_per_closing_trade
+  11. adaptive_plus_realized_alpha0p25_h0p030
+  12. buy_markout_adj_grosswt_h0p030_lb0p010
+  13. adaptive_plus_realized_alpha0p5_h0p070
+  14. buy_markout_adj_mean_h0p200_lb0p030
+  15. buy_markout_adj_mean_h0p200_lb0p200
+  16. sell_markout_adj_median_h0p150_lb0p010
+  17. n_distinct_buy_days
+  18. major_move_time_remaining_pct
+  19. time_to_major_move_pct_of_market
+  20. adaptive_markout_raw_grosswt_h0p030
+[xgb3] PIN_TEST_MARKETS active -> test pinned to 1 market(s); random stratified split disabled
+[xgb3] markets total: 29  (train=28, test=1; large in test=1, small in test=5)
+[xgb3] market assignment (sorted by row count desc):
+  test   large  n= 245  pos= 35  us-strikes-iran-by-march-1-2026-492
+  train  large  n= 189  pos= 27  us-strikes-iran-by-february-28-2026-227-967-547-688-589-491-592-418-452-924-384-915-464-672-196-157-993-596-269-535-381-391-471-256-988-997-296-225-762-973-292-827-345-182-558-215-794-879-189-761
+  train  small  n=  49  pos=  7  will-axiom-be-accused-of-insider-trading
+  train  small  n=  42  pos=  6  microstrategy-announces-1000-btc-purchase-december-2-8
+  train  small  n=  28  pos=  4  us-x-iran-ceasefire-by-april-7
+  train  small  n=  28  pos=  4  will-us-or-israel-strike-iran-by-february-28-2026-766
+  train  small  n=  21  pos=  3  will-draftkings-launch-a-prediction-market-in-2025
+  train  small  n=  21  pos=  3  will-microstrategy-announce-a-bitcoin-purchase-december-16-22
+  train  small  n=  20  pos=  4  will-stable-launch-a-token-in-2025
+  train  small  n=  14  pos=  2  nothing-ever-happens-microstrategy
+  train  small  n=  14  pos=  2  will-microstrategy-announce-holding-650k-btc-by-november-30
+  train  small  n=  14  pos=  2  will-microstrategy-purchase-bitcoin-july-1-7
+  train  small  n=   7  pos=  1  microstrategy-sell-any-bitcoin-in-2025
+  train  small  n=   7  pos=  1  will-openai-release-a-new-frontier-model-by-december-13-683
+  train  small  n=   7  pos=  1  openai-browser-by-october-31
+  train  small  n=   7  pos=  1  openai-browser-in-2025
+  train  small  n=   7  pos=  1  openai-social-app-in-2025
+  train  small  n=   7  pos=  1  microstrategy-announces-1000-btc-purchase-november-11-17
+  train  small  n=   7  pos=  1  khamenei-out-as-supreme-leader-of-iran-by-march-31
+  train  small  n=   7  pos=  1  will-lighter-perform-an-airdrop-by-december-31
+  train  small  n=   7  pos=  1  will-cardi-b-perform-during-the-super-bowl-lx-halftime-show
+  train  small  n=   7  pos=  1  will-openai-release-a-new-frontier-model-on-december-11
+  train  small  n=   7  pos=  1  will-microstrategy-hold-680k-btc-by-december-31
+  train  small  n=   7  pos=  1  will-karol-g-perform-during-the-super-bowl-lx-halftime-show
+  train  small  n=   7  pos=  1  will-microstrategy-hold-620k-btc-before-august
+  train  small  n=   5  pos=  1  will-microstrategy-announce-holding-740k-btc-by-march-31
+  train  small  n=   5  pos=  2  will-mara-corina-machado-win-the-nobel-peace-prize-in-2025
+  train  small  n=   4  pos=  1  will-aztec-launch-a-token-in-2025
+  train  small  n=   3  pos=  1  will-yulia-navalnaya-win-the-nobel-peace-prize-in-2025
+[xgb3] row distribution (total n=793, pos=117, overall pos rate=14.75%):
+  train  n= 548  (69.10% of total)  pos= 82  (14.96% pos rate within split)
+  test   n= 245  (30.90% of total)  pos= 35  (14.29% pos rate within split)
+[xgb3] starting Optuna tuning: 100 trials, TPE sampler (20 random startup), MedianPruner, 5-fold GroupKFold CV
+[xgb3]   trial   0  state=COMPLETE  score=0.6072  best=0.6072
+[xgb3]   trial   1  state=COMPLETE  score=0.6079  best=0.6079
+[xgb3]   trial   2  state=COMPLETE  score=0.6220  best=0.6220
+[xgb3]   trial   3  state=COMPLETE  score=0.6216  best=0.6220
+[xgb3]   trial   4  state=COMPLETE  score=0.6252  best=0.6252
+[xgb3]   trial   5  state=COMPLETE  score=0.5967  best=0.6252
+[xgb3]   trial   6  state=COMPLETE  score=0.5666  best=0.6252
+[xgb3]   trial   7  state=COMPLETE  score=0.6358  best=0.6358
+[xgb3]   trial   8  state=COMPLETE  score=0.6180  best=0.6358
+[xgb3]   trial   9  state=COMPLETE  score=0.6241  best=0.6358
+[xgb3]   trial  10  state=COMPLETE  score=0.6075  best=0.6358
+[xgb3]   trial  11  state=COMPLETE  score=0.6249  best=0.6358
+[xgb3]   trial  12  state=COMPLETE  score=0.6091  best=0.6358
+[xgb3]   trial  13  state=COMPLETE  score=0.6293  best=0.6358
+[xgb3]   trial  14  state=COMPLETE  score=0.5847  best=0.6358
+[xgb3]   trial  15  state=COMPLETE  score=0.6063  best=0.6358
+[xgb3]   trial  16  state=COMPLETE  score=0.6147  best=0.6358
+[xgb3]   trial  17  state=COMPLETE  score=0.6276  best=0.6358
+[xgb3]   trial  18  state=COMPLETE  score=0.6114  best=0.6358
+[xgb3]   trial  19  state=COMPLETE  score=0.6284  best=0.6358
+[xgb3]   trial  20  state=COMPLETE  score=0.6167  best=0.6358
+[xgb3]   trial  21  state=COMPLETE  score=0.6107  best=0.6358
+[xgb3]   trial  22  state=COMPLETE  score=0.6166  best=0.6358
+[xgb3]   trial  23  state=COMPLETE  score=0.6153  best=0.6358
+[xgb3]   trial  24  state=COMPLETE  score=0.6163  best=0.6358
+[xgb3]   trial  25  state=COMPLETE  score=0.6164  best=0.6358
+[xgb3]   trial  26  state=COMPLETE  score=0.6253  best=0.6358
+[xgb3]   trial  27  state=COMPLETE  score=0.6238  best=0.6358
+[xgb3]   trial  28  state=COMPLETE  score=0.6147  best=0.6358
+[xgb3]   trial  29  state=COMPLETE  score=0.6409  best=0.6409
+[xgb3]   trial  30  state=COMPLETE  score=0.6221  best=0.6409
+[xgb3]   trial  31  state=COMPLETE  score=0.6210  best=0.6409
+[xgb3]   trial  32  state=COMPLETE  score=0.6241  best=0.6409
+[xgb3]   trial  33  state=COMPLETE  score=0.6204  best=0.6409
+[xgb3]   trial  34  state=COMPLETE  score=0.6243  best=0.6409
+[xgb3]   trial  35  state=COMPLETE  score=0.6134  best=0.6409
+[xgb3]   trial  36  state=COMPLETE  score=0.5965  best=0.6409
+[xgb3]   trial  37  state=COMPLETE  score=0.6350  best=0.6409
+[xgb3]   trial  38  state=COMPLETE  score=0.6453  best=0.6453
+[xgb3]   trial  39  state=COMPLETE  score=0.6300  best=0.6453
+[xgb3]   trial  40  state=COMPLETE  score=0.6406  best=0.6453
+[xgb3]   trial  41  state=COMPLETE  score=0.6440  best=0.6453
+[xgb3]   trial  42  state=COMPLETE  score=0.6387  best=0.6453
+[xgb3]   trial  43  state=COMPLETE  score=0.6379  best=0.6453
+[xgb3]   trial  44  state=COMPLETE  score=0.6078  best=0.6453
+[xgb3]   trial  45  state=COMPLETE  score=0.6246  best=0.6453
+[xgb3]   trial  46  state=COMPLETE  score=0.6443  best=0.6453
+[xgb3]   trial  47  state=COMPLETE  score=0.6448  best=0.6453
+[xgb3]   trial  48  state=COMPLETE  score=0.6276  best=0.6453
+[xgb3]   trial  49  state=COMPLETE  score=0.6440  best=0.6453
+[xgb3]   trial  50  state=COMPLETE  score=0.6419  best=0.6453
+[xgb3]   trial  51  state=COMPLETE  score=0.6427  best=0.6453
+[xgb3]   trial  52  state=COMPLETE  score=0.6514  best=0.6514
+[xgb3]   trial  53  state=COMPLETE  score=0.6504  best=0.6514
+[xgb3]   trial  54  state=COMPLETE  score=0.6426  best=0.6514
+[xgb3]   trial  55  state=COMPLETE  score=0.6408  best=0.6514
+[xgb3]   trial  56  state=COMPLETE  score=0.6494  best=0.6514
+[xgb3]   trial  57  state=COMPLETE  score=0.6433  best=0.6514
+[xgb3]   trial  58  state=COMPLETE  score=0.6223  best=0.6514
+[xgb3]   trial  59  state=COMPLETE  score=0.6434  best=0.6514
+[xgb3]   trial  60  state=COMPLETE  score=0.6387  best=0.6514
+[xgb3]   trial  61  state=COMPLETE  score=0.6455  best=0.6514
+[xgb3]   trial  62  state=COMPLETE  score=0.6406  best=0.6514
+[xgb3]   trial  63  state=COMPLETE  score=0.6475  best=0.6514
+[xgb3]   trial  64  state=COMPLETE  score=0.6500  best=0.6514
+[xgb3]   trial  65  state=COMPLETE  score=0.6405  best=0.6514
+[xgb3]   trial  66  state=COMPLETE  score=0.6412  best=0.6514
+[xgb3]   trial  67  state=COMPLETE  score=0.6395  best=0.6514
+[xgb3]   trial  68  state=COMPLETE  score=0.6361  best=0.6514
+[xgb3]   trial  69  state=COMPLETE  score=0.6307  best=0.6514
+[xgb3]   trial  70  state=COMPLETE  score=0.6374  best=0.6514
+[xgb3]   trial  71  state=COMPLETE  score=0.6445  best=0.6514
+[xgb3]   trial  72  state=COMPLETE  score=0.6389  best=0.6514
+[xgb3]   trial  73  state=COMPLETE  score=0.6440  best=0.6514
+[xgb3]   trial  74  state=COMPLETE  score=0.6381  best=0.6514
+[xgb3]   trial  75  state=COMPLETE  score=0.6369  best=0.6514
+[xgb3]   trial  76  state=COMPLETE  score=0.6394  best=0.6514
+[xgb3]   trial  77  state=COMPLETE  score=0.6325  best=0.6514
+[xgb3]   trial  78  state=COMPLETE  score=0.6197  best=0.6514
+[xgb3]   trial  79  state=COMPLETE  score=0.6272  best=0.6514
+[xgb3]   trial  80  state=COMPLETE  score=0.6444  best=0.6514
+[xgb3]   trial  81  state=COMPLETE  score=0.6437  best=0.6514
+[xgb3]   trial  82  state=COMPLETE  score=0.6433  best=0.6514
+[xgb3]   trial  83  state=COMPLETE  score=0.6345  best=0.6514
+[xgb3]   trial  84  state=COMPLETE  score=0.6387  best=0.6514
+[xgb3]   trial  85  state=COMPLETE  score=0.6341  best=0.6514
+[xgb3]   trial  86  state=COMPLETE  score=0.6419  best=0.6514
+[xgb3]   trial  87  state=COMPLETE  score=0.6386  best=0.6514
+[xgb3]   trial  88  state=COMPLETE  score=0.6384  best=0.6514
+[xgb3]   trial  89  state=COMPLETE  score=0.6282  best=0.6514
+[xgb3]   trial  90  state=COMPLETE  score=0.6412  best=0.6514
+[xgb3]   trial  91  state=COMPLETE  score=0.6390  best=0.6514
+[xgb3]   trial  92  state=COMPLETE  score=0.6486  best=0.6514
+[xgb3]   trial  93  state=COMPLETE  score=0.6513  best=0.6514
+[xgb3]   trial  94  state=COMPLETE  score=0.6534  best=0.6534
+[xgb3]   trial  95  state=COMPLETE  score=0.6519  best=0.6534
+[xgb3]   trial  96  state=COMPLETE  score=0.6409  best=0.6534
+[xgb3]   trial  97  state=COMPLETE  score=0.6501  best=0.6534
+[xgb3]   trial  98  state=COMPLETE  score=0.6428  best=0.6534
+[xgb3]   trial  99  state=COMPLETE  score=0.6490  best=0.6534
+[xgb3] tuning done in 163.3s  (100 completed, 0 pruned)
+[xgb3] best CV PR-AUC = 0.6534
+[xgb3] best params:
+  n_estimators         = 300
+  max_depth            = 2
+  learning_rate        = 0.00651
+  min_child_weight     = 2.60306
+  subsample            = 0.86665
+  colsample_bytree     = 0.90517
+  reg_lambda           = 0.51671
+  reg_alpha            = 0.05024
+  gamma                = 3.35800
+  scale_pos_weight     = 3.23750
+
+[xgb3] re-running CV with best params to collect OOF preds + per-fold scores
+  fold 1: train_mks=27 val_mks=1  val_rows=189 val_pos=27  PR-AUC=0.8584
+  fold 2: train_mks=22 val_mks=6  val_rows=91 val_pos=13  PR-AUC=0.5689
+  fold 3: train_mks=22 val_mks=6  val_rows=88 val_pos=15  PR-AUC=0.3264
+  fold 4: train_mks=21 val_mks=7  val_rows=89 val_pos=13  PR-AUC=0.7594
+  fold 5: train_mks=20 val_mks=8  val_rows=91 val_pos=14  PR-AUC=0.7539
+[xgb3] CV PR-AUC = 0.6534 ± 0.1884
+[xgb3] OOF Platt calibrator: sigmoid(4.618 * raw_prob -3.509)
+
+[xgb3] fitting final model on full train (548 rows)
+[xgb3] final fit in 0.15s
+
+[xgb3] raw  prob range  train=[0.071, 0.818]  test=[0.071, 0.394]
+[xgb3] cal. prob range  train=[0.040, 0.566]  test=[0.040, 0.156]
+[xgb3] sanity: TEST PR-AUC raw=0.9969  (should equal calibrated PR-AUC; AUC is invariant to Platt)
+
+[xgb3] metrics per split (overfit check: train >> test => overfit):
+[xgb3] train  n= 548 pos= 82  ROC-AUC=0.9547  PR-AUC=0.8195  P=0.8667  R=0.4756  F1=0.6142  (thr=0.5)
+[xgb3] test   n= 245 pos= 35  ROC-AUC=0.9995  PR-AUC=0.9969  P=0.0000  R=0.0000  F1=0.0000  (thr=0.5)
+
+[xgb3] PR-AUC gap train-test = -0.1774  (big positive = overfit train)
+[xgb3] PR-AUC gap CV-test    = -0.3435  (big positive = test markets harder than CV folds)
+
+[xgb3] classification metrics @ fixed thr=0.5:
+  train  P=0.8667  R=0.4756  F1=0.6142  (TP=39, FP=6, FN=43, TN=460)
+  test   P=0.0000  R=0.0000  F1=0.0000  (TP=0, FP=0, FN=35, TN=210)
+[xgb3] curves saved to xgboost3_20260616_140106_curves.png
+
+[xgb3] TEST predictions, one row per wallet, sorted by prob desc.
+[xgb3]  rank  prob    label  cum_tp  cum_fp  prec   recall  market  wallet
+[xgb3]     1    0.1560    1        1       0  1.000   0.029  us-strikes-iran-by-march-1-202  0x95bd107886bd48d6737029603e3db242fb781652
+[xgb3]     2    0.1560    1        2       0  1.000   0.057  us-strikes-iran-by-march-1-202  0x5e0b017aef88af84fb3897fecce7413c6754981a
+[xgb3]     3    0.1560    1        3       0  1.000   0.086  us-strikes-iran-by-march-1-202  0x344c5073e9b152a95d9f42767ac084a87fad68ab
+[xgb3]     4    0.1560    1        4       0  1.000   0.114  us-strikes-iran-by-march-1-202  0x943117ea8e3f5b160e158c1c4b1786fee5d3e5a0
+[xgb3]     5    0.1560    1        5       0  1.000   0.143  us-strikes-iran-by-march-1-202  0xf37af11e538c6eba3ddcea540ee54ca35c6354f8
+[xgb3]     6    0.1560    1        6       0  1.000   0.171  us-strikes-iran-by-march-1-202  0x45f402894f550357ff1d5db385c93bb9e480dd79
+[xgb3]     7    0.1560    1        7       0  1.000   0.200  us-strikes-iran-by-march-1-202  0x4ec2f11d2893eb1bc3bab7449910540c93adf7ec
+[xgb3]     8    0.1560    1        8       0  1.000   0.229  us-strikes-iran-by-march-1-202  0x3e545810f8b95dd0fcf4114b0246a0dbb40ad1c5
+[xgb3]     9    0.1560    1        9       0  1.000   0.257  us-strikes-iran-by-march-1-202  0xab54f4b400bd8015e206a74f8d89362cf8eee856
+[xgb3]    10    0.1560    1       10       0  1.000   0.286  us-strikes-iran-by-march-1-202  0xa34d11f372e8a87acc87e3beabb32e2fe7f9ee4d
+[xgb3]    11    0.1560    1       11       0  1.000   0.314  us-strikes-iran-by-march-1-202  0xb7200eb4ffc3ea4bde0ef28110238bd9f539c414
+[xgb3]    12    0.1560    1       12       0  1.000   0.343  us-strikes-iran-by-march-1-202  0x421b26a47bb5136d045190d7870095eb29498469
+[xgb3]    13    0.1560    1       13       0  1.000   0.371  us-strikes-iran-by-march-1-202  0xdad42409cf398c9149c50217e4dc4a039d9dec0b
+[xgb3]    14    0.1560    1       14       0  1.000   0.400  us-strikes-iran-by-march-1-202  0xfffee3116390fc9415956617ed048d26c7c1b424
+[xgb3]    15    0.1560    1       15       0  1.000   0.429  us-strikes-iran-by-march-1-202  0xe1bdfa52bc9342115bbf1d41d04b8cf0bcd8f5a7
+[xgb3]    16    0.1560    1       16       0  1.000   0.457  us-strikes-iran-by-march-1-202  0xeee545e9706a03e73c5d17632e2bbb6f1096cce1
+[xgb3]    17    0.1560    1       17       0  1.000   0.486  us-strikes-iran-by-march-1-202  0xeb1cdc2f267723b577cd0d1441fe5db05d440f79
+[xgb3]    18    0.1560    1       18       0  1.000   0.514  us-strikes-iran-by-march-1-202  0x65387d3235b2fd6ac3587df1fff2c2de2f98e523
+[xgb3]    19    0.1560    1       19       0  1.000   0.543  us-strikes-iran-by-march-1-202  0xe85f1414171cd41707dc7b256bd3db269f94a28c
+[xgb3]    20    0.1560    1       20       0  1.000   0.571  us-strikes-iran-by-march-1-202  0x244cde3e010a8eb27f0ff588476091bd3d73f1dc
+[xgb3]    21    0.1560    1       21       0  1.000   0.600  us-strikes-iran-by-march-1-202  0x62730fede68ebedfb510e6f38da2aa2eca081741
+[xgb3]    22    0.1560    1       22       0  1.000   0.629  us-strikes-iran-by-march-1-202  0xcb8ed92b702a0f2397f8cda9e4925867b7b9135e
+[xgb3]    23    0.1560    1       23       0  1.000   0.657  us-strikes-iran-by-march-1-202  0xf1d54d55b7568e6e4c20867ccf377555cd947ffc
+[xgb3]    24    0.1560    1       24       0  1.000   0.686  us-strikes-iran-by-march-1-202  0x6130238e132bd12ba92244568815c2f7fe4fc5c1
+[xgb3]    25    0.1560    1       25       0  1.000   0.714  us-strikes-iran-by-march-1-202  0x22d0803925702b81d038c9b3f3aa77a3727f218f
+[xgb3]    26    0.1560    1       26       0  1.000   0.743  us-strikes-iran-by-march-1-202  0xf1a1bcf248a0dc05bec474c229f490db00106f24
+[xgb3]    27    0.1560    1       27       0  1.000   0.771  us-strikes-iran-by-march-1-202  0x8e588259e06da665020dac0e4958301a2089579e
+[xgb3]    28    0.1560    1       28       0  1.000   0.800  us-strikes-iran-by-march-1-202  0x1270fccb862f069b80181dcedf7be31ec6cfc2c8
+[xgb3]    29    0.1560    1       29       0  1.000   0.829  us-strikes-iran-by-march-1-202  0x82ed2416f0a49cc02fb529b00c03582598d17cc3
+[xgb3]    30    0.1560    1       30       0  1.000   0.857  us-strikes-iran-by-march-1-202  0x79963fd69baccad9bb8ab51ddfbf1f13e0630e13
+[xgb3]    31    0.1560    1       31       0  1.000   0.886  us-strikes-iran-by-march-1-202  0x2b6072aa2255e3a95154180076771417e3dc0b9e
+[xgb3]    32    0.1560    1       32       0  1.000   0.914  us-strikes-iran-by-march-1-202  0xdcce3bfa065cf5ca9a0acfe83d6ecd8279d10a15
+[xgb3]    33    0.1560    1       33       0  1.000   0.943  us-strikes-iran-by-march-1-202  0x26ecf4f4a01bf39ce98144ef9aeddf28e9548f54
+[xgb3]    34    0.1542    0       33       1  0.971   0.943  us-strikes-iran-by-march-1-202  0x0ef76ca8d226473cdef7c17c20c07c05d7059ae8
+[xgb3]    35    0.1542    0       33       2  0.943   0.943  us-strikes-iran-by-march-1-202  0x1b740123415b0dccff0ee15e199b3508dcb2778c
+[xgb3]    36    0.1490    1       34       2  0.944   0.971  us-strikes-iran-by-march-1-202  0xc0292a841a0c9a7320aa39075cffcf1b8f64f705
+[xgb3]    37    0.1490    1       35       2  0.946   1.000  us-strikes-iran-by-march-1-202  0xb390ae2cc3fd8cb2670a62129faeb775faee106c
+[xgb3]    38    0.1318    0       35       3  0.921   1.000  us-strikes-iran-by-march-1-202  0x37d10ffb61998561c5f9fb941c42c952d8fb4e28
+[xgb3]    39    0.1318    0       35       4  0.897   1.000  us-strikes-iran-by-march-1-202  0xa67b468c188a5cc7ad8c9659dfd00210cddac941
+[xgb3]    40    0.1318    0       35       5  0.875   1.000  us-strikes-iran-by-march-1-202  0x470e177a6cb992fcc0b6086b91d46a6d45f68fb6
+[xgb3]    41    0.1115    0       35       6  0.854   1.000  us-strikes-iran-by-march-1-202  0x10b0d2a23eed5184fe43d452bca85d063f6b9b5e
+[xgb3]    42    0.1115    0       35       7  0.833   1.000  us-strikes-iran-by-march-1-202  0x0ffcfdffec108e9869698f69c62c82eca210e5a7
+[xgb3]    43    0.1115    0       35       8  0.814   1.000  us-strikes-iran-by-march-1-202  0x131bcf98856e2ac178509b3a5e7a891ac06597c3
+[xgb3]    44    0.1115    0       35       9  0.795   1.000  us-strikes-iran-by-march-1-202  0xb4d0807e3447a8ac6dc52f51070d4e7caa6fa1c5
+[xgb3]    45    0.1115    0       35      10  0.778   1.000  us-strikes-iran-by-march-1-202  0xce785a5ee27cefae536575b5adc89114e62e8093
+[xgb3]    46    0.1082    0       35      11  0.761   1.000  us-strikes-iran-by-march-1-202  0xeff07c97c491e11e6ab7a6f4520e61f8fa5c1210
+[xgb3]    47    0.1054    0       35      12  0.745   1.000  us-strikes-iran-by-march-1-202  0x097ac31be4864bff96838d0aec3eeb30c0ab7041
+[xgb3]    48    0.1011    0       35      13  0.729   1.000  us-strikes-iran-by-march-1-202  0x58804ec98542e15e2764b3acb09ff413f2dd18a0
+[xgb3]    49    0.1000    0       35      14  0.714   1.000  us-strikes-iran-by-march-1-202  0xf5be02858d86213b0ac7fc7afbaf12fd5f26195a
+[xgb3]    50    0.0996    0       35      15  0.700   1.000  us-strikes-iran-by-march-1-202  0x6195e441d616bc6fe41b7344e2027f91e5c54570
+[xgb3]    51    0.0996    0       35      16  0.686   1.000  us-strikes-iran-by-march-1-202  0xabdb30e2a40513f2c40fa48ab3702456786773da
+[xgb3]    52    0.0990    0       35      17  0.673   1.000  us-strikes-iran-by-march-1-202  0x13ff290849c6fef06efde63dfe643e62767716a3
+[xgb3]    53    0.0986    0       35      18  0.660   1.000  us-strikes-iran-by-march-1-202  0x57e862cc576dde007bace893b51ba5c38085057e
+[xgb3]    54    0.0986    0       35      19  0.648   1.000  us-strikes-iran-by-march-1-202  0x741f827ce3986563261675f03448991b15d1f6ca
+[xgb3]    55    0.0986    0       35      20  0.636   1.000  us-strikes-iran-by-march-1-202  0x7926492b3f086db8ff8e349d1037bea1650c1e34
+[xgb3]    56    0.0960    0       35      21  0.625   1.000  us-strikes-iran-by-march-1-202  0xc89dc66e04aa7cd9a38334cca48abf3ad45bb1f1
+[xgb3]    57    0.0954    0       35      22  0.614   1.000  us-strikes-iran-by-march-1-202  0xb05dd86107a3809d6d148fe1f68da0351e40bc1a
+[xgb3]    58    0.0919    0       35      23  0.603   1.000  us-strikes-iran-by-march-1-202  0x1521b47bf0c41f6b7fd3ad41cdec566812c8f23e
+[xgb3]    59    0.0802    0       35      24  0.593   1.000  us-strikes-iran-by-march-1-202  0xe8f348dae364517f0ee9bbeac2928460335dd930
+[xgb3]    60    0.0791    0       35      25  0.583   1.000  us-strikes-iran-by-march-1-202  0xe16ff104a4116cf3a834cd23b3f3391132d66d1f
+[xgb3]    61    0.0788    0       35      26  0.574   1.000  us-strikes-iran-by-march-1-202  0x05548d347cd9c7fd5d8b985590436704024b4514
+[xgb3]    62    0.0785    0       35      27  0.565   1.000  us-strikes-iran-by-march-1-202  0x237ec57d6bdc6c8517f745d08183c016ba0c403c
+[xgb3]    63    0.0772    0       35      28  0.556   1.000  us-strikes-iran-by-march-1-202  0xd3ae24a39cf21417de88b79ed72b6d28a6385b63
+[xgb3]    64    0.0768    0       35      29  0.547   1.000  us-strikes-iran-by-march-1-202  0xddfe9c1985dabc00a483197262a0959d2e754c2e
+[xgb3]    65    0.0767    0       35      30  0.538   1.000  us-strikes-iran-by-march-1-202  0xaface7aac5c1ea428eda2772437ce74142154a84
+[xgb3]    66    0.0767    0       35      31  0.530   1.000  us-strikes-iran-by-march-1-202  0xda406e9cb4c0c357ff7fef0c0d1e97341b898142
+[xgb3]    67    0.0767    0       35      32  0.522   1.000  us-strikes-iran-by-march-1-202  0xe7461927f98f994568411e25e1a3e401f30aff6a
+[xgb3]    68    0.0755    0       35      33  0.515   1.000  us-strikes-iran-by-march-1-202  0xda2d327a9dd25f8460d0576e1facc3ce95da1cee
+[xgb3]    69    0.0746    0       35      34  0.507   1.000  us-strikes-iran-by-march-1-202  0x0329d8856892b29f995245d6bc3bb7ef1b443d96
+[xgb3]    70    0.0742    0       35      35  0.500   1.000  us-strikes-iran-by-march-1-202  0xe397a5077002d4d857e08574033c806a2c9360b6
+[xgb3]    71    0.0742    0       35      36  0.493   1.000  us-strikes-iran-by-march-1-202  0x80b6ec922b7c39c044f487c47779ca8bed8d878c
+[xgb3]    72    0.0742    0       35      37  0.486   1.000  us-strikes-iran-by-march-1-202  0x074aad8084b71edd6a0eab63caed39d66603511d
+[xgb3]    73    0.0741    0       35      38  0.479   1.000  us-strikes-iran-by-march-1-202  0x11aa25a1a88f199aec54b54a6b7ff747c369c2f8
+[xgb3]    74    0.0720    0       35      39  0.473   1.000  us-strikes-iran-by-march-1-202  0x19c97e57baf0b2443fdd607c76ed203943e7b2ce
+[xgb3]    75    0.0720    0       35      40  0.467   1.000  us-strikes-iran-by-march-1-202  0xa50c5c5d7834e665def9f85309dbf957d644f75d
+[xgb3]    76    0.0720    0       35      41  0.461   1.000  us-strikes-iran-by-march-1-202  0xd9edd8c428fd3ce72e1c0be6b126bddc8fdfbc2e
+[xgb3]    77    0.0693    0       35      42  0.455   1.000  us-strikes-iran-by-march-1-202  0x7e80fca8bf7a3e61fd8d2bd7f5e585fec457f17a
+[xgb3]    78    0.0691    0       35      43  0.449   1.000  us-strikes-iran-by-march-1-202  0xf769c6390f6d564fe4859effbddb682c62660114
+[xgb3]    79    0.0675    0       35      44  0.443   1.000  us-strikes-iran-by-march-1-202  0x33acd201d6b02982b3a95b975b331bc225649334
+[xgb3]    80    0.0672    0       35      45  0.438   1.000  us-strikes-iran-by-march-1-202  0x9642bd30d320cad7878f642566f9f5b91fc9d2ab
+[xgb3]    81    0.0649    0       35      46  0.432   1.000  us-strikes-iran-by-march-1-202  0xfadf8833dfb222ab3da48d27d69353762606dda0
+[xgb3]    82    0.0640    0       35      47  0.427   1.000  us-strikes-iran-by-march-1-202  0x6470814e64f3085fe4586cd4939cbf985b53aac7
+[xgb3]    83    0.0639    0       35      48  0.422   1.000  us-strikes-iran-by-march-1-202  0x5ce19758652a0519790b68e25f204f82f7bd62fa
+[xgb3]    84    0.0637    0       35      49  0.417   1.000  us-strikes-iran-by-march-1-202  0xe6ef1d940d84acbb25ce574eb16613db0894418d
+[xgb3]    85    0.0637    0       35      50  0.412   1.000  us-strikes-iran-by-march-1-202  0xa54dcc04bdca68f6cf4fbf1e74e393da842b18bf
+[xgb3]    86    0.0637    0       35      51  0.407   1.000  us-strikes-iran-by-march-1-202  0xdb4b7bf7a5d084bb089ba81a4646e57340180b46
+[xgb3]    87    0.0635    0       35      52  0.402   1.000  us-strikes-iran-by-march-1-202  0x6f01eec19cc6523b741677ed870b0ac04cd7558f
+[xgb3]    88    0.0635    0       35      53  0.398   1.000  us-strikes-iran-by-march-1-202  0xe0afeb157a0b7e76ce7dde16daa1f265b0362dec
+[xgb3]    89    0.0635    0       35      54  0.393   1.000  us-strikes-iran-by-march-1-202  0x06da66efe045ab24e87cdfe0b70b23b2edc2f2ed
+[xgb3]    90    0.0635    0       35      55  0.389   1.000  us-strikes-iran-by-march-1-202  0x2d4e90768c7ae9661acca6b16e605eba3e70edb0
+[xgb3]    91    0.0635    0       35      56  0.385   1.000  us-strikes-iran-by-march-1-202  0x82c762fb547c4d02f41c9baef2258b4f0751e125
+[xgb3]    92    0.0635    0       35      57  0.380   1.000  us-strikes-iran-by-march-1-202  0x9c4abb471fa36400db43d5fa221c680bf2f24896
+[xgb3]    93    0.0633    0       35      58  0.376   1.000  us-strikes-iran-by-march-1-202  0x062b87fc5c1433b79e350c0f558753db63979a6b
+[xgb3]    94    0.0629    0       35      59  0.372   1.000  us-strikes-iran-by-march-1-202  0x8f9bda594242a62008870f1d632352b889116c25
+[xgb3]    95    0.0629    0       35      60  0.368   1.000  us-strikes-iran-by-march-1-202  0x5fef666811668d1352ebd8687d68ad2315a95840
+[xgb3]    96    0.0629    0       35      61  0.365   1.000  us-strikes-iran-by-march-1-202  0xf45082a309088f99e1e2a227a4911c2a2b018eb3
+[xgb3]    97    0.0618    0       35      62  0.361   1.000  us-strikes-iran-by-march-1-202  0x22c030983521343a420500050dcb9ee115420267
+[xgb3]    98    0.0613    0       35      63  0.357   1.000  us-strikes-iran-by-march-1-202  0xd27b644fe8e7246246cadcacd974f4af8d8a3966
+[xgb3]    99    0.0612    0       35      64  0.354   1.000  us-strikes-iran-by-march-1-202  0xbbfe015f178cbd59deb5643dd4888d53d5b5c0ad
+[xgb3]   100    0.0611    0       35      65  0.350   1.000  us-strikes-iran-by-march-1-202  0x1424a9e0a0def5a86c3c6cffbd8b6c65e1b12c7f
+[xgb3]   101    0.0606    0       35      66  0.347   1.000  us-strikes-iran-by-march-1-202  0x58fab4517584b6111af0c011a4e643361e3f1b44
+[xgb3]   102    0.0599    0       35      67  0.343   1.000  us-strikes-iran-by-march-1-202  0xa32ae354b32cc0b69f067850a747b4091a5f36d4
+[xgb3]   103    0.0595    0       35      68  0.340   1.000  us-strikes-iran-by-march-1-202  0x4be1a0489801a5a5a9a41024b13f4a6182ee3fea
+[xgb3]   104    0.0581    0       35      69  0.337   1.000  us-strikes-iran-by-march-1-202  0xdaefcd102d9f3e1626cf49302b65c9073d5ee647
+[xgb3]   105    0.0580    0       35      70  0.333   1.000  us-strikes-iran-by-march-1-202  0x4ad6f0f4e0799bf87b7fec2595b7cd6be5cebf78
+[xgb3]   106    0.0580    0       35      71  0.330   1.000  us-strikes-iran-by-march-1-202  0x3a44416fe65918647226c32e5bfd147b34260196
+[xgb3]   107    0.0575    0       35      72  0.327   1.000  us-strikes-iran-by-march-1-202  0x83708188bb141ae02eb081e4f7131f7b2da9f352
+[xgb3]   108    0.0575    0       35      73  0.324   1.000  us-strikes-iran-by-march-1-202  0xab79b07cf7f7a864f3417997b758cc0a4ae24bff
+[xgb3]   109    0.0574    0       35      74  0.321   1.000  us-strikes-iran-by-march-1-202  0xf33d2aab3dd3af01829f5bbaafd8ab6511cbc852
+[xgb3]   110    0.0569    0       35      75  0.318   1.000  us-strikes-iran-by-march-1-202  0x1bcd6d6ac07a22838618e95ab3d8fef55b9abb7e
+[xgb3]   111    0.0566    0       35      76  0.315   1.000  us-strikes-iran-by-march-1-202  0xc433b9da33c17b1b256eac027873b923d054478e
+[xgb3]   112    0.0566    0       35      77  0.312   1.000  us-strikes-iran-by-march-1-202  0xae0f21790d847393dcc4da8b4d15f72ff84cf647
+[xgb3]   113    0.0566    0       35      78  0.310   1.000  us-strikes-iran-by-march-1-202  0x22535f30260f9e0bb2603f45d8847caedc7cf8e2
+[xgb3]   114    0.0559    0       35      79  0.307   1.000  us-strikes-iran-by-march-1-202  0x50b0b5be14f256bf15c63ae78b33be7214b27dc5
+[xgb3]   115    0.0558    0       35      80  0.304   1.000  us-strikes-iran-by-march-1-202  0x3ecfd2f2df0ef9ed14aa715daa614946b045c870
+[xgb3]   116    0.0553    0       35      81  0.302   1.000  us-strikes-iran-by-march-1-202  0x4e25605fd905e9972efc0f4d8814530c655cd7a7
+[xgb3]   117    0.0546    0       35      82  0.299   1.000  us-strikes-iran-by-march-1-202  0xe168b5394c715b1714b5093d22c681556d3ee559
+[xgb3]   118    0.0545    0       35      83  0.297   1.000  us-strikes-iran-by-march-1-202  0xb8b7f00fc9a15e062550f3c83844aab463300c0c
+[xgb3]   119    0.0545    0       35      84  0.294   1.000  us-strikes-iran-by-march-1-202  0xc2fef07ca5c2ade7b204660ea8a7e487d20c71d6
+[xgb3]   120    0.0544    0       35      85  0.292   1.000  us-strikes-iran-by-march-1-202  0xdbb4a207c02e3f05c4ce1b02e7c934b086cbafe9
+[xgb3]   121    0.0541    0       35      86  0.289   1.000  us-strikes-iran-by-march-1-202  0x77b0b896910b3388e01708521d1f92d1f5c2ba0b
+[xgb3]   122    0.0536    0       35      87  0.287   1.000  us-strikes-iran-by-march-1-202  0xcf8a41bf14bea62c6bf86366406e751b8eb6eadd
+[xgb3]   123    0.0516    0       35      88  0.285   1.000  us-strikes-iran-by-march-1-202  0x06dcaa14f57d8a0573f5dc5940565e6de667af59
+[xgb3]   124    0.0510    0       35      89  0.282   1.000  us-strikes-iran-by-march-1-202  0x5b6331e7ff0831a3fe2ed12004747db1a9c911a4
+[xgb3]   125    0.0507    0       35      90  0.280   1.000  us-strikes-iran-by-march-1-202  0x394ea9fc98dc616575a47975b36483777a3d23d2
+[xgb3]   126    0.0473    0       35      91  0.278   1.000  us-strikes-iran-by-march-1-202  0xc360b7771fe7c63139076a6f9e8c34b773badbb2
+[xgb3]   127    0.0469    0       35      92  0.276   1.000  us-strikes-iran-by-march-1-202  0x0f214043fe6d32f8692a302270e2ce460a523d6e
+[xgb3]   128    0.0465    0       35      93  0.273   1.000  us-strikes-iran-by-march-1-202  0x200febf6368ca9db8b8d1c809d5d7b088b22fe99
+[xgb3]   129    0.0461    0       35      94  0.271   1.000  us-strikes-iran-by-march-1-202  0x951417b7773e19f60d9a581b661a028ccffbeaf1
+[xgb3]   130    0.0451    0       35      95  0.269   1.000  us-strikes-iran-by-march-1-202  0x1a57513f0dcb0789fedb13174252b28e5dc5c02b
+[xgb3]   131    0.0447    0       35      96  0.267   1.000  us-strikes-iran-by-march-1-202  0x6bc74c392c320cfe10d5be61db978a58c8444ad4
+[xgb3]   132    0.0441    0       35      97  0.265   1.000  us-strikes-iran-by-march-1-202  0x4ffb4c1c052e680c4901feccc519cfc74c29933a
+[xgb3]   133    0.0436    0       35      98  0.263   1.000  us-strikes-iran-by-march-1-202  0x702226b14b65b1c8d05ff51759e095f09932f64e
+[xgb3]   134    0.0436    0       35      99  0.261   1.000  us-strikes-iran-by-march-1-202  0xd44c2de98e5b4e2d3b9d23a9cde790f693511223
+[xgb3]   135    0.0436    0       35     100  0.259   1.000  us-strikes-iran-by-march-1-202  0x7c6a5008a0dec812b3200229968889a5c185a406
+[xgb3]   136    0.0436    0       35     101  0.257   1.000  us-strikes-iran-by-march-1-202  0xd0e70259b30341bec5ad1c3c073aa077f37b7ef4
+[xgb3]   137    0.0436    0       35     102  0.255   1.000  us-strikes-iran-by-march-1-202  0x2beac05bd6b6e4a264eec239eea79af3be46df24
+[xgb3]   138    0.0436    0       35     103  0.254   1.000  us-strikes-iran-by-march-1-202  0xfd2b1925b4131dda1fdd4b6292e0339649b5de02
+[xgb3]   139    0.0436    0       35     104  0.252   1.000  us-strikes-iran-by-march-1-202  0xaa4696d5b52e75333946d47e667d0b9a060e5b29
+[xgb3]   140    0.0436    0       35     105  0.250   1.000  us-strikes-iran-by-march-1-202  0xdde758b9ce87ee0e2a91c4f2f8705d5de950b868
+[xgb3]   141    0.0436    0       35     106  0.248   1.000  us-strikes-iran-by-march-1-202  0x16bd7cc71f6da1e77d1d8255677abc75b9bae288
+[xgb3]   142    0.0435    0       35     107  0.246   1.000  us-strikes-iran-by-march-1-202  0x60b41cf81fc908cd755e4cd7f06e2db611fad140
+[xgb3]   143    0.0435    0       35     108  0.245   1.000  us-strikes-iran-by-march-1-202  0xe492cfff541fa99e6ab02bbbb31ab740ece48309
+[xgb3]   144    0.0435    0       35     109  0.243   1.000  us-strikes-iran-by-march-1-202  0x095dcfb123a4bc035ee6b0d624bab0cc964352cf
+[xgb3]   145    0.0435    0       35     110  0.241   1.000  us-strikes-iran-by-march-1-202  0x470a1f47c3fb22f5e4e70c778d20ccbf1928e36c
+[xgb3]   146    0.0435    0       35     111  0.240   1.000  us-strikes-iran-by-march-1-202  0x770569d15dfdc4ad5c3a0ec204032812cc85a442
+[xgb3]   147    0.0435    0       35     112  0.238   1.000  us-strikes-iran-by-march-1-202  0x47088683f8a65fcda4239f4d30f856c6d44c7835
+[xgb3]   148    0.0435    0       35     113  0.236   1.000  us-strikes-iran-by-march-1-202  0x770ee3a1d4c6839ac52bcb7f838c0e83c86ab559
+[xgb3]   149    0.0435    0       35     114  0.235   1.000  us-strikes-iran-by-march-1-202  0x575f9fb0b758d52e93342def50d678e300fc5b78
+[xgb3]   150    0.0435    0       35     115  0.233   1.000  us-strikes-iran-by-march-1-202  0x24836f8deba0a3f7d10328ffa78e4281d5fe6f2f
+[xgb3]   151    0.0435    0       35     116  0.232   1.000  us-strikes-iran-by-march-1-202  0x1f85e6e3e41e5f1fe03f6cf22a52ae4e352ea51b
+[xgb3]   152    0.0435    0       35     117  0.230   1.000  us-strikes-iran-by-march-1-202  0xd2f8885d33a00bac50ecb68cc100d7638759071e
+[xgb3]   153    0.0434    0       35     118  0.229   1.000  us-strikes-iran-by-march-1-202  0xdf409ebc2cda86c98f3abf7666ff4bdc01ff38b8
+[xgb3]   154    0.0432    0       35     119  0.227   1.000  us-strikes-iran-by-march-1-202  0xefaf0cc43dd5970e01485217d1dabe5158d76289
+[xgb3]   155    0.0431    0       35     120  0.226   1.000  us-strikes-iran-by-march-1-202  0x82c39bebf8837e68e8d85e6ddac8e17a1d09764c
+[xgb3]   156    0.0428    0       35     121  0.224   1.000  us-strikes-iran-by-march-1-202  0x6acee3c318f3e3aad88803bfe224b309746095a9
+[xgb3]   157    0.0418    0       35     122  0.223   1.000  us-strikes-iran-by-march-1-202  0x042876159be6d7b9bf89abd83e05f83a7177ae98
+[xgb3]   158    0.0418    0       35     123  0.222   1.000  us-strikes-iran-by-march-1-202  0x9cc5bd222e6020a7e86f10c791c25df613c36714
+[xgb3]   159    0.0418    0       35     124  0.220   1.000  us-strikes-iran-by-march-1-202  0x5e002167ca1d6f4e423b4fb44d360f051d107dc5
+[xgb3]   160    0.0418    0       35     125  0.219   1.000  us-strikes-iran-by-march-1-202  0x75935d040cd2795bdebb692210f9753e63fce677
+[xgb3]   161    0.0417    0       35     126  0.217   1.000  us-strikes-iran-by-march-1-202  0xf80f12c256e97029057760c224524aef5d167868
+[xgb3]   162    0.0417    0       35     127  0.216   1.000  us-strikes-iran-by-march-1-202  0x0aae5c4ec45339a64a1dd2fe4ba98c2a19eb251c
+[xgb3]   163    0.0417    0       35     128  0.215   1.000  us-strikes-iran-by-march-1-202  0xcb2ff2840a6b5abffe7071b35ecdd24891200eb7
+[xgb3]   164    0.0417    0       35     129  0.213   1.000  us-strikes-iran-by-march-1-202  0xc160930494d473fe72671eb81e9458ebb37571ac
+[xgb3]   165    0.0417    0       35     130  0.212   1.000  us-strikes-iran-by-march-1-202  0x4fdbbc57bc50f1abf77d3e68bb26e83080e90b12
+[xgb3]   166    0.0417    0       35     131  0.211   1.000  us-strikes-iran-by-march-1-202  0x803f5027e592523b51fd1aa8c509991d7c4bf6ed
+[xgb3]   167    0.0417    0       35     132  0.210   1.000  us-strikes-iran-by-march-1-202  0xfe23f3506b5aa11e0f4df534faf641433064937b
+[xgb3]   168    0.0417    0       35     133  0.208   1.000  us-strikes-iran-by-march-1-202  0xfd0b63ed8d68738e4905abc4097e9a63510ba6be
+[xgb3]   169    0.0417    0       35     134  0.207   1.000  us-strikes-iran-by-march-1-202  0xed521bba9cb56cc65ed25a54ed93eb6026e29e9c
+[xgb3]   170    0.0417    0       35     135  0.206   1.000  us-strikes-iran-by-march-1-202  0xc922b1202995e6b34697e76e1881d56ca2652a8c
+[xgb3]   171    0.0417    0       35     136  0.205   1.000  us-strikes-iran-by-march-1-202  0x7858d06794cfc352518ec992284aa2431b7b1cbd
+[xgb3]   172    0.0417    0       35     137  0.203   1.000  us-strikes-iran-by-march-1-202  0x8159e504042305104d507bea55ee644e76eff32b
+[xgb3]   173    0.0417    0       35     138  0.202   1.000  us-strikes-iran-by-march-1-202  0x18d422264f629f07d78a75bc5aef7d14ba11af03
+[xgb3]   174    0.0417    0       35     139  0.201   1.000  us-strikes-iran-by-march-1-202  0x63c652270a37e53a170303b6b264a2aa835743a5
+[xgb3]   175    0.0417    0       35     140  0.200   1.000  us-strikes-iran-by-march-1-202  0x8cf4d3bd0f849bdd39ce68889259d9a584e65608
+[xgb3]   176    0.0417    0       35     141  0.199   1.000  us-strikes-iran-by-march-1-202  0xa7b5bf2089e3de036ae68425461407343466fa78
+[xgb3]   177    0.0417    0       35     142  0.198   1.000  us-strikes-iran-by-march-1-202  0x685e556c2559da06aa59ab0d70c727285cd63fd7
+[xgb3]   178    0.0417    0       35     143  0.197   1.000  us-strikes-iran-by-march-1-202  0x0de44e5e476c731b9ca5671e7882e6098a462d29
+[xgb3]   179    0.0417    0       35     144  0.196   1.000  us-strikes-iran-by-march-1-202  0xda25ac7b9d3984fb984ce247c2065ed719576998
+[xgb3]   180    0.0417    0       35     145  0.194   1.000  us-strikes-iran-by-march-1-202  0x171eda69c3857c363f38c954e20dc9039d7be046
+[xgb3]   181    0.0417    0       35     146  0.193   1.000  us-strikes-iran-by-march-1-202  0x48da00a574fa77b8c734377db640cc7c26980419
+[xgb3]   182    0.0417    0       35     147  0.192   1.000  us-strikes-iran-by-march-1-202  0x2ae085ed72ebf5beb536ce7e73a6f4c2e57cbc70
+[xgb3]   183    0.0417    0       35     148  0.191   1.000  us-strikes-iran-by-march-1-202  0xd62840cf26fab216a46c5c9e9920487098e243c1
+[xgb3]   184    0.0415    0       35     149  0.190   1.000  us-strikes-iran-by-march-1-202  0x69ea0d77ef34f1acb03aaed901df7620fc4215cd
+[xgb3]   185    0.0413    0       35     150  0.189   1.000  us-strikes-iran-by-march-1-202  0x882e3b3f40a9e6c8b597dffc72d0d87dc95be757
+[xgb3]   186    0.0411    0       35     151  0.188   1.000  us-strikes-iran-by-march-1-202  0xcd6be6693e2bc11150d397caa9e6f7c6744b68f5
+[xgb3]   187    0.0411    0       35     152  0.187   1.000  us-strikes-iran-by-march-1-202  0x811fe35b4ccfb689a8bf2e144498f358ae7516e3
+[xgb3]   188    0.0410    0       35     153  0.186   1.000  us-strikes-iran-by-march-1-202  0x230725d75ed7da05caffbc16cdbfeaa288db1b45
+[xgb3]   189    0.0409    0       35     154  0.185   1.000  us-strikes-iran-by-march-1-202  0x4a3e9c85342f50e89a51dd6c4e97d34558d0ac1c
+[xgb3]   190    0.0405    0       35     155  0.184   1.000  us-strikes-iran-by-march-1-202  0xbdf4b123270d5ef58a8d69ceb5ac2fdd883b59b4
+[xgb3]   191    0.0405    0       35     156  0.183   1.000  us-strikes-iran-by-march-1-202  0xefc9a3d319adf4ba1259feb39bbd28dddcb0a0b9
+[xgb3]   192    0.0404    0       35     157  0.182   1.000  us-strikes-iran-by-march-1-202  0xfc8dce60c93690dd7a22b0024693294f0afe55c5
+[xgb3]   193    0.0404    0       35     158  0.181   1.000  us-strikes-iran-by-march-1-202  0xb59b573ffc4aea5a5cf6360d5c258e784363916b
+[xgb3]   194    0.0404    0       35     159  0.180   1.000  us-strikes-iran-by-march-1-202  0x0d0f7444f6601a09e75e9a523d8a6684fa4757d9
+[xgb3]   195    0.0403    0       35     160  0.179   1.000  us-strikes-iran-by-march-1-202  0xc7f9a6a9597b0bf2bd4ee1235b3d6d227293c491
+[xgb3]   196    0.0403    0       35     161  0.179   1.000  us-strikes-iran-by-march-1-202  0x81e0d0c6817669629a58ea8b08d2eb1b93492c3b
+[xgb3]   197    0.0402    0       35     162  0.178   1.000  us-strikes-iran-by-march-1-202  0x21cd32cb22b75bc61cb80fe2fbf05bb84cdbf07c
+[xgb3]   198    0.0402    0       35     163  0.177   1.000  us-strikes-iran-by-march-1-202  0x8ca197428f70eed0c0e34d08b9c04e58b69c0c54
+[xgb3]   199    0.0402    0       35     164  0.176   1.000  us-strikes-iran-by-march-1-202  0x1a4f110a2813daef17d72170f97b6dabb9d69b0c
+[xgb3]   200    0.0402    0       35     165  0.175   1.000  us-strikes-iran-by-march-1-202  0x9c65e79218de1bd8c4aad0fbdb69397f8f931cde
+[xgb3]   201    0.0402    0       35     166  0.174   1.000  us-strikes-iran-by-march-1-202  0xeecbf295fb74c4a0a767a0efcf95ac280da86166
+[xgb3]   202    0.0402    0       35     167  0.173   1.000  us-strikes-iran-by-march-1-202  0xab46266fe8ed5c0cf795dc16627ae05629592296
+[xgb3]   203    0.0402    0       35     168  0.172   1.000  us-strikes-iran-by-march-1-202  0x23f77ff9e8eab8a6db75b4ed803497de4fa8547f
+[xgb3]   204    0.0402    0       35     169  0.172   1.000  us-strikes-iran-by-march-1-202  0x9d3ff469e93195b3fc753f38fb2f6072ffbbf19b
+[xgb3]   205    0.0402    0       35     170  0.171   1.000  us-strikes-iran-by-march-1-202  0x4e617ec97e179213f7b4b751d706713453fb82ee
+[xgb3]   206    0.0402    0       35     171  0.170   1.000  us-strikes-iran-by-march-1-202  0x37a4754aa02b17da40499266c10e474268f91631
+[xgb3]   207    0.0402    0       35     172  0.169   1.000  us-strikes-iran-by-march-1-202  0x31ca2fdf162e6fb34a6d77837053c9ced1b035ce
+[xgb3]   208    0.0402    0       35     173  0.168   1.000  us-strikes-iran-by-march-1-202  0x03e41e837f2a9f1e50e68aa8054ab4a38dd3a504
+[xgb3]   209    0.0402    0       35     174  0.167   1.000  us-strikes-iran-by-march-1-202  0x6d5d83165b0c80a4ef13f01e3ba08602c7990ee8
+[xgb3]   210    0.0402    0       35     175  0.167   1.000  us-strikes-iran-by-march-1-202  0x11a556a8d63c65516bc2369edff97becc94d2770
+[xgb3]   211    0.0401    0       35     176  0.166   1.000  us-strikes-iran-by-march-1-202  0x1c0ad0fcf5356497560f585dc6b3d33f2b3dcbc9
+[xgb3]   212    0.0401    0       35     177  0.165   1.000  us-strikes-iran-by-march-1-202  0xdb1b125189913bf03405e74cbf47273b4466efb5
+[xgb3]   213    0.0401    0       35     178  0.164   1.000  us-strikes-iran-by-march-1-202  0x0a793254e040027c5d1ca0c2f87cda8e22228e05
+[xgb3]   214    0.0401    0       35     179  0.164   1.000  us-strikes-iran-by-march-1-202  0xdb657fd8dc9a21a28432104b655908b5aa23a419
+[xgb3]   215    0.0401    0       35     180  0.163   1.000  us-strikes-iran-by-march-1-202  0xa9e37dc9a42a5bd083e584dbbcde6723033c706f
+[xgb3]   216    0.0401    0       35     181  0.162   1.000  us-strikes-iran-by-march-1-202  0xe4e6aa2f9eb66b76d372d80cd91f6bc592d04bd4
+[xgb3]   217    0.0401    0       35     182  0.161   1.000  us-strikes-iran-by-march-1-202  0x94bde001e4a00152490c60bebe2aab120e8c6184
+[xgb3]   218    0.0401    0       35     183  0.161   1.000  us-strikes-iran-by-march-1-202  0x66d609dbda9df641eff684190a01182f6de450c7
+[xgb3]   219    0.0400    0       35     184  0.160   1.000  us-strikes-iran-by-march-1-202  0xc8ab97a9089a9ff7e6ef0688e6e591a066946418
+[xgb3]   220    0.0400    0       35     185  0.159   1.000  us-strikes-iran-by-march-1-202  0x5ecde7348ea5100af4360dd7a6e0a3fb1d420787
+[xgb3]   221    0.0400    0       35     186  0.158   1.000  us-strikes-iran-by-march-1-202  0x1872ca13e77040190750bea62767df466b189ba9
+[xgb3]   222    0.0400    0       35     187  0.158   1.000  us-strikes-iran-by-march-1-202  0xa5ed94eb047a584083361bdbe81f83e3934d7b21
+[xgb3]   223    0.0400    0       35     188  0.157   1.000  us-strikes-iran-by-march-1-202  0x1c266db0f8529b1f25b77123e9c0c918ac2f6e31
+[xgb3]   224    0.0400    0       35     189  0.156   1.000  us-strikes-iran-by-march-1-202  0xf29560ea2bdb539ae8546a42e24040d9b18c508f
+[xgb3]   225    0.0400    0       35     190  0.156   1.000  us-strikes-iran-by-march-1-202  0x2707f2e693b3d20b5a17b603c532571108140afa
+[xgb3]   226    0.0400    0       35     191  0.155   1.000  us-strikes-iran-by-march-1-202  0xa51d9879dc7a35378fc8f9f7487ffb2ea3f3b897
+[xgb3]   227    0.0400    0       35     192  0.154   1.000  us-strikes-iran-by-march-1-202  0x74240608a5c09179445169e2deb23a4285d1a54f
+[xgb3]   228    0.0400    0       35     193  0.154   1.000  us-strikes-iran-by-march-1-202  0xbe3d34441e4fd5f3c69c5a00e694376e37964dc6
+[xgb3]   229    0.0400    0       35     194  0.153   1.000  us-strikes-iran-by-march-1-202  0xa175b0752987ff88f111079095180df1a488a36f
+[xgb3]   230    0.0400    0       35     195  0.152   1.000  us-strikes-iran-by-march-1-202  0xe39783f92ee0985f1ab5fe514030f946825abfcb
+[xgb3]   231    0.0400    0       35     196  0.152   1.000  us-strikes-iran-by-march-1-202  0x0800af6d3a2afc1b427b415baffbf11eab752fec
+[xgb3]   232    0.0400    0       35     197  0.151   1.000  us-strikes-iran-by-march-1-202  0xf3aaa1993611a22a9a0626abe021c4bfec28d6d6
+[xgb3]   233    0.0400    0       35     198  0.150   1.000  us-strikes-iran-by-march-1-202  0x2f0994255febc5e67adaa43f245d99e674a6d942
+[xgb3]   234    0.0400    0       35     199  0.150   1.000  us-strikes-iran-by-march-1-202  0x535ec2dccf77489cc0d1453f088344a2995fccd9
+[xgb3]   235    0.0400    0       35     200  0.149   1.000  us-strikes-iran-by-march-1-202  0x999f3c7a1ec4c6b876fdc5f43aff0e8718b1da43
+[xgb3]   236    0.0400    0       35     201  0.148   1.000  us-strikes-iran-by-march-1-202  0x00ae235ae56a988331104bc5753f2dee196ed68f
+[xgb3]   237    0.0400    0       35     202  0.148   1.000  us-strikes-iran-by-march-1-202  0xe85fbb5dfa5e35fd27b8bddda5aa22bc621d8b0f
+[xgb3]   238    0.0400    0       35     203  0.147   1.000  us-strikes-iran-by-march-1-202  0xd6d3ac4eff7a84993e8c63078603f9e551a5161c
+[xgb3]   239    0.0400    0       35     204  0.146   1.000  us-strikes-iran-by-march-1-202  0xfc2f4f50ce2f6045d35558a5e2d8d4b2ac6610c7
+[xgb3]   240    0.0400    0       35     205  0.146   1.000  us-strikes-iran-by-march-1-202  0x2760925a2d2d05728c8d701f73eaabee99c9ef06
+[xgb3]   241    0.0400    0       35     206  0.145   1.000  us-strikes-iran-by-march-1-202  0xd8e4d149e4860908e319286783defecb0604ea77
+[xgb3]   242    0.0400    0       35     207  0.145   1.000  us-strikes-iran-by-march-1-202  0xc115985a2ec1a736a5b8212a6ad41c5568ba7b4a
+[xgb3]   243    0.0400    0       35     208  0.144   1.000  us-strikes-iran-by-march-1-202  0x174b27fef5e1c06ed52c1ddff29720b23cb65a55
+[xgb3]   244    0.0399    0       35     209  0.143   1.000  us-strikes-iran-by-march-1-202  0xc02147dee42356b7a4edbb1c35ac4ffa95f61fa8
+[xgb3]   245    0.0399    0       35     210  0.143   1.000  us-strikes-iran-by-march-1-202  0xf67f72df65797a85dc9fd44d57adfe5b7b4a31cf
+
+[xgb3] TEST confusion matrix @ thr=0.5
+[[210   0]
+ [ 35   0]]
+
+              precision    recall  f1-score   support
+
+           0     0.8571    1.0000    0.9231       210
+           1     0.0000    0.0000    0.0000        35
+
+    accuracy                         0.8571       245
+   macro avg     0.4286    0.5000    0.4615       245
+weighted avg     0.7347    0.8571    0.7912       245
+
+[xgb3] feature importances (gain):
+   0.1687  adaptive_markout_raw_grosswt_h0p030
+   0.1337  adaptive_markout_raw_grosswt_h0p010
+   0.1297  unrealized_edge_per_open_token_sqrt
+   0.1239  unrealized_edge_per_open_token
+   0.0970  adaptive_markout_raw_grosswt_h0p070
+   0.0598  adaptive_markout_raw_grosswt_h0p150
+   0.0412  buy_markout_adj_grosswt_h0p070_lb0p150
+   0.0400  buy_markout_adj_grosswt_h0p030_lb0p010
+   0.0316  adaptive_plus_realized_alpha0p25_h0p030
+   0.0289  time_to_major_move_pct_of_market
+   0.0272  realized_pnl_per_closing_trade
+   0.0248  buy_markout_adj_mean_h0p200_lb0p200
+   0.0223  adaptive_plus_realized_alpha0p5_h0p070
+   0.0193  buy_markout_adj_grosswt_h0p030_lb0p200
+   0.0191  major_move_time_remaining_pct
+   0.0188  sell_markout_adj_median_h0p150_lb0p010
+   0.0140  buy_markout_adj_mean_h0p200_lb0p030
+   0.0000  adaptive_markout_raw_grosswt_h0p200
+   0.0000  high_sell_nonflattening_cash_frac_pctl90
+   0.0000  n_distinct_buy_days
+
+[xgb3] saved cache/models/xgb_insider_20feat_v2_20260616_140106.json
+[xgb3] saved cache/models/xgb_insider_20feat_v2_20260616_140106.calibrator.joblib
+[xgb3] saved cache/models/xgb_insider_20feat_v2_20260616_140106.meta.json
+[xgb3] copied -> cache/models/xgb_insider_20feat_v2_latest.json
+[xgb3] copied -> cache/models/xgb_insider_20feat_v2_latest.calibrator.joblib
+[xgb3] copied -> cache/models/xgb_insider_20feat_v2_latest.meta.json
+
+[xgb3] comparison vs other models on each model's own test set (NOT directly comparable -- different splits):
+  cb  10-feat v2 (catboost3)             ROC-AUC=0.9947  PR-AUC=0.9661
+  cb  10-feat v2 d2 (catboost4)          ROC-AUC=0.9928  PR-AUC=0.9314
+  cb  30-feat v2 (catboost2)             ROC-AUC=0.9827  PR-AUC=0.8564
+  rf  10-feat v2 (randomforest2)         ROC-AUC=0.9959  PR-AUC=0.9702
+  xgb 30-feat (notebook 80/20)           ROC-AUC=0.9469  PR-AUC=0.8362
+  xgb 20-feat v2 (this run)              ROC-AUC=0.9995  PR-AUC=0.9969

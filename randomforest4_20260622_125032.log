@@ -1,0 +1,200 @@
+[rf4] run timestamp = 20260622_125032
+[rf4] logging to randomforest4_20260622_125032.log
+[rf4] loading cache/training_data_with_metadata.parquet
+[rf4] full shape=(793, 339)  positives=117  negatives=676
+[rf4] using 10 behavioral + 17 metadata = 27 features
+[rf4] behavioral (top-10 from cb_insider_30feat_latest.meta.json):
+   1. adaptive_markout_raw_grosswt_h0p070
+   2. unrealized_edge_per_open_token
+   3. adaptive_markout_raw_grosswt_h0p010
+   4. adaptive_markout_raw_grosswt_h0p150
+   5. unrealized_edge_per_open_token_sqrt
+   6. buy_markout_adj_grosswt_h0p070_lb0p150
+   7. adaptive_markout_raw_grosswt_h0p200
+   8. buy_markout_adj_grosswt_h0p030_lb0p200
+   9. high_sell_nonflattening_cash_frac_pctl90
+  10. realized_pnl_per_closing_trade
+[rf4] metadata:
+   1. n_markets_traded
+   2. wallet_age_seconds
+   3. market_age_seconds
+   4. wallet_to_market_age_ratio
+   5. wallet_minus_market_age_seconds
+   6. winrate
+   7. avg_bet_size_usdc
+   8. median_bet_size_usdc
+   9. total_bet_size_usdc
+  10. n_wallets_same_funder
+  11. n_other_wallets_same_funder
+  12. herfindahl_index_markets
+  13. is_first_market
+  14. time_since_first_deposit_to_first_trade_seconds
+  15. lifetime_volume_share_on_market
+  16. pnl_sharpe
+  17. funder_flagged_wallet_count
+[rf4] markets total: 29  (train=20, val=8, test=1)
+[rf4] market order (oldest -> newest), split assignment:
+  train  2025-07-07  will-microstrategy-purchase-bitcoin-july-1-7
+  train  2025-07-28  will-microstrategy-hold-620k-btc-before-august
+  train  2025-09-26  openai-social-app-in-2025
+  train  2025-10-09  will-mara-corina-machado-win-the-nobel-peace-prize-in-2025
+  train  2025-10-10  will-yulia-navalnaya-win-the-nobel-peace-prize-in-2025
+  train  2025-10-18  openai-browser-in-2025
+  train  2025-10-19  openai-browser-by-october-31
+  train  2025-11-17  microstrategy-announces-1000-btc-purchase-november-11-17
+  train  2025-11-30  will-microstrategy-announce-holding-650k-btc-by-november-30
+  train  2025-12-06  will-stable-launch-a-token-in-2025
+  train  2025-12-08  microstrategy-announces-1000-btc-purchase-december-2-8
+  train  2025-12-11  will-openai-release-a-new-frontier-model-by-december-13-683
+  train  2025-12-17  will-draftkings-launch-a-prediction-market-in-2025
+  train  2025-12-22  will-microstrategy-announce-a-bitcoin-purchase-december-16-22
+  train  2025-12-27  microstrategy-sell-any-bitcoin-in-2025
+  train  2025-12-28  will-aztec-launch-a-token-in-2025
+  train  2025-12-28  will-microstrategy-hold-680k-btc-by-december-31
+  train  2025-12-29  will-lighter-perform-an-airdrop-by-december-31
+  train  2026-02-09  will-cardi-b-perform-during-the-super-bowl-lx-halftime-show
+  train  2026-02-09  will-karol-g-perform-during-the-super-bowl-lx-halftime-show
+  test   2026-02-26  will-axiom-be-accused-of-insider-trading
+  val    2026-02-27  will-us-or-israel-strike-iran-by-february-28-2026-766
+  val    2026-02-27  us-strikes-iran-by-february-28-2026-227-967-547-688-589-491-592-418-452-924-384-915-464-672-196-157-993-596-269-535-381-391-471-256-988-997-296-225-762-973-292-827-345-182-558-215-794-879-189-761
+  val    2026-02-28  us-strikes-iran-by-march-1-2026-492
+  val    2026-02-28  khamenei-out-as-supreme-leader-of-iran-by-march-31
+  val    2026-03-13  nothing-ever-happens-microstrategy
+  val    2026-03-15  will-microstrategy-announce-holding-740k-btc-by-march-31
+  val    NaT         us-x-iran-ceasefire-by-april-7
+  val    NaT         will-openai-release-a-new-frontier-model-on-december-11
+[rf4] row distribution (total n=793, pos=117, overall pos rate=14.75%):
+  train  n= 221  (27.87% of total)  pos= 35  (15.84% pos rate within split)
+  val    n= 523  (65.95% of total)  pos= 75  (14.34% pos rate within split)
+  test   n=  49  ( 6.18% of total)  pos=  7  (14.29% pos rate within split)
+[rf4] running 5-fold expanding-window CV on 20 train markets
+  fold 1: train_mks=5 (rows=36, pos=7) val_mks=3 (rows=21, pos=3)  ROC-AUC=0.9259  PR-AUC=0.7222
+  fold 2: train_mks=8 (rows=57, pos=10) val_mks=3 (rows=76, pos=12)  ROC-AUC=0.8496  PR-AUC=0.4507
+  fold 3: train_mks=11 (rows=133, pos=22) val_mks=3 (rows=49, pos=7)  ROC-AUC=0.9558  PR-AUC=0.7044
+  fold 4: train_mks=14 (rows=182, pos=29) val_mks=3 (rows=18, pos=3)  ROC-AUC=1.0000  PR-AUC=1.0000
+  fold 5: train_mks=17 (rows=200, pos=32) val_mks=3 (rows=21, pos=3)  ROC-AUC=0.7870  PR-AUC=0.5286
+[rf4] CV ROC-AUC = 0.9037 ± 0.0762  (over 5 usable folds)
+[rf4] CV PR-AUC  = 0.6812 ± 0.1899
+[rf4] final positive class weight = 2.000  (auto-balanced would be 5.314)
+[rf4] fit in 0.54s  n_estimators=300
+
+[rf4] prob range  train=[0.000, 0.953]  val=[0.000, 0.757]  test=[0.000, 0.507]
+
+[rf4] metrics per split (overfit check: train >> val => overfit):
+[rf4] train  n= 221 pos= 35  ROC-AUC=1.0000  PR-AUC=1.0000  P=1.0000  R=1.0000  F1=1.0000  (thr=0.5)
+[rf4] val    n= 523 pos= 75  ROC-AUC=0.9671  PR-AUC=0.7614  P=0.7576  R=0.6667  F1=0.7092  (thr=0.5)
+[rf4] test   n=  49 pos=  7  ROC-AUC=0.9048  PR-AUC=0.5009  P=0.0000  R=0.0000  F1=0.0000  (thr=0.5)
+
+[rf4] PR-AUC gap train-val = +0.2386  (big positive = overfit train)
+[rf4] PR-AUC gap val-test  = +0.2605  (big positive = overfit val)
+
+[rf4] classification metrics @ fixed thr=0.5:
+  train  P=1.0000  R=1.0000  F1=1.0000  (TP=35, FP=0, FN=0, TN=186)
+  val    P=0.7576  R=0.6667  F1=0.7092  (TP=50, FP=16, FN=25, TN=432)
+  test   P=0.0000  R=0.0000  F1=0.0000  (TP=0, FP=1, FN=7, TN=41)
+[rf4] curves saved to randomforest4_20260622_125032_curves.png
+
+[rf4] TEST predictions, one row per wallet, sorted by prob desc.
+[rf4]  rank  prob    label  cum_tp  cum_fp  prec   recall  wallet
+[rf4]     1    0.5067    0        0       1  0.000   0.000  0xa2bc00398168c2ef76c81230c543ab118a227134
+[rf4]     2    0.4933    1        1       1  0.500   0.143  0x054ec2f0ccfdae941886a3ed306635068c716639
+[rf4]     3    0.4900    0        1       2  0.333   0.143  0x22d53062ca2f41ee15df9b401a523eea73419aeb
+[rf4]     4    0.4567    1        2       2  0.500   0.286  0xaab29084bcc42daff9e11b4a5a4cc55cda3eb306
+[rf4]     5    0.4533    1        3       2  0.600   0.429  0x581f34349babaf03b2d3c8f5f60cf44ffbe19a3a
+[rf4]     6    0.4500    0        3       3  0.500   0.429  0xc8ee8150ff9bf058b2b8defd09e1bac866ffffd7
+[rf4]     7    0.4433    0        3       4  0.429   0.429  0x8192329901e78e1af09863b6c69378b35b99168d
+[rf4]     8    0.3867    1        4       4  0.500   0.571  0x1d9af60c679cd0b577c3c4ccb4b1a4be4174426d
+[rf4]     9    0.3867    0        4       5  0.444   0.571  0x5e524f43357198fa815e6766f02fe686b444b064
+[rf4]    10    0.3767    1        5       5  0.500   0.714  0x6d6affce1ed04a0e9611484daf1cef5cbcf3fb40
+[rf4]    11    0.3700    0        5       6  0.455   0.714  0x3670279e844f5005d7ed8cc37ca562eaadef34f9
+[rf4]    12    0.3367    0        5       7  0.417   0.714  0xff55beaf369387d7748a31213699a51f1ca8b877
+[rf4]    13    0.3367    1        6       7  0.462   0.857  0x98a96619e482700e83e8486e4f3727dba17f5381
+[rf4]    14    0.3133    1        7       7  0.500   1.000  0xe56526b27b96f009b31ddb46558a134047bfce48
+[rf4]    15    0.3033    0        7       8  0.467   1.000  0xd9eab53eaba81333045da5bd84ce6c833f721e89
+[rf4]    16    0.2767    0        7       9  0.438   1.000  0xc1872cdc321ce83ae361516ee22e3419579c4f67
+[rf4]    17    0.2467    0        7      10  0.412   1.000  0xb3768b87f4dcb77a92f2e73f5a54ef2d01ab8817
+[rf4]    18    0.2100    0        7      11  0.389   1.000  0x4268978b9f58cf6e916d9878aa990cc515b70169
+[rf4]    19    0.1733    0        7      12  0.368   1.000  0x8432866dac9038e7a0c9bfae1635f21c695c21a3
+[rf4]    20    0.1433    0        7      13  0.350   1.000  0xd21563efd89113ed2ea602bf8562feb4332cddcf
+[rf4]    21    0.1400    0        7      14  0.333   1.000  0x66d5296705f8f0abcaa8043986c3dc9196aa9e9f
+[rf4]    22    0.1367    0        7      15  0.318   1.000  0xe31b852756937aef6a047b8de0d36196804b3fb7
+[rf4]    23    0.0600    0        7      16  0.304   1.000  0xa5ab0fe08ccffa97e2de8e5caf4d7bd7cd32ed02
+[rf4]    24    0.0600    0        7      17  0.292   1.000  0x2b3e111fdecbe01582ba9dbedad79a94ceb2b898
+[rf4]    25    0.0433    0        7      18  0.280   1.000  0x9bd35d55ae6c5d4900ef48e9e2ffe981ed5a3748
+[rf4]    26    0.0367    0        7      19  0.269   1.000  0x0aeb57166a5496fdfe6d02cd878ecae36e9ec405
+[rf4]    27    0.0333    0        7      20  0.259   1.000  0x16c7fe0dff534c7b8faf8fee6dbddddea1a10f82
+[rf4]    28    0.0333    0        7      21  0.250   1.000  0xc907f73eade151b451d970d79a39b13a7b18e852
+[rf4]    29    0.0300    0        7      22  0.241   1.000  0xf67f72df65797a85dc9fd44d57adfe5b7b4a31cf
+[rf4]    30    0.0167    0        7      23  0.233   1.000  0xcf6a714618a328c608a1c70cb62a31a6bef3f9d0
+[rf4]    31    0.0133    0        7      24  0.226   1.000  0x5f8fe08245151828dc063df19ccbb3c9100d40cf
+[rf4]    32    0.0100    0        7      25  0.219   1.000  0x4429fafc9675b330beaa808dbcfa74aeb04c4409
+[rf4]    33    0.0100    0        7      26  0.212   1.000  0x828d1dc3586d7aacbc8de4916685690b1453c9a5
+[rf4]    34    0.0067    0        7      27  0.206   1.000  0x72a22d4d155079da8f50c89d4c6c03b6428e7b65
+[rf4]    35    0.0067    0        7      28  0.200   1.000  0xb2fc56f2f4ef3e34b59a6d603b084ffb34f71881
+[rf4]    36    0.0033    0        7      29  0.194   1.000  0x50261ea1791d99d4b8e8f65b9e602390a1cbcd15
+[rf4]    37    0.0033    0        7      30  0.189   1.000  0x0c97325a81ad05c6b58ae30d12eaaec1b8451b68
+[rf4]    38    0.0033    0        7      31  0.184   1.000  0x2d58182d23f73967a9eff97a6020b73b7b891aea
+[rf4]    39    0.0033    0        7      32  0.179   1.000  0x44c1dfe43260c94ed4f1d00de2e1f80fb113ebc1
+[rf4]    40    0.0000    0        7      33  0.175   1.000  0xb10047d6a254b2ebb306d7a7d13bf59171ab6461
+[rf4]    41    0.0000    0        7      34  0.171   1.000  0x0260366a9add43c25d4f4d35d2210526c6750d88
+[rf4]    42    0.0000    0        7      35  0.167   1.000  0xc5d563a36ae78145c45a50134d48a1215220f80a
+[rf4]    43    0.0000    0        7      36  0.163   1.000  0xec593b3c1a9a0ed15e597dc4ea09cafbffe3bb35
+[rf4]    44    0.0000    0        7      37  0.159   1.000  0x076ca0207aaa48365da2eb6a917edcbdee5e4e7b
+[rf4]    45    0.0000    0        7      38  0.156   1.000  0x7744bfd749a70020d16a1fcbac1d064761c9999e
+[rf4]    46    0.0000    0        7      39  0.152   1.000  0xdc9d2b17dd9d903f0e33acdbc9b41c77a339efc0
+[rf4]    47    0.0000    0        7      40  0.149   1.000  0xedf72350cc1d1fc9b02186f33a19a27108e24003
+[rf4]    48    0.0000    0        7      41  0.146   1.000  0x6bab41a0dc40d6dd4c1a915b8c01969479fd1292
+[rf4]    49    0.0000    0        7      42  0.143   1.000  0x5188fa0e8a77e87bc6a58e6781fdfc4e165cc804
+
+[rf4] TEST confusion matrix @ thr=0.5
+[[41  1]
+ [ 7  0]]
+
+              precision    recall  f1-score   support
+
+           0     0.8542    0.9762    0.9111        42
+           1     0.0000    0.0000    0.0000         7
+
+    accuracy                         0.8367        49
+   macro avg     0.4271    0.4881    0.4556        49
+weighted avg     0.7321    0.8367    0.7810        49
+
+[rf4] feature importances (mean decrease in impurity):
+   0.1311  median_bet_size_usdc
+   0.1216  herfindahl_index_markets
+   0.0689  time_since_first_deposit_to_first_trade_seconds
+   0.0521  wallet_age_seconds
+   0.0510  lifetime_volume_share_on_market
+   0.0454  adaptive_markout_raw_grosswt_h0p200
+   0.0433  avg_bet_size_usdc
+   0.0404  total_bet_size_usdc
+   0.0396  adaptive_markout_raw_grosswt_h0p070
+   0.0393  adaptive_markout_raw_grosswt_h0p010
+   0.0391  wallet_minus_market_age_seconds
+   0.0368  unrealized_edge_per_open_token
+   0.0360  n_markets_traded
+   0.0346  pnl_sharpe
+   0.0346  winrate
+   0.0341  adaptive_markout_raw_grosswt_h0p150
+   0.0324  wallet_to_market_age_ratio
+   0.0312  buy_markout_adj_grosswt_h0p030_lb0p200
+   0.0290  unrealized_edge_per_open_token_sqrt
+   0.0200  buy_markout_adj_grosswt_h0p070_lb0p150
+   0.0177  market_age_seconds
+   0.0124  realized_pnl_per_closing_trade
+   0.0045  is_first_market
+   0.0020  high_sell_nonflattening_cash_frac_pctl90
+   0.0017  n_wallets_same_funder
+   0.0010  n_other_wallets_same_funder
+   0.0000  funder_flagged_wallet_count
+
+[rf4] saved cache/models/rf_insider_meta_v4_20260622_125032.joblib
+[rf4] saved cache/models/rf_insider_meta_v4_20260622_125032.meta.json
+[rf4] copied -> cache/models/rf_insider_meta_v4_latest.joblib
+[rf4] copied -> cache/models/rf_insider_meta_v4_latest.meta.json
+
+[rf4] comparison vs other models (NOT same test market -- rf3 tests Iran, this tests axiom):
+  rf  10-feat + meta v3 (Iran test)    ROC-AUC=0.9925  PR-AUC=0.9332
+  rf  10-feat v2 (behavioral only)     ROC-AUC=0.9959  PR-AUC=0.9702
+  cb  10-feat v2 (same behavioral)     ROC-AUC=0.9947  PR-AUC=0.9661
+  rf  10-feat + meta v4 (this run)     ROC-AUC=0.9048  PR-AUC=0.5009

@@ -1,0 +1,193 @@
+08:40:48 [super] ============================================================
+08:40:48 [super] supercompute starting, log=supercompute_willtrumppardonchangpeng_20260701_084048.log
+08:40:48 [super] market=will-trump-pardon-changpeng-zhao-in-2025-162-949-658  jobs=16  meta_jobs=8  top_n=all
+08:40:48 [super] model=xgb_insider_meta_v7_latest.json  features=30 (20 behavioral + 10 metadata)  calibrator=yes  threshold=0.15
+08:40:48 [super] known-insider wallets for funder signal: 0
+08:40:48 [super] events: cache miss -> resolving market + fetching (needs internet)...
+08:44:19 [super] events: fetched 22261 in 210.7s
+08:44:19 [super] events: cached to cache/events/will-trump-pardon-changpeng-zhao-in-2025-162-949-658.pkl
+08:44:19 [super] market resolved: tokens=2 closed=True duration=188.8d
+08:44:19 [super] market: closed=True final_outcome_yes=1  wallets that traded: 3164
+08:44:19 [super] scoring 3164 wallets
+08:44:19 [super] behavioral: 3164 wallets across 16 processes
+08:47:37 [super] behavioral: 200/3164 wallets (198s)
+08:50:25 [super] behavioral: 400/3164 wallets (365s)
+08:52:35 [super] behavioral: 600/3164 wallets (495s)
+08:55:27 [super] behavioral: 800/3164 wallets (667s)
+08:57:30 [super] behavioral: 1000/3164 wallets (790s)
+09:00:19 [super] behavioral: 1200/3164 wallets (960s)
+09:02:14 [super] behavioral: 1400/3164 wallets (1075s)
+09:04:58 [super] behavioral: 1600/3164 wallets (1239s)
+09:07:03 [super] behavioral: 1800/3164 wallets (1363s)
+09:09:48 [super] behavioral: 2000/3164 wallets (1529s)
+09:12:05 [super] behavioral: 2200/3164 wallets (1665s)
+09:14:42 [super] behavioral: 2400/3164 wallets (1823s)
+09:16:54 [super] behavioral: 2600/3164 wallets (1955s)
+09:19:26 [super] behavioral: 2800/3164 wallets (2106s)
+09:21:43 [super] behavioral: 3000/3164 wallets (2244s)
+09:23:16 [super] behavioral: 3164/3164 wallets (2337s)
+09:23:17 [super] behavioral: done in 2337.3s
+09:23:17 [super] metadata: 3164 wallets across 8 threads (api_key=set)
+09:30:26 [super] metadata: 200/3164 wallets (429s)
+09:32:59 [super] metadata failed for 0x17e5540bc696fd3e8b7da9101a93e4835c783d19: ReadTimeout: HTTPSConnectionPool(host='api.etherscan.io', port=443): Read timed out. (read timeout=30.0)
+09:33:06 [super] metadata failed for 0x9c950fcaaa29159d4a6490bb30ad98eb28f43b35: ReadTimeout: HTTPSConnectionPool(host='api.etherscan.io', port=443): Read timed out. (read timeout=30.0)
+09:33:07 [super] metadata failed for 0xbad26fe5458e6219cec3e40272760e275e835296: ReadTimeout: HTTPSConnectionPool(host='api.etherscan.io', port=443): Read timed out. (read timeout=30.0)
+09:38:28 [super] metadata: 400/3164 wallets (912s)
+09:45:02 [super] metadata: 600/3164 wallets (1306s)
+09:51:34 [super] metadata: 800/3164 wallets (1697s)
+09:56:20 [super] metadata failed for 0xc739b3ca74ab8c38ed5c29b0a572c00607b3f0a0: ReadTimeout: HTTPSConnectionPool(host='api.etherscan.io', port=443): Read timed out. (read timeout=30.0)
+09:58:02 [super] metadata: 1000/3164 wallets (2085s)
+10:02:05 [super] metadata failed for 0xc9f8cf7817ea6bb1ba00382c318bf3e32c0a44e5: ReadTimeout: HTTPSConnectionPool(host='api.etherscan.io', port=443): Read timed out. (read timeout=30.0)
+10:04:33 [super] metadata: 1200/3164 wallets (2476s)
+10:10:29 [super] metadata: 1400/3164 wallets (2833s)
+10:16:27 [super] metadata failed for 0x55e967c63981c1a0587930bf4692d2309351a328: ReadTimeout: HTTPSConnectionPool(host='api.etherscan.io', port=443): Read timed out. (read timeout=30.0)
+10:16:31 [super] metadata failed for 0x20562683c1f1842921c06438d698abec6250843d: ReadTimeout: HTTPSConnectionPool(host='api.etherscan.io', port=443): Read timed out. (read timeout=30.0)
+10:16:38 [super] metadata failed for 0x5a0dce88f7b53cf1b522eb93cd3bec9f8345d3f2: ReadTimeout: HTTPSConnectionPool(host='api.etherscan.io', port=443): Read timed out. (read timeout=30.0)
+10:16:40 [super] metadata failed for 0xeb7bc926c6862f756c20751704874727feec4f37: ReadTimeout: HTTPSConnectionPool(host='api.etherscan.io', port=443): Read timed out. (read timeout=30.0)
+10:16:52 [super] metadata failed for 0x28ecdf6cd7ff47d591894eea0ff42b79cbf7663e: ReadTimeout: HTTPSConnectionPool(host='api.etherscan.io', port=443): Read timed out. (read timeout=30.0)
+10:16:53 [super] metadata failed for 0xaa2ecacb0393f15cf5129a18aca735fecafa3939: ReadTimeout: HTTPSConnectionPool(host='api.etherscan.io', port=443): Read timed out. (read timeout=30.0)
+10:16:54 [super] metadata failed for 0xc3a04434d764f74b11ddace550d2f3cd96fa2698: ReadTimeout: HTTPSConnectionPool(host='api.etherscan.io', port=443): Read timed out. (read timeout=30.0)
+10:17:09 [super] metadata: 1600/3164 wallets (3232s)
+10:22:59 [super] metadata: 1800/3164 wallets (3582s)
+10:23:40 [super] metadata failed for 0x234939f5689a18209369be5e962aad63daef4f4d: ReadTimeout: HTTPSConnectionPool(host='api.etherscan.io', port=443): Read timed out. (read timeout=30.0)
+10:23:42 [super] metadata failed for 0xdd90cdb78343fc53fd73b658a4bb7f6c33819ef9: ReadTimeout: HTTPSConnectionPool(host='api.etherscan.io', port=443): Read timed out. (read timeout=30.0)
+10:23:43 [super] metadata failed for 0x764ebaaa9ce963b1097c939c6b57bbb20327941e: ReadTimeout: HTTPSConnectionPool(host='api.etherscan.io', port=443): Read timed out. (read timeout=30.0)
+10:23:44 [super] metadata failed for 0x9e96bf1a125edc30e4d5d0c4037cf40ed4d9633f: ReadTimeout: HTTPSConnectionPool(host='api.etherscan.io', port=443): Read timed out. (read timeout=30.0)
+10:29:10 [super] metadata: 2000/3164 wallets (3953s)
+10:34:08 [super] metadata: 2200/3164 wallets (4252s)
+10:38:46 [super] metadata: 2400/3164 wallets (4529s)
+10:43:20 [super] metadata: 2600/3164 wallets (4803s)
+10:48:32 [super] metadata: 2800/3164 wallets (5116s)
+10:53:49 [super] metadata: 3000/3164 wallets (5433s)
+10:57:18 [super] metadata: 3164/3164 wallets (5641s)
+10:57:18 [super] metadata: done in 5641.0s
+10:57:18 [super] ============================================================
+10:57:18 [super] RESULT: 124/3164 wallets flagged at calibrated prob >= 0.15
+10:57:18 [super] ============================================================
+10:57:18 [super] FLAGGED 0x37aa9ba3ac08c188b43bde8df7c911b1e8e1c860  prob=0.701 (raw=0.981)  vol=$826  trades=12  first_trade=2025-10-13 13:03  winrate=0.400  n_markets_traded=5.000  herfindahl_index_markets=0.512
+10:57:18 [super] FLAGGED 0xbfe7f475e6bf0a947224a824ce2de9fcebfad95a  prob=0.701 (raw=0.981)  vol=$16,489  trades=31  first_trade=2025-10-06 09:16  winrate=0.000  n_markets_traded=1.000  herfindahl_index_markets=1.000
+10:57:18 [super] FLAGGED 0xf4604a0828e571a615b53bdaa0cb2c8ee045c31f  prob=0.699 (raw=0.979)  vol=$12,880  trades=32  first_trade=2025-08-26 04:16  winrate=0.000  n_markets_traded=1.000  herfindahl_index_markets=1.000
+10:57:18 [super] FLAGGED 0x6e7e17cd09e2f9403dc967fdac7475b0ff762a50  prob=0.675 (raw=0.955)  vol=$423  trades=2  first_trade=2025-08-30 19:39  winrate=0.000  n_markets_traded=13.000  herfindahl_index_markets=0.255
+10:57:18 [super] FLAGGED 0x176500db77481722c5b898acaaafaa755508a60b  prob=0.669 (raw=0.949)  vol=$11,611  trades=42  first_trade=2025-10-11 13:07  winrate=0.000  n_markets_traded=1.000  herfindahl_index_markets=1.000
+10:57:18 [super] FLAGGED 0x98cd52d48600d6149806b50877d954f62cd146a5  prob=0.666 (raw=0.946)  vol=$61,217  trades=202  first_trade=2025-09-10 16:04  winrate=0.000  n_markets_traded=1.000  herfindahl_index_markets=1.000
+10:57:18 [super] FLAGGED 0xaba9685661f38e50ff226e8e761eaab8d9b13739  prob=0.665 (raw=0.946)  vol=$44,745  trades=300  first_trade=2025-08-31 21:29  winrate=0.000  n_markets_traded=1.000  herfindahl_index_markets=1.000
+10:57:18 [super] FLAGGED 0xcd5546a006e0a15fa64f6665ab03365a88807131  prob=0.665 (raw=0.946)  vol=$2  trades=2  first_trade=2025-10-18 08:30  winrate=0.357  n_markets_traded=14.000  herfindahl_index_markets=0.185
+10:57:18 [super] FLAGGED 0xde28593ff757ef2920ae0e0c837eafd0d1888dbd  prob=0.643 (raw=0.925)  vol=$1,871  trades=10  first_trade=2025-10-10 20:54  winrate=0.000  n_markets_traded=1.000  herfindahl_index_markets=1.000
+10:57:18 [super] FLAGGED 0x78cae507c94ae5bc946d390fac6c4eab569cdc46  prob=0.642 (raw=0.924)  vol=$4,033  trades=12  first_trade=2025-10-10 20:10  winrate=0.000  n_markets_traded=1.000  herfindahl_index_markets=1.000
+10:57:18 [super] FLAGGED 0x7a0fb229f1cc2ac8f2e42b62d0adc8d2266d5c1d  prob=0.642 (raw=0.923)  vol=$5,932  trades=73  first_trade=2025-10-15 07:33  winrate=0.000  n_markets_traded=1.000  herfindahl_index_markets=1.000
+10:57:18 [super] FLAGGED 0x86be72f88e5e4cff39ff47880e8770d9185d7efb  prob=0.635 (raw=0.917)  vol=$914  trades=5  first_trade=2025-10-14 01:28  winrate=0.000  n_markets_traded=1.000  herfindahl_index_markets=1.000
+10:57:18 [super] FLAGGED 0xa268d4480a3785a3297ee2dbec955bb32e66d60b  prob=0.631 (raw=0.914)  vol=$4,879  trades=8  first_trade=2025-10-11 19:29  winrate=0.000  n_markets_traded=6.000  herfindahl_index_markets=0.339
+10:57:18 [super] FLAGGED 0x609a193fa082b8237b3e77944a47ad1a09696c1e  prob=0.630 (raw=0.913)  vol=$10  trades=2  first_trade=2025-10-15 09:20  winrate=0.000  n_markets_traded=3.000  herfindahl_index_markets=0.977
+10:57:18 [super] FLAGGED 0x3cc9d14a3be050d8976bc4917e56c32db33eeeb2  prob=0.624 (raw=0.907)  vol=$1,008  trades=7  first_trade=2025-10-13 00:21  winrate=0.000  n_markets_traded=2.000  herfindahl_index_markets=0.984
+10:57:18 [super] FLAGGED 0x0d809e43222339946787728c10cfbed76a37d3a6  prob=0.621 (raw=0.904)  vol=$3,415  trades=16  first_trade=2025-09-17 09:14  winrate=0.000  n_markets_traded=2.000  herfindahl_index_markets=0.990
+10:57:18 [super] FLAGGED 0x7f1329ade2ec162c6f8791dad99125e0dc49801c  prob=0.611 (raw=0.895)  vol=$53,155  trades=147  first_trade=2025-09-28 04:48  winrate=0.000  n_markets_traded=1.000  herfindahl_index_markets=1.000
+10:57:18 [super] FLAGGED 0xbaf9b8bde26abd337a2f81efe7f63407288a26b0  prob=0.607 (raw=0.892)  vol=$1,084  trades=7  first_trade=2025-10-07 11:57  winrate=0.000  n_markets_traded=1.000  herfindahl_index_markets=1.000
+10:57:18 [super] FLAGGED 0x9b22bbbb31af5b9f544bb366f8392b5ed63b20de  prob=0.605 (raw=0.890)  vol=$753  trades=8  first_trade=2025-10-11 21:50  winrate=0.000  n_markets_traded=1.000  herfindahl_index_markets=1.000
+10:57:18 [super] FLAGGED 0x52f4da2ff6caf3ae55496226e6a25f7aa7ef96c7  prob=0.603 (raw=0.888)  vol=$16,923  trades=22  first_trade=2025-10-09 00:32  winrate=0.000  n_markets_traded=2.000  herfindahl_index_markets=0.503
+10:57:18 [super] FLAGGED 0xc458b72dd70b189a07d73e2118ff63d6d6141cff  prob=0.602 (raw=0.887)  vol=$1,092  trades=9  first_trade=2025-10-07 08:36  winrate=0.000  n_markets_traded=1.000  herfindahl_index_markets=1.000
+10:57:18 [super] FLAGGED 0x60673a3d6fa61da294026fd456f37898c6372e4d  prob=0.591 (raw=0.878)  vol=$330  trades=2  first_trade=2025-07-08 20:10  winrate=0.000  n_markets_traded=1.000  herfindahl_index_markets=1.000
+10:57:18 [super] FLAGGED 0x4872bea5de0d63c9762ad43dd134952a3ab6a3ee  prob=0.589 (raw=0.876)  vol=$15,772  trades=40  first_trade=2025-08-23 19:52  winrate=0.000  n_markets_traded=1.000  herfindahl_index_markets=1.000
+10:57:18 [super] FLAGGED 0xf4db8e7d8a60423ea2559f45c5c7f066fbc040b9  prob=0.567 (raw=0.856)  vol=$213  trades=2  first_trade=2025-10-21 16:57  winrate=0.000  n_markets_traded=1.000  herfindahl_index_markets=1.000
+10:57:18 [super] FLAGGED 0xff03161464ff3b3229bc331430a1bf7ca3ba7c3b  prob=0.563 (raw=0.853)  vol=$200  trades=3  first_trade=2025-10-23 15:09  winrate=0.333  n_markets_traded=3.000  herfindahl_index_markets=0.565
+10:57:18 [super] FLAGGED 0xed49defb36f77e74912c0ff38d2667317bad8783  prob=0.560 (raw=0.850)  vol=$1,208  trades=7  first_trade=2025-09-16 20:59  winrate=0.400  n_markets_traded=5.000  herfindahl_index_markets=0.685
+10:57:18 [super] FLAGGED 0x06c1d2910ea748c47db6b745acf40301fe8a2727  prob=0.558 (raw=0.849)  vol=$8,840  trades=47  first_trade=2025-09-30 06:34  winrate=0.429  n_markets_traded=7.000  herfindahl_index_markets=0.258
+10:57:18 [super] FLAGGED 0xb4800380e14685277d619324096bdfd69da342dc  prob=0.554 (raw=0.845)  vol=$100  trades=5  first_trade=2025-10-12 14:21  winrate=0.000  n_markets_traded=1.000  herfindahl_index_markets=1.000
+10:57:18 [super] FLAGGED 0x5daf611bf660152f44c1f7dd8cb3384b824796b5  prob=0.540 (raw=0.833)  vol=$40  trades=3  first_trade=2025-10-16 17:43  winrate=0.000  n_markets_traded=2.000  herfindahl_index_markets=0.592
+10:57:18 [super] FLAGGED 0x73234e1ff1d5478eafdb8da0d9ce5f40c5a1d0fc  prob=0.516 (raw=0.812)  vol=$1,718  trades=15  first_trade=2025-10-10 23:32  winrate=0.000  n_markets_traded=1.000  herfindahl_index_markets=1.000
+10:57:18 [super] FLAGGED 0xfa7416b32686d204965312dabbf2d8f65e4ef79f  prob=0.508 (raw=0.805)  vol=$3  trades=2  first_trade=2025-09-10 03:33  winrate=0.000  n_markets_traded=3.000  herfindahl_index_markets=0.333
+10:57:18 [super] FLAGGED 0xffc725fa08dc54712dddc6df7344e6a1451936b8  prob=0.507 (raw=0.804)  vol=$629  trades=8  first_trade=2025-10-15 17:33  winrate=0.000  n_markets_traded=1.000  herfindahl_index_markets=1.000
+10:57:18 [super] FLAGGED 0x71c2f6b0d989453028b7cb0afd61858f3ee34115  prob=0.503 (raw=0.801)  vol=$8,986  trades=28  first_trade=2025-10-10 20:02  winrate=0.300  n_markets_traded=10.000  herfindahl_index_markets=0.403
+10:57:18 [super] FLAGGED 0x5de27d424af56637bf162fc0814730008d3cee12  prob=0.499 (raw=0.797)  vol=$2  trades=3  first_trade=2025-10-20 07:33  winrate=0.000  n_markets_traded=1.000  herfindahl_index_markets=1.000
+10:57:18 [super] FLAGGED 0xdbb6684746fb5c6c84e659a1a30606ae58337e22  prob=0.495 (raw=0.794)  vol=$602  trades=4  first_trade=2025-10-11 11:33  winrate=0.500  n_markets_traded=2.000  herfindahl_index_markets=0.726
+10:57:18 [super] FLAGGED 0xaf28c510bb8e1c212913cf272a2e003ed847d4c6  prob=0.494 (raw=0.793)  vol=$24  trades=2  first_trade=2025-10-18 12:11  winrate=0.231  n_markets_traded=12.000  herfindahl_index_markets=0.427
+10:57:18 [super] FLAGGED 0xdcb19a9f2ce21b6073ee96addb107e3ccc4f1ebf  prob=0.491 (raw=0.791)  vol=$2,602  trades=11  first_trade=2025-10-06 11:45  winrate=0.000  n_markets_traded=1.000  herfindahl_index_markets=1.000
+10:57:18 [super] FLAGGED 0xdb8bfca9dcf710a7b07a42fa0eb2c5a72e6f8d25  prob=0.488 (raw=0.788)  vol=$2  trades=2  first_trade=2025-09-27 10:39  winrate=0.000  n_markets_traded=7.000  herfindahl_index_markets=0.945
+10:57:18 [super] FLAGGED 0xdf52f29300bb186a6e8931d3d58f53ebf95329b7  prob=0.475 (raw=0.777)  vol=$1,785  trades=12  first_trade=2025-10-09 01:14  winrate=0.000  n_markets_traded=7.000  herfindahl_index_markets=0.269
+10:57:18 [super] FLAGGED 0x06335c305d038a05fc0e2da1314719883ee7d7d9  prob=0.472 (raw=0.774)  vol=$524  trades=5  first_trade=2025-09-03 13:49  winrate=0.000  n_markets_traded=6.000  herfindahl_index_markets=0.721
+10:57:18 [super] FLAGGED 0xa26cfe6701c6e930fd09453ad80e09915ffd2876  prob=0.469 (raw=0.772)  vol=$2  trades=2  first_trade=2025-10-22 11:08  winrate=0.000  n_markets_traded=4.000  herfindahl_index_markets=0.300
+10:57:18 [super] FLAGGED 0x8c62dc0a981453ed117d850bd05007782000527b  prob=0.458 (raw=0.762)  vol=$7,463  trades=47  first_trade=2025-10-09 03:41  winrate=0.000  n_markets_traded=1.000  herfindahl_index_markets=1.000
+10:57:18 [super] FLAGGED 0x6b1d02532a9ee174fa13719fa049bef831aa4a8c  prob=0.455 (raw=0.760)  vol=$1,164  trades=6  first_trade=2025-10-13 02:17  winrate=0.000  n_markets_traded=2.000  herfindahl_index_markets=0.615
+10:57:18 [super] FLAGGED 0x729474de1c15326d1c7a2a92e09c0dc012971760  prob=0.444 (raw=0.750)  vol=$10  trades=2  first_trade=2025-10-18 09:49  winrate=0.000  n_markets_traded=3.000  herfindahl_index_markets=0.378
+10:57:18 [super] FLAGGED 0xb92f92d21443681ec740d5b04b3a5a9679cd129c  prob=0.430 (raw=0.738)  vol=$24  trades=2  first_trade=2025-10-18 09:08  winrate=0.000  n_markets_traded=1.000  herfindahl_index_markets=1.000
+10:57:18 [super] FLAGGED 0x3f1796822c53e6061abab0393b7923bb3ad06bc6  prob=0.429 (raw=0.737)  vol=$6  trades=2  first_trade=2025-10-13 20:32  winrate=0.261  n_markets_traded=23.000  herfindahl_index_markets=1.000
+10:57:18 [super] FLAGGED 0x4feb194d3d16d404f0d85534a3be11b4ec85149b  prob=0.428 (raw=0.736)  vol=$20  trades=3  first_trade=2025-10-16 13:37  winrate=0.000  n_markets_traded=6.000  herfindahl_index_markets=0.502
+10:57:18 [super] FLAGGED 0x84ed22516696d4997351738e8678b4618042011b  prob=0.416 (raw=0.726)  vol=$12  trades=2  first_trade=2025-10-18 05:09  winrate=0.000  n_markets_traded=3.000  herfindahl_index_markets=0.333
+10:57:18 [super] FLAGGED 0xa9627cd7b190d4d3547840ccd76e39d819ee8978  prob=0.416 (raw=0.725)  vol=$270  trades=5  first_trade=2025-09-04 03:08  winrate=0.000  n_markets_traded=1.000  herfindahl_index_markets=1.000
+10:57:18 [super] FLAGGED 0x0861a063fb88396fcbe31a53cc24459ea8ade48c  prob=0.414 (raw=0.724)  vol=$2  trades=2  first_trade=2025-10-21 14:25  winrate=0.000  n_markets_traded=1.000  herfindahl_index_markets=1.000
+10:57:18 [super] FLAGGED 0x4e3acf84c074083faef3db54f1a62d0ef326ca2a  prob=0.400 (raw=0.712)  vol=$195  trades=3  first_trade=2025-08-11 01:21  winrate=0.000  n_markets_traded=1.000  herfindahl_index_markets=1.000
+10:57:18 [super] FLAGGED 0x75e99c56615ff79deac853cb498012a7dba830af  prob=0.397 (raw=0.709)  vol=$6  trades=2  first_trade=2025-09-23 18:01  winrate=0.143  n_markets_traded=7.000  herfindahl_index_markets=0.578
+10:57:18 [super] FLAGGED 0xc7a90a19f01967ca4a8c28cc5807192b763b7c93  prob=0.386 (raw=0.699)  vol=$23  trades=3  first_trade=2025-09-25 17:56  winrate=0.000  n_markets_traded=2.000  herfindahl_index_markets=0.847
+10:57:18 [super] FLAGGED 0x56e07375e0266e831395a8b3fc9fe799a6fe6442  prob=0.377 (raw=0.691)  vol=$297  trades=4  first_trade=2025-07-29 13:13  winrate=0.000  n_markets_traded=1.000  herfindahl_index_markets=1.000
+10:57:18 [super] FLAGGED 0x4c8a7ed44397d12b7522479814b4ac77a1020e17  prob=0.371 (raw=0.686)  vol=$27  trades=2  first_trade=2025-09-11 16:50  winrate=0.000  n_markets_traded=5.000  herfindahl_index_markets=0.200
+10:57:18 [super] FLAGGED 0x39d97489e6368d098156a401c8ab232a6232c24e  prob=0.371 (raw=0.686)  vol=$27  trades=2  first_trade=2025-09-11 16:50  winrate=0.000  n_markets_traded=5.000  herfindahl_index_markets=0.200
+10:57:18 [super] FLAGGED 0x687898e3c9957945be1aeb80f9ea3e46b8f3bec2  prob=0.351 (raw=0.667)  vol=$465  trades=6  first_trade=2025-09-19 15:18  winrate=0.000  n_markets_traded=1.000  herfindahl_index_markets=1.000
+10:57:18 [super] FLAGGED 0xcd23b8b82026e77d041b4bb72f8b79651ebd4f9e  prob=0.339 (raw=0.655)  vol=$2  trades=2  first_trade=2025-10-22 12:53  winrate=0.000  n_markets_traded=6.000  herfindahl_index_markets=0.219
+10:57:18 [super] FLAGGED 0x64e9b129c53030913b6134967375e8bc1b1f9657  prob=0.327 (raw=0.643)  vol=$5,646  trades=26  first_trade=2025-10-11 19:33  winrate=0.000  n_markets_traded=2.000  herfindahl_index_markets=0.530
+10:57:18 [super] FLAGGED 0xa0b849dd1b630d33524e4167cb0e08e0e7489546  prob=0.314 (raw=0.631)  vol=$16  trades=2  first_trade=2025-09-29 19:50  winrate=0.000  n_markets_traded=10.000  herfindahl_index_markets=0.182
+10:57:18 [super] FLAGGED 0x0d76d59951762d5e41a298b2b99e50175a43d516  prob=0.314 (raw=0.631)  vol=$514  trades=8  first_trade=2025-10-14 14:53  winrate=0.000  n_markets_traded=7.000  herfindahl_index_markets=0.992
+10:57:18 [super] FLAGGED 0xec052d86d48ebc7af822a523307c1581ecbb2b59  prob=0.312 (raw=0.628)  vol=$168  trades=4  first_trade=2025-09-12 23:57  winrate=0.000  n_markets_traded=1.000  herfindahl_index_markets=1.000
+10:57:18 [super] FLAGGED 0xc9542b03298861d385a7c8fed0503cc8f62d520a  prob=0.308 (raw=0.625)  vol=$116  trades=3  first_trade=2025-09-28 04:58  winrate=0.000  n_markets_traded=1.000  herfindahl_index_markets=1.000
+10:57:18 [super] FLAGGED 0x05d372eec6051ca6ae5621a831edf7ee57672f03  prob=0.300 (raw=0.617)  vol=$1,709  trades=9  first_trade=2025-10-14 02:41  winrate=0.000  n_markets_traded=1.000  herfindahl_index_markets=1.000
+10:57:18 [super] FLAGGED 0x957015a2400c13cfb8fd2a5d97c2b0b8f9adc030  prob=0.292 (raw=0.609)  vol=$13,915  trades=38  first_trade=2025-08-23 04:27  winrate=0.571  n_markets_traded=13.000  herfindahl_index_markets=0.207
+10:57:18 [super] FLAGGED 0xfef2369a9d9b88bc0545320853e2ce616a381470  prob=0.289 (raw=0.606)  vol=$3,574  trades=10  first_trade=2025-10-13 12:01  winrate=0.300  n_markets_traded=10.000  herfindahl_index_markets=0.207
+10:57:18 [super] FLAGGED 0xc4439174a5d5f821e173ce86def1d86c3145f19f  prob=0.280 (raw=0.596)  vol=$49,500  trades=19  first_trade=2025-09-12 15:01  winrate=0.667  n_markets_traded=7.000  herfindahl_index_markets=0.500
+10:57:18 [super] FLAGGED 0x991e046705420389e108e8d818b88907b35b4cd8  prob=0.273 (raw=0.588)  vol=$1,988  trades=5  first_trade=2025-07-27 17:53  winrate=0.455  n_markets_traded=11.000  herfindahl_index_markets=0.293
+10:57:18 [super] FLAGGED 0xa59cf205950f619238ff7d467c235007bfdc6338  prob=0.272 (raw=0.588)  vol=$20,651  trades=79  first_trade=2025-09-12 21:37  winrate=0.000  n_markets_traded=1.000  herfindahl_index_markets=1.000
+10:57:18 [super] FLAGGED 0x1295f064976a9879e62a545adfad4604a1c1640d  prob=0.262 (raw=0.576)  vol=$403  trades=8  first_trade=2025-07-29 16:39  winrate=0.000  n_markets_traded=3.000  herfindahl_index_markets=0.976
+10:57:18 [super] FLAGGED 0x02ab4be202f33565bbb11da864c547f78e30cda4  prob=0.255 (raw=0.569)  vol=$1,972  trades=8  first_trade=2025-09-16 18:25  winrate=0.000  n_markets_traded=2.000  herfindahl_index_markets=0.500
+10:57:18 [super] FLAGGED 0x7a066c7cc5e4a5d5f968d7ed62fdb6d32579fd6e  prob=0.255 (raw=0.569)  vol=$7  trades=2  first_trade=2025-07-30 11:16  winrate=0.000  n_markets_traded=4.000  herfindahl_index_markets=0.481
+10:57:18 [super] FLAGGED 0x7445a961421b62ebae524bb1b8feefa50819a86c  prob=0.254 (raw=0.568)  vol=$382  trades=5  first_trade=2025-10-13 08:33  winrate=0.250  n_markets_traded=4.000  herfindahl_index_markets=0.625
+10:57:18 [super] FLAGGED 0x78162a0f2925b450a85f5a3e46418f9cbfd6ce35  prob=0.253 (raw=0.566)  vol=$100  trades=3  first_trade=2025-09-02 20:48  winrate=0.000  n_markets_traded=3.000  herfindahl_index_markets=0.621
+10:57:18 [super] FLAGGED 0x06f56ecfaece46dfbeea924bd9dcb9fe93178f9c  prob=0.248 (raw=0.561)  vol=$433  trades=7  first_trade=2025-09-19 09:29  winrate=0.000  n_markets_traded=1.000  herfindahl_index_markets=1.000
+10:57:18 [super] FLAGGED 0x8e6685180e9f7f1834b218c6755d017d3145d1c2  prob=0.245 (raw=0.557)  vol=$62  trades=5  first_trade=2025-10-13 13:41  winrate=0.000  n_markets_traded=1.000  herfindahl_index_markets=1.000
+10:57:18 [super] FLAGGED 0xfe2c78b402dbf18ba921ff0770b461fc2eb16dd6  prob=0.240 (raw=0.552)  vol=$139  trades=2  first_trade=2025-09-03 12:14  winrate=0.625  n_markets_traded=8.000  herfindahl_index_markets=0.537
+10:57:18 [super] FLAGGED 0xae87e98c94924ec9791d55886038bc2b561be602  prob=0.240 (raw=0.551)  vol=$4,692  trades=30  first_trade=2025-10-11 09:22  winrate=0.000  n_markets_traded=1.000  herfindahl_index_markets=1.000
+10:57:18 [super] FLAGGED 0xcda42a6cb8a68cc33e43148819024704992e5124  prob=0.237 (raw=0.548)  vol=$6  trades=4  first_trade=2025-08-24 09:51  winrate=0.000  n_markets_traded=3.000  herfindahl_index_markets=0.867
+10:57:18 [super] FLAGGED 0x573a6177a9cced9bf2cd64e8c9aeb746c068c47c  prob=0.229 (raw=0.538)  vol=$1,733  trades=20  first_trade=2025-09-16 09:43  winrate=0.500  n_markets_traded=2.000  herfindahl_index_markets=0.726
+10:57:18 [super] FLAGGED 0x7014771e6ffa7993680ffe90ff41d83de0a3f10d  prob=0.229 (raw=0.538)  vol=$2  trades=2  first_trade=2025-10-16 20:35  winrate=0.000  n_markets_traded=1.000  herfindahl_index_markets=1.000
+10:57:18 [super] FLAGGED 0x3c8d501e7f9cf551e50c47c33b3437e8e07262bf  prob=0.225 (raw=0.533)  vol=$99  trades=2  first_trade=2025-07-28 17:19  winrate=0.000  n_markets_traded=3.000  herfindahl_index_markets=0.336
+10:57:18 [super] FLAGGED 0x5e353d9ac25ba271540fc8fccd6ecc20769465da  prob=0.219 (raw=0.526)  vol=$23  trades=2  first_trade=2025-10-13 06:51  winrate=0.150  n_markets_traded=20.000  herfindahl_index_markets=0.402
+10:57:18 [super] FLAGGED 0x0c07e306ebabe41a927e92707a82e7b334440e6b  prob=0.219 (raw=0.526)  vol=$10  trades=1  first_trade=2025-09-29 13:48  winrate=0.000  n_markets_traded=3.000  herfindahl_index_markets=0.383
+10:57:18 [super] FLAGGED 0x2e1b465504fd80ee76f00e37ccecaa82d06b70af  prob=0.217 (raw=0.524)  vol=$2  trades=2  first_trade=2025-10-11 02:12  winrate=0.000  n_markets_traded=5.000  herfindahl_index_markets=0.685
+10:57:18 [super] FLAGGED 0x628d20c8541cb8be452eca226521cb7bf99a1f4c  prob=0.215 (raw=0.521)  vol=$6,325  trades=22  first_trade=2025-10-12 11:11  winrate=0.375  n_markets_traded=16.000  herfindahl_index_markets=0.301
+10:57:18 [super] FLAGGED 0x12d0e815ac008b418cc54319e7120202149a46e0  prob=0.215 (raw=0.521)  vol=$5  trades=4  first_trade=2025-09-24 17:14  winrate=0.000  n_markets_traded=1.000  herfindahl_index_markets=1.000
+10:57:18 [super] FLAGGED 0x005b4400fd20970ae26ad80d287d7b02e7ec8f5f  prob=0.215 (raw=0.521)  vol=$32  trades=2  first_trade=2025-07-24 14:25  winrate=0.000  n_markets_traded=1.000  herfindahl_index_markets=1.000
+10:57:18 [super] FLAGGED 0x388f3efeb35c8d3f8510a60807aa06c70dd18b45  prob=0.212 (raw=0.517)  vol=$43  trades=3  first_trade=2025-10-12 16:32  winrate=0.000  n_markets_traded=1.000  herfindahl_index_markets=1.000
+10:57:18 [super] FLAGGED 0xf713d93be5c321acb09984705b49f97686115613  prob=0.207 (raw=0.510)  vol=$2  trades=3  first_trade=2025-09-29 07:29  winrate=0.000  n_markets_traded=4.000  herfindahl_index_markets=0.457
+10:57:18 [super] FLAGGED 0xdf2e70ec951f9a1c8c2b4847aa3c15e08bd940d3  prob=0.205 (raw=0.508)  vol=$2  trades=2  first_trade=2025-10-13 03:54  winrate=0.000  n_markets_traded=4.000  herfindahl_index_markets=0.984
+10:57:18 [super] FLAGGED 0x525635a7aef7221eebf83126e11761ce15b0c969  prob=0.203 (raw=0.505)  vol=$47,000  trades=163  first_trade=2025-10-10 12:00  winrate=0.000  n_markets_traded=1.000  herfindahl_index_markets=1.000
+10:57:18 [super] FLAGGED 0x4cc945733087f5cd7cc68186a0bbe264293fd5be  prob=0.202 (raw=0.505)  vol=$4  trades=2  first_trade=2025-09-29 03:49  winrate=0.000  n_markets_traded=1.000  herfindahl_index_markets=1.000
+10:57:18 [super] FLAGGED 0xbb571256117c3cc6aaf17ad5fc57db805dae0a7b  prob=0.195 (raw=0.495)  vol=$189  trades=2  first_trade=2025-10-15 03:43  winrate=0.000  n_markets_traded=9.000  herfindahl_index_markets=0.476
+10:57:18 [super] FLAGGED 0xaac256038e675aead28d04ba28408e17715624a9  prob=0.195 (raw=0.494)  vol=$818  trades=11  first_trade=2025-10-14 03:02  winrate=0.000  n_markets_traded=1.000  herfindahl_index_markets=1.000
+10:57:18 [super] FLAGGED 0xd1c732173672606af1b0b6a2e10aec0cc712848f  prob=0.192 (raw=0.491)  vol=$50  trades=2  first_trade=2025-10-10 21:42  winrate=0.000  n_markets_traded=3.000  herfindahl_index_markets=0.349
+10:57:18 [super] FLAGGED 0xb70b10b7c86b1f60a1e362d2aaae20a586d66759  prob=0.188 (raw=0.484)  vol=$2  trades=2  first_trade=2025-09-26 14:21  winrate=0.333  n_markets_traded=6.000  herfindahl_index_markets=0.167
+10:57:18 [super] FLAGGED 0xa1acb7c248fa109cb34302723e3e6583698c0115  prob=0.186 (raw=0.482)  vol=$3  trades=2  first_trade=2025-07-22 22:46  winrate=0.000  n_markets_traded=1.000  herfindahl_index_markets=1.000
+10:57:18 [super] FLAGGED 0x5f4c2bd53763da6013aee7f52627ce4623811913  prob=0.185 (raw=0.480)  vol=$3  trades=2  first_trade=2025-09-28 17:35  winrate=0.000  n_markets_traded=1.000  herfindahl_index_markets=1.000
+10:57:18 [super] FLAGGED 0xc34cde0b144a8efd995288bfd37dd36cfa32fda7  prob=0.183 (raw=0.478)  vol=$183  trades=5  first_trade=2025-09-24 07:22  winrate=0.000  n_markets_traded=5.000  herfindahl_index_markets=0.704
+10:57:18 [super] FLAGGED 0x21012889d366af35bb4c5481e8adea5addada657  prob=0.183 (raw=0.478)  vol=$29  trades=2  first_trade=2025-09-26 07:12  winrate=0.000  n_markets_traded=2.000  herfindahl_index_markets=0.500
+10:57:18 [super] FLAGGED 0x59836ac10d17a37c87253f629b68f8473307dd68  prob=0.180 (raw=0.473)  vol=$2  trades=2  first_trade=2025-10-13 03:44  winrate=0.200  n_markets_traded=5.000  herfindahl_index_markets=0.596
+10:57:18 [super] FLAGGED 0x93785ab88d7dbd6d737680da18debe5a9458f90b  prob=0.177 (raw=0.468)  vol=$5  trades=2  first_trade=2025-09-19 11:50  winrate=0.000  n_markets_traded=2.000  herfindahl_index_markets=0.500
+10:57:18 [super] FLAGGED 0x24453c672dad9851260e4efc4c86f6c470f28bda  prob=0.175 (raw=0.466)  vol=$179  trades=2  first_trade=2025-10-14 11:16  winrate=0.167  n_markets_traded=6.000  herfindahl_index_markets=0.330
+10:57:18 [super] FLAGGED 0xb8d616b7ef69c42f4efddbab824fbda9417338fb  prob=0.174 (raw=0.465)  vol=$2  trades=2  first_trade=2025-10-20 14:22  winrate=0.000  n_markets_traded=3.000  herfindahl_index_markets=0.333
+10:57:18 [super] FLAGGED 0xe94ef542eded9d9aefed183d3ee009eded7d2bf8  prob=0.172 (raw=0.462)  vol=$12  trades=3  first_trade=2025-08-18 19:34  winrate=0.000  n_markets_traded=3.000  herfindahl_index_markets=0.469
+10:57:18 [super] FLAGGED 0xabf29842911193a56c5c62ad02d501c09787d9db  prob=0.171 (raw=0.460)  vol=$29  trades=3  first_trade=2025-09-17 09:11  winrate=0.000  n_markets_traded=1.000  herfindahl_index_markets=1.000
+10:57:18 [super] FLAGGED 0x0f6352bb0b367f90e5cddace20c818804471835a  prob=0.168 (raw=0.456)  vol=$473  trades=4  first_trade=2025-10-10 23:26  winrate=0.429  n_markets_traded=7.000  herfindahl_index_markets=0.232
+10:57:18 [super] FLAGGED 0x509245f30315521ab91f3b6e61bb9cdce7a376ba  prob=0.167 (raw=0.453)  vol=$43,537  trades=40  first_trade=2025-09-10 16:44  winrate=0.000  n_markets_traded=1.000  herfindahl_index_markets=1.000
+10:57:18 [super] FLAGGED 0x855ea750bdf706eaf617a8ed208125f828ff40fb  prob=0.166 (raw=0.453)  vol=$7,589  trades=22  first_trade=2025-09-17 00:18  winrate=0.000  n_markets_traded=1.000  herfindahl_index_markets=1.000
+10:57:18 [super] FLAGGED 0x92ad15c85299b1dbef6f1dab7ca91e621162c78f  prob=0.166 (raw=0.452)  vol=$4  trades=2  first_trade=2025-10-11 20:56  winrate=0.000  n_markets_traded=1.000  herfindahl_index_markets=1.000
+10:57:18 [super] FLAGGED 0xc3e6601179ffde8c75dae60b5bfabf2cd95c5d2b  prob=0.166 (raw=0.452)  vol=$297  trades=7  first_trade=2025-10-12 13:37  winrate=0.655  n_markets_traded=112.000  herfindahl_index_markets=0.511
+10:57:18 [super] FLAGGED 0x96b655865919b73776a2ce9993475572f963bcfb  prob=0.164 (raw=0.450)  vol=$360  trades=7  first_trade=2025-10-11 06:06  winrate=0.500  n_markets_traded=2.000  herfindahl_index_markets=0.799
+10:57:18 [super] FLAGGED 0xcdaded84698baf60ae9ddb9db6d71cf61f21e9eb  prob=0.164 (raw=0.449)  vol=$10  trades=2  first_trade=2025-09-28 16:48  winrate=0.000  n_markets_traded=3.000  herfindahl_index_markets=0.333
+10:57:18 [super] FLAGGED 0xd3d0edd7aa93b7fb3419083f93eee1ca6b293df9  prob=0.161 (raw=0.444)  vol=$14,158  trades=41  first_trade=2025-10-08 14:33  winrate=0.400  n_markets_traded=10.000  herfindahl_index_markets=0.781
+10:57:18 [super] FLAGGED 0xe6c481c2338eaf452efd0f1c5f0ec6cbd73eab7f  prob=0.161 (raw=0.444)  vol=$1,841  trades=10  first_trade=2025-10-11 04:02  winrate=0.333  n_markets_traded=3.000  herfindahl_index_markets=0.847
+10:57:18 [super] FLAGGED 0x51178946b2270fe6fbae4083835134c600cad36f  prob=0.160 (raw=0.444)  vol=$1,844  trades=4  first_trade=2025-10-14 17:51  winrate=0.000  n_markets_traded=21.000  herfindahl_index_markets=0.075
+10:57:18 [super] FLAGGED 0xb3c2146a5ac45cef98aef132e7debe394fa9191d  prob=0.159 (raw=0.441)  vol=$20  trades=3  first_trade=2025-09-20 03:11  winrate=0.111  n_markets_traded=9.000  herfindahl_index_markets=0.326
+10:57:18 [super] FLAGGED 0x53e7060d2d89e22fa00fbed5745d0b662b79e252  prob=0.158 (raw=0.439)  vol=$20  trades=3  first_trade=2025-10-10 23:12  winrate=0.000  n_markets_traded=1.000  herfindahl_index_markets=1.000
+10:57:18 [super] FLAGGED 0x97c3342befe79adcfcbb63e4037c2737afdaf76a  prob=0.157 (raw=0.438)  vol=$7,246  trades=10  first_trade=2025-10-10 20:13  winrate=0.500  n_markets_traded=2.000  herfindahl_index_markets=0.510
+10:57:18 [super] FLAGGED 0x4bee2b016cac154712a7dd51090c8c5bac762d3f  prob=0.157 (raw=0.438)  vol=$2  trades=3  first_trade=2025-10-11 04:58  winrate=0.000  n_markets_traded=1.000  herfindahl_index_markets=1.000
+10:57:18 [super] FLAGGED 0xa55a2fc5a4c046933ed32c997a059b6b59d994b0  prob=0.157 (raw=0.437)  vol=$3  trades=2  first_trade=2025-10-11 16:07  winrate=0.000  n_markets_traded=3.000  herfindahl_index_markets=0.335
+10:57:18 [super] FLAGGED 0xd88e93578f353faa318f5ef54903cdb1832487c6  prob=0.153 (raw=0.432)  vol=$6  trades=2  first_trade=2025-10-13 08:25  winrate=0.000  n_markets_traded=1.000  herfindahl_index_markets=1.000
+10:57:18 [super] FLAGGED 0x7587040a8ee7b511c9efcfded159a00a26ab1554  prob=0.152 (raw=0.429)  vol=$1,944  trades=7  first_trade=2025-10-11 16:23  winrate=0.000  n_markets_traded=2.000  herfindahl_index_markets=0.962
+10:57:18 [super] wrote supercompute_willtrumppardonchangpeng_20260701_084048_results.csv
+10:57:18 [super] wrote supercompute_willtrumppardonchangpeng_20260701_084048_flagged.csv
+10:57:18 [super] log saved to supercompute_willtrumppardonchangpeng_20260701_084048.log

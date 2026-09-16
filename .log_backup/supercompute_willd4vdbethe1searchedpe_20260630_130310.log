@@ -1,0 +1,41 @@
+13:03:10 [super] ============================================================
+13:03:10 [super] supercompute starting, log=supercompute_willd4vdbethe1searchedpe_20260630_130310.log
+13:03:10 [super] market=will-d4vd-be-the-1-searched-person-on-google-this-year  jobs=16  meta_jobs=8  top_n=all
+13:03:10 [super] model=xgb_insider_meta_v7_latest.json  features=30 (20 behavioral + 10 metadata)  calibrator=yes  threshold=0.15
+13:03:10 [super] known-insider wallets for funder signal: 0
+13:03:10 [super] events: cache miss -> resolving market + fetching (needs internet)...
+13:05:11 [super] events: fetched 14760 in 120.1s
+13:05:11 [super] events: cached to cache/events/will-d4vd-be-the-1-searched-person-on-google-this-year.pkl
+13:05:11 [super] market resolved: tokens=2 closed=True duration=54.5d
+13:05:11 [super] market: closed=True final_outcome_yes=1  wallets that traded: 1829
+13:05:11 [super] scoring 1829 wallets
+13:05:11 [super] behavioral: 1829 wallets across 16 processes
+13:06:34 [super] behavioral: 200/1829 wallets (83s)
+13:07:46 [super] behavioral: 400/1829 wallets (154s)
+13:08:33 [super] behavioral: 600/1829 wallets (202s)
+13:09:43 [super] behavioral: 800/1829 wallets (271s)
+13:10:27 [super] behavioral: 1000/1829 wallets (316s)
+13:11:39 [super] behavioral: 1200/1829 wallets (388s)
+13:12:31 [super] behavioral: 1400/1829 wallets (440s)
+13:13:34 [super] behavioral: 1600/1829 wallets (503s)
+13:14:26 [super] behavioral: 1800/1829 wallets (555s)
+13:14:33 [super] behavioral: 1829/1829 wallets (561s)
+13:14:33 [super] behavioral: done in 561.2s
+13:14:33 [super] metadata: 1829 wallets across 8 threads (api_key=set)
+13:25:03 [super] metadata: 200/1829 wallets (630s)
+13:32:30 [super] metadata: 400/1829 wallets (1077s)
+13:39:13 [super] metadata: 600/1829 wallets (1480s)
+13:45:20 [super] metadata: 800/1829 wallets (1847s)
+13:51:35 [super] metadata: 1000/1829 wallets (2222s)
+13:57:44 [super] metadata: 1200/1829 wallets (2591s)
+14:04:18 [super] metadata: 1400/1829 wallets (2985s)
+14:10:07 [super] metadata: 1600/1829 wallets (3334s)
+14:15:01 [super] metadata: 1800/1829 wallets (3628s)
+14:16:27 [super] metadata: 1829/1829 wallets (3715s)
+14:16:27 [super] metadata: done in 3714.6s
+14:16:27 [super] ============================================================
+14:16:27 [super] RESULT: 0/1829 wallets flagged at calibrated prob >= 0.15
+14:16:27 [super] ============================================================
+14:16:27 [super] wrote supercompute_willd4vdbethe1searchedpe_20260630_130310_results.csv
+14:16:27 [super] wrote supercompute_willd4vdbethe1searchedpe_20260630_130310_flagged.csv
+14:16:27 [super] log saved to supercompute_willd4vdbethe1searchedpe_20260630_130310.log

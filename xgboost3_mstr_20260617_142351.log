@@ -1,0 +1,297 @@
+[xgb3-mstr] run timestamp = 20260617_142351
+[xgb3-mstr] logging to xgboost3_mstr_20260617_142351.log
+[xgb3-mstr] loading cache/training_data.parquet
+[xgb3-mstr] full shape=(793, 322)  positives=117  negatives=676
+[xgb3-mstr] using top-20 features from cb_insider_30feat_latest.meta.json:
+   1. adaptive_markout_raw_grosswt_h0p070
+   2. unrealized_edge_per_open_token
+   3. adaptive_markout_raw_grosswt_h0p010
+   4. adaptive_markout_raw_grosswt_h0p150
+   5. unrealized_edge_per_open_token_sqrt
+   6. buy_markout_adj_grosswt_h0p070_lb0p150
+   7. adaptive_markout_raw_grosswt_h0p200
+   8. buy_markout_adj_grosswt_h0p030_lb0p200
+   9. high_sell_nonflattening_cash_frac_pctl90
+  10. realized_pnl_per_closing_trade
+  11. adaptive_plus_realized_alpha0p25_h0p030
+  12. buy_markout_adj_grosswt_h0p030_lb0p010
+  13. adaptive_plus_realized_alpha0p5_h0p070
+  14. buy_markout_adj_mean_h0p200_lb0p030
+  15. buy_markout_adj_mean_h0p200_lb0p200
+  16. sell_markout_adj_median_h0p150_lb0p010
+  17. n_distinct_buy_days
+  18. major_move_time_remaining_pct
+  19. time_to_major_move_pct_of_market
+  20. adaptive_markout_raw_grosswt_h0p030
+[xgb3-mstr] PIN_TEST_MARKETS active -> test pinned to 1 market(s); random stratified split disabled
+[xgb3-mstr] markets total: 29  (train=28, test=1; large in test=1, small in test=5)
+[xgb3-mstr] market assignment (sorted by row count desc):
+  train  large  n= 245  pos= 35  us-strikes-iran-by-march-1-2026-492
+  train  large  n= 189  pos= 27  us-strikes-iran-by-february-28-2026-227-967-547-688-589-491-592-418-452-924-384-915-464-672-196-157-993-596-269-535-381-391-471-256-988-997-296-225-762-973-292-827-345-182-558-215-794-879-189-761
+  train  small  n=  49  pos=  7  will-axiom-be-accused-of-insider-trading
+  test   small  n=  42  pos=  6  microstrategy-announces-1000-btc-purchase-december-2-8
+  train  small  n=  28  pos=  4  us-x-iran-ceasefire-by-april-7
+  train  small  n=  28  pos=  4  will-us-or-israel-strike-iran-by-february-28-2026-766
+  train  small  n=  21  pos=  3  will-draftkings-launch-a-prediction-market-in-2025
+  train  small  n=  21  pos=  3  will-microstrategy-announce-a-bitcoin-purchase-december-16-22
+  train  small  n=  20  pos=  4  will-stable-launch-a-token-in-2025
+  train  small  n=  14  pos=  2  nothing-ever-happens-microstrategy
+  train  small  n=  14  pos=  2  will-microstrategy-announce-holding-650k-btc-by-november-30
+  train  small  n=  14  pos=  2  will-microstrategy-purchase-bitcoin-july-1-7
+  train  small  n=   7  pos=  1  microstrategy-sell-any-bitcoin-in-2025
+  train  small  n=   7  pos=  1  will-openai-release-a-new-frontier-model-by-december-13-683
+  train  small  n=   7  pos=  1  openai-browser-by-october-31
+  train  small  n=   7  pos=  1  openai-browser-in-2025
+  train  small  n=   7  pos=  1  openai-social-app-in-2025
+  train  small  n=   7  pos=  1  microstrategy-announces-1000-btc-purchase-november-11-17
+  train  small  n=   7  pos=  1  khamenei-out-as-supreme-leader-of-iran-by-march-31
+  train  small  n=   7  pos=  1  will-lighter-perform-an-airdrop-by-december-31
+  train  small  n=   7  pos=  1  will-cardi-b-perform-during-the-super-bowl-lx-halftime-show
+  train  small  n=   7  pos=  1  will-openai-release-a-new-frontier-model-on-december-11
+  train  small  n=   7  pos=  1  will-microstrategy-hold-680k-btc-by-december-31
+  train  small  n=   7  pos=  1  will-karol-g-perform-during-the-super-bowl-lx-halftime-show
+  train  small  n=   7  pos=  1  will-microstrategy-hold-620k-btc-before-august
+  train  small  n=   5  pos=  1  will-microstrategy-announce-holding-740k-btc-by-march-31
+  train  small  n=   5  pos=  2  will-mara-corina-machado-win-the-nobel-peace-prize-in-2025
+  train  small  n=   4  pos=  1  will-aztec-launch-a-token-in-2025
+  train  small  n=   3  pos=  1  will-yulia-navalnaya-win-the-nobel-peace-prize-in-2025
+[xgb3-mstr] row distribution (total n=793, pos=117, overall pos rate=14.75%):
+  train  n= 751  (94.70% of total)  pos=111  (14.78% pos rate within split)
+  test   n=  42  ( 5.30% of total)  pos=  6  (14.29% pos rate within split)
+[xgb3-mstr] starting Optuna tuning: 100 trials, TPE sampler (20 random startup), MedianPruner, 5-fold GroupKFold CV
+[xgb3-mstr]   trial   0  state=COMPLETE  score=0.7517  best=0.7517
+[xgb3-mstr]   trial   1  state=COMPLETE  score=0.7384  best=0.7517
+[xgb3-mstr]   trial   2  state=COMPLETE  score=0.7463  best=0.7517
+[xgb3-mstr]   trial   3  state=COMPLETE  score=0.7268  best=0.7517
+[xgb3-mstr]   trial   4  state=COMPLETE  score=0.7078  best=0.7517
+[xgb3-mstr]   trial   5  state=COMPLETE  score=0.6584  best=0.7517
+[xgb3-mstr]   trial   6  state=COMPLETE  score=0.7263  best=0.7517
+[xgb3-mstr]   trial   7  state=COMPLETE  score=0.7325  best=0.7517
+[xgb3-mstr]   trial   8  state=COMPLETE  score=0.7640  best=0.7640
+[xgb3-mstr]   trial   9  state=COMPLETE  score=0.7332  best=0.7640
+[xgb3-mstr]   trial  10  state=COMPLETE  score=0.7351  best=0.7640
+[xgb3-mstr]   trial  11  state=COMPLETE  score=0.7470  best=0.7640
+[xgb3-mstr]   trial  12  state=COMPLETE  score=0.7331  best=0.7640
+[xgb3-mstr]   trial  13  state=COMPLETE  score=0.7314  best=0.7640
+[xgb3-mstr]   trial  14  state=COMPLETE  score=0.7093  best=0.7640
+[xgb3-mstr]   trial  15  state=COMPLETE  score=0.7251  best=0.7640
+[xgb3-mstr]   trial  16  state=COMPLETE  score=0.7315  best=0.7640
+[xgb3-mstr]   trial  17  state=COMPLETE  score=0.7367  best=0.7640
+[xgb3-mstr]   trial  18  state=COMPLETE  score=0.7260  best=0.7640
+[xgb3-mstr]   trial  19  state=COMPLETE  score=0.7432  best=0.7640
+[xgb3-mstr]   trial  20  state=COMPLETE  score=0.7629  best=0.7640
+[xgb3-mstr]   trial  21  state=COMPLETE  score=0.7599  best=0.7640
+[xgb3-mstr]   trial  22  state=COMPLETE  score=0.7565  best=0.7640
+[xgb3-mstr]   trial  23  state=COMPLETE  score=0.7579  best=0.7640
+[xgb3-mstr]   trial  24  state=COMPLETE  score=0.7579  best=0.7640
+[xgb3-mstr]   trial  25  state=COMPLETE  score=0.7563  best=0.7640
+[xgb3-mstr]   trial  26  state=COMPLETE  score=0.7504  best=0.7640
+[xgb3-mstr]   trial  27  state=COMPLETE  score=0.7465  best=0.7640
+[xgb3-mstr]   trial  28  state=COMPLETE  score=0.7629  best=0.7640
+[xgb3-mstr]   trial  29  state=COMPLETE  score=0.7531  best=0.7640
+[xgb3-mstr]   trial  30  state=COMPLETE  score=0.7578  best=0.7640
+[xgb3-mstr]   trial  31  state=COMPLETE  score=0.7668  best=0.7668
+[xgb3-mstr]   trial  32  state=COMPLETE  score=0.7646  best=0.7668
+[xgb3-mstr]   trial  33  state=COMPLETE  score=0.7534  best=0.7668
+[xgb3-mstr]   trial  34  state=COMPLETE  score=0.7576  best=0.7668
+[xgb3-mstr]   trial  35  state=COMPLETE  score=0.7531  best=0.7668
+[xgb3-mstr]   trial  36  state=COMPLETE  score=0.7482  best=0.7668
+[xgb3-mstr]   trial  37  state=COMPLETE  score=0.7430  best=0.7668
+[xgb3-mstr]   trial  38  state=COMPLETE  score=0.7559  best=0.7668
+[xgb3-mstr]   trial  39  state=COMPLETE  score=0.7507  best=0.7668
+[xgb3-mstr]   trial  40  state=COMPLETE  score=0.7586  best=0.7668
+[xgb3-mstr]   trial  41  state=COMPLETE  score=0.7665  best=0.7668
+[xgb3-mstr]   trial  42  state=COMPLETE  score=0.7287  best=0.7668
+[xgb3-mstr]   trial  43  state=COMPLETE  score=0.7561  best=0.7668
+[xgb3-mstr]   trial  44  state=COMPLETE  score=0.7605  best=0.7668
+[xgb3-mstr]   trial  45  state=COMPLETE  score=0.7631  best=0.7668
+[xgb3-mstr]   trial  46  state=COMPLETE  score=0.7472  best=0.7668
+[xgb3-mstr]   trial  47  state=COMPLETE  score=0.7629  best=0.7668
+[xgb3-mstr]   trial  48  state=COMPLETE  score=0.7404  best=0.7668
+[xgb3-mstr]   trial  49  state=COMPLETE  score=0.7494  best=0.7668
+[xgb3-mstr]   trial  50  state=COMPLETE  score=0.7523  best=0.7668
+[xgb3-mstr]   trial  51  state=COMPLETE  score=0.7522  best=0.7668
+[xgb3-mstr]   trial  52  state=COMPLETE  score=0.7490  best=0.7668
+[xgb3-mstr]   trial  53  state=COMPLETE  score=0.7477  best=0.7668
+[xgb3-mstr]   trial  54  state=COMPLETE  score=0.7476  best=0.7668
+[xgb3-mstr]   trial  55  state=COMPLETE  score=0.7424  best=0.7668
+[xgb3-mstr]   trial  56  state=COMPLETE  score=0.7409  best=0.7668
+[xgb3-mstr]   trial  57  state=COMPLETE  score=0.7574  best=0.7668
+[xgb3-mstr]   trial  58  state=COMPLETE  score=0.7652  best=0.7668
+[xgb3-mstr]   trial  59  state=COMPLETE  score=0.7638  best=0.7668
+[xgb3-mstr]   trial  60  state=COMPLETE  score=0.7453  best=0.7668
+[xgb3-mstr]   trial  61  state=COMPLETE  score=0.7388  best=0.7668
+[xgb3-mstr]   trial  62  state=COMPLETE  score=0.7674  best=0.7674
+[xgb3-mstr]   trial  63  state=COMPLETE  score=0.7664  best=0.7674
+[xgb3-mstr]   trial  64  state=COMPLETE  score=0.7667  best=0.7674
+[xgb3-mstr]   trial  65  state=COMPLETE  score=0.7698  best=0.7698
+[xgb3-mstr]   trial  66  state=COMPLETE  score=0.7680  best=0.7698
+[xgb3-mstr]   trial  67  state=COMPLETE  score=0.7673  best=0.7698
+[xgb3-mstr]   trial  68  state=COMPLETE  score=0.7700  best=0.7700
+[xgb3-mstr]   trial  69  state=COMPLETE  score=0.7681  best=0.7700
+[xgb3-mstr]   trial  70  state=COMPLETE  score=0.7715  best=0.7715
+[xgb3-mstr]   trial  71  state=COMPLETE  score=0.7703  best=0.7715
+[xgb3-mstr]   trial  72  state=COMPLETE  score=0.7708  best=0.7715
+[xgb3-mstr]   trial  73  state=COMPLETE  score=0.7711  best=0.7715
+[xgb3-mstr]   trial  74  state=COMPLETE  score=0.7696  best=0.7715
+[xgb3-mstr]   trial  75  state=COMPLETE  score=0.7717  best=0.7717
+[xgb3-mstr]   trial  76  state=COMPLETE  score=0.7684  best=0.7717
+[xgb3-mstr]   trial  77  state=COMPLETE  score=0.7656  best=0.7717
+[xgb3-mstr]   trial  78  state=COMPLETE  score=0.7685  best=0.7717
+[xgb3-mstr]   trial  79  state=COMPLETE  score=0.7668  best=0.7717
+[xgb3-mstr]   trial  80  state=COMPLETE  score=0.7685  best=0.7717
+[xgb3-mstr]   trial  81  state=COMPLETE  score=0.7715  best=0.7717
+[xgb3-mstr]   trial  82  state=COMPLETE  score=0.7676  best=0.7717
+[xgb3-mstr]   trial  83  state=COMPLETE  score=0.7650  best=0.7717
+[xgb3-mstr]   trial  84  state=COMPLETE  score=0.7673  best=0.7717
+[xgb3-mstr]   trial  85  state=COMPLETE  score=0.7579  best=0.7717
+[xgb3-mstr]   trial  86  state=COMPLETE  score=0.7581  best=0.7717
+[xgb3-mstr]   trial  87  state=COMPLETE  score=0.7640  best=0.7717
+[xgb3-mstr]   trial  88  state=COMPLETE  score=0.7615  best=0.7717
+[xgb3-mstr]   trial  89  state=COMPLETE  score=0.7663  best=0.7717
+[xgb3-mstr]   trial  90  state=COMPLETE  score=0.7671  best=0.7717
+[xgb3-mstr]   trial  91  state=COMPLETE  score=0.7695  best=0.7717
+[xgb3-mstr]   trial  92  state=COMPLETE  score=0.7683  best=0.7717
+[xgb3-mstr]   trial  93  state=COMPLETE  score=0.7631  best=0.7717
+[xgb3-mstr]   trial  94  state=COMPLETE  score=0.7602  best=0.7717
+[xgb3-mstr]   trial  95  state=COMPLETE  score=0.7671  best=0.7717
+[xgb3-mstr]   trial  96  state=COMPLETE  score=0.7662  best=0.7717
+[xgb3-mstr]   trial  97  state=COMPLETE  score=0.7681  best=0.7717
+[xgb3-mstr]   trial  98  state=COMPLETE  score=0.7618  best=0.7717
+[xgb3-mstr]   trial  99  state=COMPLETE  score=0.7693  best=0.7717
+[xgb3-mstr] tuning done in 2455.1s  (100 completed, 0 pruned)
+[xgb3-mstr] best CV PR-AUC = 0.7717
+[xgb3-mstr] best params:
+  n_estimators         = 1200
+  max_depth            = 4
+  learning_rate        = 0.00505
+  min_child_weight     = 1.17884
+  subsample            = 0.67183
+  colsample_bytree     = 0.50057
+  reg_lambda           = 6.51499
+  reg_alpha            = 0.76716
+  gamma                = 3.53435
+  scale_pos_weight     = 6.28343
+
+[xgb3-mstr] re-running CV with best params to collect OOF preds + per-fold scores
+  fold 1: train_mks=27 val_mks=1  val_rows=245 val_pos=35  PR-AUC=0.9946
+  fold 2: train_mks=27 val_mks=1  val_rows=189 val_pos=27  PR-AUC=0.8073
+  fold 3: train_mks=21 val_mks=7  val_rows=101 val_pos=16  PR-AUC=0.7160
+  fold 4: train_mks=19 val_mks=9  val_rows=108 val_pos=17  PR-AUC=0.5663
+  fold 5: train_mks=18 val_mks=10  val_rows=108 val_pos=16  PR-AUC=0.7743
+[xgb3-mstr] CV PR-AUC = 0.7717 ± 0.1387
+[xgb3-mstr] OOF Platt calibrator: sigmoid(5.521 * raw_prob -3.561)
+
+[xgb3-mstr] fitting final model on full train (751 rows)
+[xgb3-mstr] final fit in 3.84s
+
+[xgb3-mstr] raw  prob range  train=[0.009, 0.974]  test=[0.016, 0.968]
+[xgb3-mstr] cal. prob range  train=[0.029, 0.860]  test=[0.030, 0.856]
+[xgb3-mstr] sanity: TEST PR-AUC raw=0.3787  (should equal calibrated PR-AUC; AUC is invariant to Platt)
+
+[xgb3-mstr] metrics per split (overfit check: train >> test => overfit):
+[xgb3-mstr] train  n= 751 pos=111  ROC-AUC=0.9911  PR-AUC=0.9401  P=0.6379  R=1.0000  F1=0.7789  (thr=0.15)
+[xgb3-mstr] test   n=  42 pos=  6  ROC-AUC=0.8426  PR-AUC=0.3787  P=0.2609  R=1.0000  F1=0.4138  (thr=0.15)
+
+[xgb3-mstr] PR-AUC gap train-test = +0.5614  (big positive = overfit train)
+[xgb3-mstr] PR-AUC gap CV-test    = +0.3930  (big positive = test markets harder than CV folds)
+
+[xgb3-mstr] classification metrics @ fixed thr=0.15:
+  train  P=0.6379  R=1.0000  F1=0.7789  (TP=111, FP=63, FN=0, TN=577)
+  test   P=0.2609  R=1.0000  F1=0.4138  (TP=6, FP=17, FN=0, TN=19)
+[xgb3-mstr] curves saved to xgboost3_mstr_20260617_142351_curves.png
+
+[xgb3-mstr] TEST predictions, one row per wallet, sorted by prob desc.
+[xgb3-mstr]  rank  prob    label  cum_tp  cum_fp  prec   recall  market  wallet
+[xgb3-mstr]     1    0.8559    0        0       1  0.000   0.000  microstrategy-announces-1000-b  0x5652090d21c85a9d1ca5b6a41fe07f3099fb00c9
+[xgb3-mstr]     2    0.8439    0        0       2  0.000   0.000  microstrategy-announces-1000-b  0xe287a1e8925e46cafd2392ef044cc789083bfb29
+[xgb3-mstr]     3    0.8408    0        0       3  0.000   0.000  microstrategy-announces-1000-b  0x6bab41a0dc40d6dd4c1a915b8c01969479fd1292
+[xgb3-mstr]     4    0.8386    1        1       3  0.250   0.167  microstrategy-announces-1000-b  0x976685b6e867a0400085b1273309e84cd0fc627c
+[xgb3-mstr]     5    0.8191    0        1       4  0.200   0.167  microstrategy-announces-1000-b  0xb574bcbc87bae0b9e95a7075bf67922612871331
+[xgb3-mstr]     6    0.8152    1        2       4  0.333   0.333  microstrategy-announces-1000-b  0x6e1a7bd753e97eaa367f45f4229d82f176475633
+[xgb3-mstr]     7    0.8147    1        3       4  0.429   0.500  microstrategy-announces-1000-b  0x5d55e3cf7a108e462186bedb04e090d4cd033bdf
+[xgb3-mstr]     8    0.8133    0        3       5  0.375   0.500  microstrategy-announces-1000-b  0xd27652b19293d3bb6157adde1005a1de0356b562
+[xgb3-mstr]     9    0.8082    1        4       5  0.444   0.667  microstrategy-announces-1000-b  0x567500e942fa8ea41bea3272014565d6466959bc
+[xgb3-mstr]    10    0.8054    1        5       5  0.500   0.833  microstrategy-announces-1000-b  0xaab69d14e74adf2e46459af9a6b512dbedd2f297
+[xgb3-mstr]    11    0.8042    0        5       6  0.455   0.833  microstrategy-announces-1000-b  0xc084ec8da72e51b4a8e4b033967aca9e8074c547
+[xgb3-mstr]    12    0.7943    0        5       7  0.417   0.833  microstrategy-announces-1000-b  0x98009921271623a77e967de26e9b2dc5da24532c
+[xgb3-mstr]    13    0.7300    0        5       8  0.385   0.833  microstrategy-announces-1000-b  0x1a475c96573121a913ae61cbc57005c6c0e4846f
+[xgb3-mstr]    14    0.7285    0        5       9  0.357   0.833  microstrategy-announces-1000-b  0x5c4a70cd92d44167ecd843aa80c887d181914737
+[xgb3-mstr]    15    0.6735    0        5      10  0.333   0.833  microstrategy-announces-1000-b  0xa0c37cb0587b0dd1542f794bcfa345762bba5b9a
+[xgb3-mstr]    16    0.6447    0        5      11  0.312   0.833  microstrategy-announces-1000-b  0xc1b399b26020a4f689108e9640fd3dc8ffc8501c
+[xgb3-mstr]    17    0.6274    0        5      12  0.294   0.833  microstrategy-announces-1000-b  0xa6d9b55a6a3a54a9d50ca94c64f00af69c50fd2f
+[xgb3-mstr]    18    0.6131    0        5      13  0.278   0.833  microstrategy-announces-1000-b  0x58f505950ae2d9fc76c906d6372b01f60fe3be7b
+[xgb3-mstr]    19    0.5570    1        6      13  0.316   1.000  microstrategy-announces-1000-b  0x0d832e843cd972ffc9549ed1b6cd6aabf1c49fc7
+[xgb3-mstr]    20    0.5014    0        6      14  0.300   1.000  microstrategy-announces-1000-b  0x91527e652fa6b190248b900b68f4a8ec5a42a52a
+[xgb3-mstr]    21    0.3918    0        6      15  0.286   1.000  microstrategy-announces-1000-b  0xf5b4adda2310d05d7d7e9e685943b88dad289c70
+[xgb3-mstr]    22    0.3230    0        6      16  0.273   1.000  microstrategy-announces-1000-b  0xf32898291d309e3c5e499c85ddd03a13268c219c
+[xgb3-mstr]    23    0.1859    0        6      17  0.261   1.000  microstrategy-announces-1000-b  0xc781e8dd03946230f2f32ab36077998bcb4a59d7
+[xgb3-mstr]    24    0.0731    0        6      18  0.250   1.000  microstrategy-announces-1000-b  0x0d1436519a8ba4cf9b5244d0337258e767ffc06d
+[xgb3-mstr]    25    0.0525    0        6      19  0.240   1.000  microstrategy-announces-1000-b  0x1e1f17412069c0736adfaadf8ee7f46e5612c855
+[xgb3-mstr]    26    0.0478    0        6      20  0.231   1.000  microstrategy-announces-1000-b  0x7a146c5e70c092d06be27097a5c770b49d0bd748
+[xgb3-mstr]    27    0.0449    0        6      21  0.222   1.000  microstrategy-announces-1000-b  0x6ffb4354cbe6e0f9989e3b55564ec5fb8646a834
+[xgb3-mstr]    28    0.0441    0        6      22  0.214   1.000  microstrategy-announces-1000-b  0x80ab6ab7646efb38367ea5a180f29042fab16c7a
+[xgb3-mstr]    29    0.0405    0        6      23  0.207   1.000  microstrategy-announces-1000-b  0xdadf44c8ae805f2cdcc7b3f2c28933443725b1ed
+[xgb3-mstr]    30    0.0403    0        6      24  0.200   1.000  microstrategy-announces-1000-b  0x8ee31afcbd86a2ed868476ef243030a61e7d66af
+[xgb3-mstr]    31    0.0398    0        6      25  0.194   1.000  microstrategy-announces-1000-b  0xff76dd29f8376dfdaac3aa470467d6ca38c59c05
+[xgb3-mstr]    32    0.0397    0        6      26  0.188   1.000  microstrategy-announces-1000-b  0x7bb7bccc02fec3d93b311695a42b251e465e44f2
+[xgb3-mstr]    33    0.0390    0        6      27  0.182   1.000  microstrategy-announces-1000-b  0xb2a3bf58e527714ffa8e4de52218186cd658e321
+[xgb3-mstr]    34    0.0388    0        6      28  0.176   1.000  microstrategy-announces-1000-b  0x0260366a9add43c25d4f4d35d2210526c6750d88
+[xgb3-mstr]    35    0.0365    0        6      29  0.171   1.000  microstrategy-announces-1000-b  0xd189664c5308903476f9f079820431e4fd7d06f4
+[xgb3-mstr]    36    0.0364    0        6      30  0.167   1.000  microstrategy-announces-1000-b  0xa4b366ad22fc0d06f1e934ff468e8922431a87b8
+[xgb3-mstr]    37    0.0362    0        6      31  0.162   1.000  microstrategy-announces-1000-b  0x551e72eda42a5ab39d6d78239a1d9bbb5db6b0e0
+[xgb3-mstr]    38    0.0358    0        6      32  0.158   1.000  microstrategy-announces-1000-b  0xb1a279adb096d316b1b168993e8ed976d3cd372a
+[xgb3-mstr]    39    0.0334    0        6      33  0.154   1.000  microstrategy-announces-1000-b  0xd6f105155c7a0f19cb226bf67d6828a7fb6011ee
+[xgb3-mstr]    40    0.0334    0        6      34  0.150   1.000  microstrategy-announces-1000-b  0xf2f76dcd2619d0c67a674a4c41e95afaaf6a146a
+[xgb3-mstr]    41    0.0329    0        6      35  0.146   1.000  microstrategy-announces-1000-b  0xa588aa3010f03d742a7b9b259970df2f08f5dad8
+[xgb3-mstr]    42    0.0302    0        6      36  0.143   1.000  microstrategy-announces-1000-b  0x4bfb41d5b3570defd03c39a9a4d8de6bd8b8982e
+
+[xgb3-mstr] TEST confusion matrix @ thr=0.15
+[[19 17]
+ [ 0  6]]
+
+              precision    recall  f1-score   support
+
+           0     1.0000    0.5278    0.6909        36
+           1     0.2609    1.0000    0.4138         6
+
+    accuracy                         0.5952        42
+   macro avg     0.6304    0.7639    0.5524        42
+weighted avg     0.8944    0.5952    0.6513        42
+
+[xgb3-mstr] feature importances (gain):
+   0.1563  adaptive_markout_raw_grosswt_h0p200
+   0.1294  unrealized_edge_per_open_token_sqrt
+   0.1061  adaptive_markout_raw_grosswt_h0p150
+   0.0904  adaptive_markout_raw_grosswt_h0p010
+   0.0704  adaptive_markout_raw_grosswt_h0p030
+   0.0696  unrealized_edge_per_open_token
+   0.0660  adaptive_markout_raw_grosswt_h0p070
+   0.0393  time_to_major_move_pct_of_market
+   0.0353  buy_markout_adj_grosswt_h0p030_lb0p200
+   0.0338  buy_markout_adj_grosswt_h0p070_lb0p150
+   0.0316  buy_markout_adj_grosswt_h0p030_lb0p010
+   0.0264  major_move_time_remaining_pct
+   0.0260  realized_pnl_per_closing_trade
+   0.0237  adaptive_plus_realized_alpha0p25_h0p030
+   0.0228  adaptive_plus_realized_alpha0p5_h0p070
+   0.0188  buy_markout_adj_mean_h0p200_lb0p200
+   0.0160  buy_markout_adj_mean_h0p200_lb0p030
+   0.0158  sell_markout_adj_median_h0p150_lb0p010
+   0.0118  n_distinct_buy_days
+   0.0106  high_sell_nonflattening_cash_frac_pctl90
+
+[xgb3-mstr] saved cache/models/xgb_insider_20feat_v2_mstr_20260617_142351.json
+[xgb3-mstr] saved cache/models/xgb_insider_20feat_v2_mstr_20260617_142351.calibrator.joblib
+[xgb3-mstr] saved cache/models/xgb_insider_20feat_v2_mstr_20260617_142351.meta.json
+[xgb3-mstr] copied -> cache/models/xgb_insider_20feat_v2_mstr_latest.json
+[xgb3-mstr] copied -> cache/models/xgb_insider_20feat_v2_mstr_latest.calibrator.joblib
+[xgb3-mstr] copied -> cache/models/xgb_insider_20feat_v2_mstr_latest.meta.json
+
+[xgb3-mstr] comparison vs other models on each model's own test set (NOT directly comparable -- different splits):
+  cb  10-feat v2 (catboost3)             ROC-AUC=0.9947  PR-AUC=0.9661
+  cb  10-feat v2 d2 (catboost4)          ROC-AUC=0.9928  PR-AUC=0.9314
+  cb  30-feat v2 (catboost2)             ROC-AUC=0.9827  PR-AUC=0.8564
+  rf  10-feat v2 (randomforest2)         ROC-AUC=0.9959  PR-AUC=0.9702
+  xgb 30-feat (notebook 80/20)           ROC-AUC=0.9469  PR-AUC=0.8362
+  xgb 20-feat v2 (this run)              ROC-AUC=0.8426  PR-AUC=0.3787

@@ -1,0 +1,38 @@
+[metadata_layer] WARNING: ETHERSCAN_API_KEY not set; wallet_age / funder / sibling features will be NaN.
+[metadata_layer] 793 (wallet, market) pairs to score
+[metadata_layer] 68 flagged wallets loaded
+[metadata_layer] 1/793 (0x3e5458…, khamenei-out-as-supreme-leader-o) err=False elapsed=0.6s
+[metadata_layer] 2/793 (0x4c2da4…, khamenei-out-as-supreme-leader-o) err=True elapsed=2.9s
+[metadata_layer] 3/793 (0x019761…, khamenei-out-as-supreme-leader-o) err=True elapsed=5.3s
+[metadata_layer] 4/793 (0x9690d9…, khamenei-out-as-supreme-leader-o) err=True elapsed=7.9s
+[metadata_layer] 5/793 (0x9e5c74…, khamenei-out-as-supreme-leader-o) err=True elapsed=10.3s
+[metadata_layer] 6/793 (0xe59843…, khamenei-out-as-supreme-leader-o) err=True elapsed=12.7s
+[metadata_layer] 7/793 (0x0793ab…, khamenei-out-as-supreme-leader-o) err=False elapsed=13.4s
+[metadata_layer] 8/793 (0x976685…, microstrategy-announces-1000-btc) err=False elapsed=13.8s
+[metadata_layer] 9/793 (0x5d55e3…, microstrategy-announces-1000-btc) err=False elapsed=14.1s
+[metadata_layer] 10/793 (0x567500…, microstrategy-announces-1000-btc) err=False elapsed=14.4s
+[metadata_layer] 11/793 (0x6e1a7b…, microstrategy-announces-1000-btc) err=False elapsed=14.7s
+[metadata_layer] 12/793 (0xaab69d…, microstrategy-announces-1000-btc) err=False elapsed=15.0s
+[metadata_layer] 13/793 (0x0d832e…, microstrategy-announces-1000-btc) err=False elapsed=15.3s
+[metadata_layer] 14/793 (0x7bb7bc…, microstrategy-announces-1000-btc) err=True elapsed=18.0s
+[metadata_layer] 15/793 (0xf2f76d…, microstrategy-announces-1000-btc) err=False elapsed=18.4s
+[metadata_layer] 16/793 (0x6bab41…, microstrategy-announces-1000-btc) err=True elapsed=20.3s
+[metadata_layer] 17/793 (0xf5b4ad…, microstrategy-announces-1000-btc) err=False elapsed=20.7s
+[metadata_layer] 18/793 (0xa6d9b5…, microstrategy-announces-1000-btc) err=True elapsed=23.3s
+[metadata_layer] 19/793 (0x8ee31a…, microstrategy-announces-1000-btc) err=False elapsed=23.6s
+[metadata_layer] 20/793 (0x026036…, microstrategy-announces-1000-btc) err=True elapsed=25.5s
+[metadata_layer] 21/793 (0x80ab6a…, microstrategy-announces-1000-btc) err=True elapsed=28.4s
+[metadata_layer] 22/793 (0xf32898…, microstrategy-announces-1000-btc) err=False elapsed=28.9s
+[metadata_layer] 23/793 (0xc084ec…, microstrategy-announces-1000-btc) err=False elapsed=29.2s
+[metadata_layer] 24/793 (0xb574bc…, microstrategy-announces-1000-btc) err=False elapsed=29.5s
+[metadata_layer] 25/793 (0x565209…, microstrategy-announces-1000-btc) err=False elapsed=31.1s
+[metadata_layer] 26/793 (0xa4b366…, microstrategy-announces-1000-btc) err=True elapsed=33.8s
+[metadata_layer] 27/793 (0x5c4a70…, microstrategy-announces-1000-btc) err=False elapsed=34.1s
+[metadata_layer] 28/793 (0x4bfb41…, microstrategy-announces-1000-btc) err=True elapsed=34.3s
+[metadata_layer] 29/793 (0x980099…, microstrategy-announces-1000-btc) err=False elapsed=34.6s
+[metadata_layer] 30/793 (0xb1a279…, microstrategy-announces-1000-btc) err=True elapsed=36.5s
+[metadata_layer] 31/793 (0x7a146c…, microstrategy-announces-1000-btc) err=True elapsed=39.1s
+[metadata_layer] 32/793 (0xa0c37c…, microstrategy-announces-1000-btc) err=True elapsed=41.7s
+[metadata_layer] 33/793 (0xc1b399…, microstrategy-announces-1000-btc) err=True elapsed=43.8s
+[metadata_layer] 34/793 (0x551e72…, microstrategy-announces-1000-btc) err=True elapsed=46.4s
+[metadata_layer] 35/793 (0xe287a1…, microstrategy-announces-1000-btc) err=False elapsed=46.8s

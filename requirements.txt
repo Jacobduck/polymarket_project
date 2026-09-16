@@ -9,3 +9,4 @@ scikit-learn>=1.5
 xgboost>=2.0
 lightgbm>=4.0
 catboost>=1.2
+shap>=0.44

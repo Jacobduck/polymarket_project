@@ -1,0 +1,324 @@
+[rf25ir] run timestamp = 20260701_085233
+[rf25ir] loading cache/training_data_with_metadata.parquet
+[rf25ir] full shape=(793, 339)  pos=117 neg=676
+[rf25ir] Iran filter = 25ir (down-sample canonical mar-1)
+[rf25ir]   mar-1 before: 245 rows (35 ins / 210 non, 14.3% ins)
+[rf25ir]   mar-1 after : 70 rows (10 ins / 60 non, 14.3% ins)  -> hid 25 ins + 150 non
+[rf25ir]   dataset: 793 -> 618 rows
+[rf25ir] post-filter shape=(618, 339)  pos=92 neg=526
+[rf25ir] using 10 behavioral + 10 metadata = 20 features
+  beh  1. adaptive_markout_raw_grosswt_h0p070
+  beh  2. unrealized_edge_per_open_token
+  beh  3. adaptive_markout_raw_grosswt_h0p010
+  beh  4. adaptive_markout_raw_grosswt_h0p150
+  beh  5. unrealized_edge_per_open_token_sqrt
+  beh  6. buy_markout_adj_grosswt_h0p070_lb0p150
+  beh  7. adaptive_markout_raw_grosswt_h0p200
+  beh  8. buy_markout_adj_grosswt_h0p030_lb0p200
+  beh  9. high_sell_nonflattening_cash_frac_pctl90
+  beh 10. realized_pnl_per_closing_trade
+  met  1. herfindahl_index_markets
+  met  2. median_bet_size_usdc
+  met  3. time_since_first_deposit_to_first_trade_seconds
+  met  4. wallet_age_seconds
+  met  5. wallet_to_market_age_ratio
+  met  6. avg_bet_size_usdc
+  met  7. wallet_minus_market_age_seconds
+  met  8. funder_flagged_wallet_count
+  met  9. winrate
+  met 10. n_markets_traded
+[rf25ir] split (GroupShuffleSplit test_size=0.15, seed=42):
+[rf25ir]   train: 383 rows, 24 markets, pos=58 neg=325
+[rf25ir]   test : 235 rows, 5 markets, pos=34
+[rf25ir]   test markets: ['us-strikes-iran-by-february-28-2026-227-967-547-688-589-491-592-418-452-924-384-915-464-672-196-157-993-596-269-535-381-391-471-256-988-997-296-225-762-973-292-827-345-182-558-215-794-879-189-761', 'will-aztec-launch-a-token-in-2025', 'will-lighter-perform-an-airdrop-by-december-31', 'will-microstrategy-hold-680k-btc-by-december-31', 'will-us-or-israel-strike-iran-by-february-28-2026-766']
+[rf25ir] tuning Optuna (50 trials, GroupKFold=4)...
+[rf25ir]   optuna best CV PR-AUC = 0.7792  (trial 20)
+[rf25ir]   optuna done in 130.5s
+[rf25ir] tuning RandomizedSearchCV (50 iters)...
+[rf25ir]   random-search best CV PR-AUC = 0.7670
+[rf25ir]   random-search done in 58.9s
+[rf25ir] tuner winner = optuna  (optuna=0.7792, random_search=0.7670)  -> best CV PR-AUC=0.7792
+[rf25ir] best params: {'n_estimators': 300, 'max_depth': None, 'min_samples_split': 11, 'min_samples_leaf': 5, 'max_features': 0.5, 'class_weight': {0: 1.0, 1: 1.0}}
+[rf25ir] CV PR-AUC (primary) = 0.7792 ± 0.0798  over 4 folds: [0.8693, 0.8479, 0.7038, 0.6958]
+[rf25ir] final fit in 0.42s
+[rf25ir] metrics per split:
+[rf25ir] train   n= 383 pos= 58  ROC-AUC=0.9902  PR-AUC=0.9508  P=0.8846  R=0.7931  F1=0.8364  (thr=0.5)
+[rf25ir] test    n= 235 pos= 34  ROC-AUC=0.9800  PR-AUC=0.9097  P=0.8205  R=0.9412  F1=0.8767  (thr=0.5)
+[rf25ir] PR-AUC gap train-test = +0.0411  (big positive = overfit)
+[rf25ir] PR-AUC gap CV-test    = -0.1305
+[rf25ir] TEST classification @ thr=0.5: P=0.8205 R=0.9412 F1=0.8767 (TP=32, FP=7, FN=2, TN=194)
+[rf25ir] TEST predictions, sorted by prob desc:
+[rf25ir]  rank  prob    label  cum_tp  cum_fp  prec   recall  market  wallet
+[rf25ir]     1    0.9569    1        1       0  1.000   0.029  us-strikes-iran-by-february-  0x6130238e132bd12ba92244568815c2f7fe4fc5c1
+[rf25ir]     2    0.9406    1        2       0  1.000   0.059  us-strikes-iran-by-february-  0xfffee3116390fc9415956617ed048d26c7c1b424
+[rf25ir]     3    0.9369    1        3       0  1.000   0.088  us-strikes-iran-by-february-  0x95bd107886bd48d6737029603e3db242fb781652
+[rf25ir]     4    0.9331    1        4       0  1.000   0.118  us-strikes-iran-by-february-  0xe1bdfa52bc9342115bbf1d41d04b8cf0bcd8f5a7
+[rf25ir]     5    0.9312    1        5       0  1.000   0.147  us-strikes-iran-by-february-  0xf1d54d55b7568e6e4c20867ccf377555cd947ffc
+[rf25ir]     6    0.9311    1        6       0  1.000   0.176  us-strikes-iran-by-february-  0x421b26a47bb5136d045190d7870095eb29498469
+[rf25ir]     7    0.9304    1        7       0  1.000   0.206  us-strikes-iran-by-february-  0x82ed2416f0a49cc02fb529b00c03582598d17cc3
+[rf25ir]     8    0.9262    0        7       1  0.875   0.206  us-strikes-iran-by-february-  0xd9bfe903637eb1ff3d04f51ecf0d091482a78d69
+[rf25ir]     9    0.9250    1        8       1  0.889   0.235  us-strikes-iran-by-february-  0xdad42409cf398c9149c50217e4dc4a039d9dec0b
+[rf25ir]    10    0.9183    1        9       1  0.900   0.265  us-strikes-iran-by-february-  0xe85f1414171cd41707dc7b256bd3db269f94a28c
+[rf25ir]    11    0.9155    1       10       1  0.909   0.294  us-strikes-iran-by-february-  0xa34d11f372e8a87acc87e3beabb32e2fe7f9ee4d
+[rf25ir]    12    0.9142    1       11       1  0.917   0.324  us-strikes-iran-by-february-  0xf1a1bcf248a0dc05bec474c229f490db00106f24
+[rf25ir]    13    0.9135    1       12       1  0.923   0.353  us-strikes-iran-by-february-  0x65387d3235b2fd6ac3587df1fff2c2de2f98e523
+[rf25ir]    14    0.9131    1       13       1  0.929   0.382  us-strikes-iran-by-february-  0x79963fd69baccad9bb8ab51ddfbf1f13e0630e13
+[rf25ir]    15    0.9100    1       14       1  0.933   0.412  us-strikes-iran-by-february-  0xeb1cdc2f267723b577cd0d1441fe5db05d440f79
+[rf25ir]    16    0.9039    1       15       1  0.938   0.441  us-strikes-iran-by-february-  0x8e588259e06da665020dac0e4958301a2089579e
+[rf25ir]    17    0.8913    1       16       1  0.941   0.471  will-us-or-israel-strike-ira  0x4ec2f11d2893eb1bc3bab7449910540c93adf7ec
+[rf25ir]    18    0.8701    1       17       1  0.944   0.500  us-strikes-iran-by-february-  0xf37af11e538c6eba3ddcea540ee54ca35c6354f8
+[rf25ir]    19    0.8668    1       18       1  0.947   0.529  us-strikes-iran-by-february-  0x943117ea8e3f5b160e158c1c4b1786fee5d3e5a0
+[rf25ir]    20    0.8449    1       19       1  0.950   0.559  will-us-or-israel-strike-ira  0xf37af11e538c6eba3ddcea540ee54ca35c6354f8
+[rf25ir]    21    0.8168    1       20       1  0.952   0.588  us-strikes-iran-by-february-  0x4ec2f11d2893eb1bc3bab7449910540c93adf7ec
+[rf25ir]    22    0.7972    1       21       1  0.955   0.618  us-strikes-iran-by-february-  0x244cde3e010a8eb27f0ff588476091bd3d73f1dc
+[rf25ir]    23    0.7897    1       22       1  0.957   0.647  will-us-or-israel-strike-ira  0x344c5073e9b152a95d9f42767ac084a87fad68ab
+[rf25ir]    24    0.7695    1       23       1  0.958   0.676  us-strikes-iran-by-february-  0xb390ae2cc3fd8cb2670a62129faeb775faee106c
+[rf25ir]    25    0.7672    0       23       2  0.920   0.676  us-strikes-iran-by-february-  0x7c64c4851d51a2c6f78d1f00e4e074e94419abdf
+[rf25ir]    26    0.7584    1       24       2  0.923   0.706  us-strikes-iran-by-february-  0xcb8ed92b702a0f2397f8cda9e4925867b7b9135e
+[rf25ir]    27    0.7262    0       24       3  0.889   0.706  us-strikes-iran-by-february-  0x6f53691020762651d14e5a543519e14d5c8654fd
+[rf25ir]    28    0.7183    1       25       3  0.893   0.735  us-strikes-iran-by-february-  0x22d0803925702b81d038c9b3f3aa77a3727f218f
+[rf25ir]    29    0.7143    1       26       3  0.897   0.765  us-strikes-iran-by-february-  0x5e0b017aef88af84fb3897fecce7413c6754981a
+[rf25ir]    30    0.6957    1       27       3  0.900   0.794  will-us-or-israel-strike-ira  0x943117ea8e3f5b160e158c1c4b1786fee5d3e5a0
+[rf25ir]    31    0.6922    0       27       4  0.871   0.794  us-strikes-iran-by-february-  0x8d39df2d470e27eb6d4810cf1fa0b10f8b7c3c8f
+[rf25ir]    32    0.6850    1       28       4  0.875   0.824  will-aztec-launch-a-token-in  0x63c247f9e2722273120a2c4a4c0f01b658022c46
+[rf25ir]    33    0.6649    0       28       5  0.848   0.824  us-strikes-iran-by-february-  0xd6cf0fb12fec574113206e8ffd0d4368a5a3b3f4
+[rf25ir]    34    0.6607    1       29       5  0.853   0.853  us-strikes-iran-by-february-  0xc0292a841a0c9a7320aa39075cffcf1b8f64f705
+[rf25ir]    35    0.6589    0       29       6  0.829   0.853  us-strikes-iran-by-february-  0x046ce8536927b698770af92ead44b2ad60c27e24
+[rf25ir]    36    0.6519    1       30       6  0.833   0.882  us-strikes-iran-by-february-  0x1270fccb862f069b80181dcedf7be31ec6cfc2c8
+[rf25ir]    37    0.6378    1       31       6  0.838   0.912  us-strikes-iran-by-february-  0x45f402894f550357ff1d5db385c93bb9e480dd79
+[rf25ir]    38    0.6333    1       32       6  0.842   0.941  us-strikes-iran-by-february-  0xeee545e9706a03e73c5d17632e2bbb6f1096cce1
+[rf25ir]    39    0.5896    0       32       7  0.821   0.941  us-strikes-iran-by-february-  0x5396d44d3894b287095db1320e4e71481b6427fc
+[rf25ir]    40    0.4959    1       33       7  0.825   0.971  will-microstrategy-hold-680k  0x55ac0f2ea2aa935b88385fe4adb98dd3a60f1023
+[rf25ir]    41    0.4336    0       33       8  0.805   0.971  us-strikes-iran-by-february-  0xb43200065fc4340af84d32f8ad59d59251902bbf
+[rf25ir]    42    0.4102    0       33       9  0.786   0.971  us-strikes-iran-by-february-  0x662a84b97648560dd56d77e8096270ecd0f66543
+[rf25ir]    43    0.4025    0       33      10  0.767   0.971  us-strikes-iran-by-february-  0x1efcbfd475d696009f339b58f73156001bc04fc9
+[rf25ir]    44    0.3852    0       33      11  0.750   0.971  us-strikes-iran-by-february-  0x6ae4160c7507f4e9634144178dcf4e4c36d7d4ce
+[rf25ir]    45    0.3757    0       33      12  0.733   0.971  will-us-or-israel-strike-ira  0xade7c3d84704a779d2adcba0f74f66129c8a3a26
+[rf25ir]    46    0.3723    0       33      13  0.717   0.971  us-strikes-iran-by-february-  0xd2c00d90b85748cc91577a9f182edc7028fda68d
+[rf25ir]    47    0.3647    0       33      14  0.702   0.971  us-strikes-iran-by-february-  0xa33d4e2346498aff52b755a5e41df51dcf772d42
+[rf25ir]    48    0.3581    0       33      15  0.688   0.971  us-strikes-iran-by-february-  0x65d6e104cd595dd4a3f9d3ffc39c9f731d1966bc
+[rf25ir]    49    0.3566    0       33      16  0.673   0.971  us-strikes-iran-by-february-  0x3f2d7fdf9e0cf8a17e960cca432160feb0e58622
+[rf25ir]    50    0.3559    0       33      17  0.660   0.971  us-strikes-iran-by-february-  0xb8a1517b8527173f67865a4d14719a40c6a7d6be
+[rf25ir]    51    0.3438    0       33      18  0.647   0.971  us-strikes-iran-by-february-  0x30db2d6f662bcc534cb80fb3c6163f44eb9733c0
+[rf25ir]    52    0.3434    0       33      19  0.635   0.971  us-strikes-iran-by-february-  0xe572287c956aa7998c7f4a623abc11ab0156ea37
+[rf25ir]    53    0.3308    0       33      20  0.623   0.971  us-strikes-iran-by-february-  0xd2311959d7b38b649ae7be5ed9d91dc070fef96a
+[rf25ir]    54    0.3102    0       33      21  0.611   0.971  us-strikes-iran-by-february-  0xf56b059c60b2d8328db85f649eb6874e5c6bd593
+[rf25ir]    55    0.2856    0       33      22  0.600   0.971  us-strikes-iran-by-february-  0xfb1be810303eef5e98d0cc53dfb4f9661ac6a247
+[rf25ir]    56    0.2773    0       33      23  0.589   0.971  us-strikes-iran-by-february-  0x2f7179be89230bbd673c39a02dee4309e65377f3
+[rf25ir]    57    0.2578    0       33      24  0.579   0.971  us-strikes-iran-by-february-  0xb0cf67e3b628d5bf3cf1bab4eae52002e4cccf8e
+[rf25ir]    58    0.2565    0       33      25  0.569   0.971  will-us-or-israel-strike-ira  0xff91aff2e663ef5753063241755ae6de10a8a1ed
+[rf25ir]    59    0.2380    0       33      26  0.559   0.971  us-strikes-iran-by-february-  0xb932b00bcdac62e7855327f4315159aef8c92e15
+[rf25ir]    60    0.2291    0       33      27  0.550   0.971  us-strikes-iran-by-february-  0xf85fa31a58fcce6c00b5af806a598b1600329800
+[rf25ir]    61    0.2268    0       33      28  0.541   0.971  us-strikes-iran-by-february-  0xe08e25295ce4a45b259cb8b20132782e55241d61
+[rf25ir]    62    0.2239    0       33      29  0.532   0.971  us-strikes-iran-by-february-  0x75cb9c9c84c00b4dd05fe061fe347f740bb126cb
+[rf25ir]    63    0.2207    0       33      30  0.524   0.971  us-strikes-iran-by-february-  0xb7f6b61d32a20b357ea82acb3fd0c337b153ce20
+[rf25ir]    64    0.2190    0       33      31  0.516   0.971  us-strikes-iran-by-february-  0xda9c73119bd0218447b77d3eb4a0f601b05fd6e3
+[rf25ir]    65    0.2099    0       33      32  0.508   0.971  us-strikes-iran-by-february-  0xcb7096b072aa00b861a2d2e9b16fd9cdc73c0573
+[rf25ir]    66    0.2098    0       33      33  0.500   0.971  us-strikes-iran-by-february-  0xbceb7af8dd137e5f38ffc72318d5b859514e8110
+[rf25ir]    67    0.2059    0       33      34  0.493   0.971  will-lighter-perform-an-aird  0xfa68d7dc8db0158e046f17941c1d29ba722bf7dd
+[rf25ir]    68    0.2048    0       33      35  0.485   0.971  us-strikes-iran-by-february-  0x325fe0ebff00b61cf658bb580b698f84986f8e0e
+[rf25ir]    69    0.2032    0       33      36  0.478   0.971  us-strikes-iran-by-february-  0x5f82d812ff98372347ac9504a6474f033451463b
+[rf25ir]    70    0.1944    0       33      37  0.471   0.971  us-strikes-iran-by-february-  0xef3b4a1622d3b6f8acdec70d289d573dd39b4af5
+[rf25ir]    71    0.1861    0       33      38  0.465   0.971  us-strikes-iran-by-february-  0x37172e9cd2ba1a0c2e3a147b5acfa8f133e3b171
+[rf25ir]    72    0.1816    0       33      39  0.458   0.971  us-strikes-iran-by-february-  0x2eefe3ec33179e2cb178ae88ba417e555446b716
+[rf25ir]    73    0.1810    0       33      40  0.452   0.971  us-strikes-iran-by-february-  0x0eaa43c627cd482acb6866a03fe1138495e0c521
+[rf25ir]    74    0.1680    0       33      41  0.446   0.971  us-strikes-iran-by-february-  0x5d7642c7887dfb5002e72964094a9863cdb8dc94
+[rf25ir]    75    0.1662    0       33      42  0.440   0.971  us-strikes-iran-by-february-  0x6d522de1cd7bfd7ef97be0fe4eb72793774bb27e
+[rf25ir]    76    0.1631    0       33      43  0.434   0.971  us-strikes-iran-by-february-  0x7ced7eaa83a00c05c2a59c95b1a62e67a54de021
+[rf25ir]    77    0.1619    0       33      44  0.429   0.971  us-strikes-iran-by-february-  0x1fa2f71820bd65c2a6d1a86f0183debdb3661323
+[rf25ir]    78    0.1610    0       33      45  0.423   0.971  us-strikes-iran-by-february-  0xa6ed0eba1f952980567049e465bc33dc1b347c98
+[rf25ir]    79    0.1594    0       33      46  0.418   0.971  will-lighter-perform-an-aird  0xeafb3d21a3d9333f0cbbcf7e61f7b207db533179
+[rf25ir]    80    0.1559    0       33      47  0.412   0.971  us-strikes-iran-by-february-  0xaa3fd43549bb53ff8a09ea1249db95ce7c2cf384
+[rf25ir]    81    0.1540    0       33      48  0.407   0.971  us-strikes-iran-by-february-  0x2c36fd7c91894c4e7cf2a01831768dc77ba29433
+[rf25ir]    82    0.1539    0       33      49  0.402   0.971  us-strikes-iran-by-february-  0x82f3acbf25fb19896771444a4da03da28fd511d8
+[rf25ir]    83    0.1515    0       33      50  0.398   0.971  us-strikes-iran-by-february-  0xebb29de89dac36f1110c5962328d37ab010221a5
+[rf25ir]    84    0.1495    0       33      51  0.393   0.971  us-strikes-iran-by-february-  0x2539956c8dd2d9462cd7f5326821c7d06b3d36c7
+[rf25ir]    85    0.1492    0       33      52  0.388   0.971  will-us-or-israel-strike-ira  0xe4dba209fc576621cfd126fdb757a5e8f349b966
+[rf25ir]    86    0.1471    0       33      53  0.384   0.971  us-strikes-iran-by-february-  0x585b65cbb098add71b1f5eb284b8cb155ea59aa3
+[rf25ir]    87    0.1466    0       33      54  0.379   0.971  us-strikes-iran-by-february-  0xb4ac50de85b5b4a83df96d95e3cfa8d1553329d5
+[rf25ir]    88    0.1444    0       33      55  0.375   0.971  us-strikes-iran-by-february-  0xfa5b845f233fc23e89249dde2ff27c623a74201f
+[rf25ir]    89    0.1409    0       33      56  0.371   0.971  us-strikes-iran-by-february-  0x5b6331e7ff0831a3fe2ed12004747db1a9c911a4
+[rf25ir]    90    0.1383    0       33      57  0.367   0.971  us-strikes-iran-by-february-  0x567464a8b6b5794c43282c4a9274e12b48ba8b14
+[rf25ir]    91    0.1374    0       33      58  0.363   0.971  us-strikes-iran-by-february-  0xac6b47dbe20be17a557e9f8062342e5c7bf59cd2
+[rf25ir]    92    0.1338    0       33      59  0.359   0.971  us-strikes-iran-by-february-  0xa6e2f0d715a27a1cf05c798cbc17c3ef7077a8b7
+[rf25ir]    93    0.1297    0       33      60  0.355   0.971  will-us-or-israel-strike-ira  0x3cb3bd97a217fb9d6102665b215fcf206f10a0cc
+[rf25ir]    94    0.1280    0       33      61  0.351   0.971  us-strikes-iran-by-february-  0x15a3ac76ab93e7bc01e2a8c3a023572dba2a0440
+[rf25ir]    95    0.1245    0       33      62  0.347   0.971  us-strikes-iran-by-february-  0x6f246862a1f510eb9ec5455b85c76183f72a5d90
+[rf25ir]    96    0.1170    0       33      63  0.344   0.971  us-strikes-iran-by-february-  0x0d1c10c2d4601633dfc794f87aa500638034565e
+[rf25ir]    97    0.1154    0       33      64  0.340   0.971  us-strikes-iran-by-february-  0x2060266f80e96c0b890e148d7332313c77dd9dd2
+[rf25ir]    98    0.1150    0       33      65  0.337   0.971  us-strikes-iran-by-february-  0x3da46558d0223df9d34d6303ddc92e1d82fab509
+[rf25ir]    99    0.1131    0       33      66  0.333   0.971  us-strikes-iran-by-february-  0x005b16743fbababc2d3f9267665bbd5a59757623
+[rf25ir]   100    0.1104    0       33      67  0.330   0.971  us-strikes-iran-by-february-  0x6fbeaaefbc20f241c007ac60b2446848134fd728
+[rf25ir]   101    0.1103    0       33      68  0.327   0.971  us-strikes-iran-by-february-  0x2d6545a125ff23bd6edc466ad0a83bc7377f19a2
+[rf25ir]   102    0.1043    0       33      69  0.324   0.971  will-lighter-perform-an-aird  0xaec560781534f479d962d711a10f9775dd6a75fd
+[rf25ir]   103    0.0963    0       33      70  0.320   0.971  us-strikes-iran-by-february-  0x82d4d5dd4345163ac8070ef28c5f730d1ba66d99
+[rf25ir]   104    0.0948    0       33      71  0.317   0.971  us-strikes-iran-by-february-  0x92a6294cd55b9c6ccd57efaffc365ad943118b84
+[rf25ir]   105    0.0938    0       33      72  0.314   0.971  us-strikes-iran-by-february-  0xd4e4b31f4be60bebba307deb0b81d985eb2e5514
+[rf25ir]   106    0.0824    0       33      73  0.311   0.971  us-strikes-iran-by-february-  0x89cd944aa9cf528142e3557099c6992eb7ce4d7d
+[rf25ir]   107    0.0814    0       33      74  0.308   0.971  us-strikes-iran-by-february-  0xa75a6048ba866f3dd4254314d58dd5a186c4a1d7
+[rf25ir]   108    0.0782    0       33      75  0.306   0.971  will-us-or-israel-strike-ira  0xbca69be5edef416ba701f9a3a2983efdf58273e3
+[rf25ir]   109    0.0756    0       33      76  0.303   0.971  us-strikes-iran-by-february-  0x81cf6fbbf8c16d133ec3a748de34130856bc091e
+[rf25ir]   110    0.0753    1       34      76  0.309   1.000  will-lighter-perform-an-aird  0xe3a1bd7fa34f49c5e11eb20787400090d9cd1ede
+[rf25ir]   111    0.0751    0       34      77  0.306   1.000  us-strikes-iran-by-february-  0x93ee6beb05afaac7e329dcd18128ff227fe5794d
+[rf25ir]   112    0.0750    0       34      78  0.304   1.000  us-strikes-iran-by-february-  0x1fd861f8ace78120a4a1fb49136306131b611de3
+[rf25ir]   113    0.0728    0       34      79  0.301   1.000  us-strikes-iran-by-february-  0x223a958be392f32d75bcb1301ea900906f1e7664
+[rf25ir]   114    0.0720    0       34      80  0.298   1.000  us-strikes-iran-by-february-  0x5cc5ec68750ee4d34b42678d65e48d212e7849cb
+[rf25ir]   115    0.0717    0       34      81  0.296   1.000  us-strikes-iran-by-february-  0xb2e24bfba9cf24507c160659f73d7b5f2537ab51
+[rf25ir]   116    0.0715    0       34      82  0.293   1.000  will-us-or-israel-strike-ira  0x68a2335fbcb6d5c530e57a860f924c567136958a
+[rf25ir]   117    0.0696    0       34      83  0.291   1.000  us-strikes-iran-by-february-  0xea9aa43f9577675394a40e2007feed8b788c64b1
+[rf25ir]   118    0.0695    0       34      84  0.288   1.000  will-us-or-israel-strike-ira  0xacbfc174623468d03d8ae7d50da1b71b0a410c9a
+[rf25ir]   119    0.0692    0       34      85  0.286   1.000  us-strikes-iran-by-february-  0xb766be2ee36ae2d42b236e3fb16dbfb317351d83
+[rf25ir]   120    0.0679    0       34      86  0.283   1.000  us-strikes-iran-by-february-  0xd9ad841f52d4b277e2ff291067338cd89e606e72
+[rf25ir]   121    0.0648    0       34      87  0.281   1.000  will-us-or-israel-strike-ira  0x60a4c4b1e76da34501932dd01cceddf477ca5214
+[rf25ir]   122    0.0648    0       34      88  0.279   1.000  us-strikes-iran-by-february-  0x6539b5dae88bbfb91f88773a0b8ffc20b500ad73
+[rf25ir]   123    0.0597    0       34      89  0.276   1.000  us-strikes-iran-by-february-  0xfc8dce60c93690dd7a22b0024693294f0afe55c5
+[rf25ir]   124    0.0585    0       34      90  0.274   1.000  us-strikes-iran-by-february-  0x0c3c6cedfc55e5977fd9ad1221b75d25c62a5eea
+[rf25ir]   125    0.0584    0       34      91  0.272   1.000  us-strikes-iran-by-february-  0x31e82ef092a5b1285bf95a530dee1162c3bad664
+[rf25ir]   126    0.0582    0       34      92  0.270   1.000  us-strikes-iran-by-february-  0x9537d7ca40572026ac72ce18f7affae759d3a2f1
+[rf25ir]   127    0.0527    0       34      93  0.268   1.000  us-strikes-iran-by-february-  0x37b5ded2084e50fcb40526959f308139620fa88b
+[rf25ir]   128    0.0523    0       34      94  0.266   1.000  us-strikes-iran-by-february-  0x9e8dcb86e6993f4d78ae540dd69bf970bf30b0e1
+[rf25ir]   129    0.0502    0       34      95  0.264   1.000  us-strikes-iran-by-february-  0x7549b3313433f7c8ae479840dcc0f9611015fd37
+[rf25ir]   130    0.0498    0       34      96  0.262   1.000  will-us-or-israel-strike-ira  0x33c8c6eabfba3e8e9b99ce5a22c005ca6c018cef
+[rf25ir]   131    0.0461    0       34      97  0.260   1.000  will-lighter-perform-an-aird  0x1615086ace48440b0bc0da28a9dfc3d6e8208f2b
+[rf25ir]   132    0.0424    0       34      98  0.258   1.000  us-strikes-iran-by-february-  0x67dee5d1b66aca1d7b6613c2b290fa1b2f54e3ff
+[rf25ir]   133    0.0419    0       34      99  0.256   1.000  will-us-or-israel-strike-ira  0x3d773b72f9450d2132a40daf746253e5a26e9ced
+[rf25ir]   134    0.0417    0       34     100  0.254   1.000  us-strikes-iran-by-february-  0xc171096e4601d90e89f786e3ef8b888403064b4f
+[rf25ir]   135    0.0414    0       34     101  0.252   1.000  us-strikes-iran-by-february-  0x00662f5c49e2576cb0736bcfc2c86a9873d3394f
+[rf25ir]   136    0.0408    0       34     102  0.250   1.000  us-strikes-iran-by-february-  0xb83f717cd03598dde412bc63e8ec1f18914fb5b2
+[rf25ir]   137    0.0407    0       34     103  0.248   1.000  us-strikes-iran-by-february-  0x90ed5bffbffbfc344aa1195572d89719a398b5bc
+[rf25ir]   138    0.0399    0       34     104  0.246   1.000  us-strikes-iran-by-february-  0x6f323a8a96ae15ba044c4847fc275621f26178ce
+[rf25ir]   139    0.0357    0       34     105  0.245   1.000  us-strikes-iran-by-february-  0xeebf48d20549f58dc74a9a26ac87d74014aee603
+[rf25ir]   140    0.0347    0       34     106  0.243   1.000  will-us-or-israel-strike-ira  0x2326812917a7bfecb485bb768007c910ea31ab0e
+[rf25ir]   141    0.0344    0       34     107  0.241   1.000  us-strikes-iran-by-february-  0xdc81c807bee8030d67b488c9d40ae6cba1f46b9e
+[rf25ir]   142    0.0327    0       34     108  0.239   1.000  will-aztec-launch-a-token-in  0x184e98eb1d39dfb9e7750e860512a9adbcbecf96
+[rf25ir]   143    0.0308    0       34     109  0.238   1.000  us-strikes-iran-by-february-  0x0ee961b8d19d2b57a57b725dbb4c660ef12d56f5
+[rf25ir]   144    0.0250    0       34     110  0.236   1.000  us-strikes-iran-by-february-  0xf3ac964596f56a91696d84b0cf01368a020af23d
+[rf25ir]   145    0.0239    0       34     111  0.234   1.000  us-strikes-iran-by-february-  0x979c8ab98a46ba24f19b50cea3190cfb5b472ab3
+[rf25ir]   146    0.0230    0       34     112  0.233   1.000  us-strikes-iran-by-february-  0xd7548347f56ad4c0c6921eee48bc0da733298e70
+[rf25ir]   147    0.0216    0       34     113  0.231   1.000  will-us-or-israel-strike-ira  0xb761ee5067211f021d7a7533aebedb621ad44b38
+[rf25ir]   148    0.0210    0       34     114  0.230   1.000  will-lighter-perform-an-aird  0xe80fa37ec3c8a4043e04b28b1a053785325d3354
+[rf25ir]   149    0.0204    0       34     115  0.228   1.000  us-strikes-iran-by-february-  0xf18d4d5dadcec89402c85be023d95ac4e1309863
+[rf25ir]   150    0.0189    0       34     116  0.227   1.000  us-strikes-iran-by-february-  0xea41d1253bf603d7947da4659e85080dc2071c98
+[rf25ir]   151    0.0163    0       34     117  0.225   1.000  will-us-or-israel-strike-ira  0xa9dc3b13e78b67b7c7666b09ad8d12112ebc01c9
+[rf25ir]   152    0.0150    0       34     118  0.224   1.000  us-strikes-iran-by-february-  0x9ef582748baf671ee716075658b870ae747c5d4f
+[rf25ir]   153    0.0149    0       34     119  0.222   1.000  will-microstrategy-hold-680k  0xa0c37cb0587b0dd1542f794bcfa345762bba5b9a
+[rf25ir]   154    0.0143    0       34     120  0.221   1.000  us-strikes-iran-by-february-  0xf3927f431815391850e0c0a1988151916a4c1a08
+[rf25ir]   155    0.0134    0       34     121  0.219   1.000  will-microstrategy-hold-680k  0x2785e7022dc20757108204b13c08cea8613b70ae
+[rf25ir]   156    0.0130    0       34     122  0.218   1.000  us-strikes-iran-by-february-  0xc0fb92d126e4a0a4779c8b5590f2700cac30d4bb
+[rf25ir]   157    0.0115    0       34     123  0.217   1.000  us-strikes-iran-by-february-  0xe6bea32e6d3719b9aca7c638a9d190700ee86df8
+[rf25ir]   158    0.0104    0       34     124  0.215   1.000  will-us-or-israel-strike-ira  0xfe140d9eac2a1565349ac7ea3405749efd011a10
+[rf25ir]   159    0.0100    0       34     125  0.214   1.000  us-strikes-iran-by-february-  0x55bd222f875ccacc59ee822e77060c6e552645e9
+[rf25ir]   160    0.0100    0       34     126  0.212   1.000  will-us-or-israel-strike-ira  0x40013367411f76d4eb943452c096131f04f53fb3
+[rf25ir]   161    0.0080    0       34     127  0.211   1.000  us-strikes-iran-by-february-  0x8a6510fb63cad25d7043b9e0cb2159176b4425ad
+[rf25ir]   162    0.0079    0       34     128  0.210   1.000  us-strikes-iran-by-february-  0x641b56cd1de69da37e9bfefeddc7b277341c5433
+[rf25ir]   163    0.0067    0       34     129  0.209   1.000  us-strikes-iran-by-february-  0x39b444267246a07f2cbf7434bb287b61b91b5c4e
+[rf25ir]   164    0.0061    0       34     130  0.207   1.000  will-us-or-israel-strike-ira  0x0ae1f7cae811ca08edf9283e4222c568d3b352b9
+[rf25ir]   165    0.0041    0       34     131  0.206   1.000  us-strikes-iran-by-february-  0x1d749b198ea0d5136b21fc128fba38bc419c96eb
+[rf25ir]   166    0.0039    0       34     132  0.205   1.000  us-strikes-iran-by-february-  0xad4e20ce7a841dbb53cd8ead45be94da7dc612f1
+[rf25ir]   167    0.0039    0       34     133  0.204   1.000  us-strikes-iran-by-february-  0x002cbcf60f163879bc683198f954f5a966708c0b
+[rf25ir]   168    0.0035    0       34     134  0.202   1.000  us-strikes-iran-by-february-  0xa3a4459147f3db0946747c882ad13b94abbfaffc
+[rf25ir]   169    0.0033    0       34     135  0.201   1.000  us-strikes-iran-by-february-  0x340799a80e861ece53fdf2a7dbe59e9223c0c3eb
+[rf25ir]   170    0.0031    0       34     136  0.200   1.000  us-strikes-iran-by-february-  0xec05c999787c8d42d3c5c8646ce0e89522d6054c
+[rf25ir]   171    0.0029    0       34     137  0.199   1.000  will-us-or-israel-strike-ira  0x08d6e2b50ad71787367f5a6e2123ef6547499b3e
+[rf25ir]   172    0.0027    0       34     138  0.198   1.000  us-strikes-iran-by-february-  0xf124eba6246b935b57ee21425f399b4f52ed3bf0
+[rf25ir]   173    0.0027    0       34     139  0.197   1.000  will-us-or-israel-strike-ira  0x0404bf5d24bfc14f7102930b876d182434a48353
+[rf25ir]   174    0.0022    0       34     140  0.195   1.000  us-strikes-iran-by-february-  0xf66bb1374fc6bcece37b9f562eb5f5bedc95b1d1
+[rf25ir]   175    0.0018    0       34     141  0.194   1.000  us-strikes-iran-by-february-  0x1e0bd686ccdd874f275b8aa7e8a6c0f01541dd71
+[rf25ir]   176    0.0016    0       34     142  0.193   1.000  us-strikes-iran-by-february-  0x6f4394c1fa596ac734fba65771d4e91edaeaa080
+[rf25ir]   177    0.0013    0       34     143  0.192   1.000  us-strikes-iran-by-february-  0x255e42f3a373dda78e208a9ab5923123ef86f6dc
+[rf25ir]   178    0.0013    0       34     144  0.191   1.000  us-strikes-iran-by-february-  0xb8e69b66c2a4d26db7b602d8f170dfb46b8f9767
+[rf25ir]   179    0.0013    0       34     145  0.190   1.000  us-strikes-iran-by-february-  0x54278849b5020b5b6d7eb0beda3ed4f2ec87bb86
+[rf25ir]   180    0.0013    0       34     146  0.189   1.000  us-strikes-iran-by-february-  0xa31514f7d3cab765443dee113985bef266834852
+[rf25ir]   181    0.0013    0       34     147  0.188   1.000  us-strikes-iran-by-february-  0x433309359f46f80da4cc494979996d6468491f57
+[rf25ir]   182    0.0013    0       34     148  0.187   1.000  us-strikes-iran-by-february-  0x439712a5c7a17996a954718d27c58c02b5005a14
+[rf25ir]   183    0.0013    0       34     149  0.186   1.000  us-strikes-iran-by-february-  0x2843d543c60a54106f572ab74f0e2e04f293b3d2
+[rf25ir]   184    0.0013    0       34     150  0.185   1.000  us-strikes-iran-by-february-  0xc87094b674cd9338c88355b457eeccd40b7faadc
+[rf25ir]   185    0.0013    0       34     151  0.184   1.000  us-strikes-iran-by-february-  0x05f1ad43fc6e0951afa63be5afc5ba063b321744
+[rf25ir]   186    0.0013    0       34     152  0.183   1.000  us-strikes-iran-by-february-  0x3b086298bd898ed072a72c68998b6e34c235497e
+[rf25ir]   187    0.0013    0       34     153  0.182   1.000  us-strikes-iran-by-february-  0xc3e45193d37ec34b82129adfc46abff7bb415bf6
+[rf25ir]   188    0.0013    0       34     154  0.181   1.000  us-strikes-iran-by-february-  0x8f42ae0a01c0383c7ca8bd060b86a645ee74b88f
+[rf25ir]   189    0.0012    0       34     155  0.180   1.000  will-microstrategy-hold-680k  0x09705c0b0a5a7359f5c94688687fc73447e65ae4
+[rf25ir]   190    0.0012    0       34     156  0.179   1.000  will-aztec-launch-a-token-in  0x8ee24691a7fe68267d0108ec8d5ebde5ea39bea6
+[rf25ir]   191    0.0011    0       34     157  0.178   1.000  us-strikes-iran-by-february-  0xa75f38f3d9899d69374a4bd172eaa8a19906433a
+[rf25ir]   192    0.0010    0       34     158  0.177   1.000  will-us-or-israel-strike-ira  0xb414bd8d17c921cdaf49023f653710c2b5324cd5
+[rf25ir]   193    0.0007    0       34     159  0.176   1.000  us-strikes-iran-by-february-  0xee2f37db9fb5ddbb6b890479b6bb7d1dbdb87677
+[rf25ir]   194    0.0007    0       34     160  0.175   1.000  us-strikes-iran-by-february-  0x6768099918b4f01e60e968537440253c9d06692d
+[rf25ir]   195    0.0006    0       34     161  0.174   1.000  us-strikes-iran-by-february-  0xb701a048fae9e67fb2d249c5c28cb873bc9459f7
+[rf25ir]   196    0.0006    0       34     162  0.173   1.000  us-strikes-iran-by-february-  0x935afdcff8bdb586c1228a2b60a1d9a4533f6235
+[rf25ir]   197    0.0006    0       34     163  0.173   1.000  us-strikes-iran-by-february-  0x027c2e46e3fc087b8047724ce99650fe4de66ecd
+[rf25ir]   198    0.0006    0       34     164  0.172   1.000  us-strikes-iran-by-february-  0x9a943c78adea66e1bfb48c8f789f05796812b335
+[rf25ir]   199    0.0005    0       34     165  0.171   1.000  us-strikes-iran-by-february-  0x92376666dc6c87a22917fd4025b6983f3731bf00
+[rf25ir]   200    0.0000    0       34     166  0.170   1.000  us-strikes-iran-by-february-  0x7818687f1c2cda416877ab68d18d2c9c25f9d185
+[rf25ir]   201    0.0000    0       34     167  0.169   1.000  us-strikes-iran-by-february-  0x2a019dc0089ea8c6edbbafc8a7cc9ba77b4b6397
+[rf25ir]   202    0.0000    0       34     168  0.168   1.000  us-strikes-iran-by-february-  0x770707d93212e4d0a0e0f9a4c171c4e103a60180
+[rf25ir]   203    0.0000    0       34     169  0.167   1.000  us-strikes-iran-by-february-  0x94885a3566cd74f28e0346f22a4bf002046ad531
+[rf25ir]   204    0.0000    0       34     170  0.167   1.000  us-strikes-iran-by-february-  0x73d49f2c921b6e363eaab93901c8a8fac1027b32
+[rf25ir]   205    0.0000    0       34     171  0.166   1.000  us-strikes-iran-by-february-  0x449303c7bf915a493271365704b329ec03b321ef
+[rf25ir]   206    0.0000    0       34     172  0.165   1.000  us-strikes-iran-by-february-  0xeff07c97c491e11e6ab7a6f4520e61f8fa5c1210
+[rf25ir]   207    0.0000    0       34     173  0.164   1.000  us-strikes-iran-by-february-  0x38a00d59548561391a9caf8bd708c661ff4416e9
+[rf25ir]   208    0.0000    0       34     174  0.163   1.000  us-strikes-iran-by-february-  0x3c593aeb73ebdadbc9ce76d4264a6a2af4011766
+[rf25ir]   209    0.0000    0       34     175  0.163   1.000  us-strikes-iran-by-february-  0x47fc035d622d5835c1c71ce0915eadaf192b8d6b
+[rf25ir]   210    0.0000    0       34     176  0.162   1.000  us-strikes-iran-by-february-  0xfea2050b3b3becb7414a99af4f4138a17607581e
+[rf25ir]   211    0.0000    0       34     177  0.161   1.000  us-strikes-iran-by-february-  0x749dcc57de7015abfc6324ff3378dd17e6551fb3
+[rf25ir]   212    0.0000    0       34     178  0.160   1.000  us-strikes-iran-by-february-  0xdd225a03cd7ed89e3931906c67c75ab31cf89ef1
+[rf25ir]   213    0.0000    0       34     179  0.160   1.000  us-strikes-iran-by-february-  0xc16c41ca1724ecbf773451f3f597cabb964c6651
+[rf25ir]   214    0.0000    0       34     180  0.159   1.000  us-strikes-iran-by-february-  0x993c072519306017fe9a6b3ee6fa4a02b3056787
+[rf25ir]   215    0.0000    0       34     181  0.158   1.000  us-strikes-iran-by-february-  0x4aaefd543cc6519c12748669f5e4b5daedcdd563
+[rf25ir]   216    0.0000    0       34     182  0.157   1.000  us-strikes-iran-by-february-  0xd86efd930d00e77358e86795f326a4f5a3c7ee3e
+[rf25ir]   217    0.0000    0       34     183  0.157   1.000  us-strikes-iran-by-february-  0x72a868a457907488d3389001053bcdcea159c016
+[rf25ir]   218    0.0000    0       34     184  0.156   1.000  us-strikes-iran-by-february-  0x3a397a4e6a3e0556f55630486d0115ad689c02c2
+[rf25ir]   219    0.0000    0       34     185  0.155   1.000  us-strikes-iran-by-february-  0xa82b0e89cf734e2fa70cbd52ca65c77d64595220
+[rf25ir]   220    0.0000    0       34     186  0.155   1.000  us-strikes-iran-by-february-  0xa3e79e028fcdae1302a85df2e28f1f670f079c38
+[rf25ir]   221    0.0000    0       34     187  0.154   1.000  us-strikes-iran-by-february-  0x595ab808788674df15f84e560721d7c5f35bbca8
+[rf25ir]   222    0.0000    0       34     188  0.153   1.000  us-strikes-iran-by-february-  0x57e4bd0fa030e6a6fdde7ee0b58aa497b4f6835e
+[rf25ir]   223    0.0000    0       34     189  0.152   1.000  us-strikes-iran-by-february-  0x1e3bb7def89b002d45fd86d37f35918c2618e232
+[rf25ir]   224    0.0000    0       34     190  0.152   1.000  us-strikes-iran-by-february-  0x977ac477cb8d2f3c9d357afed779ad7570acf2ca
+[rf25ir]   225    0.0000    0       34     191  0.151   1.000  will-aztec-launch-a-token-in  0x4bfb41d5b3570defd03c39a9a4d8de6bd8b8982e
+[rf25ir]   226    0.0000    0       34     192  0.150   1.000  us-strikes-iran-by-february-  0xc550e5ee1011afb6d37c7fbb18fea32e03f9272d
+[rf25ir]   227    0.0000    0       34     193  0.150   1.000  will-us-or-israel-strike-ira  0xcd95ebd0d0d099fa442b9730991f2b8be5d28c17
+[rf25ir]   228    0.0000    0       34     194  0.149   1.000  will-us-or-israel-strike-ira  0xc8ab97a9089a9ff7e6ef0688e6e591a066946418
+[rf25ir]   229    0.0000    0       34     195  0.148   1.000  will-lighter-perform-an-aird  0xc781e8dd03946230f2f32ab36077998bcb4a59d7
+[rf25ir]   230    0.0000    0       34     196  0.148   1.000  will-microstrategy-hold-680k  0xf32a44b612a60f2b0c0f23c419876ec1c89c06fd
+[rf25ir]   231    0.0000    0       34     197  0.147   1.000  will-microstrategy-hold-680k  0xa8c63f775ddbbe66b56614191747def3021444e8
+[rf25ir]   232    0.0000    0       34     198  0.147   1.000  will-microstrategy-hold-680k  0x9def9524630e31ff90f884eed32c3eecfbf8d1a5
+[rf25ir]   233    0.0000    0       34     199  0.146   1.000  will-us-or-israel-strike-ira  0x83a296505eb520c9d35823571204ced41fd69452
+[rf25ir]   234    0.0000    0       34     200  0.145   1.000  will-us-or-israel-strike-ira  0xb59b573ffc4aea5a5cf6360d5c258e784363916b
+[rf25ir]   235    0.0000    0       34     201  0.145   1.000  will-us-or-israel-strike-ira  0xd17dba7de23787d235937110791c4836b3bbd0ee
+[rf25ir] TEST confusion matrix @ thr=0.5
+[[194   7]
+ [  2  32]]
+              precision    recall  f1-score   support
+
+           0     0.9898    0.9652    0.9773       201
+           1     0.8205    0.9412    0.8767        34
+
+    accuracy                         0.9617       235
+   macro avg     0.9052    0.9532    0.9270       235
+weighted avg     0.9653    0.9617    0.9628       235
+
+[rf25ir] feature importances (mean decrease in impurity):
+   0.2138  median_bet_size_usdc
+   0.0710  time_since_first_deposit_to_first_trade_seconds
+   0.0699  buy_markout_adj_grosswt_h0p030_lb0p200
+   0.0663  adaptive_markout_raw_grosswt_h0p010
+   0.0651  wallet_age_seconds
+   0.0633  adaptive_markout_raw_grosswt_h0p150
+   0.0589  wallet_to_market_age_ratio
+   0.0562  unrealized_edge_per_open_token_sqrt
+   0.0556  adaptive_markout_raw_grosswt_h0p070
+   0.0513  adaptive_markout_raw_grosswt_h0p200
+   0.0500  wallet_minus_market_age_seconds
+   0.0455  unrealized_edge_per_open_token
+   0.0406  buy_markout_adj_grosswt_h0p070_lb0p150
+   0.0332  herfindahl_index_markets
+   0.0329  avg_bet_size_usdc
+   0.0137  realized_pnl_per_closing_trade
+   0.0072  winrate
+   0.0056  n_markets_traded
+   0.0001  high_sell_nonflattening_cash_frac_pctl90
+   0.0000  funder_flagged_wallet_count
+[rf25ir] curves saved to 25ir_randomforest_20260701_085233_curves.png
+[rf25ir] saved cache/models/rf_insider_25ir_20260701_085233.joblib
+[rf25ir] saved cache/models/rf_insider_25ir_20260701_085233.meta.json
+
+[rf25ir] === RESULT ===  CV PR-AUC=0.7792  TEST PR-AUC=0.9097  TEST ROC-AUC=0.9800

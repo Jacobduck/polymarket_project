@@ -1,0 +1,304 @@
+[xgb3-axiom] run timestamp = 20260617_142348
+[xgb3-axiom] logging to xgboost3_axiom_20260617_142348.log
+[xgb3-axiom] loading cache/training_data.parquet
+[xgb3-axiom] full shape=(793, 322)  positives=117  negatives=676
+[xgb3-axiom] using top-20 features from cb_insider_30feat_latest.meta.json:
+   1. adaptive_markout_raw_grosswt_h0p070
+   2. unrealized_edge_per_open_token
+   3. adaptive_markout_raw_grosswt_h0p010
+   4. adaptive_markout_raw_grosswt_h0p150
+   5. unrealized_edge_per_open_token_sqrt
+   6. buy_markout_adj_grosswt_h0p070_lb0p150
+   7. adaptive_markout_raw_grosswt_h0p200
+   8. buy_markout_adj_grosswt_h0p030_lb0p200
+   9. high_sell_nonflattening_cash_frac_pctl90
+  10. realized_pnl_per_closing_trade
+  11. adaptive_plus_realized_alpha0p25_h0p030
+  12. buy_markout_adj_grosswt_h0p030_lb0p010
+  13. adaptive_plus_realized_alpha0p5_h0p070
+  14. buy_markout_adj_mean_h0p200_lb0p030
+  15. buy_markout_adj_mean_h0p200_lb0p200
+  16. sell_markout_adj_median_h0p150_lb0p010
+  17. n_distinct_buy_days
+  18. major_move_time_remaining_pct
+  19. time_to_major_move_pct_of_market
+  20. adaptive_markout_raw_grosswt_h0p030
+[xgb3-axiom] PIN_TEST_MARKETS active -> test pinned to 1 market(s); random stratified split disabled
+[xgb3-axiom] markets total: 29  (train=28, test=1; large in test=1, small in test=5)
+[xgb3-axiom] market assignment (sorted by row count desc):
+  train  large  n= 245  pos= 35  us-strikes-iran-by-march-1-2026-492
+  train  large  n= 189  pos= 27  us-strikes-iran-by-february-28-2026-227-967-547-688-589-491-592-418-452-924-384-915-464-672-196-157-993-596-269-535-381-391-471-256-988-997-296-225-762-973-292-827-345-182-558-215-794-879-189-761
+  test   small  n=  49  pos=  7  will-axiom-be-accused-of-insider-trading
+  train  small  n=  42  pos=  6  microstrategy-announces-1000-btc-purchase-december-2-8
+  train  small  n=  28  pos=  4  us-x-iran-ceasefire-by-april-7
+  train  small  n=  28  pos=  4  will-us-or-israel-strike-iran-by-february-28-2026-766
+  train  small  n=  21  pos=  3  will-draftkings-launch-a-prediction-market-in-2025
+  train  small  n=  21  pos=  3  will-microstrategy-announce-a-bitcoin-purchase-december-16-22
+  train  small  n=  20  pos=  4  will-stable-launch-a-token-in-2025
+  train  small  n=  14  pos=  2  nothing-ever-happens-microstrategy
+  train  small  n=  14  pos=  2  will-microstrategy-announce-holding-650k-btc-by-november-30
+  train  small  n=  14  pos=  2  will-microstrategy-purchase-bitcoin-july-1-7
+  train  small  n=   7  pos=  1  microstrategy-sell-any-bitcoin-in-2025
+  train  small  n=   7  pos=  1  will-openai-release-a-new-frontier-model-by-december-13-683
+  train  small  n=   7  pos=  1  openai-browser-by-october-31
+  train  small  n=   7  pos=  1  openai-browser-in-2025
+  train  small  n=   7  pos=  1  openai-social-app-in-2025
+  train  small  n=   7  pos=  1  microstrategy-announces-1000-btc-purchase-november-11-17
+  train  small  n=   7  pos=  1  khamenei-out-as-supreme-leader-of-iran-by-march-31
+  train  small  n=   7  pos=  1  will-lighter-perform-an-airdrop-by-december-31
+  train  small  n=   7  pos=  1  will-cardi-b-perform-during-the-super-bowl-lx-halftime-show
+  train  small  n=   7  pos=  1  will-openai-release-a-new-frontier-model-on-december-11
+  train  small  n=   7  pos=  1  will-microstrategy-hold-680k-btc-by-december-31
+  train  small  n=   7  pos=  1  will-karol-g-perform-during-the-super-bowl-lx-halftime-show
+  train  small  n=   7  pos=  1  will-microstrategy-hold-620k-btc-before-august
+  train  small  n=   5  pos=  1  will-microstrategy-announce-holding-740k-btc-by-march-31
+  train  small  n=   5  pos=  2  will-mara-corina-machado-win-the-nobel-peace-prize-in-2025
+  train  small  n=   4  pos=  1  will-aztec-launch-a-token-in-2025
+  train  small  n=   3  pos=  1  will-yulia-navalnaya-win-the-nobel-peace-prize-in-2025
+[xgb3-axiom] row distribution (total n=793, pos=117, overall pos rate=14.75%):
+  train  n= 744  (93.82% of total)  pos=110  (14.78% pos rate within split)
+  test   n=  49  ( 6.18% of total)  pos=  7  (14.29% pos rate within split)
+[xgb3-axiom] starting Optuna tuning: 100 trials, TPE sampler (20 random startup), MedianPruner, 5-fold GroupKFold CV
+[xgb3-axiom]   trial   0  state=COMPLETE  score=0.6642  best=0.6642
+[xgb3-axiom]   trial   1  state=COMPLETE  score=0.6575  best=0.6642
+[xgb3-axiom]   trial   2  state=COMPLETE  score=0.6625  best=0.6642
+[xgb3-axiom]   trial   3  state=COMPLETE  score=0.6768  best=0.6768
+[xgb3-axiom]   trial   4  state=COMPLETE  score=0.6652  best=0.6768
+[xgb3-axiom]   trial   5  state=COMPLETE  score=0.6521  best=0.6768
+[xgb3-axiom]   trial   6  state=COMPLETE  score=0.6757  best=0.6768
+[xgb3-axiom]   trial   7  state=COMPLETE  score=0.6682  best=0.6768
+[xgb3-axiom]   trial   8  state=COMPLETE  score=0.6612  best=0.6768
+[xgb3-axiom]   trial   9  state=COMPLETE  score=0.6589  best=0.6768
+[xgb3-axiom]   trial  10  state=COMPLETE  score=0.6621  best=0.6768
+[xgb3-axiom]   trial  11  state=COMPLETE  score=0.6585  best=0.6768
+[xgb3-axiom]   trial  12  state=COMPLETE  score=0.6724  best=0.6768
+[xgb3-axiom]   trial  13  state=COMPLETE  score=0.6689  best=0.6768
+[xgb3-axiom]   trial  14  state=COMPLETE  score=0.6742  best=0.6768
+[xgb3-axiom]   trial  15  state=COMPLETE  score=0.6659  best=0.6768
+[xgb3-axiom]   trial  16  state=COMPLETE  score=0.6633  best=0.6768
+[xgb3-axiom]   trial  17  state=COMPLETE  score=0.6731  best=0.6768
+[xgb3-axiom]   trial  18  state=COMPLETE  score=0.6487  best=0.6768
+[xgb3-axiom]   trial  19  state=COMPLETE  score=0.6596  best=0.6768
+[xgb3-axiom]   trial  20  state=COMPLETE  score=0.6589  best=0.6768
+[xgb3-axiom]   trial  21  state=COMPLETE  score=0.6562  best=0.6768
+[xgb3-axiom]   trial  22  state=COMPLETE  score=0.6717  best=0.6768
+[xgb3-axiom]   trial  23  state=COMPLETE  score=0.6656  best=0.6768
+[xgb3-axiom]   trial  24  state=COMPLETE  score=0.6554  best=0.6768
+[xgb3-axiom]   trial  25  state=COMPLETE  score=0.6711  best=0.6768
+[xgb3-axiom]   trial  26  state=COMPLETE  score=0.6633  best=0.6768
+[xgb3-axiom]   trial  27  state=COMPLETE  score=0.6468  best=0.6768
+[xgb3-axiom]   trial  28  state=COMPLETE  score=0.6490  best=0.6768
+[xgb3-axiom]   trial  29  state=COMPLETE  score=0.6597  best=0.6768
+[xgb3-axiom]   trial  30  state=COMPLETE  score=0.6873  best=0.6873
+[xgb3-axiom]   trial  31  state=COMPLETE  score=0.6737  best=0.6873
+[xgb3-axiom]   trial  32  state=COMPLETE  score=0.6880  best=0.6880
+[xgb3-axiom]   trial  33  state=COMPLETE  score=0.6935  best=0.6935
+[xgb3-axiom]   trial  34  state=COMPLETE  score=0.6870  best=0.6935
+[xgb3-axiom]   trial  35  state=COMPLETE  score=0.6882  best=0.6935
+[xgb3-axiom]   trial  36  state=COMPLETE  score=0.6833  best=0.6935
+[xgb3-axiom]   trial  37  state=COMPLETE  score=0.6871  best=0.6935
+[xgb3-axiom]   trial  38  state=COMPLETE  score=0.6712  best=0.6935
+[xgb3-axiom]   trial  39  state=COMPLETE  score=0.6790  best=0.6935
+[xgb3-axiom]   trial  40  state=COMPLETE  score=0.6717  best=0.6935
+[xgb3-axiom]   trial  41  state=COMPLETE  score=0.6775  best=0.6935
+[xgb3-axiom]   trial  42  state=COMPLETE  score=0.6867  best=0.6935
+[xgb3-axiom]   trial  43  state=COMPLETE  score=0.6773  best=0.6935
+[xgb3-axiom]   trial  44  state=COMPLETE  score=0.6783  best=0.6935
+[xgb3-axiom]   trial  45  state=COMPLETE  score=0.6806  best=0.6935
+[xgb3-axiom]   trial  46  state=COMPLETE  score=0.6820  best=0.6935
+[xgb3-axiom]   trial  47  state=COMPLETE  score=0.6863  best=0.6935
+[xgb3-axiom]   trial  48  state=COMPLETE  score=0.6804  best=0.6935
+[xgb3-axiom]   trial  49  state=COMPLETE  score=0.6689  best=0.6935
+[xgb3-axiom]   trial  50  state=COMPLETE  score=0.6646  best=0.6935
+[xgb3-axiom]   trial  51  state=COMPLETE  score=0.6997  best=0.6997
+[xgb3-axiom]   trial  52  state=COMPLETE  score=0.6917  best=0.6997
+[xgb3-axiom]   trial  53  state=COMPLETE  score=0.6859  best=0.6997
+[xgb3-axiom]   trial  54  state=COMPLETE  score=0.6754  best=0.6997
+[xgb3-axiom]   trial  55  state=COMPLETE  score=0.6823  best=0.6997
+[xgb3-axiom]   trial  56  state=COMPLETE  score=0.6991  best=0.6997
+[xgb3-axiom]   trial  57  state=COMPLETE  score=0.6736  best=0.6997
+[xgb3-axiom]   trial  58  state=COMPLETE  score=0.6773  best=0.6997
+[xgb3-axiom]   trial  59  state=COMPLETE  score=0.6780  best=0.6997
+[xgb3-axiom]   trial  60  state=COMPLETE  score=0.6542  best=0.6997
+[xgb3-axiom]   trial  61  state=COMPLETE  score=0.6824  best=0.6997
+[xgb3-axiom]   trial  62  state=COMPLETE  score=0.6894  best=0.6997
+[xgb3-axiom]   trial  63  state=COMPLETE  score=0.6671  best=0.6997
+[xgb3-axiom]   trial  64  state=COMPLETE  score=0.6888  best=0.6997
+[xgb3-axiom]   trial  65  state=COMPLETE  score=0.6763  best=0.6997
+[xgb3-axiom]   trial  66  state=COMPLETE  score=0.6718  best=0.6997
+[xgb3-axiom]   trial  67  state=COMPLETE  score=0.6759  best=0.6997
+[xgb3-axiom]   trial  68  state=COMPLETE  score=0.6583  best=0.6997
+[xgb3-axiom]   trial  69  state=COMPLETE  score=0.6780  best=0.6997
+[xgb3-axiom]   trial  70  state=COMPLETE  score=0.6987  best=0.6997
+[xgb3-axiom]   trial  71  state=COMPLETE  score=0.6874  best=0.6997
+[xgb3-axiom]   trial  72  state=COMPLETE  score=0.6720  best=0.6997
+[xgb3-axiom]   trial  73  state=COMPLETE  score=0.6799  best=0.6997
+[xgb3-axiom]   trial  74  state=COMPLETE  score=0.6761  best=0.6997
+[xgb3-axiom]   trial  75  state=COMPLETE  score=0.6830  best=0.6997
+[xgb3-axiom]   trial  76  state=COMPLETE  score=0.6686  best=0.6997
+[xgb3-axiom]   trial  77  state=COMPLETE  score=0.6800  best=0.6997
+[xgb3-axiom]   trial  78  state=COMPLETE  score=0.6640  best=0.6997
+[xgb3-axiom]   trial  79  state=COMPLETE  score=0.6601  best=0.6997
+[xgb3-axiom]   trial  80  state=COMPLETE  score=0.6762  best=0.6997
+[xgb3-axiom]   trial  81  state=COMPLETE  score=0.6839  best=0.6997
+[xgb3-axiom]   trial  82  state=COMPLETE  score=0.6803  best=0.6997
+[xgb3-axiom]   trial  83  state=COMPLETE  score=0.6972  best=0.6997
+[xgb3-axiom]   trial  84  state=COMPLETE  score=0.6840  best=0.6997
+[xgb3-axiom]   trial  85  state=COMPLETE  score=0.6844  best=0.6997
+[xgb3-axiom]   trial  86  state=COMPLETE  score=0.6756  best=0.6997
+[xgb3-axiom]   trial  87  state=COMPLETE  score=0.6899  best=0.6997
+[xgb3-axiom]   trial  88  state=COMPLETE  score=0.6808  best=0.6997
+[xgb3-axiom]   trial  89  state=COMPLETE  score=0.6682  best=0.6997
+[xgb3-axiom]   trial  90  state=COMPLETE  score=0.6675  best=0.6997
+[xgb3-axiom]   trial  91  state=COMPLETE  score=0.6847  best=0.6997
+[xgb3-axiom]   trial  92  state=COMPLETE  score=0.6820  best=0.6997
+[xgb3-axiom]   trial  93  state=COMPLETE  score=0.6953  best=0.6997
+[xgb3-axiom]   trial  94  state=COMPLETE  score=0.6717  best=0.6997
+[xgb3-axiom]   trial  95  state=COMPLETE  score=0.6757  best=0.6997
+[xgb3-axiom]   trial  96  state=COMPLETE  score=0.6897  best=0.6997
+[xgb3-axiom]   trial  97  state=COMPLETE  score=0.6831  best=0.6997
+[xgb3-axiom]   trial  98  state=COMPLETE  score=0.6711  best=0.6997
+[xgb3-axiom]   trial  99  state=COMPLETE  score=0.6732  best=0.6997
+[xgb3-axiom] tuning done in 2261.7s  (100 completed, 0 pruned)
+[xgb3-axiom] best CV PR-AUC = 0.6997
+[xgb3-axiom] best params:
+  n_estimators         = 1650
+  max_depth            = 4
+  learning_rate        = 0.06372
+  min_child_weight     = 1.03945
+  subsample            = 0.93814
+  colsample_bytree     = 0.54508
+  reg_lambda           = 1.36998
+  reg_alpha            = 0.30599
+  gamma                = 3.24101
+  scale_pos_weight     = 6.31005
+
+[xgb3-axiom] re-running CV with best params to collect OOF preds + per-fold scores
+  fold 1: train_mks=27 val_mks=1  val_rows=245 val_pos=35  PR-AUC=0.9649
+  fold 2: train_mks=27 val_mks=1  val_rows=189 val_pos=27  PR-AUC=0.8688
+  fold 3: train_mks=20 val_mks=8  val_rows=103 val_pos=15  PR-AUC=0.5662
+  fold 4: train_mks=20 val_mks=8  val_rows=102 val_pos=17  PR-AUC=0.4876
+  fold 5: train_mks=18 val_mks=10  val_rows=105 val_pos=16  PR-AUC=0.6108
+[xgb3-axiom] CV PR-AUC = 0.6997 ± 0.1842
+[xgb3-axiom] OOF Platt calibrator: sigmoid(4.366 * raw_prob -2.910)
+
+[xgb3-axiom] fitting final model on full train (744 rows)
+[xgb3-axiom] final fit in 10.33s
+
+[xgb3-axiom] raw  prob range  train=[0.002, 0.987]  test=[0.003, 0.899]
+[xgb3-axiom] cal. prob range  train=[0.052, 0.802]  test=[0.052, 0.734]
+[xgb3-axiom] sanity: TEST PR-AUC raw=0.6745  (should equal calibrated PR-AUC; AUC is invariant to Platt)
+
+[xgb3-axiom] metrics per split (overfit check: train >> test => overfit):
+[xgb3-axiom] train  n= 744 pos=110  ROC-AUC=0.9952  PR-AUC=0.9645  P=0.6627  R=1.0000  F1=0.7971  (thr=0.15)
+[xgb3-axiom] test   n=  49 pos=  7  ROC-AUC=0.8912  PR-AUC=0.6745  P=0.3571  R=0.7143  F1=0.4762  (thr=0.15)
+
+[xgb3-axiom] PR-AUC gap train-test = +0.2900  (big positive = overfit train)
+[xgb3-axiom] PR-AUC gap CV-test    = +0.0252  (big positive = test markets harder than CV folds)
+
+[xgb3-axiom] classification metrics @ fixed thr=0.15:
+  train  P=0.6627  R=1.0000  F1=0.7971  (TP=110, FP=56, FN=0, TN=578)
+  test   P=0.3571  R=0.7143  F1=0.4762  (TP=5, FP=9, FN=2, TN=33)
+[xgb3-axiom] curves saved to xgboost3_axiom_20260617_142348_curves.png
+
+[xgb3-axiom] TEST predictions, one row per wallet, sorted by prob desc.
+[xgb3-axiom]  rank  prob    label  cum_tp  cum_fp  prec   recall  market  wallet
+[xgb3-axiom]     1    0.7340    1        1       0  1.000   0.143  will-axiom-be-accused-of-insid  0x581f34349babaf03b2d3c8f5f60cf44ffbe19a3a
+[xgb3-axiom]     2    0.7089    1        2       0  1.000   0.286  will-axiom-be-accused-of-insid  0x6d6affce1ed04a0e9611484daf1cef5cbcf3fb40
+[xgb3-axiom]     3    0.6069    1        3       0  1.000   0.429  will-axiom-be-accused-of-insid  0x1d9af60c679cd0b577c3c4ccb4b1a4be4174426d
+[xgb3-axiom]     4    0.5000    0        3       1  0.750   0.429  will-axiom-be-accused-of-insid  0xff55beaf369387d7748a31213699a51f1ca8b877
+[xgb3-axiom]     5    0.4802    0        3       2  0.600   0.429  will-axiom-be-accused-of-insid  0xb3768b87f4dcb77a92f2e73f5a54ef2d01ab8817
+[xgb3-axiom]     6    0.4449    0        3       3  0.500   0.429  will-axiom-be-accused-of-insid  0x5e524f43357198fa815e6766f02fe686b444b064
+[xgb3-axiom]     7    0.4067    0        3       4  0.429   0.429  will-axiom-be-accused-of-insid  0xd9eab53eaba81333045da5bd84ce6c833f721e89
+[xgb3-axiom]     8    0.3935    1        4       4  0.500   0.571  will-axiom-be-accused-of-insid  0xaab29084bcc42daff9e11b4a5a4cc55cda3eb306
+[xgb3-axiom]     9    0.3714    0        4       5  0.444   0.571  will-axiom-be-accused-of-insid  0x44c1dfe43260c94ed4f1d00de2e1f80fb113ebc1
+[xgb3-axiom]    10    0.2193    1        5       5  0.500   0.714  will-axiom-be-accused-of-insid  0xe56526b27b96f009b31ddb46558a134047bfce48
+[xgb3-axiom]    11    0.2007    0        5       6  0.455   0.714  will-axiom-be-accused-of-insid  0x22d53062ca2f41ee15df9b401a523eea73419aeb
+[xgb3-axiom]    12    0.1784    0        5       7  0.417   0.714  will-axiom-be-accused-of-insid  0xa5ab0fe08ccffa97e2de8e5caf4d7bd7cd32ed02
+[xgb3-axiom]    13    0.1617    0        5       8  0.385   0.714  will-axiom-be-accused-of-insid  0xc8ee8150ff9bf058b2b8defd09e1bac866ffffd7
+[xgb3-axiom]    14    0.1569    0        5       9  0.357   0.714  will-axiom-be-accused-of-insid  0x5188fa0e8a77e87bc6a58e6781fdfc4e165cc804
+[xgb3-axiom]    15    0.1279    0        5      10  0.333   0.714  will-axiom-be-accused-of-insid  0x72a22d4d155079da8f50c89d4c6c03b6428e7b65
+[xgb3-axiom]    16    0.1213    0        5      11  0.312   0.714  will-axiom-be-accused-of-insid  0x5f8fe08245151828dc063df19ccbb3c9100d40cf
+[xgb3-axiom]    17    0.1164    1        6      11  0.353   0.857  will-axiom-be-accused-of-insid  0x054ec2f0ccfdae941886a3ed306635068c716639
+[xgb3-axiom]    18    0.1154    0        6      12  0.333   0.857  will-axiom-be-accused-of-insid  0xa2bc00398168c2ef76c81230c543ab118a227134
+[xgb3-axiom]    19    0.1025    1        7      12  0.368   1.000  will-axiom-be-accused-of-insid  0x98a96619e482700e83e8486e4f3727dba17f5381
+[xgb3-axiom]    20    0.0800    0        7      13  0.350   1.000  will-axiom-be-accused-of-insid  0xe31b852756937aef6a047b8de0d36196804b3fb7
+[xgb3-axiom]    21    0.0686    0        7      14  0.333   1.000  will-axiom-be-accused-of-insid  0xc1872cdc321ce83ae361516ee22e3419579c4f67
+[xgb3-axiom]    22    0.0680    0        7      15  0.318   1.000  will-axiom-be-accused-of-insid  0xcf6a714618a328c608a1c70cb62a31a6bef3f9d0
+[xgb3-axiom]    23    0.0654    0        7      16  0.304   1.000  will-axiom-be-accused-of-insid  0x0c97325a81ad05c6b58ae30d12eaaec1b8451b68
+[xgb3-axiom]    24    0.0633    0        7      17  0.292   1.000  will-axiom-be-accused-of-insid  0x8192329901e78e1af09863b6c69378b35b99168d
+[xgb3-axiom]    25    0.0596    0        7      18  0.280   1.000  will-axiom-be-accused-of-insid  0xdc9d2b17dd9d903f0e33acdbc9b41c77a339efc0
+[xgb3-axiom]    26    0.0585    0        7      19  0.269   1.000  will-axiom-be-accused-of-insid  0xedf72350cc1d1fc9b02186f33a19a27108e24003
+[xgb3-axiom]    27    0.0577    0        7      20  0.259   1.000  will-axiom-be-accused-of-insid  0x2d58182d23f73967a9eff97a6020b73b7b891aea
+[xgb3-axiom]    28    0.0577    0        7      21  0.250   1.000  will-axiom-be-accused-of-insid  0xb10047d6a254b2ebb306d7a7d13bf59171ab6461
+[xgb3-axiom]    29    0.0567    0        7      22  0.241   1.000  will-axiom-be-accused-of-insid  0xf67f72df65797a85dc9fd44d57adfe5b7b4a31cf
+[xgb3-axiom]    30    0.0567    0        7      23  0.233   1.000  will-axiom-be-accused-of-insid  0x66d5296705f8f0abcaa8043986c3dc9196aa9e9f
+[xgb3-axiom]    31    0.0560    0        7      24  0.226   1.000  will-axiom-be-accused-of-insid  0x828d1dc3586d7aacbc8de4916685690b1453c9a5
+[xgb3-axiom]    32    0.0557    0        7      25  0.219   1.000  will-axiom-be-accused-of-insid  0x50261ea1791d99d4b8e8f65b9e602390a1cbcd15
+[xgb3-axiom]    33    0.0555    0        7      26  0.212   1.000  will-axiom-be-accused-of-insid  0x7744bfd749a70020d16a1fcbac1d064761c9999e
+[xgb3-axiom]    34    0.0551    0        7      27  0.206   1.000  will-axiom-be-accused-of-insid  0x3670279e844f5005d7ed8cc37ca562eaadef34f9
+[xgb3-axiom]    35    0.0546    0        7      28  0.200   1.000  will-axiom-be-accused-of-insid  0x0260366a9add43c25d4f4d35d2210526c6750d88
+[xgb3-axiom]    36    0.0546    0        7      29  0.194   1.000  will-axiom-be-accused-of-insid  0xd21563efd89113ed2ea602bf8562feb4332cddcf
+[xgb3-axiom]    37    0.0546    0        7      30  0.189   1.000  will-axiom-be-accused-of-insid  0x9bd35d55ae6c5d4900ef48e9e2ffe981ed5a3748
+[xgb3-axiom]    38    0.0546    0        7      31  0.184   1.000  will-axiom-be-accused-of-insid  0x2b3e111fdecbe01582ba9dbedad79a94ceb2b898
+[xgb3-axiom]    39    0.0546    0        7      32  0.179   1.000  will-axiom-be-accused-of-insid  0x16c7fe0dff534c7b8faf8fee6dbddddea1a10f82
+[xgb3-axiom]    40    0.0546    0        7      33  0.175   1.000  will-axiom-be-accused-of-insid  0x8432866dac9038e7a0c9bfae1635f21c695c21a3
+[xgb3-axiom]    41    0.0546    0        7      34  0.171   1.000  will-axiom-be-accused-of-insid  0x4268978b9f58cf6e916d9878aa990cc515b70169
+[xgb3-axiom]    42    0.0546    0        7      35  0.167   1.000  will-axiom-be-accused-of-insid  0xc907f73eade151b451d970d79a39b13a7b18e852
+[xgb3-axiom]    43    0.0546    0        7      36  0.163   1.000  will-axiom-be-accused-of-insid  0x0aeb57166a5496fdfe6d02cd878ecae36e9ec405
+[xgb3-axiom]    44    0.0546    0        7      37  0.159   1.000  will-axiom-be-accused-of-insid  0x4429fafc9675b330beaa808dbcfa74aeb04c4409
+[xgb3-axiom]    45    0.0544    0        7      38  0.156   1.000  will-axiom-be-accused-of-insid  0xb2fc56f2f4ef3e34b59a6d603b084ffb34f71881
+[xgb3-axiom]    46    0.0535    0        7      39  0.152   1.000  will-axiom-be-accused-of-insid  0xec593b3c1a9a0ed15e597dc4ea09cafbffe3bb35
+[xgb3-axiom]    47    0.0528    0        7      40  0.149   1.000  will-axiom-be-accused-of-insid  0x6bab41a0dc40d6dd4c1a915b8c01969479fd1292
+[xgb3-axiom]    48    0.0525    0        7      41  0.146   1.000  will-axiom-be-accused-of-insid  0x076ca0207aaa48365da2eb6a917edcbdee5e4e7b
+[xgb3-axiom]    49    0.0522    0        7      42  0.143   1.000  will-axiom-be-accused-of-insid  0xc5d563a36ae78145c45a50134d48a1215220f80a
+
+[xgb3-axiom] TEST confusion matrix @ thr=0.15
+[[33  9]
+ [ 2  5]]
+
+              precision    recall  f1-score   support
+
+           0     0.9429    0.7857    0.8571        42
+           1     0.3571    0.7143    0.4762         7
+
+    accuracy                         0.7755        49
+   macro avg     0.6500    0.7500    0.6667        49
+weighted avg     0.8592    0.7755    0.8027        49
+
+[xgb3-axiom] feature importances (gain):
+   0.3062  unrealized_edge_per_open_token_sqrt
+   0.1350  adaptive_markout_raw_grosswt_h0p010
+   0.0632  adaptive_markout_raw_grosswt_h0p070
+   0.0604  buy_markout_adj_grosswt_h0p070_lb0p150
+   0.0567  buy_markout_adj_grosswt_h0p030_lb0p200
+   0.0476  time_to_major_move_pct_of_market
+   0.0433  buy_markout_adj_grosswt_h0p030_lb0p010
+   0.0363  major_move_time_remaining_pct
+   0.0300  adaptive_plus_realized_alpha0p5_h0p070
+   0.0283  adaptive_plus_realized_alpha0p25_h0p030
+   0.0262  adaptive_markout_raw_grosswt_h0p150
+   0.0257  realized_pnl_per_closing_trade
+   0.0224  adaptive_markout_raw_grosswt_h0p200
+   0.0214  high_sell_nonflattening_cash_frac_pctl90
+   0.0201  buy_markout_adj_mean_h0p200_lb0p200
+   0.0192  sell_markout_adj_median_h0p150_lb0p010
+   0.0185  buy_markout_adj_mean_h0p200_lb0p030
+   0.0175  unrealized_edge_per_open_token
+   0.0141  n_distinct_buy_days
+   0.0078  adaptive_markout_raw_grosswt_h0p030
+
+[xgb3-axiom] saved cache/models/xgb_insider_20feat_v2_axiom_20260617_142348.json
+[xgb3-axiom] saved cache/models/xgb_insider_20feat_v2_axiom_20260617_142348.calibrator.joblib
+[xgb3-axiom] saved cache/models/xgb_insider_20feat_v2_axiom_20260617_142348.meta.json
+[xgb3-axiom] copied -> cache/models/xgb_insider_20feat_v2_axiom_latest.json
+[xgb3-axiom] copied -> cache/models/xgb_insider_20feat_v2_axiom_latest.calibrator.joblib
+[xgb3-axiom] copied -> cache/models/xgb_insider_20feat_v2_axiom_latest.meta.json
+
+[xgb3-axiom] comparison vs other models on each model's own test set (NOT directly comparable -- different splits):
+  cb  10-feat v2 (catboost3)             ROC-AUC=0.9947  PR-AUC=0.9661
+  cb  10-feat v2 d2 (catboost4)          ROC-AUC=0.9928  PR-AUC=0.9314
+  cb  30-feat v2 (catboost2)             ROC-AUC=0.9827  PR-AUC=0.8564
+  rf  10-feat v2 (randomforest2)         ROC-AUC=0.9959  PR-AUC=0.9702
+  xgb 30-feat (notebook 80/20)           ROC-AUC=0.9469  PR-AUC=0.8362
+  xgb 20-feat v2 (this run)              ROC-AUC=0.8912  PR-AUC=0.6745

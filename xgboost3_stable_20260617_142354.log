@@ -1,0 +1,275 @@
+[xgb3-stable] run timestamp = 20260617_142354
+[xgb3-stable] logging to xgboost3_stable_20260617_142354.log
+[xgb3-stable] loading cache/training_data.parquet
+[xgb3-stable] full shape=(793, 322)  positives=117  negatives=676
+[xgb3-stable] using top-20 features from cb_insider_30feat_latest.meta.json:
+   1. adaptive_markout_raw_grosswt_h0p070
+   2. unrealized_edge_per_open_token
+   3. adaptive_markout_raw_grosswt_h0p010
+   4. adaptive_markout_raw_grosswt_h0p150
+   5. unrealized_edge_per_open_token_sqrt
+   6. buy_markout_adj_grosswt_h0p070_lb0p150
+   7. adaptive_markout_raw_grosswt_h0p200
+   8. buy_markout_adj_grosswt_h0p030_lb0p200
+   9. high_sell_nonflattening_cash_frac_pctl90
+  10. realized_pnl_per_closing_trade
+  11. adaptive_plus_realized_alpha0p25_h0p030
+  12. buy_markout_adj_grosswt_h0p030_lb0p010
+  13. adaptive_plus_realized_alpha0p5_h0p070
+  14. buy_markout_adj_mean_h0p200_lb0p030
+  15. buy_markout_adj_mean_h0p200_lb0p200
+  16. sell_markout_adj_median_h0p150_lb0p010
+  17. n_distinct_buy_days
+  18. major_move_time_remaining_pct
+  19. time_to_major_move_pct_of_market
+  20. adaptive_markout_raw_grosswt_h0p030
+[xgb3-stable] PIN_TEST_MARKETS active -> test pinned to 1 market(s); random stratified split disabled
+[xgb3-stable] markets total: 29  (train=28, test=1; large in test=1, small in test=5)
+[xgb3-stable] market assignment (sorted by row count desc):
+  train  large  n= 245  pos= 35  us-strikes-iran-by-march-1-2026-492
+  train  large  n= 189  pos= 27  us-strikes-iran-by-february-28-2026-227-967-547-688-589-491-592-418-452-924-384-915-464-672-196-157-993-596-269-535-381-391-471-256-988-997-296-225-762-973-292-827-345-182-558-215-794-879-189-761
+  train  small  n=  49  pos=  7  will-axiom-be-accused-of-insider-trading
+  train  small  n=  42  pos=  6  microstrategy-announces-1000-btc-purchase-december-2-8
+  train  small  n=  28  pos=  4  us-x-iran-ceasefire-by-april-7
+  train  small  n=  28  pos=  4  will-us-or-israel-strike-iran-by-february-28-2026-766
+  train  small  n=  21  pos=  3  will-draftkings-launch-a-prediction-market-in-2025
+  train  small  n=  21  pos=  3  will-microstrategy-announce-a-bitcoin-purchase-december-16-22
+  test   small  n=  20  pos=  4  will-stable-launch-a-token-in-2025
+  train  small  n=  14  pos=  2  nothing-ever-happens-microstrategy
+  train  small  n=  14  pos=  2  will-microstrategy-announce-holding-650k-btc-by-november-30
+  train  small  n=  14  pos=  2  will-microstrategy-purchase-bitcoin-july-1-7
+  train  small  n=   7  pos=  1  microstrategy-sell-any-bitcoin-in-2025
+  train  small  n=   7  pos=  1  will-openai-release-a-new-frontier-model-by-december-13-683
+  train  small  n=   7  pos=  1  openai-browser-by-october-31
+  train  small  n=   7  pos=  1  openai-browser-in-2025
+  train  small  n=   7  pos=  1  openai-social-app-in-2025
+  train  small  n=   7  pos=  1  microstrategy-announces-1000-btc-purchase-november-11-17
+  train  small  n=   7  pos=  1  khamenei-out-as-supreme-leader-of-iran-by-march-31
+  train  small  n=   7  pos=  1  will-lighter-perform-an-airdrop-by-december-31
+  train  small  n=   7  pos=  1  will-cardi-b-perform-during-the-super-bowl-lx-halftime-show
+  train  small  n=   7  pos=  1  will-openai-release-a-new-frontier-model-on-december-11
+  train  small  n=   7  pos=  1  will-microstrategy-hold-680k-btc-by-december-31
+  train  small  n=   7  pos=  1  will-karol-g-perform-during-the-super-bowl-lx-halftime-show
+  train  small  n=   7  pos=  1  will-microstrategy-hold-620k-btc-before-august
+  train  small  n=   5  pos=  1  will-microstrategy-announce-holding-740k-btc-by-march-31
+  train  small  n=   5  pos=  2  will-mara-corina-machado-win-the-nobel-peace-prize-in-2025
+  train  small  n=   4  pos=  1  will-aztec-launch-a-token-in-2025
+  train  small  n=   3  pos=  1  will-yulia-navalnaya-win-the-nobel-peace-prize-in-2025
+[xgb3-stable] row distribution (total n=793, pos=117, overall pos rate=14.75%):
+  train  n= 773  (97.48% of total)  pos=113  (14.62% pos rate within split)
+  test   n=  20  ( 2.52% of total)  pos=  4  (20.00% pos rate within split)
+[xgb3-stable] starting Optuna tuning: 100 trials, TPE sampler (20 random startup), MedianPruner, 5-fold GroupKFold CV
+[xgb3-stable]   trial   0  state=COMPLETE  score=0.6958  best=0.6958
+[xgb3-stable]   trial   1  state=COMPLETE  score=0.6859  best=0.6958
+[xgb3-stable]   trial   2  state=COMPLETE  score=0.6968  best=0.6968
+[xgb3-stable]   trial   3  state=COMPLETE  score=0.7330  best=0.7330
+[xgb3-stable]   trial   4  state=COMPLETE  score=0.7039  best=0.7330
+[xgb3-stable]   trial   5  state=COMPLETE  score=0.6491  best=0.7330
+[xgb3-stable]   trial   6  state=COMPLETE  score=0.6792  best=0.7330
+[xgb3-stable]   trial   7  state=COMPLETE  score=0.7095  best=0.7330
+[xgb3-stable]   trial   8  state=COMPLETE  score=0.7217  best=0.7330
+[xgb3-stable]   trial   9  state=COMPLETE  score=0.6799  best=0.7330
+[xgb3-stable]   trial  10  state=COMPLETE  score=0.7120  best=0.7330
+[xgb3-stable]   trial  11  state=COMPLETE  score=0.7134  best=0.7330
+[xgb3-stable]   trial  12  state=COMPLETE  score=0.6826  best=0.7330
+[xgb3-stable]   trial  13  state=COMPLETE  score=0.7101  best=0.7330
+[xgb3-stable]   trial  14  state=COMPLETE  score=0.6668  best=0.7330
+[xgb3-stable]   trial  15  state=COMPLETE  score=0.7137  best=0.7330
+[xgb3-stable]   trial  16  state=COMPLETE  score=0.6829  best=0.7330
+[xgb3-stable]   trial  17  state=COMPLETE  score=0.7250  best=0.7330
+[xgb3-stable]   trial  18  state=COMPLETE  score=0.6840  best=0.7330
+[xgb3-stable]   trial  19  state=COMPLETE  score=0.7153  best=0.7330
+[xgb3-stable]   trial  20  state=COMPLETE  score=0.7231  best=0.7330
+[xgb3-stable]   trial  21  state=COMPLETE  score=0.7190  best=0.7330
+[xgb3-stable]   trial  22  state=COMPLETE  score=0.7248  best=0.7330
+[xgb3-stable]   trial  23  state=COMPLETE  score=0.7171  best=0.7330
+[xgb3-stable]   trial  24  state=COMPLETE  score=0.7145  best=0.7330
+[xgb3-stable]   trial  25  state=COMPLETE  score=0.7234  best=0.7330
+[xgb3-stable]   trial  26  state=COMPLETE  score=0.7210  best=0.7330
+[xgb3-stable]   trial  27  state=COMPLETE  score=0.7161  best=0.7330
+[xgb3-stable]   trial  28  state=COMPLETE  score=0.7275  best=0.7330
+[xgb3-stable]   trial  29  state=COMPLETE  score=0.7140  best=0.7330
+[xgb3-stable]   trial  30  state=COMPLETE  score=0.6864  best=0.7330
+[xgb3-stable]   trial  31  state=COMPLETE  score=0.7104  best=0.7330
+[xgb3-stable]   trial  32  state=COMPLETE  score=0.7142  best=0.7330
+[xgb3-stable]   trial  33  state=COMPLETE  score=0.6958  best=0.7330
+[xgb3-stable]   trial  34  state=COMPLETE  score=0.7091  best=0.7330
+[xgb3-stable]   trial  35  state=COMPLETE  score=0.7175  best=0.7330
+[xgb3-stable]   trial  36  state=COMPLETE  score=0.6961  best=0.7330
+[xgb3-stable]   trial  37  state=COMPLETE  score=0.7178  best=0.7330
+[xgb3-stable]   trial  38  state=COMPLETE  score=0.7137  best=0.7330
+[xgb3-stable]   trial  39  state=COMPLETE  score=0.7137  best=0.7330
+[xgb3-stable]   trial  40  state=COMPLETE  score=0.7187  best=0.7330
+[xgb3-stable]   trial  41  state=COMPLETE  score=0.7242  best=0.7330
+[xgb3-stable]   trial  42  state=COMPLETE  score=0.7191  best=0.7330
+[xgb3-stable]   trial  43  state=COMPLETE  score=0.7113  best=0.7330
+[xgb3-stable]   trial  44  state=COMPLETE  score=0.7195  best=0.7330
+[xgb3-stable]   trial  45  state=COMPLETE  score=0.7139  best=0.7330
+[xgb3-stable]   trial  46  state=COMPLETE  score=0.7241  best=0.7330
+[xgb3-stable]   trial  47  state=COMPLETE  score=0.7092  best=0.7330
+[xgb3-stable]   trial  48  state=COMPLETE  score=0.7103  best=0.7330
+[xgb3-stable]   trial  49  state=COMPLETE  score=0.7152  best=0.7330
+[xgb3-stable]   trial  50  state=COMPLETE  score=0.7071  best=0.7330
+[xgb3-stable]   trial  51  state=COMPLETE  score=0.7214  best=0.7330
+[xgb3-stable]   trial  52  state=COMPLETE  score=0.7159  best=0.7330
+[xgb3-stable]   trial  53  state=COMPLETE  score=0.7182  best=0.7330
+[xgb3-stable]   trial  54  state=COMPLETE  score=0.7203  best=0.7330
+[xgb3-stable]   trial  55  state=COMPLETE  score=0.7186  best=0.7330
+[xgb3-stable]   trial  56  state=COMPLETE  score=0.7235  best=0.7330
+[xgb3-stable]   trial  57  state=COMPLETE  score=0.7207  best=0.7330
+[xgb3-stable]   trial  58  state=COMPLETE  score=0.7294  best=0.7330
+[xgb3-stable]   trial  59  state=COMPLETE  score=0.7063  best=0.7330
+[xgb3-stable]   trial  60  state=COMPLETE  score=0.7231  best=0.7330
+[xgb3-stable]   trial  61  state=COMPLETE  score=0.7242  best=0.7330
+[xgb3-stable]   trial  62  state=COMPLETE  score=0.7181  best=0.7330
+[xgb3-stable]   trial  63  state=COMPLETE  score=0.7325  best=0.7330
+[xgb3-stable]   trial  64  state=COMPLETE  score=0.7327  best=0.7330
+[xgb3-stable]   trial  65  state=COMPLETE  score=0.7310  best=0.7330
+[xgb3-stable]   trial  66  state=COMPLETE  score=0.7329  best=0.7330
+[xgb3-stable]   trial  67  state=COMPLETE  score=0.7320  best=0.7330
+[xgb3-stable]   trial  68  state=COMPLETE  score=0.7322  best=0.7330
+[xgb3-stable]   trial  69  state=COMPLETE  score=0.7220  best=0.7330
+[xgb3-stable]   trial  70  state=COMPLETE  score=0.7339  best=0.7339
+[xgb3-stable]   trial  71  state=COMPLETE  score=0.7287  best=0.7339
+[xgb3-stable]   trial  72  state=COMPLETE  score=0.7300  best=0.7339
+[xgb3-stable]   trial  73  state=COMPLETE  score=0.7151  best=0.7339
+[xgb3-stable]   trial  74  state=COMPLETE  score=0.7225  best=0.7339
+[xgb3-stable]   trial  75  state=COMPLETE  score=0.7248  best=0.7339
+[xgb3-stable]   trial  76  state=COMPLETE  score=0.7233  best=0.7339
+[xgb3-stable]   trial  77  state=COMPLETE  score=0.7332  best=0.7339
+[xgb3-stable]   trial  78  state=COMPLETE  score=0.7269  best=0.7339
+[xgb3-stable]   trial  79  state=COMPLETE  score=0.7113  best=0.7339
+[xgb3-stable]   trial  80  state=COMPLETE  score=0.7162  best=0.7339
+[xgb3-stable]   trial  81  state=COMPLETE  score=0.7334  best=0.7339
+[xgb3-stable]   trial  82  state=COMPLETE  score=0.6879  best=0.7339
+[xgb3-stable]   trial  83  state=COMPLETE  score=0.7311  best=0.7339
+[xgb3-stable]   trial  84  state=COMPLETE  score=0.7245  best=0.7339
+[xgb3-stable]   trial  85  state=COMPLETE  score=0.7307  best=0.7339
+[xgb3-stable]   trial  86  state=COMPLETE  score=0.7304  best=0.7339
+[xgb3-stable]   trial  87  state=COMPLETE  score=0.7223  best=0.7339
+[xgb3-stable]   trial  88  state=COMPLETE  score=0.7247  best=0.7339
+[xgb3-stable]   trial  89  state=COMPLETE  score=0.7164  best=0.7339
+[xgb3-stable]   trial  90  state=COMPLETE  score=0.7293  best=0.7339
+[xgb3-stable]   trial  91  state=COMPLETE  score=0.7263  best=0.7339
+[xgb3-stable]   trial  92  state=COMPLETE  score=0.7155  best=0.7339
+[xgb3-stable]   trial  93  state=COMPLETE  score=0.7359  best=0.7359
+[xgb3-stable]   trial  94  state=COMPLETE  score=0.7301  best=0.7359
+[xgb3-stable]   trial  95  state=COMPLETE  score=0.7273  best=0.7359
+[xgb3-stable]   trial  96  state=COMPLETE  score=0.7325  best=0.7359
+[xgb3-stable]   trial  97  state=COMPLETE  score=0.7167  best=0.7359
+[xgb3-stable]   trial  98  state=COMPLETE  score=0.7229  best=0.7359
+[xgb3-stable]   trial  99  state=COMPLETE  score=0.7262  best=0.7359
+[xgb3-stable] tuning done in 2482.3s  (100 completed, 0 pruned)
+[xgb3-stable] best CV PR-AUC = 0.7359
+[xgb3-stable] best params:
+  n_estimators         = 1650
+  max_depth            = 2
+  learning_rate        = 0.00677
+  min_child_weight     = 13.78416
+  subsample            = 0.99990
+  colsample_bytree     = 0.82594
+  reg_lambda           = 1.11542
+  reg_alpha            = 0.00268
+  gamma                = 3.34922
+  scale_pos_weight     = 4.14914
+
+[xgb3-stable] re-running CV with best params to collect OOF preds + per-fold scores
+  fold 1: train_mks=27 val_mks=1  val_rows=245 val_pos=35  PR-AUC=0.9430
+  fold 2: train_mks=27 val_mks=1  val_rows=189 val_pos=27  PR-AUC=0.8208
+  fold 3: train_mks=21 val_mks=7  val_rows=112 val_pos=16  PR-AUC=0.6345
+  fold 4: train_mks=19 val_mks=9  val_rows=113 val_pos=17  PR-AUC=0.4798
+  fold 5: train_mks=18 val_mks=10  val_rows=114 val_pos=18  PR-AUC=0.8016
+[xgb3-stable] CV PR-AUC = 0.7359 ± 0.1614
+[xgb3-stable] OOF Platt calibrator: sigmoid(5.823 * raw_prob -3.803)
+
+[xgb3-stable] fitting final model on full train (773 rows)
+[xgb3-stable] final fit in 0.65s
+
+[xgb3-stable] raw  prob range  train=[0.004, 0.969]  test=[0.034, 0.519]
+[xgb3-stable] cal. prob range  train=[0.022, 0.863]  test=[0.026, 0.314]
+[xgb3-stable] sanity: TEST PR-AUC raw=0.7589  (should equal calibrated PR-AUC; AUC is invariant to Platt)
+
+[xgb3-stable] metrics per split (overfit check: train >> test => overfit):
+[xgb3-stable] train  n= 773 pos=113  ROC-AUC=0.9802  PR-AUC=0.8739  P=0.6331  R=0.9469  F1=0.7589  (thr=0.15)
+[xgb3-stable] test   n=  20 pos=  4  ROC-AUC=0.8281  PR-AUC=0.7589  P=1.0000  R=0.5000  F1=0.6667  (thr=0.15)
+
+[xgb3-stable] PR-AUC gap train-test = +0.1150  (big positive = overfit train)
+[xgb3-stable] PR-AUC gap CV-test    = -0.0230  (big positive = test markets harder than CV folds)
+
+[xgb3-stable] classification metrics @ fixed thr=0.15:
+  train  P=0.6331  R=0.9469  F1=0.7589  (TP=107, FP=62, FN=6, TN=598)
+  test   P=1.0000  R=0.5000  F1=0.6667  (TP=2, FP=0, FN=2, TN=16)
+[xgb3-stable] curves saved to xgboost3_stable_20260617_142354_curves.png
+
+[xgb3-stable] TEST predictions, one row per wallet, sorted by prob desc.
+[xgb3-stable]  rank  prob    label  cum_tp  cum_fp  prec   recall  market  wallet
+[xgb3-stable]     1    0.3141    1        1       0  1.000   0.250  will-stable-launch-a-token-in-  0x185ffa4bd5bebfd8a463b905137ebd801bb7053c
+[xgb3-stable]     2    0.3122    1        2       0  1.000   0.500  will-stable-launch-a-token-in-  0x4b7e367dd40de1d629a09bc414ec7b14e97c8736
+[xgb3-stable]     3    0.0690    0        2       1  0.667   0.500  will-stable-launch-a-token-in-  0x68fe494c5ca794f3f247f4ec2a8bf95e3ef28792
+[xgb3-stable]     4    0.0537    1        3       1  0.750   0.750  will-stable-launch-a-token-in-  0xc8809a2756d80cbbf5c81a685f2ce113b3242c56
+[xgb3-stable]     5    0.0504    0        3       2  0.600   0.750  will-stable-launch-a-token-in-  0x40f0a23417676555c3e8b4993fb29cfee8d2f925
+[xgb3-stable]     6    0.0494    0        3       3  0.500   0.750  will-stable-launch-a-token-in-  0x69aa9fa621403e3a121b29ad77d32ba9eb5e8847
+[xgb3-stable]     7    0.0459    0        3       4  0.429   0.750  will-stable-launch-a-token-in-  0xf2b6d922dc212c5f6ff3444350a2b9b85c5580b9
+[xgb3-stable]     8    0.0459    0        3       5  0.375   0.750  will-stable-launch-a-token-in-  0x4d49acb0ae1c463eb5b1947d174141b812ba7450
+[xgb3-stable]     9    0.0459    0        3       6  0.333   0.750  will-stable-launch-a-token-in-  0x2785e7022dc20757108204b13c08cea8613b70ae
+[xgb3-stable]    10    0.0449    0        3       7  0.300   0.750  will-stable-launch-a-token-in-  0xfdd9cbf51e4813c5e674b0baf9ff48e46c778ea6
+[xgb3-stable]    11    0.0403    0        3       8  0.273   0.750  will-stable-launch-a-token-in-  0xd58eb86835883a621bb7c98c6dd4f460dd0d6712
+[xgb3-stable]    12    0.0391    0        3       9  0.250   0.750  will-stable-launch-a-token-in-  0x956fcf62e065a206e1ad1dcf0740905d4407f960
+[xgb3-stable]    13    0.0391    0        3      10  0.231   0.750  will-stable-launch-a-token-in-  0xdef0280dcf7a56aa8bacee40c86a7670647f3d06
+[xgb3-stable]    14    0.0376    1        4      10  0.286   1.000  will-stable-launch-a-token-in-  0xe3a1bd7fa34f49c5e11eb20787400090d9cd1ede
+[xgb3-stable]    15    0.0369    0        4      11  0.267   1.000  will-stable-launch-a-token-in-  0x73e4c57a583a629005192247852e8fe98b6a3097
+[xgb3-stable]    16    0.0360    0        4      12  0.250   1.000  will-stable-launch-a-token-in-  0xe3b674cd19b79ab59462b87b9ceaa4b4879b86ab
+[xgb3-stable]    17    0.0339    0        4      13  0.235   1.000  will-stable-launch-a-token-in-  0xf5d1bbe457de304e30b52bd51d7b78982c193c94
+[xgb3-stable]    18    0.0325    0        4      14  0.222   1.000  will-stable-launch-a-token-in-  0x5bffcf561bcae83af680ad600cb99f1184d6ffbe
+[xgb3-stable]    19    0.0325    0        4      15  0.211   1.000  will-stable-launch-a-token-in-  0xc60437e21520ddb05334039cbe412528f5a051e6
+[xgb3-stable]    20    0.0264    0        4      16  0.200   1.000  will-stable-launch-a-token-in-  0x4bfb41d5b3570defd03c39a9a4d8de6bd8b8982e
+
+[xgb3-stable] TEST confusion matrix @ thr=0.15
+[[16  0]
+ [ 2  2]]
+
+              precision    recall  f1-score   support
+
+           0     0.8889    1.0000    0.9412        16
+           1     1.0000    0.5000    0.6667         4
+
+    accuracy                         0.9000        20
+   macro avg     0.9444    0.7500    0.8039        20
+weighted avg     0.9111    0.9000    0.8863        20
+
+[xgb3-stable] feature importances (gain):
+   0.3182  unrealized_edge_per_open_token_sqrt
+   0.1251  adaptive_markout_raw_grosswt_h0p070
+   0.1240  adaptive_markout_raw_grosswt_h0p010
+   0.1111  adaptive_markout_raw_grosswt_h0p030
+   0.0711  buy_markout_adj_grosswt_h0p030_lb0p010
+   0.0320  adaptive_markout_raw_grosswt_h0p150
+   0.0313  time_to_major_move_pct_of_market
+   0.0304  adaptive_markout_raw_grosswt_h0p200
+   0.0285  buy_markout_adj_grosswt_h0p030_lb0p200
+   0.0213  adaptive_plus_realized_alpha0p5_h0p070
+   0.0210  realized_pnl_per_closing_trade
+   0.0193  buy_markout_adj_grosswt_h0p070_lb0p150
+   0.0177  major_move_time_remaining_pct
+   0.0172  adaptive_plus_realized_alpha0p25_h0p030
+   0.0103  sell_markout_adj_median_h0p150_lb0p010
+   0.0079  unrealized_edge_per_open_token
+   0.0074  buy_markout_adj_mean_h0p200_lb0p030
+   0.0061  buy_markout_adj_mean_h0p200_lb0p200
+   0.0000  high_sell_nonflattening_cash_frac_pctl90
+   0.0000  n_distinct_buy_days
+
+[xgb3-stable] saved cache/models/xgb_insider_20feat_v2_stable_20260617_142354.json
+[xgb3-stable] saved cache/models/xgb_insider_20feat_v2_stable_20260617_142354.calibrator.joblib
+[xgb3-stable] saved cache/models/xgb_insider_20feat_v2_stable_20260617_142354.meta.json
+[xgb3-stable] copied -> cache/models/xgb_insider_20feat_v2_stable_latest.json
+[xgb3-stable] copied -> cache/models/xgb_insider_20feat_v2_stable_latest.calibrator.joblib
+[xgb3-stable] copied -> cache/models/xgb_insider_20feat_v2_stable_latest.meta.json
+
+[xgb3-stable] comparison vs other models on each model's own test set (NOT directly comparable -- different splits):
+  cb  10-feat v2 (catboost3)             ROC-AUC=0.9947  PR-AUC=0.9661
+  cb  10-feat v2 d2 (catboost4)          ROC-AUC=0.9928  PR-AUC=0.9314
+  cb  30-feat v2 (catboost2)             ROC-AUC=0.9827  PR-AUC=0.8564
+  rf  10-feat v2 (randomforest2)         ROC-AUC=0.9959  PR-AUC=0.9702
+  xgb 30-feat (notebook 80/20)           ROC-AUC=0.9469  PR-AUC=0.8362
+  xgb 20-feat v2 (this run)              ROC-AUC=0.8281  PR-AUC=0.7589

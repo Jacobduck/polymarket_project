@@ -1,0 +1,40 @@
+09:47:56 [super] ============================================================
+09:47:56 [super] plot_top_wallets starting, log=supercompute_willd4vdbethe1searchedpe_20260701_094756.log
+09:47:56 [super] market=will-d4vd-be-the-1-searched-person-on-google-this-year  top_n=25
+09:47:56 [super] reading scores from supercompute_willd4vdbethe1searchedpe_20260630_130310_results.csv
+09:47:56 [super] loaded 1829 scored wallets
+09:47:56 [super] events: cache miss -> resolving market + fetching (needs internet)...
+09:48:28 [super] events: fetched 14760 in 31.6s
+09:48:28 [super] events: cached to cache/events/will-d4vd-be-the-1-searched-person-on-google-this-year.pkl
+09:48:28 [super] market resolved: tokens=2 closed=True duration=54.5d  events=14760
+09:48:28 [super] wallets with parsed trades: 1829
+09:48:28 [super] plots: rendering top 25 wallets' trades to supercompute_willd4vdbethe1searchedpe_20260630_130310_plots
+09:48:28 [super] plots: wrote rank01_0xc1259ddd92f58aded52d029e37e3fbbebafaa4c1.png (97 trades)
+09:48:28 [super] plots: wrote rank02_0xbec4aa2be58b5127560b95a3bd263e6b3daf1868.png (8 trades)
+09:48:29 [super] plots: wrote rank03_0x0c4acd96e5befc4f43bc8f17ff638668557725b2.png (24 trades)
+09:48:29 [super] plots: wrote rank04_0x902b3084831c411a7c5a8812768617fc57deca29.png (49 trades)
+09:48:29 [super] plots: wrote rank05_0xee0153c0a89f103ab465276735fa1e58b5842e8e.png (4 trades)
+09:48:29 [super] plots: wrote rank06_0x2a6fb502dc5fdbe4118a6d4367c0b0b361b4d4ae.png (38 trades)
+09:48:29 [super] plots: wrote rank07_0x94353164e0b0e4d87441b8c53f6002f9eaffc1e2.png (5 trades)
+09:48:30 [super] plots: wrote rank08_0xc8dd4022ee037db9e38749d03761e0773fcd2813.png (8 trades)
+09:48:30 [super] plots: wrote rank09_0xa15abbcd222d38db5b32c96cafa0df909d694e72.png (4 trades)
+09:48:30 [super] plots: wrote rank10_0x18cf20cc39cfbe354b5f1923672720e78066cb22.png (15 trades)
+09:48:30 [super] plots: wrote rank11_0xfbb784750c920c859d592ff2b2bd407de33bb779.png (3 trades)
+09:48:30 [super] plots: wrote rank12_0x2148038b6aa61e78dc69d1739e66684e42bf639e.png (3 trades)
+09:48:31 [super] plots: wrote rank13_0x423549e0ef0a9e9611fe176393107e5a82363574.png (5 trades)
+09:48:31 [super] plots: wrote rank14_0x52830fbbef5ca1ddee6de5c12d975f962ad59a3f.png (5 trades)
+09:48:31 [super] plots: wrote rank15_0xf947f6c081332fa15b0bb4f03cd6923878fba3d4.png (2 trades)
+09:48:31 [super] plots: wrote rank16_0xfd68ec4b38e10198048f7291d76a5394d3e9b9c2.png (12 trades)
+09:48:31 [super] plots: wrote rank17_0x8b245f1d581dfec27babc595711a601a885a8435.png (27 trades)
+09:48:32 [super] plots: wrote rank18_0xee50a31c3f5a7c77824b12a941a54388a2827ed6.png (175 trades)
+09:48:32 [super] plots: wrote rank19_0xf04c5f26b5542050c680e33b6aad8a4969f0d375.png (4 trades)
+09:48:32 [super] plots: wrote rank20_0x7bb7bccc02fec3d93b311695a42b251e465e44f2.png (22 trades)
+09:48:32 [super] plots: wrote rank21_0xa3ea0e0b10f43c8679103e1af35f3c36f0830637.png (11 trades)
+09:48:33 [super] plots: wrote rank22_0xbd76b5c22591de7d293004cad917d11617104e83.png (4 trades)
+09:48:33 [super] plots: wrote rank23_0x24beeb31bc61eeb0f17b4dd7a610666a99bc6e89.png (33 trades)
+09:48:33 [super] plots: wrote rank24_0xf32898291d309e3c5e499c85ddd03a13268c219c.png (2 trades)
+09:48:33 [super] plots: wrote rank25_0x99dfc271bc6883f4732e0eb84f059a7d22d67331.png (4 trades)
+09:48:33 [super] plots: 25/25 PNGs written to supercompute_willd4vdbethe1searchedpe_20260630_130310_plots
+09:48:33 [super] ============================================================
+09:48:33 [super] DONE: 25 plots written to supercompute_willd4vdbethe1searchedpe_20260630_130310_plots
+09:48:33 [super] log saved to supercompute_willd4vdbethe1searchedpe_20260701_094756.log

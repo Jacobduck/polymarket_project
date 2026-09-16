@@ -1,0 +1,47 @@
+[cmp] discovered 27 models in cache/models
+
+model                     algo  meta   nf    CV-PR    ±std  test-PR test-ROC
+------------------------------------------------------------------------------
+xgb 25ir-hidden (30f)      xgb False   30   0.8363  0.1025   0.9252   0.9805
+xgb 20b+10m v7             xgb  True   30   0.8289  0.1145   0.8694   0.9893
+rf 0ir-hidden (20f)         rf False   20   0.8081  0.1182   0.6807   0.9400
+xgb 10b+17m v5             xgb  True   27   0.8050  0.1529   0.8923   0.9882
+logreg 30feat               lr False   30   0.7926  0.0667   0.7140   0.9338
+rf 10b+10m v5 (tuned)       rf  True   20   0.7887       -   0.7462   0.9718
+rf 25ir-hidden (20f)        rf False   20   0.7792  0.0798   0.9097   0.9800
+xgb 20feat v2 (mstr)       xgb False   20   0.7717  0.1387   0.3787   0.8426
+xgb 0ir-hidden (30f)       xgb False   30   0.7529  0.1098   0.7850   0.9363
+xgb 20feat v2 (stable)     xgb False   20   0.7359  0.1614   0.7589   0.8281
+xgb 20feat v2 (axiom)      xgb False   20   0.6997  0.1842   0.6745   0.8912
+rf 10b+17m v3               rf  True   27   0.6913  0.1932   0.9332   0.9925
+rf 10b+17m v4 (axiom)       rf  True   27   0.6812  0.1899   0.5009   0.9048
+xgb 30feat v2              xgb False   30   0.6695  0.1864   0.8391   0.9854
+xgb 10feat v2              xgb False   10   0.6589  0.1595   0.9692   0.9972
+xgb 20feat v2              xgb False   20   0.6534  0.1884   0.9969   0.9995
+xgb meta-only v6           xgb  True   10   0.6406  0.1163   0.6690   0.9506
+cb 30feat v2                cb False   30   0.5449  0.1978   0.8564   0.9827
+rf 10feat v2                rf False   10   0.5108  0.1171   0.9702   0.9959
+cb 10feat v2                cb False   10   0.4782  0.1526   0.9661   0.9947
+cb 10feat v2 (d2)           cb False   10   0.4720  0.1948   0.9314   0.9928
+isoforest 30feat           iso False   30        -       -   0.4123   0.7222
+lgbm 30feat               lgbm False   30        -       -   0.8459   0.9511
+stack 30feat             stack False   30        -       -   0.8534   0.9444
+xgb 14feat                 xgb False   14        -       -   0.6744   0.8900
+xgb 50feat                 xgb False   50        -       -   0.8305   0.9341
+xgb all-319feat            xgb False  319        -       -   0.8399   0.9492
+
+==============================================================================
+RECOMMENDATIONS
+==============================================================================
+  BEST by CV PR-AUC : xgb 25ir-hidden (30f)    CV=0.8363±0.1025  test-PR=0.9251659551776924  nf=30
+  BEST by test PR   : xgb 20feat v2            test-PR=0.9969  test-ROC=0.9995  CV=0.6534264816858297  nf=20
+  SIMPLE (deploy)   : rf 10feat v2             test-PR=0.9702  test-ROC=0.9959  nf=10
+  SIMPLE by CV      : rf 0ir-hidden (20f)      CV-PR=0.8081  nf=20
+
+  NOTE: the metadata models top the CV ranking but the behavioral
+  models top the TEST ranking -- the CV ordering inverts on the
+  held-out market, a classic CV-optimism / overfit signal. For
+  deploying on NEW markets, trust the test-PR leaders.
+
+[cmp] plot saved to model_comparison_20260707_093914.png
+[cmp] log saved to model_comparison_20260707_093914.log

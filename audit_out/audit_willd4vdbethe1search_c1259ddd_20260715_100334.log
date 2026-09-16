@@ -1,0 +1,648 @@
+10:03:34 [audit] ========================================================================
+10:03:34 [audit] audit_pair starting, log=audit_out/audit_willd4vdbethe1search_c1259ddd_20260715_100334.log
+10:03:34 [audit] wallet=0xc1259ddd92f58aded52d029e37e3fbbebafaa4c1
+10:03:34 [audit] market=will-d4vd-be-the-1-searched-person-on-google-this-year
+10:03:34 [audit] shap available: True
+10:03:34 [audit] models to score: 36
+10:03:34 [audit] feature union: 75 (58 behavioral + 17 metadata)
+10:03:34 [audit] events: loading market + events from cache cache/events/will-d4vd-be-the-1-searched-person-on-google-this-year.pkl
+10:03:34 [audit] events: 14760 loaded from cache (offline-ok)
+10:03:34 [audit] wallet trades on this market: 97
+10:03:34 [audit] features: computing 58 behavioral features
+10:03:37 [audit] features: computing 17 metadata features (api_key=MISSING -> funder feats NaN)
+10:03:37 [audit] ------------------------------------------------------------------------
+10:03:37 [audit] PAIR CONTEXT
+10:03:37 [audit]   first trade on market : 2025-12-02 06:51 UTC
+10:03:37 [audit]   volume / n_trades     : $65,187 / 97
+10:03:37 [audit]   market closed / YES-won: True / 1
+10:03:37 [audit]   winrate / n_markets    : 0.0000 / 1.0000
+10:03:37 [audit]   herfindahl / funder-flagged siblings: 1.0000 / NaN
+10:03:42 [audit] model stack_insider_30feat: no predict_proba/decision_function (MinMaxScaler); skipping
+10:03:45 [audit] ========================================================================
+10:03:45 [audit] PER-MODEL RESULTS (flagged first)
+10:03:45 [audit] ------------------------------------------------------------------------
+10:03:45 [audit] MODEL  retrained_rf_insider_meta_v5   [tag=retrained_rf_insider_meta_v5, algo=rf, nf=20, raw]
+10:03:45 [audit]   prob=0.8340 (raw=0.8340)  threshold=0.5   ==> FLAGGED insider
+10:03:45 [audit]   features driving THIS prediction (SHAP, signed toward insider):
+10:03:45 [audit]         explain [shap (TreeExplainer)]  base=+0.5126
+10:03:45 [audit]           herfindahl_index_markets                     contrib=+0.0525 ↑insider  value=+1.0000
+10:03:45 [audit]           unrealized_edge_per_open_token_sqrt          contrib=+0.0454 ↑insider  value=+1.3126
+10:03:45 [audit]           time_since_first_deposit_to_first_trade_seconds contrib=+0.0405 ↑insider  value=+88.0000
+10:03:45 [audit]           wallet_to_market_age_ratio                   contrib=+0.0405 ↑insider  value=+0.0000
+10:03:45 [audit]           wallet_age_seconds                           contrib=+0.0378 ↑insider  value=+88.0000
+10:03:45 [audit]           median_bet_size_usdc                         contrib=-0.0305 ↓insider  value=+24.1120
+10:03:45 [audit]           adaptive_markout_raw_grosswt_h0p010          contrib=+0.0256 ↑insider  value=+0.1594
+10:03:45 [audit]           wallet_minus_market_age_seconds              contrib=+0.0224 ↑insider  value=-4213143.0000
+10:03:45 [audit]           unrealized_edge_per_open_token               contrib=+0.0222 ↑insider  value=+0.1596
+10:03:45 [audit]           buy_markout_adj_grosswt_h0p030_lb0p200       contrib=-0.0204 ↓insider  value=-0.0837
+10:03:45 [audit]           adaptive_markout_raw_grosswt_h0p150          contrib=+0.0186 ↑insider  value=+0.1593
+10:03:45 [audit]           adaptive_markout_raw_grosswt_h0p200          contrib=+0.0157 ↑insider  value=+0.1593
+10:03:45 [audit] ------------------------------------------------------------------------
+10:03:45 [audit] MODEL  retrained_rf_insider_25ir   [tag=retrained_rf_insider_25ir, algo=rf, nf=20, raw]
+10:03:45 [audit]   prob=0.7946 (raw=0.7946)  threshold=0.5   ==> FLAGGED insider
+10:03:45 [audit]   features driving THIS prediction (SHAP, signed toward insider):
+10:03:45 [audit]         explain [shap (TreeExplainer)]  base=+0.5882
+10:03:45 [audit]           herfindahl_index_markets                     contrib=+0.1261 ↑insider  value=+1.0000
+10:03:45 [audit]           buy_markout_adj_grosswt_h0p030_lb0p200       contrib=-0.0991 ↓insider  value=-0.0837
+10:03:45 [audit]           unrealized_edge_per_open_token_sqrt          contrib=+0.0457 ↑insider  value=+1.3126
+10:03:45 [audit]           time_since_first_deposit_to_first_trade_seconds contrib=+0.0330 ↑insider  value=+88.0000
+10:03:45 [audit]           wallet_age_seconds                           contrib=+0.0326 ↑insider  value=+88.0000
+10:03:45 [audit]           median_bet_size_usdc                         contrib=-0.0308 ↓insider  value=+24.1120
+10:03:45 [audit]           n_markets_traded                             contrib=+0.0173 ↑insider  value=+1.0000
+10:03:45 [audit]           wallet_minus_market_age_seconds              contrib=+0.0161 ↑insider  value=-4213143.0000
+10:03:45 [audit]           wallet_to_market_age_ratio                   contrib=+0.0156 ↑insider  value=+0.0000
+10:03:45 [audit]           unrealized_edge_per_open_token               contrib=+0.0143 ↑insider  value=+0.1596
+10:03:45 [audit]           avg_bet_size_usdc                            contrib=+0.0077 ↑insider  value=+830.8037
+10:03:45 [audit]           adaptive_markout_raw_grosswt_h0p150          contrib=+0.0059 ↑insider  value=+0.1593
+10:03:45 [audit] ------------------------------------------------------------------------
+10:03:45 [audit] MODEL  xgb 10b+17m v5   [tag=xgb_insider_meta_v5, algo=xgb, nf=27, calibrated]
+10:03:45 [audit]   prob=0.6812 (raw=0.9485)  threshold=0.15   ==> FLAGGED insider
+10:03:45 [audit]   features driving THIS prediction (SHAP, signed toward insider):
+10:03:45 [audit]         explain [shap (TreeExplainer)]  base=+0.3916
+10:03:45 [audit]           buy_markout_adj_grosswt_h0p030_lb0p200       contrib=-0.6270 ↓insider  value=-0.0837
+10:03:45 [audit]           unrealized_edge_per_open_token_sqrt          contrib=+0.5810 ↑insider  value=+1.3126
+10:03:45 [audit]           avg_bet_size_usdc                            contrib=+0.4744 ↑insider  value=+830.8037
+10:03:45 [audit]           herfindahl_index_markets                     contrib=+0.3766 ↑insider  value=+1.0000
+10:03:45 [audit]           median_bet_size_usdc                         contrib=-0.3492 ↓insider  value=+24.1120
+10:03:45 [audit]           wallet_age_seconds                           contrib=+0.3390 ↑insider  value=+88.0000
+10:03:45 [audit]           realized_pnl_per_closing_trade               contrib=+0.3333 ↑insider  value=+5185.6288
+10:03:45 [audit]           total_bet_size_usdc                          contrib=+0.3168 ↑insider  value=+42370.9876
+10:03:45 [audit]           wallet_to_market_age_ratio                   contrib=+0.2570 ↑insider  value=+0.0000
+10:03:45 [audit]           adaptive_markout_raw_grosswt_h0p070          contrib=+0.2158 ↑insider  value=+0.1594
+10:03:45 [audit]           time_since_first_deposit_to_first_trade_seconds contrib=+0.1453 ↑insider  value=+88.0000
+10:03:45 [audit]           unrealized_edge_per_open_token               contrib=+0.1223 ↑insider  value=+0.1596
+10:03:45 [audit] ------------------------------------------------------------------------
+10:03:45 [audit] MODEL  rf 10b+10m v5 (tuned)   [tag=rf_insider_meta_v5, algo=rf, nf=20, raw]
+10:03:45 [audit]   prob=0.6762 (raw=0.6762)  threshold=0.5   ==> FLAGGED insider
+10:03:45 [audit]   features driving THIS prediction (SHAP, signed toward insider):
+10:03:45 [audit]         explain [shap (TreeExplainer)]  base=+0.3444
+10:03:45 [audit]           unrealized_edge_per_open_token_sqrt          contrib=+0.0985 ↑insider  value=+1.3126
+10:03:45 [audit]           herfindahl_index_markets                     contrib=+0.0753 ↑insider  value=+1.0000
+10:03:45 [audit]           wallet_to_market_age_ratio                   contrib=+0.0745 ↑insider  value=+0.0000
+10:03:45 [audit]           median_bet_size_usdc                         contrib=-0.0669 ↓insider  value=+24.1120
+10:03:45 [audit]           wallet_age_seconds                           contrib=+0.0386 ↑insider  value=+88.0000
+10:03:45 [audit]           time_since_first_deposit_to_first_trade_seconds contrib=+0.0302 ↑insider  value=+88.0000
+10:03:45 [audit]           buy_markout_adj_grosswt_h0p030_lb0p200       contrib=-0.0248 ↓insider  value=-0.0837
+10:03:45 [audit]           avg_bet_size_usdc                            contrib=+0.0197 ↑insider  value=+830.8037
+10:03:45 [audit]           unrealized_edge_per_open_token               contrib=+0.0168 ↑insider  value=+0.1596
+10:03:45 [audit]           adaptive_markout_raw_grosswt_h0p150          contrib=+0.0145 ↑insider  value=+0.1593
+10:03:45 [audit]           winrate                                      contrib=+0.0143 ↑insider  value=+0.0000
+10:03:45 [audit]           adaptive_markout_raw_grosswt_h0p200          contrib=+0.0126 ↑insider  value=+0.1593
+10:03:45 [audit] ------------------------------------------------------------------------
+10:03:45 [audit] MODEL  retrained_xgb_insider_meta_v5   [tag=retrained_xgb_insider_meta_v5, algo=xgb, nf=27, calibrated]
+10:03:45 [audit]   prob=0.6228 (raw=0.8648)  threshold=0.15   ==> FLAGGED insider
+10:03:45 [audit]   features driving THIS prediction (SHAP, signed toward insider):
+10:03:45 [audit]         explain [shap (TreeExplainer)]  base=-0.2900
+10:03:45 [audit]           unrealized_edge_per_open_token_sqrt          contrib=+0.6103 ↑insider  value=+1.3126
+10:03:45 [audit]           median_bet_size_usdc                         contrib=-0.5516 ↓insider  value=+24.1120
+10:03:45 [audit]           herfindahl_index_markets                     contrib=+0.3994 ↑insider  value=+1.0000
+10:03:45 [audit]           buy_markout_adj_grosswt_h0p030_lb0p200       contrib=-0.3991 ↓insider  value=-0.0837
+10:03:45 [audit]           wallet_age_seconds                           contrib=+0.3332 ↑insider  value=+88.0000
+10:03:45 [audit]           total_bet_size_usdc                          contrib=+0.3238 ↑insider  value=+42370.9876
+10:03:45 [audit]           realized_pnl_per_closing_trade               contrib=+0.3066 ↑insider  value=+5185.6288
+10:03:45 [audit]           wallet_to_market_age_ratio                   contrib=+0.2681 ↑insider  value=+0.0000
+10:03:45 [audit]           avg_bet_size_usdc                            contrib=+0.2352 ↑insider  value=+830.8037
+10:03:45 [audit]           adaptive_markout_raw_grosswt_h0p070          contrib=+0.1771 ↑insider  value=+0.1594
+10:03:45 [audit]           pnl_sharpe                                   contrib=-0.1446 ↓insider  value=   NaN
+10:03:45 [audit]           wallet_minus_market_age_seconds              contrib=+0.1313 ↑insider  value=-4213143.0000
+10:03:45 [audit] ------------------------------------------------------------------------
+10:03:45 [audit] MODEL  rf 10b+17m v4 (axiom)   [tag=rf_insider_meta_v4, algo=rf, nf=27, raw]
+10:03:45 [audit]   prob=0.6000 (raw=0.6000)  threshold=0.5   ==> FLAGGED insider
+10:03:45 [audit]   features driving THIS prediction (SHAP, signed toward insider):
+10:03:45 [audit]         explain [shap (TreeExplainer)]  base=+0.2730
+10:03:45 [audit]           herfindahl_index_markets                     contrib=+0.0921 ↑insider  value=+1.0000
+10:03:45 [audit]           median_bet_size_usdc                         contrib=-0.0711 ↓insider  value=+24.1120
+10:03:45 [audit]           time_since_first_deposit_to_first_trade_seconds contrib=+0.0471 ↑insider  value=+88.0000
+10:03:45 [audit]           wallet_age_seconds                           contrib=+0.0412 ↑insider  value=+88.0000
+10:03:45 [audit]           buy_markout_adj_grosswt_h0p030_lb0p200       contrib=-0.0374 ↓insider  value=-0.0837
+10:03:45 [audit]           winrate                                      contrib=+0.0334 ↑insider  value=+0.0000
+10:03:45 [audit]           wallet_to_market_age_ratio                   contrib=+0.0333 ↑insider  value=+0.0000
+10:03:45 [audit]           lifetime_volume_share_on_market              contrib=+0.0308 ↑insider  value=+0.8296
+10:03:45 [audit]           avg_bet_size_usdc                            contrib=+0.0214 ↑insider  value=+830.8037
+10:03:45 [audit]           n_markets_traded                             contrib=+0.0162 ↑insider  value=+1.0000
+10:03:45 [audit]           adaptive_markout_raw_grosswt_h0p200          contrib=+0.0162 ↑insider  value=+0.1593
+10:03:45 [audit]           unrealized_edge_per_open_token_sqrt          contrib=+0.0160 ↑insider  value=+1.3126
+10:03:45 [audit] ------------------------------------------------------------------------
+10:03:45 [audit] MODEL  xgb 0ir-hidden (30f)   [tag=xgb_insider_0ir, algo=xgb, nf=30, calibrated]
+10:03:45 [audit]   prob=0.5805 (raw=0.9040)  threshold=0.15   ==> FLAGGED insider
+10:03:45 [audit]   features driving THIS prediction (SHAP, signed toward insider):
+10:03:45 [audit]         explain [shap (TreeExplainer)]  base=+1.6285
+10:03:45 [audit]           median_bet_size_usdc                         contrib=-1.4253 ↓insider  value=+24.1120
+10:03:45 [audit]           herfindahl_index_markets                     contrib=+0.7167 ↑insider  value=+1.0000
+10:03:45 [audit]           unrealized_edge_per_open_token_sqrt          contrib=+0.6390 ↑insider  value=+1.3126
+10:03:45 [audit]           winrate                                      contrib=-0.6197 ↓insider  value=+0.0000
+10:03:45 [audit]           realized_pnl_per_closing_trade               contrib=+0.6009 ↑insider  value=+5185.6288
+10:03:45 [audit]           buy_markout_adj_grosswt_h0p070_lb0p150       contrib=-0.4880 ↓insider  value=+0.8042
+10:03:45 [audit]           time_to_major_move_pct_of_market             contrib=+0.4397 ↑insider  value=+0.0334
+10:03:45 [audit]           wallet_minus_market_age_seconds              contrib=+0.4292 ↑insider  value=-4213143.0000
+10:03:45 [audit]           wallet_to_market_age_ratio                   contrib=+0.3054 ↑insider  value=+0.0000
+10:03:45 [audit]           buy_markout_adj_grosswt_h0p030_lb0p010       contrib=-0.2974 ↓insider  value=-0.0822
+10:03:45 [audit]           buy_markout_adj_mean_h0p200_lb0p030          contrib=-0.2970 ↓insider  value=+7.3178
+10:03:45 [audit]           wallet_age_seconds                           contrib=+0.2764 ↑insider  value=+88.0000
+10:03:45 [audit] ------------------------------------------------------------------------
+10:03:45 [audit] MODEL  rf 10b+17m v3   [tag=rf_insider_meta_v3, algo=rf, nf=27, raw]
+10:03:45 [audit]   prob=0.5667 (raw=0.5667)  threshold=0.5   ==> FLAGGED insider
+10:03:45 [audit]   features driving THIS prediction (SHAP, signed toward insider):
+10:03:45 [audit]         explain [shap (TreeExplainer)]  base=+0.2628
+10:03:45 [audit]           unrealized_edge_per_open_token_sqrt          contrib=+0.0669 ↑insider  value=+1.3126
+10:03:45 [audit]           median_bet_size_usdc                         contrib=-0.0597 ↓insider  value=+24.1120
+10:03:45 [audit]           herfindahl_index_markets                     contrib=+0.0570 ↑insider  value=+1.0000
+10:03:45 [audit]           avg_bet_size_usdc                            contrib=+0.0516 ↑insider  value=+830.8037
+10:03:45 [audit]           buy_markout_adj_grosswt_h0p030_lb0p200       contrib=-0.0325 ↓insider  value=-0.0837
+10:03:45 [audit]           wallet_age_seconds                           contrib=+0.0318 ↑insider  value=+88.0000
+10:03:45 [audit]           wallet_to_market_age_ratio                   contrib=+0.0311 ↑insider  value=+0.0000
+10:03:45 [audit]           time_since_first_deposit_to_first_trade_seconds contrib=+0.0262 ↑insider  value=+88.0000
+10:03:45 [audit]           wallet_minus_market_age_seconds              contrib=+0.0217 ↑insider  value=-4213143.0000
+10:03:45 [audit]           realized_pnl_per_closing_trade               contrib=+0.0189 ↑insider  value=+5185.6288
+10:03:45 [audit]           total_bet_size_usdc                          contrib=+0.0172 ↑insider  value=+42370.9876
+10:03:45 [audit]           unrealized_edge_per_open_token               contrib=+0.0139 ↑insider  value=+0.1596
+10:03:45 [audit] ------------------------------------------------------------------------
+10:03:45 [audit] MODEL  retrained_xgb_insider_0ir   [tag=retrained_xgb_insider_0ir, algo=xgb, nf=30, calibrated]
+10:03:45 [audit]   prob=0.5533 (raw=0.8736)  threshold=0.15   ==> FLAGGED insider
+10:03:45 [audit]   features driving THIS prediction (SHAP, signed toward insider):
+10:03:45 [audit]         explain [shap (TreeExplainer)]  base=+0.3998
+10:03:45 [audit]           median_bet_size_usdc                         contrib=-1.5314 ↓insider  value=+24.1120
+10:03:45 [audit]           herfindahl_index_markets                     contrib=+0.8728 ↑insider  value=+1.0000
+10:03:45 [audit]           realized_pnl_per_closing_trade               contrib=+0.7607 ↑insider  value=+5185.6288
+10:03:45 [audit]           winrate                                      contrib=-0.6474 ↓insider  value=+0.0000
+10:03:45 [audit]           time_since_first_deposit_to_first_trade_seconds contrib=+0.5661 ↑insider  value=+88.0000
+10:03:45 [audit]           unrealized_edge_per_open_token_sqrt          contrib=+0.4114 ↑insider  value=+1.3126
+10:03:45 [audit]           wallet_age_seconds                           contrib=+0.3773 ↑insider  value=+88.0000
+10:03:45 [audit]           buy_markout_adj_grosswt_h0p070_lb0p150       contrib=-0.2935 ↓insider  value=+0.8042
+10:03:45 [audit]           wallet_to_market_age_ratio                   contrib=+0.2387 ↑insider  value=+0.0000
+10:03:45 [audit]           adaptive_markout_raw_grosswt_h0p070          contrib=+0.2384 ↑insider  value=+0.1594
+10:03:45 [audit]           buy_markout_adj_grosswt_h0p030_lb0p010       contrib=-0.2172 ↓insider  value=-0.0822
+10:03:45 [audit]           buy_markout_adj_mean_h0p200_lb0p200          contrib=-0.2111 ↓insider  value=+7.3128
+10:03:45 [audit] ------------------------------------------------------------------------
+10:03:45 [audit] MODEL  retrained_rf_insider_meta_v3   [tag=retrained_rf_insider_meta_v3, algo=rf, nf=27, raw]
+10:03:45 [audit]   prob=0.5533 (raw=0.5533)  threshold=0.5   ==> FLAGGED insider
+10:03:45 [audit]   features driving THIS prediction (SHAP, signed toward insider):
+10:03:45 [audit]         explain [shap (TreeExplainer)]  base=+0.2628
+10:03:45 [audit]           unrealized_edge_per_open_token_sqrt          contrib=+0.0758 ↑insider  value=+1.3126
+10:03:45 [audit]           herfindahl_index_markets                     contrib=+0.0613 ↑insider  value=+1.0000
+10:03:45 [audit]           buy_markout_adj_grosswt_h0p030_lb0p200       contrib=-0.0454 ↓insider  value=-0.0837
+10:03:45 [audit]           lifetime_volume_share_on_market              contrib=+0.0363 ↑insider  value=+0.8296
+10:03:45 [audit]           median_bet_size_usdc                         contrib=-0.0362 ↓insider  value=+24.1120
+10:03:45 [audit]           wallet_to_market_age_ratio                   contrib=+0.0330 ↑insider  value=+0.0000
+10:03:45 [audit]           time_since_first_deposit_to_first_trade_seconds contrib=+0.0265 ↑insider  value=+88.0000
+10:03:45 [audit]           wallet_age_seconds                           contrib=+0.0254 ↑insider  value=+88.0000
+10:03:45 [audit]           adaptive_markout_raw_grosswt_h0p200          contrib=+0.0195 ↑insider  value=+0.1593
+10:03:45 [audit]           wallet_minus_market_age_seconds              contrib=+0.0194 ↑insider  value=-4213143.0000
+10:03:45 [audit]           winrate                                      contrib=+0.0157 ↑insider  value=+0.0000
+10:03:45 [audit]           realized_pnl_per_closing_trade               contrib=+0.0144 ↑insider  value=+5185.6288
+10:03:45 [audit] ------------------------------------------------------------------------
+10:03:45 [audit] MODEL  rf 25ir-hidden (20f)   [tag=rf_insider_25ir, algo=rf, nf=20, raw]
+10:03:45 [audit]   prob=0.5524 (raw=0.5524)  threshold=0.5   ==> FLAGGED insider
+10:03:45 [audit]   features driving THIS prediction (SHAP, signed toward insider):
+10:03:45 [audit]         explain [shap (TreeExplainer)]  base=+0.1529
+10:03:45 [audit]           wallet_to_market_age_ratio                   contrib=+0.1005 ↑insider  value=+0.0000
+10:03:45 [audit]           herfindahl_index_markets                     contrib=+0.0622 ↑insider  value=+1.0000
+10:03:45 [audit]           time_since_first_deposit_to_first_trade_seconds contrib=+0.0604 ↑insider  value=+88.0000
+10:03:45 [audit]           wallet_age_seconds                           contrib=+0.0537 ↑insider  value=+88.0000
+10:03:45 [audit]           median_bet_size_usdc                         contrib=-0.0522 ↓insider  value=+24.1120
+10:03:45 [audit]           unrealized_edge_per_open_token_sqrt          contrib=+0.0448 ↑insider  value=+1.3126
+10:03:45 [audit]           wallet_minus_market_age_seconds              contrib=+0.0372 ↑insider  value=-4213143.0000
+10:03:45 [audit]           buy_markout_adj_grosswt_h0p030_lb0p200       contrib=-0.0321 ↓insider  value=-0.0837
+10:03:45 [audit]           avg_bet_size_usdc                            contrib=+0.0277 ↑insider  value=+830.8037
+10:03:45 [audit]           adaptive_markout_raw_grosswt_h0p150          contrib=+0.0170 ↑insider  value=+0.1593
+10:03:45 [audit]           unrealized_edge_per_open_token               contrib=+0.0140 ↑insider  value=+0.1596
+10:03:45 [audit]           adaptive_markout_raw_grosswt_h0p010          contrib=+0.0139 ↑insider  value=+0.1594
+10:03:45 [audit] ------------------------------------------------------------------------
+10:03:45 [audit] MODEL  retrained_rf_insider_meta_v4   [tag=retrained_rf_insider_meta_v4, algo=rf, nf=27, raw]
+10:03:45 [audit]   prob=0.5367 (raw=0.5367)  threshold=0.5   ==> FLAGGED insider
+10:03:45 [audit]   features driving THIS prediction (SHAP, signed toward insider):
+10:03:45 [audit]         explain [shap (TreeExplainer)]  base=+0.2730
+10:03:45 [audit]           median_bet_size_usdc                         contrib=-0.1051 ↓insider  value=+24.1120
+10:03:45 [audit]           herfindahl_index_markets                     contrib=+0.0805 ↑insider  value=+1.0000
+10:03:45 [audit]           lifetime_volume_share_on_market              contrib=+0.0633 ↑insider  value=+0.8296
+10:03:45 [audit]           buy_markout_adj_grosswt_h0p030_lb0p200       contrib=-0.0592 ↓insider  value=-0.0837
+10:03:45 [audit]           time_since_first_deposit_to_first_trade_seconds contrib=+0.0429 ↑insider  value=+88.0000
+10:03:45 [audit]           total_bet_size_usdc                          contrib=+0.0321 ↑insider  value=+42370.9876
+10:03:45 [audit]           winrate                                      contrib=+0.0303 ↑insider  value=+0.0000
+10:03:45 [audit]           wallet_age_seconds                           contrib=+0.0271 ↑insider  value=+88.0000
+10:03:45 [audit]           wallet_to_market_age_ratio                   contrib=+0.0237 ↑insider  value=+0.0000
+10:03:45 [audit]           unrealized_edge_per_open_token_sqrt          contrib=+0.0156 ↑insider  value=+1.3126
+10:03:45 [audit]           unrealized_edge_per_open_token               contrib=+0.0153 ↑insider  value=+0.1596
+10:03:45 [audit]           buy_markout_adj_grosswt_h0p070_lb0p150       contrib=+0.0136 ↑insider  value=+0.8042
+10:03:45 [audit] ------------------------------------------------------------------------
+10:03:45 [audit] MODEL  retrained_xgb_insider_meta10_v6   [tag=retrained_xgb_insider_meta10_v6, algo=xgb, nf=10, calibrated]
+10:03:45 [audit]   prob=0.5202 (raw=0.9107)  threshold=0.15   ==> FLAGGED insider
+10:03:45 [audit]   features driving THIS prediction (SHAP, signed toward insider):
+10:03:45 [audit]         explain [shap (TreeExplainer)]  base=+1.5297
+10:03:45 [audit]           herfindahl_index_markets                     contrib=+0.6998 ↑insider  value=+1.0000
+10:03:45 [audit]           wallet_to_market_age_ratio                   contrib=+0.5830 ↑insider  value=+0.0000
+10:03:45 [audit]           median_bet_size_usdc                         contrib=-0.5746 ↓insider  value=+24.1120
+10:03:45 [audit]           n_markets_traded                             contrib=+0.1676 ↑insider  value=+1.0000
+10:03:45 [audit]           winrate                                      contrib=-0.1466 ↓insider  value=+0.0000
+10:03:45 [audit]           time_since_first_deposit_to_first_trade_seconds contrib=+0.1278 ↑insider  value=+88.0000
+10:03:45 [audit]           wallet_minus_market_age_seconds              contrib=-0.0989 ↓insider  value=-4213143.0000
+10:03:45 [audit]           wallet_age_seconds                           contrib=+0.0540 ↑insider  value=+88.0000
+10:03:45 [audit]           avg_bet_size_usdc                            contrib=-0.0452 ↓insider  value=+830.8037
+10:03:45 [audit]           funder_flagged_wallet_count                  contrib=+0.0260 ↑insider  value=   NaN
+10:03:45 [audit] ------------------------------------------------------------------------
+10:03:45 [audit] MODEL  xgb meta-only v6   [tag=xgb_insider_meta10_v6, algo=xgb, nf=10, calibrated]
+10:03:45 [audit]   prob=0.4963 (raw=0.8976)  threshold=0.15   ==> FLAGGED insider
+10:03:45 [audit]   features driving THIS prediction (SHAP, signed toward insider):
+10:03:45 [audit]         explain [shap (TreeExplainer)]  base=+0.1030
+10:03:45 [audit]           herfindahl_index_markets                     contrib=+0.8725 ↑insider  value=+1.0000
+10:03:45 [audit]           avg_bet_size_usdc                            contrib=+0.4988 ↑insider  value=+830.8037
+10:03:45 [audit]           wallet_minus_market_age_seconds              contrib=+0.4489 ↑insider  value=-4213143.0000
+10:03:45 [audit]           n_markets_traded                             contrib=+0.2365 ↑insider  value=+1.0000
+10:03:45 [audit]           time_since_first_deposit_to_first_trade_seconds contrib=+0.0887 ↑insider  value=+88.0000
+10:03:45 [audit]           wallet_to_market_age_ratio                   contrib=-0.0647 ↓insider  value=+0.0000
+10:03:45 [audit]           median_bet_size_usdc                         contrib=-0.0437 ↓insider  value=+24.1120
+10:03:45 [audit]           funder_flagged_wallet_count                  contrib=+0.0179 ↑insider  value=   NaN
+10:03:45 [audit]           wallet_age_seconds                           contrib=+0.0116 ↑insider  value=+88.0000
+10:03:45 [audit]           winrate                                      contrib=+0.0013 ↑insider  value=+0.0000
+10:03:45 [audit] ------------------------------------------------------------------------
+10:03:45 [audit] MODEL  xgb 25ir-hidden (30f)   [tag=xgb_insider_25ir, algo=xgb, nf=30, calibrated]
+10:03:45 [audit]   prob=0.4906 (raw=0.7878)  threshold=0.15   ==> FLAGGED insider
+10:03:45 [audit]   features driving THIS prediction (SHAP, signed toward insider):
+10:03:45 [audit]         explain [shap (TreeExplainer)]  base=+0.5679
+10:03:45 [audit]           median_bet_size_usdc                         contrib=-0.4802 ↓insider  value=+24.1120
+10:03:45 [audit]           buy_markout_adj_grosswt_h0p030_lb0p200       contrib=-0.4787 ↓insider  value=-0.0837
+10:03:45 [audit]           time_to_major_move_pct_of_market             contrib=-0.4176 ↓insider  value=+0.0334
+10:03:45 [audit]           wallet_minus_market_age_seconds              contrib=+0.4096 ↑insider  value=-4213143.0000
+10:03:45 [audit]           time_since_first_deposit_to_first_trade_seconds contrib=+0.4060 ↑insider  value=+88.0000
+10:03:45 [audit]           buy_markout_adj_grosswt_h0p030_lb0p010       contrib=-0.3573 ↓insider  value=-0.0822
+10:03:45 [audit]           unrealized_edge_per_open_token_sqrt          contrib=+0.3426 ↑insider  value=+1.3126
+10:03:45 [audit]           herfindahl_index_markets                     contrib=+0.3239 ↑insider  value=+1.0000
+10:03:45 [audit]           avg_bet_size_usdc                            contrib=+0.3149 ↑insider  value=+830.8037
+10:03:45 [audit]           wallet_to_market_age_ratio                   contrib=+0.2374 ↑insider  value=+0.0000
+10:03:45 [audit]           adaptive_plus_realized_alpha0p25_h0p030      contrib=+0.1797 ↑insider  value=+0.2531
+10:03:45 [audit]           major_move_time_remaining_pct                contrib=-0.1504 ↓insider  value=+0.0727
+10:03:45 [audit] ------------------------------------------------------------------------
+10:03:45 [audit] MODEL  retrained_xgb_insider_25ir   [tag=retrained_xgb_insider_25ir, algo=xgb, nf=30, calibrated]
+10:03:45 [audit]   prob=0.4657 (raw=0.8077)  threshold=0.15   ==> FLAGGED insider
+10:03:45 [audit]   features driving THIS prediction (SHAP, signed toward insider):
+10:03:45 [audit]         explain [shap (TreeExplainer)]  base=+0.5958
+10:03:45 [audit]           median_bet_size_usdc                         contrib=-0.6751 ↓insider  value=+24.1120
+10:03:45 [audit]           herfindahl_index_markets                     contrib=+0.4376 ↑insider  value=+1.0000
+10:03:45 [audit]           wallet_minus_market_age_seconds              contrib=+0.4258 ↑insider  value=-4213143.0000
+10:03:45 [audit]           unrealized_edge_per_open_token_sqrt          contrib=+0.3481 ↑insider  value=+1.3126
+10:03:45 [audit]           time_since_first_deposit_to_first_trade_seconds contrib=+0.3344 ↑insider  value=+88.0000
+10:03:45 [audit]           buy_markout_adj_grosswt_h0p030_lb0p010       contrib=-0.3283 ↓insider  value=-0.0822
+10:03:45 [audit]           wallet_to_market_age_ratio                   contrib=+0.2625 ↑insider  value=+0.0000
+10:03:45 [audit]           winrate                                      contrib=-0.2006 ↓insider  value=+0.0000
+10:03:45 [audit]           buy_markout_adj_grosswt_h0p030_lb0p200       contrib=-0.1833 ↓insider  value=-0.0837
+10:03:45 [audit]           adaptive_plus_realized_alpha0p5_h0p070       contrib=+0.1644 ↑insider  value=+0.3468
+10:03:45 [audit]           wallet_age_seconds                           contrib=+0.1432 ↑insider  value=+88.0000
+10:03:45 [audit]           adaptive_markout_raw_grosswt_h0p070          contrib=+0.1395 ↑insider  value=+0.1594
+10:03:45 [audit] ------------------------------------------------------------------------
+10:03:45 [audit] MODEL  retrained_xgb_insider_meta_v7   [tag=retrained_xgb_insider_meta_v7, algo=xgb, nf=30, calibrated]
+10:03:45 [audit]   prob=0.3396 (raw=0.6486)  threshold=0.15   ==> FLAGGED insider
+10:03:45 [audit]   features driving THIS prediction (SHAP, signed toward insider):
+10:03:45 [audit]         explain [shap (TreeExplainer)]  base=-0.1243
+10:03:45 [audit]           time_to_major_move_pct_of_market             contrib=-0.6118 ↓insider  value=+0.0334
+10:03:45 [audit]           unrealized_edge_per_open_token_sqrt          contrib=+0.5731 ↑insider  value=+1.3126
+10:03:45 [audit]           median_bet_size_usdc                         contrib=-0.4591 ↓insider  value=+24.1120
+10:03:45 [audit]           herfindahl_index_markets                     contrib=+0.4514 ↑insider  value=+1.0000
+10:03:45 [audit]           avg_bet_size_usdc                            contrib=+0.2711 ↑insider  value=+830.8037
+10:03:45 [audit]           time_since_first_deposit_to_first_trade_seconds contrib=+0.2511 ↑insider  value=+88.0000
+10:03:45 [audit]           wallet_to_market_age_ratio                   contrib=+0.2123 ↑insider  value=+0.0000
+10:03:45 [audit]           wallet_age_seconds                           contrib=+0.1966 ↑insider  value=+88.0000
+10:03:45 [audit]           buy_markout_adj_grosswt_h0p030_lb0p010       contrib=-0.1946 ↓insider  value=-0.0822
+10:03:45 [audit]           major_move_time_remaining_pct                contrib=-0.1811 ↓insider  value=+0.0727
+10:03:45 [audit]           buy_markout_adj_grosswt_h0p030_lb0p200       contrib=-0.1263 ↓insider  value=-0.0837
+10:03:45 [audit]           wallet_minus_market_age_seconds              contrib=+0.0797 ↑insider  value=-4213143.0000
+10:03:45 [audit] ------------------------------------------------------------------------
+10:03:45 [audit] MODEL  xgb 20b+10m v7   [tag=xgb_insider_meta_v7, algo=xgb, nf=30, calibrated]
+10:03:45 [audit]   prob=0.1861 (raw=0.4821)  threshold=0.15   ==> FLAGGED insider
+10:03:45 [audit]   features driving THIS prediction (SHAP, signed toward insider):
+10:03:45 [audit]         explain [shap (TreeExplainer)]  base=+0.8148
+10:03:45 [audit]           time_to_major_move_pct_of_market             contrib=-1.3201 ↓insider  value=+0.0334
+10:03:45 [audit]           major_move_time_remaining_pct                contrib=-0.7505 ↓insider  value=+0.0727
+10:03:45 [audit]           unrealized_edge_per_open_token_sqrt          contrib=+0.6912 ↑insider  value=+1.3126
+10:03:45 [audit]           buy_markout_adj_grosswt_h0p030_lb0p200       contrib=-0.5479 ↓insider  value=-0.0837
+10:03:45 [audit]           median_bet_size_usdc                         contrib=-0.4318 ↓insider  value=+24.1120
+10:03:45 [audit]           avg_bet_size_usdc                            contrib=+0.4029 ↑insider  value=+830.8037
+10:03:45 [audit]           herfindahl_index_markets                     contrib=+0.3505 ↑insider  value=+1.0000
+10:03:45 [audit]           time_since_first_deposit_to_first_trade_seconds contrib=+0.2950 ↑insider  value=+88.0000
+10:03:45 [audit]           buy_markout_adj_grosswt_h0p030_lb0p010       contrib=-0.2159 ↓insider  value=-0.0822
+10:03:45 [audit]           wallet_to_market_age_ratio                   contrib=+0.1715 ↑insider  value=+0.0000
+10:03:45 [audit]           adaptive_plus_realized_alpha0p25_h0p030      contrib=+0.1399 ↑insider  value=+0.2531
+10:03:45 [audit]           adaptive_markout_raw_grosswt_h0p070          contrib=+0.1116 ↑insider  value=+0.1594
+10:03:45 [audit] ------------------------------------------------------------------------
+10:03:45 [audit] MODEL  isoforest 30feat   [tag=iso_insider_30feat, algo=iso, nf=30, raw]
+10:03:45 [audit]   anomaly_score=-0.0397 (lower = more anomalous; anomaly<0)   ==> FLAGGED insider
+10:03:45 [audit]   features driving THIS prediction (SHAP, signed toward insider):
+10:03:45 [audit]         explain [shap (TreeExplainer)]  base=+13.3024
+10:03:45 [audit]           realized_pnl_per_closing_trade               contrib=-0.6229 ↓insider  value=+5185.6288
+10:03:45 [audit]           n_low_buy_building_trades                    contrib=-0.6156 ↓insider  value=+89.0000
+10:03:45 [audit]           buy_markout_adj_mean_h0p200_lb0p030          contrib=-0.5570 ↓insider  value=+7.3178
+10:03:45 [audit]           buy_markout_adj_mean_h0p200_lb0p200          contrib=-0.5203 ↓insider  value=+7.3128
+10:03:45 [audit]           realized_edge_grosswt                        contrib=-0.5069 ↓insider  value=+0.3749
+10:03:45 [audit]           realized_pnl_total                           contrib=-0.2917 ↓insider  value=+41485.0305
+10:03:45 [audit]           derisk_0p75_time_position_mean               contrib=-0.2875 ↓insider  value=+0.6720
+10:03:45 [audit]           major_move_time_remaining_pct                contrib=-0.0965 ↓insider  value=+0.0727
+10:03:45 [audit]           adaptive_plus_realized_alpha0p5_h0p070       contrib=-0.0938 ↓insider  value=+0.3468
+10:03:45 [audit]           high_sell_nonflattening_cash_frac_pctl90     contrib=+0.0937 ↑insider  value=+0.0000
+10:03:45 [audit]           unrealized_edge_per_open_token_sqrt          contrib=-0.0806 ↓insider  value=+1.3126
+10:03:45 [audit]           sell_markout_adj_median_h0p150_lb0p200       contrib=+0.0674 ↑insider  value=   NaN
+10:03:45 [audit] ------------------------------------------------------------------------
+10:03:45 [audit] MODEL  rf 0ir-hidden (20f)   [tag=rf_insider_0ir, algo=rf, nf=20, raw]
+10:03:45 [audit]   prob=0.4941 (raw=0.4941)  threshold=0.5       not flagged
+10:03:45 [audit]   features driving THIS prediction (SHAP, signed toward insider):
+10:03:45 [audit]         explain [shap (TreeExplainer)]  base=+0.1571
+10:03:45 [audit]           herfindahl_index_markets                     contrib=+0.0891 ↑insider  value=+1.0000
+10:03:45 [audit]           median_bet_size_usdc                         contrib=-0.0808 ↓insider  value=+24.1120
+10:03:45 [audit]           wallet_age_seconds                           contrib=+0.0573 ↑insider  value=+88.0000
+10:03:45 [audit]           wallet_to_market_age_ratio                   contrib=+0.0457 ↑insider  value=+0.0000
+10:03:45 [audit]           avg_bet_size_usdc                            contrib=+0.0397 ↑insider  value=+830.8037
+10:03:45 [audit]           time_since_first_deposit_to_first_trade_seconds contrib=+0.0370 ↑insider  value=+88.0000
+10:03:45 [audit]           unrealized_edge_per_open_token_sqrt          contrib=+0.0330 ↑insider  value=+1.3126
+10:03:45 [audit]           winrate                                      contrib=+0.0230 ↑insider  value=+0.0000
+10:03:45 [audit]           adaptive_markout_raw_grosswt_h0p010          contrib=+0.0208 ↑insider  value=+0.1594
+10:03:45 [audit]           buy_markout_adj_grosswt_h0p030_lb0p200       contrib=-0.0200 ↓insider  value=-0.0837
+10:03:45 [audit]           buy_markout_adj_grosswt_h0p070_lb0p150       contrib=+0.0158 ↑insider  value=+0.8042
+10:03:45 [audit]           realized_pnl_per_closing_trade               contrib=+0.0143 ↑insider  value=+5185.6288
+10:03:45 [audit] ------------------------------------------------------------------------
+10:03:45 [audit] MODEL  xgb 14feat   [tag=xgb_insider_14feat, algo=xgb, nf=14, raw]
+10:03:45 [audit]   prob=0.4534 (raw=0.4534)  threshold=0.5       not flagged
+10:03:45 [audit]   features driving THIS prediction (SHAP, signed toward insider):
+10:03:45 [audit]         explain [shap (TreeExplainer)]  base=+0.2893
+10:03:45 [audit]           adaptive_markout_raw_grosswt_h0p030          contrib=-0.5828 ↓insider  value=+0.1594
+10:03:45 [audit]           unrealized_edge_per_open_token               contrib=-0.4329 ↓insider  value=+0.1596
+10:03:45 [audit]           adaptive_plus_realized_alpha0p5_h0p070       contrib=+0.4027 ↑insider  value=+0.3468
+10:03:45 [audit]           adaptive_minus_realized_alpha1p0_h0p030      contrib=+0.3334 ↑insider  value=-0.2155
+10:03:45 [audit]           low_buy_high_sell_pctl                       contrib=-0.3191 ↓insider  value=+0.0000
+10:03:45 [audit]           adaptive_markout_latespike_adj_grosswt_h0p070 contrib=+0.3044 ↑insider  value=+0.1594
+10:03:45 [audit]           adaptive_plus_realized_alpha1p0_h0p030       contrib=-0.1291 ↓insider  value=+0.5343
+10:03:45 [audit]           adaptive_markout_raw_grosswt_h0p070          contrib=-0.0844 ↓insider  value=+0.1594
+10:03:45 [audit]           realized_pnl_per_matched_token               contrib=-0.0752 ↓insider  value=+0.9044
+10:03:45 [audit]           adaptive_minus_realized_alpha1p0_h0p070      contrib=+0.0600 ↑insider  value=-0.2155
+10:03:45 [audit]           adaptive_plus_realized_alpha1p0_h0p070       contrib=+0.0382 ↑insider  value=+0.5343
+10:03:45 [audit]           adaptive_minus_realized_alpha0p5_h0p070      contrib=+0.0121 ↑insider  value=-0.0281
+10:03:45 [audit] ------------------------------------------------------------------------
+10:03:45 [audit] MODEL  retrained_rf_insider_0ir   [tag=retrained_rf_insider_0ir, algo=rf, nf=20, raw]
+10:03:45 [audit]   prob=0.4409 (raw=0.4409)  threshold=0.5       not flagged
+10:03:45 [audit]   features driving THIS prediction (SHAP, signed toward insider):
+10:03:45 [audit]         explain [shap (TreeExplainer)]  base=+0.4966
+10:03:45 [audit]           median_bet_size_usdc                         contrib=-0.2468 ↓insider  value=+24.1120
+10:03:45 [audit]           buy_markout_adj_grosswt_h0p030_lb0p200       contrib=-0.0710 ↓insider  value=-0.0837
+10:03:45 [audit]           herfindahl_index_markets                     contrib=+0.0694 ↑insider  value=+1.0000
+10:03:45 [audit]           wallet_age_seconds                           contrib=+0.0322 ↑insider  value=+88.0000
+10:03:45 [audit]           time_since_first_deposit_to_first_trade_seconds contrib=+0.0223 ↑insider  value=+88.0000
+10:03:45 [audit]           wallet_to_market_age_ratio                   contrib=+0.0202 ↑insider  value=+0.0000
+10:03:45 [audit]           n_markets_traded                             contrib=+0.0173 ↑insider  value=+1.0000
+10:03:45 [audit]           unrealized_edge_per_open_token_sqrt          contrib=+0.0160 ↑insider  value=+1.3126
+10:03:45 [audit]           adaptive_markout_raw_grosswt_h0p070          contrib=+0.0136 ↑insider  value=+0.1594
+10:03:45 [audit]           adaptive_markout_raw_grosswt_h0p150          contrib=+0.0133 ↑insider  value=+0.1593
+10:03:45 [audit]           realized_pnl_per_closing_trade               contrib=+0.0121 ↑insider  value=+5185.6288
+10:03:45 [audit]           adaptive_markout_raw_grosswt_h0p010          contrib=+0.0115 ↑insider  value=+0.1594
+10:03:45 [audit] ------------------------------------------------------------------------
+10:03:45 [audit] MODEL  xgb 10feat v2   [tag=xgb_insider_10feat_v2, algo=xgb, nf=10, calibrated]
+10:03:45 [audit]   prob=0.4207 (raw=0.6471)  threshold=0.5       not flagged
+10:03:45 [audit]   features driving THIS prediction (SHAP, signed toward insider):
+10:03:45 [audit]         explain [shap (TreeExplainer)]  base=-1.0125
+10:03:45 [audit]           unrealized_edge_per_open_token_sqrt          contrib=+0.7817 ↑insider  value=+1.3126
+10:03:45 [audit]           realized_pnl_per_closing_trade               contrib=+0.6453 ↑insider  value=+5185.6288
+10:03:45 [audit]           buy_markout_adj_grosswt_h0p030_lb0p200       contrib=-0.3666 ↓insider  value=-0.0837
+10:03:45 [audit]           adaptive_markout_raw_grosswt_h0p070          contrib=+0.2497 ↑insider  value=+0.1594
+10:03:45 [audit]           buy_markout_adj_grosswt_h0p070_lb0p150       contrib=+0.1962 ↑insider  value=+0.8042
+10:03:45 [audit]           unrealized_edge_per_open_token               contrib=+0.1343 ↑insider  value=+0.1596
+10:03:45 [audit]           adaptive_markout_raw_grosswt_h0p150          contrib=-0.0280 ↓insider  value=+0.1593
+10:03:45 [audit]           adaptive_markout_raw_grosswt_h0p010          contrib=+0.0060 ↑insider  value=+0.1594
+10:03:45 [audit]           adaptive_markout_raw_grosswt_h0p200          contrib=+0.0000 ↑insider  value=+0.1593
+10:03:45 [audit]           high_sell_nonflattening_cash_frac_pctl90     contrib=+0.0000 ↑insider  value=+0.0000
+10:03:45 [audit] ------------------------------------------------------------------------
+10:03:45 [audit] MODEL  logreg 30feat   [tag=lr_insider_30feat, algo=lr, nf=30, raw]
+10:03:45 [audit]   prob=0.2655 (raw=0.2655)  threshold=0.5       not flagged
+10:03:45 [audit]   features driving THIS prediction (SHAP, signed toward insider):
+10:03:45 [audit]         explain [linear (coef*x, log-odds)]  base=-1.2317
+10:03:45 [audit]           major_move_time_remaining_pct                contrib=-0.5153 ↓insider  value=+0.0727
+10:03:45 [audit]           realized_pnl_per_closing_trade               contrib=+0.4946 ↑insider  value=+5185.6288
+10:03:45 [audit]           realized_pnl_total                           contrib=+0.1954 ↑insider  value=+41485.0305
+10:03:45 [audit]           time_to_major_move_pct_of_market             contrib=-0.1680 ↓insider  value=+0.0334
+10:03:45 [audit]           adaptive_plus_realized_alpha0p5_h0p070       contrib=+0.1116 ↑insider  value=+0.3468
+10:03:45 [audit]           unrealized_edge_per_open_token_sqrt          contrib=+0.1036 ↑insider  value=+1.3126
+10:03:45 [audit]           adaptive_plus_realized_alpha0p25_h0p030      contrib=+0.0797 ↑insider  value=+0.2531
+10:03:45 [audit]           buy_markout_adj_grosswt_h0p030_lb0p010       contrib=-0.0692 ↓insider  value=-0.0822
+10:03:45 [audit]           buy_markout_adj_grosswt_h0p030_lb0p200       contrib=-0.0688 ↓insider  value=-0.0837
+10:03:45 [audit]           high_sell_nonflattening_cash_frac_pctl90     contrib=+0.0549 ↑insider  value=+0.0000
+10:03:45 [audit]           active_day_frac                              contrib=-0.0538 ↓insider  value=+0.2308
+10:03:45 [audit]           realized_edge_grosswt                        contrib=-0.0467 ↓insider  value=+0.3749
+10:03:45 [audit] ------------------------------------------------------------------------
+10:03:45 [audit] MODEL  rf 10feat v2   [tag=rf_insider_10feat_v2, algo=rf, nf=10, raw]
+10:03:45 [audit]   prob=0.2567 (raw=0.2567)  threshold=0.5       not flagged
+10:03:45 [audit]   features driving THIS prediction (SHAP, signed toward insider):
+10:03:45 [audit]         explain [shap (TreeExplainer)]  base=+0.2628
+10:03:45 [audit]           unrealized_edge_per_open_token_sqrt          contrib=+0.0629 ↑insider  value=+1.3126
+10:03:45 [audit]           realized_pnl_per_closing_trade               contrib=+0.0386 ↑insider  value=+5185.6288
+10:03:45 [audit]           adaptive_markout_raw_grosswt_h0p070          contrib=-0.0273 ↓insider  value=+0.1594
+10:03:45 [audit]           adaptive_markout_raw_grosswt_h0p200          contrib=-0.0208 ↓insider  value=+0.1593
+10:03:45 [audit]           adaptive_markout_raw_grosswt_h0p010          contrib=-0.0185 ↓insider  value=+0.1594
+10:03:45 [audit]           unrealized_edge_per_open_token               contrib=-0.0181 ↓insider  value=+0.1596
+10:03:45 [audit]           buy_markout_adj_grosswt_h0p030_lb0p200       contrib=-0.0159 ↓insider  value=-0.0837
+10:03:45 [audit]           adaptive_markout_raw_grosswt_h0p150          contrib=-0.0123 ↓insider  value=+0.1593
+10:03:45 [audit]           buy_markout_adj_grosswt_h0p070_lb0p150       contrib=+0.0076 ↑insider  value=+0.8042
+10:03:45 [audit]           high_sell_nonflattening_cash_frac_pctl90     contrib=-0.0024 ↓insider  value=+0.0000
+10:03:45 [audit] ------------------------------------------------------------------------
+10:03:45 [audit] MODEL  cb 10feat v2 (d2)   [tag=cb_insider_10feat_v2_d2, algo=cb, nf=10, calibrated]
+10:03:45 [audit]   prob=0.1992 (raw=0.3631)  threshold=0.3       not flagged
+10:03:45 [audit]   features driving THIS prediction (SHAP, signed toward insider):
+10:03:45 [audit]         explain [shap (TreeExplainer)]  base=-1.3939
+10:03:45 [audit]           buy_markout_adj_grosswt_h0p030_lb0p200       contrib=-0.2612 ↓insider  value=-0.0837
+10:03:45 [audit]           realized_pnl_per_closing_trade               contrib=+0.2513 ↑insider  value=+5185.6288
+10:03:45 [audit]           adaptive_markout_raw_grosswt_h0p150          contrib=+0.2431 ↑insider  value=+0.1593
+10:03:45 [audit]           unrealized_edge_per_open_token_sqrt          contrib=+0.1896 ↑insider  value=+1.3126
+10:03:45 [audit]           adaptive_markout_raw_grosswt_h0p010          contrib=+0.1585 ↑insider  value=+0.1594
+10:03:45 [audit]           adaptive_markout_raw_grosswt_h0p070          contrib=+0.1293 ↑insider  value=+0.1594
+10:03:45 [audit]           buy_markout_adj_grosswt_h0p070_lb0p150       contrib=+0.0895 ↑insider  value=+0.8042
+10:03:45 [audit]           unrealized_edge_per_open_token               contrib=+0.0510 ↑insider  value=+0.1596
+10:03:45 [audit]           adaptive_markout_raw_grosswt_h0p200          contrib=-0.0235 ↓insider  value=+0.1593
+10:03:45 [audit]           high_sell_nonflattening_cash_frac_pctl90     contrib=+0.0046 ↑insider  value=+0.0000
+10:03:45 [audit] ------------------------------------------------------------------------
+10:03:45 [audit] MODEL  cb 10feat v2   [tag=cb_insider_10feat_v2, algo=cb, nf=10, calibrated]
+10:03:45 [audit]   prob=0.1776 (raw=0.3193)  threshold=0.3       not flagged
+10:03:45 [audit]   features driving THIS prediction (SHAP, signed toward insider):
+10:03:45 [audit]         explain [shap (TreeExplainer)]  base=-1.2181
+10:03:45 [audit]           buy_markout_adj_grosswt_h0p030_lb0p200       contrib=-0.3218 ↓insider  value=-0.0837
+10:03:45 [audit]           unrealized_edge_per_open_token_sqrt          contrib=+0.2774 ↑insider  value=+1.3126
+10:03:45 [audit]           adaptive_markout_raw_grosswt_h0p200          contrib=+0.2022 ↑insider  value=+0.1593
+10:03:45 [audit]           buy_markout_adj_grosswt_h0p070_lb0p150       contrib=+0.1418 ↑insider  value=+0.8042
+10:03:45 [audit]           adaptive_markout_raw_grosswt_h0p010          contrib=+0.1057 ↑insider  value=+0.1594
+10:03:45 [audit]           adaptive_markout_raw_grosswt_h0p150          contrib=+0.0554 ↑insider  value=+0.1593
+10:03:45 [audit]           adaptive_markout_raw_grosswt_h0p070          contrib=-0.0506 ↓insider  value=+0.1594
+10:03:45 [audit]           realized_pnl_per_closing_trade               contrib=+0.0242 ↑insider  value=+5185.6288
+10:03:45 [audit]           high_sell_nonflattening_cash_frac_pctl90     contrib=+0.0215 ↑insider  value=+0.0000
+10:03:45 [audit]           unrealized_edge_per_open_token               contrib=+0.0052 ↑insider  value=+0.1596
+10:03:45 [audit] ------------------------------------------------------------------------
+10:03:45 [audit] MODEL  xgb 30feat v2   [tag=xgb_insider_30feat_v2, algo=xgb, nf=30, calibrated]
+10:03:45 [audit]   prob=0.1402 (raw=0.4076)  threshold=0.5       not flagged
+10:03:45 [audit]   features driving THIS prediction (SHAP, signed toward insider):
+10:03:45 [audit]         explain [shap (TreeExplainer)]  base=+0.0709
+10:03:45 [audit]           time_to_major_move_pct_of_market             contrib=-0.9187 ↓insider  value=+0.0334
+10:03:45 [audit]           unrealized_edge_per_open_token_sqrt          contrib=+0.2322 ↑insider  value=+1.3126
+10:03:45 [audit]           realized_pnl_total                           contrib=+0.1805 ↑insider  value=+41485.0305
+10:03:45 [audit]           buy_markout_adj_grosswt_h0p030_lb0p010       contrib=-0.1355 ↓insider  value=-0.0822
+10:03:45 [audit]           buy_markout_adj_grosswt_h0p030_lb0p200       contrib=-0.1334 ↓insider  value=-0.0837
+10:03:45 [audit]           adaptive_plus_realized_alpha0p25_h0p030      contrib=+0.0979 ↑insider  value=+0.2531
+10:03:45 [audit]           major_move_time_remaining_pct                contrib=-0.0943 ↓insider  value=+0.0727
+10:03:45 [audit]           adaptive_markout_raw_grosswt_h0p070          contrib=+0.0886 ↑insider  value=+0.1594
+10:03:45 [audit]           realized_pnl_per_closing_trade               contrib=+0.0804 ↑insider  value=+5185.6288
+10:03:45 [audit]           active_day_frac                              contrib=-0.0601 ↓insider  value=+0.2308
+10:03:45 [audit]           adaptive_plus_realized_alpha0p5_h0p070       contrib=+0.0581 ↑insider  value=+0.3468
+10:03:45 [audit]           n_low_buy_building_trades                    contrib=+0.0581 ↑insider  value=+89.0000
+10:03:45 [audit] ------------------------------------------------------------------------
+10:03:45 [audit] MODEL  cb 30feat v2   [tag=cb_insider_30feat_v2, algo=cb, nf=30, calibrated]
+10:03:45 [audit]   prob=0.1393 (raw=0.1358)  threshold=0.3       not flagged
+10:03:45 [audit]   features driving THIS prediction (SHAP, signed toward insider):
+10:03:45 [audit]         explain [shap (TreeExplainer)]  base=-1.7533
+10:03:45 [audit]           time_to_major_move_pct_of_market             contrib=-0.7598 ↓insider  value=+0.0334
+10:03:45 [audit]           buy_markout_adj_grosswt_h0p030_lb0p200       contrib=-0.1790 ↓insider  value=-0.0837
+10:03:45 [audit]           adaptive_markout_raw_grosswt_h0p150          contrib=+0.1782 ↑insider  value=+0.1593
+10:03:45 [audit]           active_day_frac                              contrib=-0.1732 ↓insider  value=+0.2308
+10:03:45 [audit]           buy_markout_adj_grosswt_h0p030_lb0p010       contrib=-0.1625 ↓insider  value=-0.0822
+10:03:45 [audit]           unrealized_edge_per_open_token_sqrt          contrib=+0.1522 ↑insider  value=+1.3126
+10:03:45 [audit]           realized_edge_grosswt                        contrib=+0.1399 ↑insider  value=+0.3749
+10:03:45 [audit]           buy_markout_adj_grosswt_h0p070_lb0p150       contrib=+0.1383 ↑insider  value=+0.8042
+10:03:45 [audit]           adaptive_plus_realized_alpha0p25_h0p030      contrib=+0.1260 ↑insider  value=+0.2531
+10:03:45 [audit]           realized_pnl_total                           contrib=+0.1065 ↑insider  value=+41485.0305
+10:03:45 [audit]           sell_markout_adj_median_h0p030_lb0p070       contrib=+0.1022 ↑insider  value=   NaN
+10:03:45 [audit]           realized_win_rate_closing_trades             contrib=-0.0897 ↓insider  value=+1.0000
+10:03:45 [audit] ------------------------------------------------------------------------
+10:03:45 [audit] MODEL  xgb 20feat v2   [tag=xgb_insider_20feat_v2, algo=xgb, nf=20, calibrated]
+10:03:45 [audit]   prob=0.1239 (raw=0.3364)  threshold=0.15       not flagged
+10:03:45 [audit]   features driving THIS prediction (SHAP, signed toward insider):
+10:03:45 [audit]         explain [shap (TreeExplainer)]  base=-0.5488
+10:03:45 [audit]           time_to_major_move_pct_of_market             contrib=-1.0468 ↓insider  value=+0.0334
+10:03:45 [audit]           unrealized_edge_per_open_token_sqrt          contrib=+0.3043 ↑insider  value=+1.3126
+10:03:45 [audit]           adaptive_plus_realized_alpha0p25_h0p030      contrib=+0.1960 ↑insider  value=+0.2531
+10:03:45 [audit]           realized_pnl_per_closing_trade               contrib=+0.1919 ↑insider  value=+5185.6288
+10:03:45 [audit]           buy_markout_adj_grosswt_h0p070_lb0p150       contrib=+0.1759 ↑insider  value=+0.8042
+10:03:45 [audit]           adaptive_markout_raw_grosswt_h0p070          contrib=+0.1270 ↑insider  value=+0.1594
+10:03:45 [audit]           buy_markout_adj_grosswt_h0p030_lb0p010       contrib=-0.1156 ↓insider  value=-0.0822
+10:03:45 [audit]           major_move_time_remaining_pct                contrib=-0.1003 ↓insider  value=+0.0727
+10:03:45 [audit]           adaptive_plus_realized_alpha0p5_h0p070       contrib=+0.0858 ↑insider  value=+0.3468
+10:03:45 [audit]           unrealized_edge_per_open_token               contrib=+0.0448 ↑insider  value=+0.1596
+10:03:45 [audit]           buy_markout_adj_grosswt_h0p030_lb0p200       contrib=-0.0139 ↓insider  value=-0.0837
+10:03:45 [audit]           buy_markout_adj_mean_h0p200_lb0p200          contrib=+0.0103 ↑insider  value=+7.3128
+10:03:45 [audit] ------------------------------------------------------------------------
+10:03:45 [audit] MODEL  xgb 20feat v2 (axiom)   [tag=xgb_insider_20feat_v2_axiom, algo=xgb, nf=20, calibrated]
+10:03:45 [audit]   prob=0.0543 (raw=0.0119)  threshold=0.15       not flagged
+10:03:45 [audit]   features driving THIS prediction (SHAP, signed toward insider):
+10:03:45 [audit]         explain [shap (TreeExplainer)]  base=+0.2035
+10:03:45 [audit]           time_to_major_move_pct_of_market             contrib=-2.7360 ↓insider  value=+0.0334
+10:03:45 [audit]           major_move_time_remaining_pct                contrib=-0.8063 ↓insider  value=+0.0727
+10:03:45 [audit]           buy_markout_adj_grosswt_h0p030_lb0p010       contrib=-0.5252 ↓insider  value=-0.0822
+10:03:45 [audit]           buy_markout_adj_grosswt_h0p030_lb0p200       contrib=-0.4860 ↓insider  value=-0.0837
+10:03:45 [audit]           buy_markout_adj_grosswt_h0p070_lb0p150       contrib=-0.4815 ↓insider  value=+0.8042
+10:03:45 [audit]           adaptive_plus_realized_alpha0p5_h0p070       contrib=+0.2892 ↑insider  value=+0.3468
+10:03:45 [audit]           unrealized_edge_per_open_token_sqrt          contrib=+0.2248 ↑insider  value=+1.3126
+10:03:45 [audit]           buy_markout_adj_mean_h0p200_lb0p200          contrib=-0.1893 ↓insider  value=+7.3128
+10:03:45 [audit]           realized_pnl_per_closing_trade               contrib=+0.1340 ↑insider  value=+5185.6288
+10:03:45 [audit]           adaptive_plus_realized_alpha0p25_h0p030      contrib=+0.1080 ↑insider  value=+0.2531
+10:03:45 [audit]           adaptive_markout_raw_grosswt_h0p070          contrib=-0.1022 ↓insider  value=+0.1594
+10:03:45 [audit]           sell_markout_adj_median_h0p150_lb0p010       contrib=+0.0592 ↑insider  value=   NaN
+10:03:45 [audit] ------------------------------------------------------------------------
+10:03:45 [audit] MODEL  xgb 20feat v2 (mstr)   [tag=xgb_insider_20feat_v2_mstr, algo=xgb, nf=20, calibrated]
+10:03:45 [audit]   prob=0.0356 (raw=0.0475)  threshold=0.15       not flagged
+10:03:45 [audit]   features driving THIS prediction (SHAP, signed toward insider):
+10:03:45 [audit]         explain [shap (TreeExplainer)]  base=+0.3097
+10:03:45 [audit]           time_to_major_move_pct_of_market             contrib=-2.0821 ↓insider  value=+0.0334
+10:03:45 [audit]           major_move_time_remaining_pct                contrib=-0.7295 ↓insider  value=+0.0727
+10:03:45 [audit]           buy_markout_adj_grosswt_h0p030_lb0p010       contrib=-0.3835 ↓insider  value=-0.0822
+10:03:45 [audit]           buy_markout_adj_grosswt_h0p030_lb0p200       contrib=-0.3746 ↓insider  value=-0.0837
+10:03:45 [audit]           unrealized_edge_per_open_token_sqrt          contrib=+0.2670 ↑insider  value=+1.3126
+10:03:45 [audit]           buy_markout_adj_grosswt_h0p070_lb0p150       contrib=-0.1643 ↓insider  value=+0.8042
+10:03:45 [audit]           adaptive_plus_realized_alpha0p25_h0p030      contrib=+0.1256 ↑insider  value=+0.2531
+10:03:45 [audit]           realized_pnl_per_closing_trade               contrib=+0.1230 ↑insider  value=+5185.6288
+10:03:45 [audit]           adaptive_plus_realized_alpha0p5_h0p070       contrib=+0.1178 ↑insider  value=+0.3468
+10:03:45 [audit]           buy_markout_adj_mean_h0p200_lb0p030          contrib=-0.1122 ↓insider  value=+7.3178
+10:03:45 [audit]           adaptive_markout_raw_grosswt_h0p070          contrib=-0.0612 ↓insider  value=+0.1594
+10:03:45 [audit]           adaptive_markout_raw_grosswt_h0p010          contrib=-0.0585 ↓insider  value=+0.1594
+10:03:45 [audit] ------------------------------------------------------------------------
+10:03:45 [audit] MODEL  xgb 20feat v2 (stable)   [tag=xgb_insider_20feat_v2_stable, algo=xgb, nf=20, calibrated]
+10:03:45 [audit]   prob=0.0278 (raw=0.0428)  threshold=0.15       not flagged
+10:03:45 [audit]   features driving THIS prediction (SHAP, signed toward insider):
+10:03:45 [audit]         explain [shap (TreeExplainer)]  base=-0.3487
+10:03:45 [audit]           time_to_major_move_pct_of_market             contrib=-1.8435 ↓insider  value=+0.0334
+10:03:45 [audit]           major_move_time_remaining_pct                contrib=-0.7782 ↓insider  value=+0.0727
+10:03:45 [audit]           buy_markout_adj_grosswt_h0p030_lb0p200       contrib=-0.5642 ↓insider  value=-0.0837
+10:03:45 [audit]           adaptive_plus_realized_alpha0p5_h0p070       contrib=+0.3096 ↑insider  value=+0.3468
+10:03:45 [audit]           unrealized_edge_per_open_token_sqrt          contrib=+0.2945 ↑insider  value=+1.3126
+10:03:45 [audit]           realized_pnl_per_closing_trade               contrib=+0.2451 ↑insider  value=+5185.6288
+10:03:45 [audit]           buy_markout_adj_grosswt_h0p070_lb0p150       contrib=-0.2408 ↓insider  value=+0.8042
+10:03:45 [audit]           adaptive_markout_raw_grosswt_h0p070          contrib=-0.1765 ↓insider  value=+0.1594
+10:03:45 [audit]           buy_markout_adj_grosswt_h0p030_lb0p010       contrib=-0.1239 ↓insider  value=-0.0822
+10:03:45 [audit]           adaptive_markout_raw_grosswt_h0p150          contrib=+0.0991 ↑insider  value=+0.1593
+10:03:45 [audit]           buy_markout_adj_mean_h0p200_lb0p200          contrib=+0.0526 ↑insider  value=+7.3128
+10:03:45 [audit]           adaptive_markout_raw_grosswt_h0p010          contrib=-0.0384 ↓insider  value=+0.1594
+10:03:45 [audit] ------------------------------------------------------------------------
+10:03:45 [audit] MODEL  xgb 50feat   [tag=xgb_insider_50feat, algo=xgb, nf=50, raw]
+10:03:45 [audit]   prob=0.0131 (raw=0.0131)  threshold=0.5       not flagged
+10:03:45 [audit]   features driving THIS prediction (SHAP, signed toward insider):
+10:03:45 [audit]         explain [shap (TreeExplainer)]  base=+0.2838
+10:03:45 [audit]           time_to_major_move_pct_of_market             contrib=-4.1996 ↓insider  value=+0.0334
+10:03:45 [audit]           major_move_time_remaining_pct                contrib=-0.6850 ↓insider  value=+0.0727
+10:03:45 [audit]           n_low_buy_building_trades                    contrib=+0.4888 ↑insider  value=+89.0000
+10:03:45 [audit]           low_buy_building_cash_frac                   contrib=+0.4815 ↑insider  value=+1.0000
+10:03:45 [audit]           buy_markout_adj_grosswt_h0p070_lb0p150       contrib=-0.4096 ↓insider  value=+0.8042
+10:03:45 [audit]           buy_markout_adj_grosswt_h0p030_lb0p010       contrib=-0.3197 ↓insider  value=-0.0822
+10:03:45 [audit]           unrealized_edge_per_open_token_sqrt          contrib=+0.2649 ↑insider  value=+1.3126
+10:03:45 [audit]           adaptive_plus_realized_alpha0p25_h0p030      contrib=+0.2583 ↑insider  value=+0.2531
+10:03:45 [audit]           buy_markout_adj_grosswt_h0p010_lb0p030       contrib=-0.2550 ↓insider  value=+0.0041
+10:03:45 [audit]           derisk_0p75_time_position_mean               contrib=-0.2375 ↓insider  value=+0.6720
+10:03:45 [audit]           net_tokens                                   contrib=-0.2264 ↓insider  value=+19130.9111
+10:03:45 [audit]           buy_markout_adj_grosswt_h0p030_lb0p200       contrib=-0.2022 ↓insider  value=-0.0837
+10:03:45 [audit] ------------------------------------------------------------------------
+10:03:45 [audit] MODEL  lgbm 30feat   [tag=lgbm_insider_30feat, algo=lgbm, nf=30, raw]
+10:03:45 [audit]   prob=0.0127 (raw=0.0127)  threshold=0.5       not flagged
+10:03:45 [audit]   features driving THIS prediction (SHAP, signed toward insider):
+10:03:45 [audit]         explain [shap (TreeExplainer)]  base=-4.8795
+10:03:45 [audit]           time_to_major_move_pct_of_market             contrib=-2.5399 ↓insider  value=+0.0334
+10:03:45 [audit]           n_low_buy_building_trades                    contrib=+1.4259 ↑insider  value=+89.0000
+10:03:45 [audit]           unrealized_edge_per_open_token_sqrt          contrib=+0.7840 ↑insider  value=+1.3126
+10:03:45 [audit]           realized_pnl_total                           contrib=+0.5023 ↑insider  value=+41485.0305
+10:03:45 [audit]           adaptive_plus_realized_alpha0p25_h0p030      contrib=+0.4076 ↑insider  value=+0.2531
+10:03:45 [audit]           major_move_time_remaining_pct                contrib=-0.3851 ↓insider  value=+0.0727
+10:03:45 [audit]           realized_edge_grosswt                        contrib=+0.3745 ↑insider  value=+0.3749
+10:03:45 [audit]           realized_pnl_per_closing_trade               contrib=+0.3515 ↑insider  value=+5185.6288
+10:03:45 [audit]           derisk_0p75_time_position_mean               contrib=-0.3054 ↓insider  value=+0.6720
+10:03:45 [audit]           adaptive_plus_realized_alpha0p5_h0p070       contrib=+0.2766 ↑insider  value=+0.3468
+10:03:45 [audit]           buy_markout_adj_grosswt_h0p030_lb0p200       contrib=-0.2425 ↓insider  value=-0.0837
+10:03:45 [audit]           unrealized_edge_per_open_token               contrib=+0.2053 ↑insider  value=+0.1596
+10:03:45 [audit] ========================================================================
+10:03:45 [audit] SUMMARY: 19/35 models flag this pair as an insider
+10:03:45 [audit] model                      algo  nf     score       thr  flagged
+10:03:45 [audit] ------------------------------------------------------------------------
+10:03:45 [audit] retrained_rf_insider_meta_v5   rf  20    0.8340     0.500  YES
+10:03:45 [audit] retrained_rf_insider_25ir    rf  20    0.7946     0.500  YES
+10:03:45 [audit] xgb 10b+17m v5              xgb  27    0.6812     0.150  YES
+10:03:45 [audit] rf 10b+10m v5 (tuned)        rf  20    0.6762     0.500  YES
+10:03:45 [audit] retrained_xgb_insider_meta_v5  xgb  27    0.6228     0.150  YES
+10:03:45 [audit] rf 10b+17m v4 (axiom)        rf  27    0.6000     0.500  YES
+10:03:45 [audit] xgb 0ir-hidden (30f)        xgb  30    0.5805     0.150  YES
+10:03:45 [audit] rf 10b+17m v3                rf  27    0.5667     0.500  YES
+10:03:45 [audit] retrained_xgb_insider_0ir   xgb  30    0.5533     0.150  YES
+10:03:45 [audit] retrained_rf_insider_meta_v3   rf  27    0.5533     0.500  YES
+10:03:45 [audit] rf 25ir-hidden (20f)         rf  20    0.5524     0.500  YES
+10:03:45 [audit] retrained_rf_insider_meta_v4   rf  27    0.5367     0.500  YES
+10:03:45 [audit] retrained_xgb_insider_meta10_v6  xgb  10    0.5202     0.150  YES
+10:03:45 [audit] xgb meta-only v6            xgb  10    0.4963     0.150  YES
+10:03:45 [audit] xgb 25ir-hidden (30f)       xgb  30    0.4906     0.150  YES
+10:03:45 [audit] retrained_xgb_insider_25ir  xgb  30    0.4657     0.150  YES
+10:03:45 [audit] retrained_xgb_insider_meta_v7  xgb  30    0.3396     0.150  YES
+10:03:45 [audit] xgb 20b+10m v7              xgb  30    0.1861     0.150  YES
+10:03:45 [audit] isoforest 30feat            iso  30   -0.0397 anomaly<0  YES
+10:03:45 [audit] rf 0ir-hidden (20f)          rf  20    0.4941     0.500  no
+10:03:45 [audit] xgb 14feat                  xgb  14    0.4534     0.500  no
+10:03:45 [audit] retrained_rf_insider_0ir     rf  20    0.4409     0.500  no
+10:03:45 [audit] xgb 10feat v2               xgb  10    0.4207     0.500  no
+10:03:45 [audit] logreg 30feat                lr  30    0.2655     0.500  no
+10:03:45 [audit] rf 10feat v2                 rf  10    0.2567     0.500  no
+10:03:45 [audit] cb 10feat v2 (d2)            cb  10    0.1992     0.300  no
+10:03:45 [audit] cb 10feat v2                 cb  10    0.1776     0.300  no
+10:03:45 [audit] xgb 30feat v2               xgb  30    0.1402     0.500  no
+10:03:45 [audit] cb 30feat v2                 cb  30    0.1393     0.300  no
+10:03:45 [audit] xgb 20feat v2               xgb  20    0.1239     0.150  no
+10:03:45 [audit] xgb 20feat v2 (axiom)       xgb  20    0.0543     0.150  no
+10:03:45 [audit] xgb 20feat v2 (mstr)        xgb  20    0.0356     0.150  no
+10:03:45 [audit] xgb 20feat v2 (stable)      xgb  20    0.0278     0.150  no
+10:03:45 [audit] xgb 50feat                  xgb  50    0.0131     0.500  no
+10:03:45 [audit] lgbm 30feat                lgbm  30    0.0127     0.500  no
+10:03:45 [audit] ========================================================================
+10:03:45 [audit] wrote audit_out/audit_willd4vdbethe1search_c1259ddd_20260715_100334_models.csv
+10:03:45 [audit] wrote audit_out/audit_willd4vdbethe1search_c1259ddd_20260715_100334_shap.csv
+10:03:45 [audit] log saved to audit_out/audit_willd4vdbethe1search_c1259ddd_20260715_100334.log

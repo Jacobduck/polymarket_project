@@ -1,0 +1,194 @@
+[rf0ir] run timestamp = 20260701_085551
+[rf0ir] loading cache/training_data_with_metadata.parquet
+[rf0ir] full shape=(793, 339)  pos=117 neg=676
+[rf0ir] Iran filter = 0ir (drop both big Iran markets)
+[rf0ir]   dropped us-strikes-iran-by-march-1-2026-492: 245 rows (35 ins)
+[rf0ir]   dropped us-strikes-iran-by-february-28-2026-227-967-547-688-589-491-592-418-452-924-384-915-464-672-196-157-993-596-269-535-381-391-471-256-988-997-296-225-762-973-292-827-345-182-558-215-794-879-189-761: 189 rows (27 ins)
+[rf0ir]   dataset: 793 -> 359 rows (removed 434); tiny Iran markets kept
+[rf0ir] post-filter shape=(359, 339)  pos=55 neg=304
+[rf0ir] using 10 behavioral + 10 metadata = 20 features
+  beh  1. adaptive_markout_raw_grosswt_h0p070
+  beh  2. unrealized_edge_per_open_token
+  beh  3. adaptive_markout_raw_grosswt_h0p010
+  beh  4. adaptive_markout_raw_grosswt_h0p150
+  beh  5. unrealized_edge_per_open_token_sqrt
+  beh  6. buy_markout_adj_grosswt_h0p070_lb0p150
+  beh  7. adaptive_markout_raw_grosswt_h0p200
+  beh  8. buy_markout_adj_grosswt_h0p030_lb0p200
+  beh  9. high_sell_nonflattening_cash_frac_pctl90
+  beh 10. realized_pnl_per_closing_trade
+  met  1. herfindahl_index_markets
+  met  2. median_bet_size_usdc
+  met  3. time_since_first_deposit_to_first_trade_seconds
+  met  4. wallet_age_seconds
+  met  5. wallet_to_market_age_ratio
+  met  6. avg_bet_size_usdc
+  met  7. wallet_minus_market_age_seconds
+  met  8. funder_flagged_wallet_count
+  met  9. winrate
+  met 10. n_markets_traded
+[rf0ir] split (GroupShuffleSplit test_size=0.15, seed=42):
+[rf0ir]   train: 254 rows, 22 markets, pos=40 neg=214
+[rf0ir]   test : 105 rows, 5 markets, pos=15
+[rf0ir]   test markets: ['khamenei-out-as-supreme-leader-of-iran-by-march-31', 'us-x-iran-ceasefire-by-april-7', 'will-axiom-be-accused-of-insider-trading', 'will-karol-g-perform-during-the-super-bowl-lx-halftime-show', 'will-microstrategy-purchase-bitcoin-july-1-7']
+[rf0ir] tuning Optuna (50 trials, GroupKFold=4)...
+[rf0ir]   optuna best CV PR-AUC = 0.8081  (trial 43)
+[rf0ir]   optuna done in 161.6s
+[rf0ir] tuning RandomizedSearchCV (50 iters)...
+[rf0ir]   random-search best CV PR-AUC = 0.8004
+[rf0ir]   random-search done in 47.4s
+[rf0ir] tuner winner = optuna  (optuna=0.8081, random_search=0.8004)  -> best CV PR-AUC=0.8081
+[rf0ir] best params: {'n_estimators': 300, 'max_depth': 8, 'min_samples_split': 2, 'min_samples_leaf': 2, 'max_features': 'sqrt', 'class_weight': {0: 1.0, 1: 1.0}}
+[rf0ir] CV PR-AUC (primary) = 0.8081 ± 0.1182  over 4 folds: [0.6618, 0.9192, 0.9294, 0.7218]
+[rf0ir] final fit in 0.41s
+[rf0ir] metrics per split:
+[rf0ir] train   n= 254 pos= 40  ROC-AUC=0.9996  PR-AUC=0.9983  P=1.0000  R=0.9000  F1=0.9474  (thr=0.5)
+[rf0ir] test    n= 105 pos= 15  ROC-AUC=0.9400  PR-AUC=0.6807  P=0.7273  R=0.5333  F1=0.6154  (thr=0.5)
+[rf0ir] PR-AUC gap train-test = +0.3175  (big positive = overfit)
+[rf0ir] PR-AUC gap CV-test    = +0.1273
+[rf0ir] TEST classification @ thr=0.5: P=0.7273 R=0.5333 F1=0.6154 (TP=8, FP=3, FN=7, TN=87)
+[rf0ir] TEST predictions, sorted by prob desc:
+[rf0ir]  rank  prob    label  cum_tp  cum_fp  prec   recall  market  wallet
+[rf0ir]     1    0.9383    1        1       0  1.000   0.067  khamenei-out-as-supreme-lead  0x3e545810f8b95dd0fcf4114b0246a0dbb40ad1c5
+[rf0ir]     2    0.8756    0        1       1  0.500   0.067  will-microstrategy-purchase-  0xb3d0ec79a8f59f016df40f8a47e6d892cf447e39
+[rf0ir]     3    0.8592    1        2       1  0.667   0.133  will-microstrategy-purchase-  0xaab69d14e74adf2e46459af9a6b512dbedd2f297
+[rf0ir]     4    0.7385    0        2       2  0.500   0.133  will-microstrategy-purchase-  0x0dea37a4a28f024cdf14d55f2179f8066b03d350
+[rf0ir]     5    0.6811    1        3       2  0.600   0.200  will-axiom-be-accused-of-ins  0x581f34349babaf03b2d3c8f5f60cf44ffbe19a3a
+[rf0ir]     6    0.6608    1        4       2  0.667   0.267  will-axiom-be-accused-of-ins  0x054ec2f0ccfdae941886a3ed306635068c716639
+[rf0ir]     7    0.6382    1        5       2  0.714   0.333  will-axiom-be-accused-of-ins  0x6d6affce1ed04a0e9611484daf1cef5cbcf3fb40
+[rf0ir]     8    0.6046    1        6       2  0.750   0.400  us-x-iran-ceasefire-by-april  0x8039ad26298d7847799899808554474b7fa57421
+[rf0ir]     9    0.5626    0        6       3  0.667   0.400  will-axiom-be-accused-of-ins  0xa2bc00398168c2ef76c81230c543ab118a227134
+[rf0ir]    10    0.5462    1        7       3  0.700   0.467  us-x-iran-ceasefire-by-april  0x755519c3a4a69469f488197fbd39b12f70b3ecc5
+[rf0ir]    11    0.5205    1        8       3  0.727   0.533  will-axiom-be-accused-of-ins  0x98a96619e482700e83e8486e4f3727dba17f5381
+[rf0ir]    12    0.4863    1        9       3  0.750   0.600  will-axiom-be-accused-of-ins  0x1d9af60c679cd0b577c3c4ccb4b1a4be4174426d
+[rf0ir]    13    0.4388    1       10       3  0.769   0.667  will-microstrategy-purchase-  0x6e1a7bd753e97eaa367f45f4229d82f176475633
+[rf0ir]    14    0.4345    0       10       4  0.714   0.667  will-microstrategy-purchase-  0xd3383f8850f852a8170c97db885a56af5cf35687
+[rf0ir]    15    0.4203    0       10       5  0.667   0.667  will-microstrategy-purchase-  0x50497ed7d44938da69806a0f91948c4237d6ec17
+[rf0ir]    16    0.4157    1       11       5  0.688   0.733  us-x-iran-ceasefire-by-april  0x68558d37cafd9e6612ab32863f55ccdd798f655a
+[rf0ir]    17    0.4051    0       11       6  0.647   0.733  will-axiom-be-accused-of-ins  0xff55beaf369387d7748a31213699a51f1ca8b877
+[rf0ir]    18    0.3974    1       12       6  0.667   0.800  will-axiom-be-accused-of-ins  0xaab29084bcc42daff9e11b4a5a4cc55cda3eb306
+[rf0ir]    19    0.3902    0       12       7  0.632   0.800  will-axiom-be-accused-of-ins  0xc8ee8150ff9bf058b2b8defd09e1bac866ffffd7
+[rf0ir]    20    0.3870    0       12       8  0.600   0.800  will-karol-g-perform-during-  0x7f34cc7e46373a6e74022181a3de47065674d254
+[rf0ir]    21    0.3740    1       13       8  0.619   0.867  will-axiom-be-accused-of-ins  0xe56526b27b96f009b31ddb46558a134047bfce48
+[rf0ir]    22    0.3383    0       13       9  0.591   0.867  will-axiom-be-accused-of-ins  0xd9eab53eaba81333045da5bd84ce6c833f721e89
+[rf0ir]    23    0.3362    0       13      10  0.565   0.867  will-axiom-be-accused-of-ins  0x5e524f43357198fa815e6766f02fe686b444b064
+[rf0ir]    24    0.3347    0       13      11  0.542   0.867  will-axiom-be-accused-of-ins  0x3670279e844f5005d7ed8cc37ca562eaadef34f9
+[rf0ir]    25    0.3301    1       14      11  0.560   0.933  us-x-iran-ceasefire-by-april  0xd9875d4a0573dd3890738aab990938a53c360041
+[rf0ir]    26    0.3104    0       14      12  0.538   0.933  will-axiom-be-accused-of-ins  0xb3768b87f4dcb77a92f2e73f5a54ef2d01ab8817
+[rf0ir]    27    0.3013    0       14      13  0.519   0.933  will-axiom-be-accused-of-ins  0xe31b852756937aef6a047b8de0d36196804b3fb7
+[rf0ir]    28    0.2985    0       14      14  0.500   0.933  will-axiom-be-accused-of-ins  0x22d53062ca2f41ee15df9b401a523eea73419aeb
+[rf0ir]    29    0.2449    0       14      15  0.483   0.933  will-axiom-be-accused-of-ins  0x8192329901e78e1af09863b6c69378b35b99168d
+[rf0ir]    30    0.2438    0       14      16  0.467   0.933  us-x-iran-ceasefire-by-april  0x7e6b15577d367a9f885f782b1c6c46556a95e3c5
+[rf0ir]    31    0.2019    0       14      17  0.452   0.933  will-axiom-be-accused-of-ins  0x8432866dac9038e7a0c9bfae1635f21c695c21a3
+[rf0ir]    32    0.2001    0       14      18  0.438   0.933  will-axiom-be-accused-of-ins  0xc907f73eade151b451d970d79a39b13a7b18e852
+[rf0ir]    33    0.1783    0       14      19  0.424   0.933  will-axiom-be-accused-of-ins  0xc1872cdc321ce83ae361516ee22e3419579c4f67
+[rf0ir]    34    0.1718    0       14      20  0.412   0.933  will-axiom-be-accused-of-ins  0x0aeb57166a5496fdfe6d02cd878ecae36e9ec405
+[rf0ir]    35    0.1651    0       14      21  0.400   0.933  will-axiom-be-accused-of-ins  0x16c7fe0dff534c7b8faf8fee6dbddddea1a10f82
+[rf0ir]    36    0.1635    0       14      22  0.389   0.933  will-microstrategy-purchase-  0xc91879e958915f0d909ec52c92dd80f5dd7a3415
+[rf0ir]    37    0.1558    0       14      23  0.378   0.933  us-x-iran-ceasefire-by-april  0x511653479dbf3a4557d8a2359595d429b90dc5b8
+[rf0ir]    38    0.1469    0       14      24  0.368   0.933  will-axiom-be-accused-of-ins  0x9bd35d55ae6c5d4900ef48e9e2ffe981ed5a3748
+[rf0ir]    39    0.1439    0       14      25  0.359   0.933  will-microstrategy-purchase-  0x2eb19d9ee562ef1f2f245cbac87f45cbbcfb326c
+[rf0ir]    40    0.1277    0       14      26  0.350   0.933  will-axiom-be-accused-of-ins  0x2b3e111fdecbe01582ba9dbedad79a94ceb2b898
+[rf0ir]    41    0.1232    0       14      27  0.341   0.933  will-axiom-be-accused-of-ins  0xd21563efd89113ed2ea602bf8562feb4332cddcf
+[rf0ir]    42    0.1125    0       14      28  0.333   0.933  khamenei-out-as-supreme-lead  0xe598435df0cdf5d22bdd5082d557f75f9180a0a8
+[rf0ir]    43    0.1079    0       14      29  0.326   0.933  will-axiom-be-accused-of-ins  0x66d5296705f8f0abcaa8043986c3dc9196aa9e9f
+[rf0ir]    44    0.0990    0       14      30  0.318   0.933  will-axiom-be-accused-of-ins  0x4268978b9f58cf6e916d9878aa990cc515b70169
+[rf0ir]    45    0.0974    1       15      30  0.333   1.000  will-karol-g-perform-during-  0x40d9ac81a425f14d2c490c41ac8969c0cbcfd472
+[rf0ir]    46    0.0945    0       15      31  0.326   1.000  us-x-iran-ceasefire-by-april  0x4d1466c694b26a71e426bd3295ebbb07727b2366
+[rf0ir]    47    0.0831    0       15      32  0.319   1.000  will-karol-g-perform-during-  0x0224bb9eb0a5c9fd261ac9123a72cbdd5748292a
+[rf0ir]    48    0.0772    0       15      33  0.312   1.000  us-x-iran-ceasefire-by-april  0x99bd7971cc56bbf3886bec226ddbf61752993d62
+[rf0ir]    49    0.0678    0       15      34  0.306   1.000  us-x-iran-ceasefire-by-april  0xc4d1a863e9cc45d02ba22d3a1ae9ba7822018ce8
+[rf0ir]    50    0.0655    0       15      35  0.300   1.000  us-x-iran-ceasefire-by-april  0xbebe49168cc3fe33fd9060c6fc83355c3359a8b5
+[rf0ir]    51    0.0625    0       15      36  0.294   1.000  us-x-iran-ceasefire-by-april  0x5823a87faccc566579cf88cc89ffe50eb54d673f
+[rf0ir]    52    0.0609    0       15      37  0.288   1.000  us-x-iran-ceasefire-by-april  0x91710b66a05f2ea3614dd50abe7192c7f90ac3e0
+[rf0ir]    53    0.0607    0       15      38  0.283   1.000  will-microstrategy-purchase-  0x8f7bb1d97c28278e28943b8481f1a1651605154b
+[rf0ir]    54    0.0508    0       15      39  0.278   1.000  will-axiom-be-accused-of-ins  0xa5ab0fe08ccffa97e2de8e5caf4d7bd7cd32ed02
+[rf0ir]    55    0.0462    0       15      40  0.273   1.000  will-microstrategy-purchase-  0xe57726b7cfb40056a20e25b526dd2782d0216c42
+[rf0ir]    56    0.0455    0       15      41  0.268   1.000  us-x-iran-ceasefire-by-april  0xd7375270e4769d3cc31885773070a5f12d5bbe95
+[rf0ir]    57    0.0406    0       15      42  0.263   1.000  us-x-iran-ceasefire-by-april  0x71edffd0d70a1da823ff07a3c6fc81457294d338
+[rf0ir]    58    0.0396    0       15      43  0.259   1.000  will-axiom-be-accused-of-ins  0xf67f72df65797a85dc9fd44d57adfe5b7b4a31cf
+[rf0ir]    59    0.0359    0       15      44  0.254   1.000  will-karol-g-perform-during-  0xbb50fa724ac755197246d950008d6a0564ee7bfc
+[rf0ir]    60    0.0319    0       15      45  0.250   1.000  will-microstrategy-purchase-  0x7a146c5e70c092d06be27097a5c770b49d0bd748
+[rf0ir]    61    0.0308    0       15      46  0.246   1.000  us-x-iran-ceasefire-by-april  0x5bffcf561bcae83af680ad600cb99f1184d6ffbe
+[rf0ir]    62    0.0293    0       15      47  0.242   1.000  us-x-iran-ceasefire-by-april  0x9e9c8b080659b08c3474ea761790a20982e26421
+[rf0ir]    63    0.0286    0       15      48  0.238   1.000  us-x-iran-ceasefire-by-april  0xfd66d7ed45d7962ad009e669cdaec9319e38fb6d
+[rf0ir]    64    0.0252    0       15      49  0.234   1.000  us-x-iran-ceasefire-by-april  0x7e30c3a56d89edac738d788dd218a9e64fb91e50
+[rf0ir]    65    0.0241    0       15      50  0.231   1.000  us-x-iran-ceasefire-by-april  0x000d257d2dc7616feaef4ae0f14600fdf50a758e
+[rf0ir]    66    0.0210    0       15      51  0.227   1.000  will-microstrategy-purchase-  0x00a9b09dbf307714050c18b37c99d6b248a536bb
+[rf0ir]    67    0.0207    0       15      52  0.224   1.000  us-x-iran-ceasefire-by-april  0x034475def048324ad32d87c5fd90e99f0f7b2538
+[rf0ir]    68    0.0180    0       15      53  0.221   1.000  will-axiom-be-accused-of-ins  0x828d1dc3586d7aacbc8de4916685690b1453c9a5
+[rf0ir]    69    0.0169    0       15      54  0.217   1.000  will-axiom-be-accused-of-ins  0xdc9d2b17dd9d903f0e33acdbc9b41c77a339efc0
+[rf0ir]    70    0.0131    0       15      55  0.214   1.000  will-microstrategy-purchase-  0xa16f2a05a6f55c2b08bf6875d78d6895645f6df1
+[rf0ir]    71    0.0128    0       15      56  0.211   1.000  will-axiom-be-accused-of-ins  0xb2fc56f2f4ef3e34b59a6d603b084ffb34f71881
+[rf0ir]    72    0.0121    0       15      57  0.208   1.000  us-x-iran-ceasefire-by-april  0x7131cb618fb195c70e8e629c45199096833c29cc
+[rf0ir]    73    0.0102    0       15      58  0.205   1.000  us-x-iran-ceasefire-by-april  0xdcd669c506a938bae9269a84b8bd2bdb220484cd
+[rf0ir]    74    0.0090    0       15      59  0.203   1.000  will-axiom-be-accused-of-ins  0x4429fafc9675b330beaa808dbcfa74aeb04c4409
+[rf0ir]    75    0.0088    0       15      60  0.200   1.000  khamenei-out-as-supreme-lead  0x0793ab4415b138f650e9e564b8aa11a1d38d7cfa
+[rf0ir]    76    0.0078    0       15      61  0.197   1.000  will-axiom-be-accused-of-ins  0x72a22d4d155079da8f50c89d4c6c03b6428e7b65
+[rf0ir]    77    0.0073    0       15      62  0.195   1.000  will-axiom-be-accused-of-ins  0xb10047d6a254b2ebb306d7a7d13bf59171ab6461
+[rf0ir]    78    0.0059    0       15      63  0.192   1.000  will-axiom-be-accused-of-ins  0x5f8fe08245151828dc063df19ccbb3c9100d40cf
+[rf0ir]    79    0.0042    0       15      64  0.190   1.000  will-axiom-be-accused-of-ins  0x44c1dfe43260c94ed4f1d00de2e1f80fb113ebc1
+[rf0ir]    80    0.0040    0       15      65  0.188   1.000  khamenei-out-as-supreme-lead  0x019761760625753afbfb7d8ef6ae9ee116e25eb8
+[rf0ir]    81    0.0040    0       15      66  0.185   1.000  will-axiom-be-accused-of-ins  0xcf6a714618a328c608a1c70cb62a31a6bef3f9d0
+[rf0ir]    82    0.0037    0       15      67  0.183   1.000  will-axiom-be-accused-of-ins  0x50261ea1791d99d4b8e8f65b9e602390a1cbcd15
+[rf0ir]    83    0.0022    0       15      68  0.181   1.000  khamenei-out-as-supreme-lead  0x9e5c74c0bf46f0bf3fcd1064d17e6201c67fd8e6
+[rf0ir]    84    0.0017    0       15      69  0.179   1.000  khamenei-out-as-supreme-lead  0x4c2da46b289847e3e8377c6f4ca3d520c620f8ae
+[rf0ir]    85    0.0015    0       15      70  0.176   1.000  will-axiom-be-accused-of-ins  0xec593b3c1a9a0ed15e597dc4ea09cafbffe3bb35
+[rf0ir]    86    0.0015    0       15      71  0.174   1.000  us-x-iran-ceasefire-by-april  0x122cdd9db64fd8dc3ebab813218e3effe21f821f
+[rf0ir]    87    0.0011    0       15      72  0.172   1.000  us-x-iran-ceasefire-by-april  0x5d05b1f588780423488a09d9aefeb64df54d6320
+[rf0ir]    88    0.0005    0       15      73  0.170   1.000  will-axiom-be-accused-of-ins  0x0c97325a81ad05c6b58ae30d12eaaec1b8451b68
+[rf0ir]    89    0.0005    0       15      74  0.169   1.000  will-axiom-be-accused-of-ins  0x2d58182d23f73967a9eff97a6020b73b7b891aea
+[rf0ir]    90    0.0004    0       15      75  0.167   1.000  will-axiom-be-accused-of-ins  0x5188fa0e8a77e87bc6a58e6781fdfc4e165cc804
+[rf0ir]    91    0.0004    0       15      76  0.165   1.000  us-x-iran-ceasefire-by-april  0xbb9c165825e9f233d1f611b50b193fe94513072b
+[rf0ir]    92    0.0000    0       15      77  0.163   1.000  will-axiom-be-accused-of-ins  0x7744bfd749a70020d16a1fcbac1d064761c9999e
+[rf0ir]    93    0.0000    0       15      78  0.161   1.000  khamenei-out-as-supreme-lead  0x9690d9f51b618222c29567c3b39aac2935a5f2d5
+[rf0ir]    94    0.0000    0       15      79  0.160   1.000  us-x-iran-ceasefire-by-april  0x06c0d07d5b59b25316bf1e6007aca6ad8f20bc23
+[rf0ir]    95    0.0000    0       15      80  0.158   1.000  us-x-iran-ceasefire-by-april  0x7c3db723f1d4d8cb9c550095203b686cb11e5c6b
+[rf0ir]    96    0.0000    0       15      81  0.156   1.000  us-x-iran-ceasefire-by-april  0x0e5bd76779e74304d08e759072abf126d87da593
+[rf0ir]    97    0.0000    0       15      82  0.155   1.000  will-axiom-be-accused-of-ins  0x076ca0207aaa48365da2eb6a917edcbdee5e4e7b
+[rf0ir]    98    0.0000    0       15      83  0.153   1.000  will-axiom-be-accused-of-ins  0xc5d563a36ae78145c45a50134d48a1215220f80a
+[rf0ir]    99    0.0000    0       15      84  0.152   1.000  will-karol-g-perform-during-  0xde0463ea7f611b065e8ab06bbfbddad75e6dfa37
+[rf0ir]   100    0.0000    0       15      85  0.150   1.000  will-karol-g-perform-during-  0x4bfb41d5b3570defd03c39a9a4d8de6bd8b8982e
+[rf0ir]   101    0.0000    0       15      86  0.149   1.000  will-axiom-be-accused-of-ins  0x6bab41a0dc40d6dd4c1a915b8c01969479fd1292
+[rf0ir]   102    0.0000    0       15      87  0.147   1.000  will-axiom-be-accused-of-ins  0x0260366a9add43c25d4f4d35d2210526c6750d88
+[rf0ir]   103    0.0000    0       15      88  0.146   1.000  will-karol-g-perform-during-  0xec981ed70ae69c5cbcac08c1ba063e734f6bafcd
+[rf0ir]   104    0.0000    0       15      89  0.144   1.000  will-axiom-be-accused-of-ins  0xedf72350cc1d1fc9b02186f33a19a27108e24003
+[rf0ir]   105    0.0000    0       15      90  0.143   1.000  will-microstrategy-purchase-  0xfd12bfa49ce450980398812c9c689824388c53fa
+[rf0ir] TEST confusion matrix @ thr=0.5
+[[87  3]
+ [ 7  8]]
+              precision    recall  f1-score   support
+
+           0     0.9255    0.9667    0.9457        90
+           1     0.7273    0.5333    0.6154        15
+
+    accuracy                         0.9048       105
+   macro avg     0.8264    0.7500    0.7805       105
+weighted avg     0.8972    0.9048    0.8985       105
+
+[rf0ir] feature importances (mean decrease in impurity):
+   0.1878  median_bet_size_usdc
+   0.0780  herfindahl_index_markets
+   0.0721  wallet_age_seconds
+   0.0646  adaptive_markout_raw_grosswt_h0p010
+   0.0645  time_since_first_deposit_to_first_trade_seconds
+   0.0595  adaptive_markout_raw_grosswt_h0p070
+   0.0565  adaptive_markout_raw_grosswt_h0p150
+   0.0544  adaptive_markout_raw_grosswt_h0p200
+   0.0482  buy_markout_adj_grosswt_h0p030_lb0p200
+   0.0477  wallet_to_market_age_ratio
+   0.0472  unrealized_edge_per_open_token
+   0.0468  avg_bet_size_usdc
+   0.0454  unrealized_edge_per_open_token_sqrt
+   0.0390  wallet_minus_market_age_seconds
+   0.0288  winrate
+   0.0260  buy_markout_adj_grosswt_h0p070_lb0p150
+   0.0190  n_markets_traded
+   0.0141  realized_pnl_per_closing_trade
+   0.0003  high_sell_nonflattening_cash_frac_pctl90
+   0.0000  funder_flagged_wallet_count
+[rf0ir] curves saved to 0ir_randomforest_20260701_085551_curves.png
+[rf0ir] saved cache/models/rf_insider_0ir_20260701_085551.joblib
+[rf0ir] saved cache/models/rf_insider_0ir_20260701_085551.meta.json
+
+[rf0ir] === RESULT ===  CV PR-AUC=0.8081  TEST PR-AUC=0.6807  TEST ROC-AUC=0.9400

@@ -70,7 +70,7 @@ MODEL_DIR.mkdir(parents=True, exist_ok=True)
 
 FEATURE_SOURCE_META = MODEL_DIR / "cb_insider_30feat_latest.meta.json"
 TOP_K = 10
-MODEL_TAG = "rf_insider_meta_v5"
+MODEL_TAG = __import__("os").environ.get("MODEL_TAG_PREFIX", "") + "rf_insider_meta_v5"
 
 # Top 10 of the 17 metadata features, ranked by xgb5's gain importance
 # (same set used by xgboost6.py / xgboost7.py). Drops the 7 weakest, which
