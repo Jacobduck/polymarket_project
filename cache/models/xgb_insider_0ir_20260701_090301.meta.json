@@ -1,0 +1,194 @@
+{
+  "trained_at": "20260701_090301",
+  "model_type": "xgboost.XGBClassifier",
+  "experiment": "0ir -- both big Iran markets removed (mar-1 + feb-28)",
+  "iran_filter": {
+    "mode": "0ir",
+    "dropped_markets": [
+      "us-strikes-iran-by-march-1-2026-492",
+      "us-strikes-iran-by-february-28-2026-227..."
+    ],
+    "note": "tiny Iran markets (ceasefire/israel-strike/khamenei) kept"
+  },
+  "split_strategy": "GroupShuffleSplit(test_size=0.15, random_state=42) by market_slug",
+  "n_train_markets": 22,
+  "n_train_rows": 254,
+  "n_test_rows": 105,
+  "test_markets": [
+    "khamenei-out-as-supreme-leader-of-iran-by-march-31",
+    "us-x-iran-ceasefire-by-april-7",
+    "will-axiom-be-accused-of-insider-trading",
+    "will-karol-g-perform-during-the-super-bowl-lx-halftime-show",
+    "will-microstrategy-purchase-bitcoin-july-1-7"
+  ],
+  "n_features": 30,
+  "features": [
+    "adaptive_markout_raw_grosswt_h0p070",
+    "unrealized_edge_per_open_token",
+    "adaptive_markout_raw_grosswt_h0p010",
+    "adaptive_markout_raw_grosswt_h0p150",
+    "unrealized_edge_per_open_token_sqrt",
+    "buy_markout_adj_grosswt_h0p070_lb0p150",
+    "adaptive_markout_raw_grosswt_h0p200",
+    "buy_markout_adj_grosswt_h0p030_lb0p200",
+    "high_sell_nonflattening_cash_frac_pctl90",
+    "realized_pnl_per_closing_trade",
+    "adaptive_plus_realized_alpha0p25_h0p030",
+    "buy_markout_adj_grosswt_h0p030_lb0p010",
+    "adaptive_plus_realized_alpha0p5_h0p070",
+    "buy_markout_adj_mean_h0p200_lb0p030",
+    "buy_markout_adj_mean_h0p200_lb0p200",
+    "sell_markout_adj_median_h0p150_lb0p010",
+    "n_distinct_buy_days",
+    "major_move_time_remaining_pct",
+    "time_to_major_move_pct_of_market",
+    "adaptive_markout_raw_grosswt_h0p030",
+    "herfindahl_index_markets",
+    "median_bet_size_usdc",
+    "time_since_first_deposit_to_first_trade_seconds",
+    "wallet_age_seconds",
+    "wallet_to_market_age_ratio",
+    "avg_bet_size_usdc",
+    "wallet_minus_market_age_seconds",
+    "funder_flagged_wallet_count",
+    "winrate",
+    "n_markets_traded"
+  ],
+  "feature_selection": "top 20 behavioral from cb_insider_30feat_latest.meta.json + top 10 of 17 metadata features (ranked by xgb5 gain)",
+  "n_behavioral_features": 20,
+  "n_metadata_features": 10,
+  "metadata_features": [
+    "herfindahl_index_markets",
+    "median_bet_size_usdc",
+    "time_since_first_deposit_to_first_trade_seconds",
+    "wallet_age_seconds",
+    "wallet_to_market_age_ratio",
+    "avg_bet_size_usdc",
+    "wallet_minus_market_age_seconds",
+    "funder_flagged_wallet_count",
+    "winrate",
+    "n_markets_traded"
+  ],
+  "threshold": 0.15,
+  "calibrator_file": "xgb_insider_0ir_20260701_090301.calibrator.joblib",
+  "calibration": {
+    "method": "Platt scaling (sklearn LogisticRegression on raw prob)",
+    "fit_on": "OOF predictions from CV (no leakage)",
+    "coef": 3.642965402203561,
+    "intercept": -2.9687059823282334
+  },
+  "model_params": {
+    "objective": "binary:logistic",
+    "eval_metric": "aucpr",
+    "tree_method": "hist",
+    "random_state": 42,
+    "n_estimators": 1750,
+    "max_depth": 3,
+    "learning_rate": 0.061353752075767196,
+    "min_child_weight": 5.928793267779629,
+    "subsample": 0.5325067716756511,
+    "colsample_bytree": 0.657089284170503,
+    "reg_lambda": 1.6173860035285086,
+    "reg_alpha": 1.2859061921173205,
+    "gamma": 0.6586989432818476,
+    "scale_pos_weight": 4.634258317360784
+  },
+  "tuning": {
+    "framework": "optuna",
+    "sampler": "TPESampler",
+    "pruner": "MedianPruner",
+    "n_trials_requested": 100,
+    "n_trials_completed": 74,
+    "n_trials_pruned": 26,
+    "n_startup_trials": 20,
+    "objective_metric": "mean PR-AUC across CV folds",
+    "tuning_seconds": 208.95998811721802,
+    "best_cv_pr_auc": 0.7528530894357225
+  },
+  "cv": {
+    "scheme": "StratifiedGroupKFold(n_splits=5, shuffle=True, random_state=42) on market_slug",
+    "n_folds": 5,
+    "folds": [
+      {
+        "fold": 1,
+        "n_val_rows": 54,
+        "n_val_positives": 9,
+        "pr_auc": 0.6735215401882069
+      },
+      {
+        "fold": 2,
+        "n_val_rows": 49,
+        "n_val_positives": 7,
+        "pr_auc": 0.6869047619047619
+      },
+      {
+        "fold": 3,
+        "n_val_rows": 49,
+        "n_val_positives": 7,
+        "pr_auc": 0.6377551020408163
+      },
+      {
+        "fold": 4,
+        "n_val_rows": 52,
+        "n_val_positives": 8,
+        "pr_auc": 0.9186507936507936
+      },
+      {
+        "fold": 5,
+        "n_val_rows": 50,
+        "n_val_positives": 9,
+        "pr_auc": 0.8474332493940337
+      }
+    ],
+    "pr_auc_mean": 0.7528530894357225,
+    "pr_auc_std": 0.10984034658833501
+  },
+  "metrics": {
+    "cv_pr_auc": 0.7528530894357225,
+    "train": {
+      "n": 254,
+      "n_positives": 40,
+      "roc_auc": 0.9980140186915888,
+      "pr_auc": 0.9895373529519376,
+      "precision": 0.6779661016949152,
+      "recall": 1.0,
+      "f1": 0.8080808080808081,
+      "classification_at_threshold": {
+        "threshold": 0.15,
+        "tp": 40,
+        "fp": 19,
+        "fn": 0,
+        "tn": 195,
+        "precision": 0.6779661016949152,
+        "recall": 1.0,
+        "f1": 0.8080808080808081
+      }
+    },
+    "test": {
+      "n": 105,
+      "n_positives": 15,
+      "roc_auc": 0.9362962962962963,
+      "pr_auc": 0.7849595434990972,
+      "precision": 0.5,
+      "recall": 0.9333333333333333,
+      "f1": 0.6511627906976745,
+      "classification_at_threshold": {
+        "threshold": 0.15,
+        "tp": 14,
+        "fp": 14,
+        "fn": 1,
+        "tn": 76,
+        "precision": 0.5,
+        "recall": 0.9333333333333333,
+        "f1": 0.6511627906976745
+      }
+    },
+    "train_test_pr_auc_gap": 0.20457780945284032,
+    "cv_test_pr_auc_gap": -0.032106454063374756,
+    "roc_auc": 0.9362962962962963,
+    "pr_auc": 0.7849595434990972
+  },
+  "log_file": "0ir_xgboost_20260701_090301.log",
+  "curves_plot": "0ir_xgboost_20260701_090301_curves.png",
+  "source_training_data": "cache/training_data_with_metadata.parquet"
+}

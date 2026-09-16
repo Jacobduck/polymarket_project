@@ -1,0 +1,192 @@
+{
+  "trained_at": "20260709_162021",
+  "model_type": "xgboost.XGBClassifier",
+  "experiment": "25ir -- canonical mar-1 Iran market down-sampled",
+  "iran_filter": {
+    "mode": "25ir",
+    "market": "us-strikes-iran-by-march-1-2026-492",
+    "hidden_insiders": 25,
+    "note": "kept 10 insiders + 60 non-insiders (ratio preserved); feb-28 and tiny Iran markets untouched"
+  },
+  "split_strategy": "GroupShuffleSplit(test_size=0.15, random_state=42) by market_slug",
+  "n_train_markets": 24,
+  "n_train_rows": 383,
+  "n_test_rows": 235,
+  "test_markets": [
+    "us-strikes-iran-by-february-28-2026-227-967-547-688-589-491-592-418-452-924-384-915-464-672-196-157-993-596-269-535-381-391-471-256-988-997-296-225-762-973-292-827-345-182-558-215-794-879-189-761",
+    "will-aztec-launch-a-token-in-2025",
+    "will-lighter-perform-an-airdrop-by-december-31",
+    "will-microstrategy-hold-680k-btc-by-december-31",
+    "will-us-or-israel-strike-iran-by-february-28-2026-766"
+  ],
+  "n_features": 30,
+  "features": [
+    "adaptive_markout_raw_grosswt_h0p070",
+    "unrealized_edge_per_open_token",
+    "adaptive_markout_raw_grosswt_h0p010",
+    "adaptive_markout_raw_grosswt_h0p150",
+    "unrealized_edge_per_open_token_sqrt",
+    "buy_markout_adj_grosswt_h0p070_lb0p150",
+    "adaptive_markout_raw_grosswt_h0p200",
+    "buy_markout_adj_grosswt_h0p030_lb0p200",
+    "high_sell_nonflattening_cash_frac_pctl90",
+    "realized_pnl_per_closing_trade",
+    "adaptive_plus_realized_alpha0p25_h0p030",
+    "buy_markout_adj_grosswt_h0p030_lb0p010",
+    "adaptive_plus_realized_alpha0p5_h0p070",
+    "buy_markout_adj_mean_h0p200_lb0p030",
+    "buy_markout_adj_mean_h0p200_lb0p200",
+    "sell_markout_adj_median_h0p150_lb0p010",
+    "n_distinct_buy_days",
+    "major_move_time_remaining_pct",
+    "time_to_major_move_pct_of_market",
+    "adaptive_markout_raw_grosswt_h0p030",
+    "herfindahl_index_markets",
+    "median_bet_size_usdc",
+    "time_since_first_deposit_to_first_trade_seconds",
+    "wallet_age_seconds",
+    "wallet_to_market_age_ratio",
+    "avg_bet_size_usdc",
+    "wallet_minus_market_age_seconds",
+    "funder_flagged_wallet_count",
+    "winrate",
+    "n_markets_traded"
+  ],
+  "feature_selection": "top 20 behavioral from cb_insider_30feat_latest.meta.json + top 10 of 17 metadata features (ranked by xgb5 gain)",
+  "n_behavioral_features": 20,
+  "n_metadata_features": 10,
+  "metadata_features": [
+    "herfindahl_index_markets",
+    "median_bet_size_usdc",
+    "time_since_first_deposit_to_first_trade_seconds",
+    "wallet_age_seconds",
+    "wallet_to_market_age_ratio",
+    "avg_bet_size_usdc",
+    "wallet_minus_market_age_seconds",
+    "funder_flagged_wallet_count",
+    "winrate",
+    "n_markets_traded"
+  ],
+  "threshold": 0.15,
+  "calibrator_file": "retrained_xgb_insider_25ir_20260709_162021.calibrator.joblib",
+  "calibration": {
+    "method": "Platt scaling (sklearn LogisticRegression on raw prob)",
+    "fit_on": "OOF predictions from CV (no leakage)",
+    "coef": 4.31151526622827,
+    "intercept": -3.6197698462351773
+  },
+  "model_params": {
+    "objective": "binary:logistic",
+    "eval_metric": "aucpr",
+    "tree_method": "hist",
+    "random_state": 42,
+    "n_estimators": 450,
+    "max_depth": 5,
+    "learning_rate": 0.017119717105644014,
+    "min_child_weight": 13.861361804529498,
+    "subsample": 0.5486061884087443,
+    "colsample_bytree": 0.5153996078938355,
+    "reg_lambda": 0.8273165424491666,
+    "reg_alpha": 0.1605001813997853,
+    "gamma": 3.776540942674605,
+    "scale_pos_weight": 6.396769336998878
+  },
+  "tuning": {
+    "framework": "optuna",
+    "sampler": "TPESampler",
+    "pruner": "MedianPruner",
+    "n_trials_requested": 100,
+    "n_trials_completed": 100,
+    "n_trials_pruned": 0,
+    "n_startup_trials": 20,
+    "objective_metric": "mean PR-AUC across CV folds",
+    "tuning_seconds": 145.1989459991455,
+    "best_cv_pr_auc": 0.7992009102884257
+  },
+  "cv": {
+    "scheme": "StratifiedGroupKFold(n_splits=5, shuffle=True, random_state=42) on market_slug",
+    "n_folds": 5,
+    "folds": [
+      {
+        "fold": 1,
+        "n_val_rows": 77,
+        "n_val_positives": 11,
+        "pr_auc": 0.9649678604224059
+      },
+      {
+        "fold": 2,
+        "n_val_rows": 77,
+        "n_val_positives": 11,
+        "pr_auc": 0.8522727272727273
+      },
+      {
+        "fold": 3,
+        "n_val_rows": 77,
+        "n_val_positives": 11,
+        "pr_auc": 0.6019855961032431
+      },
+      {
+        "fold": 4,
+        "n_val_rows": 72,
+        "n_val_positives": 12,
+        "pr_auc": 0.8356812169312169
+      },
+      {
+        "fold": 5,
+        "n_val_rows": 80,
+        "n_val_positives": 13,
+        "pr_auc": 0.7410971507125353
+      }
+    ],
+    "pr_auc_mean": 0.7992009102884257,
+    "pr_auc_std": 0.12156976541352862
+  },
+  "metrics": {
+    "cv_pr_auc": 0.7992009102884257,
+    "train": {
+      "n": 383,
+      "n_positives": 58,
+      "roc_auc": 0.9758090185676392,
+      "pr_auc": 0.8669527337562649,
+      "precision": 0.6195652173913043,
+      "recall": 0.9827586206896551,
+      "f1": 0.76,
+      "classification_at_threshold": {
+        "threshold": 0.15,
+        "tp": 57,
+        "fp": 35,
+        "fn": 1,
+        "tn": 290,
+        "precision": 0.6195652173913043,
+        "recall": 0.9827586206896551,
+        "f1": 0.76
+      }
+    },
+    "test": {
+      "n": 235,
+      "n_positives": 34,
+      "roc_auc": 0.9714661984196664,
+      "pr_auc": 0.8390379517746567,
+      "precision": 0.4925373134328358,
+      "recall": 0.9705882352941176,
+      "f1": 0.6534653465346534,
+      "classification_at_threshold": {
+        "threshold": 0.15,
+        "tp": 33,
+        "fp": 34,
+        "fn": 1,
+        "tn": 167,
+        "precision": 0.4925373134328358,
+        "recall": 0.9705882352941176,
+        "f1": 0.6534653465346534
+      }
+    },
+    "train_test_pr_auc_gap": 0.02791478198160824,
+    "cv_test_pr_auc_gap": -0.03983704148623102,
+    "roc_auc": 0.9714661984196664,
+    "pr_auc": 0.8390379517746567
+  },
+  "log_file": "25ir_xgboost_20260709_162021.log",
+  "curves_plot": "25ir_xgboost_20260709_162021_curves.png",
+  "source_training_data": "cache/training_data_with_metadata.parquet"
+}

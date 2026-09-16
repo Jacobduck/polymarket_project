@@ -1,0 +1,113 @@
+{
+  "trained_at": "20260610_151253",
+  "model_type": "stacking_ensemble (weighted mean of base model scores)",
+  "ensemble_kind": "prauc_weighted",
+  "n_train": 634,
+  "n_test": 159,
+  "n_features": 30,
+  "features": [
+    "adaptive_markout_raw_grosswt_h0p070",
+    "unrealized_edge_per_open_token",
+    "adaptive_markout_raw_grosswt_h0p010",
+    "adaptive_markout_raw_grosswt_h0p150",
+    "unrealized_edge_per_open_token_sqrt",
+    "buy_markout_adj_grosswt_h0p070_lb0p150",
+    "adaptive_markout_raw_grosswt_h0p200",
+    "buy_markout_adj_grosswt_h0p030_lb0p200",
+    "high_sell_nonflattening_cash_frac_pctl90",
+    "realized_pnl_per_closing_trade",
+    "adaptive_plus_realized_alpha0p25_h0p030",
+    "buy_markout_adj_grosswt_h0p030_lb0p010",
+    "adaptive_plus_realized_alpha0p5_h0p070",
+    "buy_markout_adj_mean_h0p200_lb0p030",
+    "buy_markout_adj_mean_h0p200_lb0p200",
+    "sell_markout_adj_median_h0p150_lb0p010",
+    "n_distinct_buy_days",
+    "major_move_time_remaining_pct",
+    "time_to_major_move_pct_of_market",
+    "adaptive_markout_raw_grosswt_h0p030",
+    "sell_markout_adj_median_h0p030_lb0p070",
+    "realized_edge_grosswt",
+    "n_low_buy_building_trades",
+    "realized_pnl_total",
+    "buy_markout_adj_grosswt_h0p010_lb0p030",
+    "position_flip_rate",
+    "realized_win_rate_closing_trades",
+    "derisk_0p75_time_position_mean",
+    "active_day_frac",
+    "sell_markout_adj_median_h0p150_lb0p200"
+  ],
+  "base_models": [
+    {
+      "tag": "xgb",
+      "path": "cache/models/xgb_insider_30feat_latest.json",
+      "kind": "xgb"
+    },
+    {
+      "tag": "lgbm",
+      "path": "cache/models/lgbm_insider_30feat_latest.joblib",
+      "kind": "joblib"
+    },
+    {
+      "tag": "cb",
+      "path": "cache/models/cb_insider_30feat_latest.joblib",
+      "kind": "joblib"
+    },
+    {
+      "tag": "rf",
+      "path": "cache/models/rf_insider_30feat_latest.joblib",
+      "kind": "joblib"
+    },
+    {
+      "tag": "lr",
+      "path": "cache/models/lr_insider_30feat_latest.joblib",
+      "kind": "joblib"
+    },
+    {
+      "tag": "iso",
+      "path": "cache/models/iso_insider_30feat_latest.joblib",
+      "kind": "iso"
+    }
+  ],
+  "weights": {
+    "xgb": 0.1844876222523279,
+    "lgbm": 0.1866350675617723,
+    "cb": 0.1962041486213226,
+    "rf": 0.18417773954818453,
+    "lr": 0.15752608162952242,
+    "iso": 0.0909693403868703
+  },
+  "iso_normalizer_path": "cache/models/stack_insider_30feat_20260610_151253.joblib",
+  "per_base_metrics": {
+    "xgb": {
+      "roc_auc": 0.9469309462915602,
+      "pr_auc": 0.8361938933042835
+    },
+    "lgbm": {
+      "roc_auc": 0.9510869565217391,
+      "pr_auc": 0.8459272327665177
+    },
+    "cb": {
+      "roc_auc": 0.9578005115089514,
+      "pr_auc": 0.8892992869392669
+    },
+    "rf": {
+      "roc_auc": 0.9339833759590792,
+      "pr_auc": 0.8347893436565521
+    },
+    "lr": {
+      "roc_auc": 0.9338235294117647,
+      "pr_auc": 0.7139901630614497
+    },
+    "iso": {
+      "roc_auc": 0.7221867007672633,
+      "pr_auc": 0.41232038215214095
+    }
+  },
+  "threshold": 0.5,
+  "metrics": {
+    "roc_auc": 0.9443734015345269,
+    "pr_auc": 0.8533640344978741
+  },
+  "source_training_data": "cache/training_data.parquet"
+}

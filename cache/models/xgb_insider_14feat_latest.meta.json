@@ -1,0 +1,39 @@
+{
+  "trained_at": "20260529_124308",
+  "n_train": 634,
+  "n_test": 159,
+  "n_features": 14,
+  "features": [
+    "unrealized_edge_per_open_token",
+    "adaptive_markout_raw_grosswt_h0p030",
+    "adaptive_markout_raw_grosswt_h0p070",
+    "adaptive_markout_raw_grosswt_h0p150",
+    "adaptive_late_spike_edge_grosswt_h0p030",
+    "adaptive_markout_latespike_adj_grosswt_h0p070",
+    "adaptive_plus_realized_alpha0p5_h0p070",
+    "adaptive_plus_realized_alpha1p0_h0p030",
+    "adaptive_plus_realized_alpha1p0_h0p070",
+    "adaptive_minus_realized_alpha0p5_h0p070",
+    "adaptive_minus_realized_alpha1p0_h0p030",
+    "adaptive_minus_realized_alpha1p0_h0p070",
+    "low_buy_high_sell_pctl",
+    "realized_pnl_per_matched_token"
+  ],
+  "scale_pos_weight": 5.74468085106383,
+  "threshold": 0.5,
+  "xgb_params": {
+    "n_estimators": 300,
+    "max_depth": 4,
+    "learning_rate": 0.05,
+    "subsample": 0.9,
+    "colsample_bytree": 0.9,
+    "reg_lambda": 1.0,
+    "eval_metric": "aucpr",
+    "random_state": 42
+  },
+  "metrics": {
+    "roc_auc": 0.8900255754475703,
+    "pr_auc": 0.6743572436007474
+  },
+  "source_training_data": "cache/training_data.parquet"
+}

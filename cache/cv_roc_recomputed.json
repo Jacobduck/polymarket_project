@@ -1,0 +1,335 @@
+{
+  "cb_insider_10feat_v2": {
+    "roc_mean": 0.7613291041736023,
+    "roc_std": 0.11841536648163258,
+    "roc_folds": [
+      0.552734375,
+      0.8299319727891156,
+      0.7555555555555555,
+      0.7592592592592593,
+      0.9091643582640814
+    ],
+    "source": "stored",
+    "pr_stored_mean": 0.4782336811767352,
+    "pr_repro_mean": 0.4782336811767352,
+    "pr_max_abs_diff": 0.0,
+    "scheme": "TimeSeriesSplit on time-ordered training markets"
+  },
+  "cb_insider_10feat_v2_d2": {
+    "roc_mean": 0.7469096018293435,
+    "roc_std": 0.13676335383332408,
+    "roc_folds": [
+      0.6901041666666666,
+      0.8962585034013606,
+      0.6222222222222221,
+      0.6018518518518519,
+      0.9241112650046167
+    ],
+    "source": "stored",
+    "pr_stored_mean": 0.47200456685517533,
+    "pr_repro_mean": 0.47200456685517533,
+    "pr_max_abs_diff": 0.0,
+    "scheme": "TimeSeriesSplit on time-ordered training markets"
+  },
+  "cb_insider_30feat_v2": {
+    "roc_mean": 0.8110612203676485,
+    "roc_std": 0.11558443103987451,
+    "roc_folds": [
+      0.63671875,
+      0.8843537414965986,
+      0.7333333333333334,
+      0.8333333333333334,
+      0.967566943674977
+    ],
+    "source": "stored",
+    "pr_stored_mean": 0.5448553195791993,
+    "pr_repro_mean": 0.5448553195791993,
+    "pr_max_abs_diff": 0.0,
+    "scheme": "TimeSeriesSplit on time-ordered training markets"
+  },
+  "lr_insider_30feat": {
+    "roc_mean": 0.8748359382142941,
+    "roc_std": 0.08350340159598528,
+    "roc_folds": [
+      0.9746227709190672,
+      0.888560157790927,
+      0.7351598173515982,
+      0.9372469635627532,
+      0.8385899814471243
+    ],
+    "source": "refit-grouped",
+    "pr_stored_mean": 0.6005567895362354,
+    "pr_repro_mean": 0.6005567895362354,
+    "pr_max_abs_diff": 0.0,
+    "scheme": "StratifiedGroupKFold(n_splits=5, shuffle=True, random_state=42) on market_slug; folds keep markets intact and stratify by is_insider (matches xgboost3.py)"
+  },
+  "rf_insider_0ir": {
+    "roc_mean": 0.9409540562318339,
+    "roc_std": 0.025987069918932074,
+    "roc_folds": [
+      0.9094650205761317,
+      0.9764309764309764,
+      0.9538461538461538,
+      0.924074074074074
+    ],
+    "source": "refit-experiment",
+    "pr_stored_mean": 0.8080586728060692,
+    "pr_repro_mean": 0.8080586728060692,
+    "pr_max_abs_diff": 0.0,
+    "scheme": "GroupKFold(n_splits=4) by market_slug, PR-AUC"
+  },
+  "rf_insider_10feat_v2": {
+    "roc_mean": 0.7506422762145024,
+    "roc_std": 0.06740810320830508,
+    "roc_folds": [
+      0.642578125,
+      0.8248299319727891,
+      0.7444444444444445,
+      0.7222222222222221,
+      0.8191366574330563
+    ],
+    "source": "stored",
+    "pr_stored_mean": 0.5107501586678542,
+    "pr_repro_mean": 0.5107501586678542,
+    "pr_max_abs_diff": 0.0,
+    "scheme": "TimeSeriesSplit on time-ordered training markets"
+  },
+  "rf_insider_25ir": {
+    "roc_mean": 0.9474540621728968,
+    "roc_std": 0.016899874736742725,
+    "roc_folds": [
+      0.9747386759581882,
+      0.9394308943089431,
+      0.9292181069958848,
+      0.9464285714285714
+    ],
+    "source": "refit-experiment",
+    "pr_stored_mean": 0.7791767725242267,
+    "pr_repro_mean": 0.7791767725242267,
+    "pr_max_abs_diff": 0.0,
+    "scheme": "GroupKFold(n_splits=4) by market_slug, PR-AUC"
+  },
+  "rf_insider_meta_v3": {
+    "roc_mean": 0.911433575094011,
+    "roc_std": 0.07993627078600786,
+    "roc_folds": [
+      0.849609375,
+      0.95578231292517,
+      1.0,
+      0.7870370370370371,
+      0.9647391505078486
+    ],
+    "source": "stored",
+    "pr_stored_mean": 0.6913469478651546,
+    "pr_repro_mean": 0.6913469478651546,
+    "pr_max_abs_diff": 0.0,
+    "scheme": "TimeSeriesSplit on time-ordered training markets"
+  },
+  "rf_insider_meta_v4": {
+    "roc_mean": 0.9036709301776267,
+    "roc_std": 0.07617911461524804,
+    "roc_folds": [
+      0.9259259259259259,
+      0.849609375,
+      0.95578231292517,
+      1.0,
+      0.7870370370370371
+    ],
+    "source": "stored",
+    "pr_stored_mean": 0.6811765328927333,
+    "pr_repro_mean": 0.6811765328927333,
+    "pr_max_abs_diff": 0.0,
+    "scheme": "TimeSeriesSplit on time-ordered training markets"
+  },
+  "rf_insider_meta_v5": {
+    "roc_mean": 0.9477611087807705,
+    "roc_std": 0.03186524801010408,
+    "roc_folds": [
+      0.9901691815272062,
+      0.9207119741100324,
+      0.9134966128191766,
+      0.9666666666666667
+    ],
+    "source": "refit-pin1",
+    "pr_stored_mean": 0.7887408721885545,
+    "pr_repro_mean": 0.7887408721885545,
+    "pr_max_abs_diff": 0.0,
+    "scheme": null
+  },
+  "xgb_insider_0ir": {
+    "roc_mean": 0.9243263507258863,
+    "roc_std": 0.030049131179153536,
+    "roc_folds": [
+      0.908641975308642,
+      0.9319727891156463,
+      0.8877551020408163,
+      0.9772727272727273,
+      0.9159891598915989
+    ],
+    "source": "refit-experiment",
+    "pr_stored_mean": 0.7528530894357225,
+    "pr_repro_mean": 0.7528530894357225,
+    "pr_max_abs_diff": 0.0,
+    "scheme": "StratifiedGroupKFold(n_splits=5, shuffle=True, random_state=42) on market_slug"
+  },
+  "xgb_insider_10feat_v2": {
+    "roc_mean": 0.8701005266912871,
+    "roc_std": 0.0755989889673475,
+    "roc_folds": [
+      0.977251943301326,
+      0.858974358974359,
+      0.74337899543379,
+      0.9003036437246965,
+      0.8705936920222636
+    ],
+    "source": "refit-valmarkets",
+    "pr_stored_mean": 0.6588845094081985,
+    "pr_repro_mean": 0.6588845094081985,
+    "pr_max_abs_diff": 0.0,
+    "scheme": "StratifiedGroupKFold(n_splits=5, shuffle=True, random_state=42) on market_slug; folds keep markets intact and stratify by is_insider"
+  },
+  "xgb_insider_20feat_v2": {
+    "roc_mean": 0.8670824587448143,
+    "roc_std": 0.07839719645199178,
+    "roc_folds": [
+      0.9781664380429813,
+      0.8274161735700198,
+      0.7465753424657534,
+      0.9149797570850203,
+      0.8682745825602969
+    ],
+    "source": "refit-valmarkets",
+    "pr_stored_mean": 0.6534264816858297,
+    "pr_repro_mean": 0.6534264816858297,
+    "pr_max_abs_diff": 0.0,
+    "scheme": "StratifiedGroupKFold(n_splits=5, shuffle=True, random_state=42) on market_slug; folds keep markets intact and stratify by is_insider"
+  },
+  "xgb_insider_20feat_v2_axiom": {
+    "roc_mean": 0.8613642500413995,
+    "roc_std": 0.1052753201201059,
+    "roc_folds": [
+      0.9965306122448979,
+      0.9806812985825332,
+      0.7522727272727273,
+      0.8034602076124568,
+      0.773876404494382
+    ],
+    "source": "refit-valmarkets",
+    "pr_stored_mean": 0.6996616768285608,
+    "pr_repro_mean": 0.6996616768285608,
+    "pr_max_abs_diff": 0.0,
+    "scheme": "StratifiedGroupKFold(n_splits=5, shuffle=True, random_state=42) on market_slug; folds keep markets intact and stratify by is_insider"
+  },
+  "xgb_insider_20feat_v2_mstr": {
+    "roc_mean": 0.9217788826439367,
+    "roc_std": 0.06291387969474556,
+    "roc_folds": [
+      0.9990476190476191,
+      0.9794238683127572,
+      0.9191176470588236,
+      0.8261150614091791,
+      0.8851902173913043
+    ],
+    "source": "refit-valmarkets",
+    "pr_stored_mean": 0.771698157779731,
+    "pr_repro_mean": 0.771698157779731,
+    "pr_max_abs_diff": 0.0,
+    "scheme": "StratifiedGroupKFold(n_splits=5, shuffle=True, random_state=42) on market_slug; folds keep markets intact and stratify by is_insider"
+  },
+  "xgb_insider_20feat_v2_stable": {
+    "roc_mean": 0.9093680563360461,
+    "roc_std": 0.06676105551669488,
+    "roc_folds": [
+      0.9904761904761905,
+      0.9747370827617741,
+      0.8378906250000001,
+      0.8299632352941176,
+      0.9137731481481483
+    ],
+    "source": "refit-valmarkets",
+    "pr_stored_mean": 0.7359489674044382,
+    "pr_repro_mean": 0.7359489674044382,
+    "pr_max_abs_diff": 0.0,
+    "scheme": "StratifiedGroupKFold(n_splits=5, shuffle=True, random_state=42) on market_slug; folds keep markets intact and stratify by is_insider"
+  },
+  "xgb_insider_25ir": {
+    "roc_mean": 0.9554920433855305,
+    "roc_std": 0.02506499880700171,
+    "roc_folds": [
+      0.9986225895316805,
+      0.9476584022038567,
+      0.9297520661157024,
+      0.9347222222222222,
+      0.9667049368541906
+    ],
+    "source": "refit-experiment",
+    "pr_stored_mean": 0.8363241193560776,
+    "pr_repro_mean": 0.8363241193560776,
+    "pr_max_abs_diff": 0.0,
+    "scheme": "StratifiedGroupKFold(n_splits=5, shuffle=True, random_state=42) on market_slug"
+  },
+  "xgb_insider_30feat_v2": {
+    "roc_mean": 0.8932321266734007,
+    "roc_std": 0.06303835510620619,
+    "roc_folds": [
+      0.9769090077732053,
+      0.849112426035503,
+      0.7972602739726028,
+      0.9291497975708503,
+      0.9137291280148423
+    ],
+    "source": "refit-valmarkets",
+    "pr_stored_mean": 0.6695032425304138,
+    "pr_repro_mean": 0.6695032425304138,
+    "pr_max_abs_diff": 0.0,
+    "scheme": "StratifiedGroupKFold(n_splits=5, shuffle=True, random_state=42) on market_slug; folds keep markets intact and stratify by is_insider"
+  },
+  "xgb_insider_meta10_v6": {
+    "roc_mean": 0.9155302584164968,
+    "roc_std": 0.03325616504997087,
+    "roc_folds": [
+      0.9332418838591677,
+      0.8634122287968442,
+      0.8922374429223744,
+      0.9564777327935223,
+      0.9322820037105751
+    ],
+    "source": "refit-valmarkets",
+    "pr_stored_mean": 0.6406084881558298,
+    "pr_repro_mean": 0.6406084881558298,
+    "pr_max_abs_diff": 0.0,
+    "scheme": "StratifiedGroupKFold(n_splits=5, shuffle=True, random_state=42) on market_slug; folds keep markets intact and stratify by is_insider"
+  },
+  "xgb_insider_meta_v5": {
+    "roc_mean": 0.9518289862276139,
+    "roc_std": 0.040851970158737434,
+    "roc_folds": [
+      0.9942844078646548,
+      0.9250493096646942,
+      0.8849315068493151,
+      0.9817813765182186,
+      0.9730983302411874
+    ],
+    "source": "refit-valmarkets",
+    "pr_stored_mean": 0.8049733552730884,
+    "pr_repro_mean": 0.8049733552730884,
+    "pr_max_abs_diff": 0.0,
+    "scheme": "StratifiedGroupKFold(n_splits=5, shuffle=True, random_state=42) on market_slug; folds keep markets intact and stratify by is_insider"
+  },
+  "xgb_insider_meta_v7": {
+    "roc_mean": 0.9539973333503269,
+    "roc_std": 0.04097052660289185,
+    "roc_folds": [
+      0.9929126657521719,
+      0.9418145956607495,
+      0.8794520547945206,
+      0.9817813765182186,
+      0.974025974025974
+    ],
+    "source": "refit-valmarkets",
+    "pr_stored_mean": 0.8289244410827059,
+    "pr_repro_mean": 0.8289244410827059,
+    "pr_max_abs_diff": 0.0,
+    "scheme": "StratifiedGroupKFold(n_splits=5, shuffle=True, random_state=42) on market_slug; folds keep markets intact and stratify by is_insider"
+  }
+}

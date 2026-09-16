@@ -1,0 +1,241 @@
+{
+  "trained_at": "20260602_085124",
+  "model_type": "catboost.CatBoostClassifier",
+  "training_design": "time-ordered grouped train/val/test + CV",
+  "group_col": "market_slug",
+  "time_col": "terminal_start_ts",
+  "split_fractions": {
+    "train": 0.6,
+    "val": 0.2,
+    "test": 0.2
+  },
+  "n_train_markets": 16,
+  "n_val_markets": 7,
+  "n_test_markets": 6,
+  "n_train_rows": 193,
+  "n_val_rows": 112,
+  "n_test_rows": 488,
+  "train_markets": [
+    "will-microstrategy-purchase-bitcoin-july-1-7",
+    "will-microstrategy-hold-620k-btc-before-august",
+    "openai-social-app-in-2025",
+    "will-mara-corina-machado-win-the-nobel-peace-prize-in-2025",
+    "will-yulia-navalnaya-win-the-nobel-peace-prize-in-2025",
+    "openai-browser-in-2025",
+    "openai-browser-by-october-31",
+    "microstrategy-announces-1000-btc-purchase-november-11-17",
+    "will-microstrategy-announce-holding-650k-btc-by-november-30",
+    "will-stable-launch-a-token-in-2025",
+    "microstrategy-announces-1000-btc-purchase-december-2-8",
+    "will-openai-release-a-new-frontier-model-by-december-13-683",
+    "will-draftkings-launch-a-prediction-market-in-2025",
+    "will-microstrategy-announce-a-bitcoin-purchase-december-16-22",
+    "microstrategy-sell-any-bitcoin-in-2025",
+    "will-aztec-launch-a-token-in-2025"
+  ],
+  "val_markets": [
+    "will-microstrategy-hold-680k-btc-by-december-31",
+    "will-lighter-perform-an-airdrop-by-december-31",
+    "will-cardi-b-perform-during-the-super-bowl-lx-halftime-show",
+    "will-karol-g-perform-during-the-super-bowl-lx-halftime-show",
+    "will-axiom-be-accused-of-insider-trading",
+    "us-x-iran-ceasefire-by-april-7",
+    "will-openai-release-a-new-frontier-model-on-december-11"
+  ],
+  "test_markets": [
+    "will-us-or-israel-strike-iran-by-february-28-2026-766",
+    "us-strikes-iran-by-february-28-2026-227-967-547-688-589-491-592-418-452-924-384-915-464-672-196-157-993-596-269-535-381-391-471-256-988-997-296-225-762-973-292-827-345-182-558-215-794-879-189-761",
+    "us-strikes-iran-by-march-1-2026-492",
+    "khamenei-out-as-supreme-leader-of-iran-by-march-31",
+    "nothing-ever-happens-microstrategy",
+    "will-microstrategy-announce-holding-740k-btc-by-march-31"
+  ],
+  "n_features": 30,
+  "features": [
+    "adaptive_markout_raw_grosswt_h0p070",
+    "unrealized_edge_per_open_token",
+    "adaptive_markout_raw_grosswt_h0p010",
+    "adaptive_markout_raw_grosswt_h0p150",
+    "unrealized_edge_per_open_token_sqrt",
+    "buy_markout_adj_grosswt_h0p070_lb0p150",
+    "adaptive_markout_raw_grosswt_h0p200",
+    "buy_markout_adj_grosswt_h0p030_lb0p200",
+    "high_sell_nonflattening_cash_frac_pctl90",
+    "realized_pnl_per_closing_trade",
+    "adaptive_plus_realized_alpha0p25_h0p030",
+    "buy_markout_adj_grosswt_h0p030_lb0p010",
+    "adaptive_plus_realized_alpha0p5_h0p070",
+    "buy_markout_adj_mean_h0p200_lb0p030",
+    "buy_markout_adj_mean_h0p200_lb0p200",
+    "sell_markout_adj_median_h0p150_lb0p010",
+    "n_distinct_buy_days",
+    "major_move_time_remaining_pct",
+    "time_to_major_move_pct_of_market",
+    "adaptive_markout_raw_grosswt_h0p030",
+    "sell_markout_adj_median_h0p030_lb0p070",
+    "realized_edge_grosswt",
+    "n_low_buy_building_trades",
+    "realized_pnl_total",
+    "buy_markout_adj_grosswt_h0p010_lb0p030",
+    "position_flip_rate",
+    "realized_win_rate_closing_trades",
+    "derisk_0p75_time_position_mean",
+    "active_day_frac",
+    "sell_markout_adj_median_h0p150_lb0p200"
+  ],
+  "feature_selection": "top 30 from cb_insider_30feat_latest.meta.json",
+  "scale_pos_weight": 5.225806451612903,
+  "threshold": 0.5501763156739095,
+  "threshold_tuning": {
+    "precision_floor": 0.8,
+    "rule": "max recall s.t. val precision >= 0.8",
+    "val_precision_at_thr": 0.8,
+    "val_recall_at_thr": 0.5,
+    "floor_reachable": true
+  },
+  "model_params": {
+    "iterations": 2000,
+    "depth": 4,
+    "learning_rate": 0.05,
+    "l2_leaf_reg": 1.0,
+    "subsample": 0.9,
+    "bootstrap_type": "Bernoulli",
+    "rsm": 0.9,
+    "scale_pos_weight": 5.225806451612903,
+    "eval_metric": "PRAUC",
+    "random_seed": 42,
+    "early_stopping_rounds": 75,
+    "best_iteration": 4
+  },
+  "cv": {
+    "scheme": "TimeSeriesSplit on time-ordered training markets",
+    "n_folds": 5,
+    "folds": [
+      {
+        "fold": 1,
+        "n_train_markets": 6,
+        "n_val_markets": 2,
+        "n_train_rows": 43,
+        "n_val_rows": 14,
+        "n_val_positives": 2,
+        "roc_auc": 0.7083333333333333,
+        "pr_auc": 0.6111111111111112,
+        "best_iter": 1
+      },
+      {
+        "fold": 2,
+        "n_train_markets": 8,
+        "n_val_markets": 2,
+        "n_train_rows": 57,
+        "n_val_rows": 34,
+        "n_val_positives": 6,
+        "roc_auc": 0.4642857142857143,
+        "pr_auc": 0.17647058823529413,
+        "best_iter": 0
+      },
+      {
+        "fold": 3,
+        "n_train_markets": 10,
+        "n_val_markets": 2,
+        "n_train_rows": 91,
+        "n_val_rows": 49,
+        "n_val_positives": 7,
+        "roc_auc": 0.903061224489796,
+        "pr_auc": 0.4916466586634653,
+        "best_iter": 20
+      },
+      {
+        "fold": 4,
+        "n_train_markets": 12,
+        "n_val_markets": 2,
+        "n_train_rows": 140,
+        "n_val_rows": 42,
+        "n_val_positives": 6,
+        "roc_auc": 0.8657407407407408,
+        "pr_auc": 0.4690359477124183,
+        "best_iter": 1
+      },
+      {
+        "fold": 5,
+        "n_train_markets": 14,
+        "n_val_markets": 2,
+        "n_train_rows": 182,
+        "n_val_rows": 11,
+        "n_val_positives": 2,
+        "roc_auc": 0.6111111111111112,
+        "pr_auc": 0.375,
+        "best_iter": 25
+      }
+    ],
+    "roc_auc_mean": 0.7105064247921391,
+    "roc_auc_std": 0.16228606392735145,
+    "pr_auc_mean": 0.4246528611444578,
+    "pr_auc_std": 0.14510999515273457,
+    "n_folds_with_metric": 5
+  },
+  "metrics": {
+    "train": {
+      "n": 193,
+      "n_positives": 31,
+      "roc_auc": 0.8964555953803266,
+      "pr_auc": 0.5607962585966986,
+      "classification_at_tuned_thr": {
+        "threshold": 0.5501763156739095,
+        "tp": 23,
+        "fp": 22,
+        "fn": 8,
+        "tn": 140,
+        "precision": 0.5111111111111111,
+        "recall": 0.7419354838709677,
+        "f1": 0.6052631578947368
+      }
+    },
+    "val": {
+      "n": 112,
+      "n_positives": 16,
+      "roc_auc": 0.9137369791666666,
+      "pr_auc": 0.7312767832525897,
+      "classification_at_tuned_thr": {
+        "threshold": 0.5501763156739095,
+        "tp": 8,
+        "fp": 2,
+        "fn": 8,
+        "tn": 94,
+        "precision": 0.8,
+        "recall": 0.5,
+        "f1": 0.6153846153846154
+      }
+    },
+    "test": {
+      "n": 488,
+      "n_positives": 70,
+      "roc_auc": 0.9656356801093644,
+      "pr_auc": 0.7849641813661388,
+      "classification_at_tuned_thr": {
+        "threshold": 0.5501763156739095,
+        "tp": 69,
+        "fp": 50,
+        "fn": 1,
+        "tn": 368,
+        "precision": 0.5798319327731093,
+        "recall": 0.9857142857142858,
+        "f1": 0.7301587301587302
+      },
+      "classification_at_thr_0p5": {
+        "threshold": 0.5,
+        "tp": 69,
+        "fp": 94,
+        "fn": 1,
+        "tn": 324,
+        "precision": 0.4233128834355828,
+        "recall": 0.9857142857142858,
+        "f1": 0.592274678111588
+      }
+    },
+    "train_val_pr_auc_gap": -0.17048052465589114,
+    "val_test_pr_auc_gap": -0.053687398113549056,
+    "roc_auc": 0.9656356801093644,
+    "pr_auc": 0.7849641813661388
+  },
+  "source_training_data": "cache/training_data.parquet"
+}

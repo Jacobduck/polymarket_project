@@ -1,0 +1,163 @@
+{
+  "trained_at": "20260701_085233",
+  "model_type": "sklearn.Pipeline[SimpleImputer, RandomForestClassifier]",
+  "experiment": "25ir -- canonical mar-1 Iran market down-sampled",
+  "iran_filter": {
+    "mode": "25ir",
+    "market": "us-strikes-iran-by-march-1-2026-492",
+    "hidden_insiders": 25,
+    "note": "kept 10 insiders + 60 non-insiders (ratio preserved); feb-28 and tiny Iran markets untouched"
+  },
+  "split_strategy": "GroupShuffleSplit(test_size=0.15, random_state=42) by market_slug",
+  "n_train_markets": 24,
+  "n_train_rows": 383,
+  "n_test_rows": 235,
+  "test_markets": [
+    "us-strikes-iran-by-february-28-2026-227-967-547-688-589-491-592-418-452-924-384-915-464-672-196-157-993-596-269-535-381-391-471-256-988-997-296-225-762-973-292-827-345-182-558-215-794-879-189-761",
+    "will-aztec-launch-a-token-in-2025",
+    "will-lighter-perform-an-airdrop-by-december-31",
+    "will-microstrategy-hold-680k-btc-by-december-31",
+    "will-us-or-israel-strike-iran-by-february-28-2026-766"
+  ],
+  "n_features": 20,
+  "features": [
+    "adaptive_markout_raw_grosswt_h0p070",
+    "unrealized_edge_per_open_token",
+    "adaptive_markout_raw_grosswt_h0p010",
+    "adaptive_markout_raw_grosswt_h0p150",
+    "unrealized_edge_per_open_token_sqrt",
+    "buy_markout_adj_grosswt_h0p070_lb0p150",
+    "adaptive_markout_raw_grosswt_h0p200",
+    "buy_markout_adj_grosswt_h0p030_lb0p200",
+    "high_sell_nonflattening_cash_frac_pctl90",
+    "realized_pnl_per_closing_trade",
+    "herfindahl_index_markets",
+    "median_bet_size_usdc",
+    "time_since_first_deposit_to_first_trade_seconds",
+    "wallet_age_seconds",
+    "wallet_to_market_age_ratio",
+    "avg_bet_size_usdc",
+    "wallet_minus_market_age_seconds",
+    "funder_flagged_wallet_count",
+    "winrate",
+    "n_markets_traded"
+  ],
+  "feature_selection": "top 10 behavioral from cb_insider_30feat_latest.meta.json + top 10 of 17 metadata features (ranked by xgb5 gain)",
+  "n_behavioral_features": 10,
+  "n_metadata_features": 10,
+  "metadata_features": [
+    "herfindahl_index_markets",
+    "median_bet_size_usdc",
+    "time_since_first_deposit_to_first_trade_seconds",
+    "wallet_age_seconds",
+    "wallet_to_market_age_ratio",
+    "avg_bet_size_usdc",
+    "wallet_minus_market_age_seconds",
+    "funder_flagged_wallet_count",
+    "winrate",
+    "n_markets_traded"
+  ],
+  "threshold": 0.5,
+  "calibration": "none (raw RF proba used)",
+  "tuning": {
+    "cv_scheme": "GroupKFold(n_splits=4) by market, PR-AUC",
+    "optuna_trials": 50,
+    "optuna_cv_pr_auc": 0.7791767725242267,
+    "random_search_iters": 50,
+    "random_search_cv_pr_auc": 0.7669610956106131,
+    "winner": "optuna",
+    "best_cv_pr_auc": 0.7791767725242267
+  },
+  "cv": {
+    "scheme": "GroupKFold(n_splits=4) by market_slug, PR-AUC",
+    "pr_auc_mean": 0.7791767725242267,
+    "pr_auc_std": 0.07981167180022591,
+    "pr_auc_folds": [
+      0.8692985080590121,
+      0.8478571317973492,
+      0.703753173976698,
+      0.695798276263847
+    ]
+  },
+  "model_params": {
+    "n_estimators": 300,
+    "max_depth": null,
+    "min_samples_split": 11,
+    "min_samples_leaf": 5,
+    "max_features": 0.5,
+    "class_weight": {
+      "0": 1.0,
+      "1": 1.0
+    }
+  },
+  "metrics": {
+    "cv_pr_auc": 0.7791767725242267,
+    "train": {
+      "n": 383,
+      "n_positives": 58,
+      "roc_auc": 0.9901856763925728,
+      "pr_auc": 0.9508369152904033,
+      "precision": 0.8846153846153846,
+      "recall": 0.7931034482758621,
+      "f1": 0.8363636363636363,
+      "classification_at_threshold": {
+        "threshold": 0.5,
+        "tp": 46,
+        "fp": 6,
+        "fn": 12,
+        "tn": 319,
+        "precision": 0.8846153846153846,
+        "recall": 0.7931034482758621,
+        "f1": 0.8363636363636363
+      }
+    },
+    "test": {
+      "n": 235,
+      "n_positives": 34,
+      "roc_auc": 0.9799531752999707,
+      "pr_auc": 0.9096968610313586,
+      "precision": 0.8205128205128205,
+      "recall": 0.9411764705882353,
+      "f1": 0.8767123287671232,
+      "classification_at_threshold": {
+        "threshold": 0.5,
+        "tp": 32,
+        "fp": 7,
+        "fn": 2,
+        "tn": 194,
+        "precision": 0.8205128205128205,
+        "recall": 0.9411764705882353,
+        "f1": 0.8767123287671232
+      }
+    },
+    "train_test_pr_auc_gap": 0.041140054259044656,
+    "cv_test_pr_auc_gap": -0.13052008850713193,
+    "roc_auc": 0.9799531752999707,
+    "pr_auc": 0.9096968610313586
+  },
+  "feature_importances": {
+    "median_bet_size_usdc": 0.21378383363753503,
+    "time_since_first_deposit_to_first_trade_seconds": 0.0709632614748511,
+    "buy_markout_adj_grosswt_h0p030_lb0p200": 0.06986800605164092,
+    "adaptive_markout_raw_grosswt_h0p010": 0.0662735437347253,
+    "wallet_age_seconds": 0.06507201522220198,
+    "adaptive_markout_raw_grosswt_h0p150": 0.0632883359436891,
+    "wallet_to_market_age_ratio": 0.05891463260591838,
+    "unrealized_edge_per_open_token_sqrt": 0.05615051901035577,
+    "adaptive_markout_raw_grosswt_h0p070": 0.055579082705471024,
+    "adaptive_markout_raw_grosswt_h0p200": 0.051324590299657,
+    "wallet_minus_market_age_seconds": 0.049977789786318304,
+    "unrealized_edge_per_open_token": 0.04546288582076913,
+    "buy_markout_adj_grosswt_h0p070_lb0p150": 0.040632798232784366,
+    "herfindahl_index_markets": 0.033172579978143935,
+    "avg_bet_size_usdc": 0.032919893788374316,
+    "realized_pnl_per_closing_trade": 0.013685871787252774,
+    "winrate": 0.007241764982422157,
+    "n_markets_traded": 0.005558292700597342,
+    "high_sell_nonflattening_cash_frac_pctl90": 0.00013030223729213568,
+    "funder_flagged_wallet_count": 0.0
+  },
+  "curves_plot": "25ir_randomforest_20260701_085233_curves.png",
+  "log_file": "25ir_randomforest_20260701_085233.log",
+  "source_training_data": "cache/training_data_with_metadata.parquet"
+}

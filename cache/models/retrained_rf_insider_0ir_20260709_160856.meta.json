@@ -1,0 +1,162 @@
+{
+  "trained_at": "20260709_160856",
+  "model_type": "sklearn.Pipeline[SimpleImputer, RandomForestClassifier]",
+  "experiment": "0ir -- both big Iran markets removed (mar-1 + feb-28)",
+  "iran_filter": {
+    "mode": "0ir",
+    "dropped_markets": [
+      "us-strikes-iran-by-march-1-2026-492",
+      "us-strikes-iran-by-february-28-2026-227..."
+    ],
+    "note": "tiny Iran markets (ceasefire/israel-strike/khamenei) kept"
+  },
+  "split_strategy": "GroupShuffleSplit(test_size=0.15, random_state=42) by market_slug",
+  "n_train_markets": 22,
+  "n_train_rows": 254,
+  "n_test_rows": 105,
+  "test_markets": [
+    "khamenei-out-as-supreme-leader-of-iran-by-march-31",
+    "us-x-iran-ceasefire-by-april-7",
+    "will-axiom-be-accused-of-insider-trading",
+    "will-karol-g-perform-during-the-super-bowl-lx-halftime-show",
+    "will-microstrategy-purchase-bitcoin-july-1-7"
+  ],
+  "n_features": 20,
+  "features": [
+    "adaptive_markout_raw_grosswt_h0p070",
+    "unrealized_edge_per_open_token",
+    "adaptive_markout_raw_grosswt_h0p010",
+    "adaptive_markout_raw_grosswt_h0p150",
+    "unrealized_edge_per_open_token_sqrt",
+    "buy_markout_adj_grosswt_h0p070_lb0p150",
+    "adaptive_markout_raw_grosswt_h0p200",
+    "buy_markout_adj_grosswt_h0p030_lb0p200",
+    "high_sell_nonflattening_cash_frac_pctl90",
+    "realized_pnl_per_closing_trade",
+    "herfindahl_index_markets",
+    "median_bet_size_usdc",
+    "time_since_first_deposit_to_first_trade_seconds",
+    "wallet_age_seconds",
+    "wallet_to_market_age_ratio",
+    "avg_bet_size_usdc",
+    "wallet_minus_market_age_seconds",
+    "funder_flagged_wallet_count",
+    "winrate",
+    "n_markets_traded"
+  ],
+  "feature_selection": "top 10 behavioral from cb_insider_30feat_latest.meta.json + top 10 of 17 metadata features (ranked by xgb5 gain)",
+  "n_behavioral_features": 10,
+  "n_metadata_features": 10,
+  "metadata_features": [
+    "herfindahl_index_markets",
+    "median_bet_size_usdc",
+    "time_since_first_deposit_to_first_trade_seconds",
+    "wallet_age_seconds",
+    "wallet_to_market_age_ratio",
+    "avg_bet_size_usdc",
+    "wallet_minus_market_age_seconds",
+    "funder_flagged_wallet_count",
+    "winrate",
+    "n_markets_traded"
+  ],
+  "threshold": 0.5,
+  "calibration": "none (raw RF proba used)",
+  "tuning": {
+    "cv_scheme": "GroupKFold(n_splits=4) by market, PR-AUC",
+    "optuna_trials": 50,
+    "optuna_cv_pr_auc": 0.7666752119712645,
+    "random_search_iters": 50,
+    "random_search_cv_pr_auc": 0.7552837882433471,
+    "winner": "optuna",
+    "best_cv_pr_auc": 0.7666752119712645
+  },
+  "cv": {
+    "scheme": "GroupKFold(n_splits=4) by market_slug, PR-AUC",
+    "pr_auc_mean": 0.7666752119712645,
+    "pr_auc_std": 0.13248994145182255,
+    "pr_auc_folds": [
+      0.6219743219743221,
+      0.8963924963924963,
+      0.9013227513227514,
+      0.6470112781954886
+    ]
+  },
+  "model_params": {
+    "n_estimators": 300,
+    "max_depth": 8,
+    "min_samples_split": 2,
+    "min_samples_leaf": 2,
+    "max_features": "sqrt",
+    "class_weight": "balanced"
+  },
+  "metrics": {
+    "cv_pr_auc": 0.7666752119712645,
+    "train": {
+      "n": 254,
+      "n_positives": 40,
+      "roc_auc": 1.0,
+      "pr_auc": 1.0,
+      "precision": 0.8888888888888888,
+      "recall": 1.0,
+      "f1": 0.9411764705882353,
+      "classification_at_threshold": {
+        "threshold": 0.5,
+        "tp": 40,
+        "fp": 5,
+        "fn": 0,
+        "tn": 209,
+        "precision": 0.8888888888888888,
+        "recall": 1.0,
+        "f1": 0.9411764705882353
+      }
+    },
+    "test": {
+      "n": 105,
+      "n_positives": 15,
+      "roc_auc": 0.9133333333333333,
+      "pr_auc": 0.5540801390291645,
+      "precision": 0.5,
+      "recall": 0.6666666666666666,
+      "f1": 0.5714285714285715,
+      "classification_at_threshold": {
+        "threshold": 0.5,
+        "tp": 10,
+        "fp": 10,
+        "fn": 5,
+        "tn": 80,
+        "precision": 0.5,
+        "recall": 0.6666666666666666,
+        "f1": 0.5714285714285715
+      }
+    },
+    "train_test_pr_auc_gap": 0.44591986097083547,
+    "cv_test_pr_auc_gap": 0.2125950729421,
+    "roc_auc": 0.9133333333333333,
+    "pr_auc": 0.5540801390291645
+  },
+  "feature_importances": {
+    "herfindahl_index_markets": 0.16028357414578007,
+    "median_bet_size_usdc": 0.14142115381843895,
+    "wallet_age_seconds": 0.07416175529029886,
+    "n_markets_traded": 0.06835451720908287,
+    "time_since_first_deposit_to_first_trade_seconds": 0.06672930835013008,
+    "adaptive_markout_raw_grosswt_h0p070": 0.05902289857125455,
+    "adaptive_markout_raw_grosswt_h0p010": 0.053132635575296974,
+    "wallet_minus_market_age_seconds": 0.048052760721969054,
+    "adaptive_markout_raw_grosswt_h0p150": 0.0472616468406732,
+    "unrealized_edge_per_open_token_sqrt": 0.045437002670602473,
+    "adaptive_markout_raw_grosswt_h0p200": 0.04249496049130433,
+    "unrealized_edge_per_open_token": 0.041377876540629834,
+    "wallet_to_market_age_ratio": 0.03820087511621584,
+    "avg_bet_size_usdc": 0.03099905946470171,
+    "buy_markout_adj_grosswt_h0p030_lb0p200": 0.026354481739195745,
+    "realized_pnl_per_closing_trade": 0.021072496312012266,
+    "winrate": 0.019346107133435774,
+    "buy_markout_adj_grosswt_h0p070_lb0p150": 0.014701713370961616,
+    "high_sell_nonflattening_cash_frac_pctl90": 0.001595176638015934,
+    "funder_flagged_wallet_count": 0.0
+  },
+  "curves_plot": "0ir_randomforest_20260709_160856_curves.png",
+  "log_file": "0ir_randomforest_20260709_160856.log",
+  "source_training_data": "cache/training_data_with_metadata.parquet"
+}

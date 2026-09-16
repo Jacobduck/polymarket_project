@@ -1,0 +1,83 @@
+{
+  "trained_at": "20260529_140957",
+  "model_type": "sklearn.Pipeline[SimpleImputer, StandardScaler, LogisticRegressionCV]",
+  "n_train": 634,
+  "n_test": 159,
+  "n_features": 30,
+  "features": [
+    "adaptive_markout_raw_grosswt_h0p070",
+    "unrealized_edge_per_open_token",
+    "adaptive_markout_raw_grosswt_h0p010",
+    "adaptive_markout_raw_grosswt_h0p150",
+    "unrealized_edge_per_open_token_sqrt",
+    "buy_markout_adj_grosswt_h0p070_lb0p150",
+    "adaptive_markout_raw_grosswt_h0p200",
+    "buy_markout_adj_grosswt_h0p030_lb0p200",
+    "high_sell_nonflattening_cash_frac_pctl90",
+    "realized_pnl_per_closing_trade",
+    "adaptive_plus_realized_alpha0p25_h0p030",
+    "buy_markout_adj_grosswt_h0p030_lb0p010",
+    "adaptive_plus_realized_alpha0p5_h0p070",
+    "buy_markout_adj_mean_h0p200_lb0p030",
+    "buy_markout_adj_mean_h0p200_lb0p200",
+    "sell_markout_adj_median_h0p150_lb0p010",
+    "n_distinct_buy_days",
+    "major_move_time_remaining_pct",
+    "time_to_major_move_pct_of_market",
+    "adaptive_markout_raw_grosswt_h0p030",
+    "sell_markout_adj_median_h0p030_lb0p070",
+    "realized_edge_grosswt",
+    "n_low_buy_building_trades",
+    "realized_pnl_total",
+    "buy_markout_adj_grosswt_h0p010_lb0p030",
+    "position_flip_rate",
+    "realized_win_rate_closing_trades",
+    "derisk_0p75_time_position_mean",
+    "active_day_frac",
+    "sell_markout_adj_median_h0p150_lb0p200"
+  ],
+  "feature_selection": "top 30 by feature_importances_ (gain) from xgb_insider_latest.json",
+  "scale_pos_weight": 5.74468085106383,
+  "threshold": 0.5,
+  "model_params": {
+    "Cs": [
+      0.01,
+      0.1,
+      1.0,
+      10.0,
+      100.0
+    ],
+    "cv": 5,
+    "penalty": "l2",
+    "solver": "lbfgs",
+    "scoring": "average_precision",
+    "class_weight": {
+      "0": 1.0,
+      "1": 5.74468085106383
+    },
+    "max_iter": 2000,
+    "n_jobs": -1,
+    "random_state": 42
+  },
+  "selected_C": 0.01,
+  "metrics": {
+    "roc_auc": 0.9338235294117647,
+    "pr_auc": 0.7139901630614497
+  },
+  "source_training_data": "cache/training_data.parquet",
+  "cv": {
+    "scheme": "StratifiedGroupKFold(n_splits=5, shuffle=True, random_state=42) on market_slug; folds keep markets intact and stratify by is_insider (matches xgboost3.py)",
+    "pr_auc_mean": 0.6005567895362354,
+    "pr_auc_std": 0.1720695370450995,
+    "pr_auc_folds": [
+      0.8199928947552577,
+      0.5529776192927558,
+      0.30140140041851193,
+      0.6678972987796516,
+      0.6605147344350002
+    ],
+    "prev_plain_kfold_mean": 0.7034933779981053,
+    "prev_plain_kfold_std": 0.10202814979865563,
+    "note": "Recomputed by lr_grouped_cv.py under the tree CV scheme. The original LogisticRegressionCV used plain StratifiedKFold (rows), which leaks same-market wallets across folds."
+  }
+}

@@ -1,0 +1,240 @@
+{
+  "trained_at": "20260617_142354",
+  "model_type": "xgboost.XGBClassifier",
+  "training_design": "stratified random train/test + GroupKFold CV + Optuna",
+  "group_col": "market_slug",
+  "split_strategy": "pinned test markets = ['will-stable-launch-a-token-in-2025']",
+  "pin_test_markets": [
+    "will-stable-launch-a-token-in-2025"
+  ],
+  "n_train_markets": 28,
+  "n_test_markets": 1,
+  "n_train_rows": 773,
+  "n_test_rows": 20,
+  "train_markets": [
+    "khamenei-out-as-supreme-leader-of-iran-by-march-31",
+    "microstrategy-announces-1000-btc-purchase-december-2-8",
+    "microstrategy-announces-1000-btc-purchase-november-11-17",
+    "microstrategy-sell-any-bitcoin-in-2025",
+    "nothing-ever-happens-microstrategy",
+    "openai-browser-by-october-31",
+    "openai-browser-in-2025",
+    "openai-social-app-in-2025",
+    "us-strikes-iran-by-february-28-2026-227-967-547-688-589-491-592-418-452-924-384-915-464-672-196-157-993-596-269-535-381-391-471-256-988-997-296-225-762-973-292-827-345-182-558-215-794-879-189-761",
+    "us-strikes-iran-by-march-1-2026-492",
+    "us-x-iran-ceasefire-by-april-7",
+    "will-axiom-be-accused-of-insider-trading",
+    "will-aztec-launch-a-token-in-2025",
+    "will-cardi-b-perform-during-the-super-bowl-lx-halftime-show",
+    "will-draftkings-launch-a-prediction-market-in-2025",
+    "will-karol-g-perform-during-the-super-bowl-lx-halftime-show",
+    "will-lighter-perform-an-airdrop-by-december-31",
+    "will-mara-corina-machado-win-the-nobel-peace-prize-in-2025",
+    "will-microstrategy-announce-a-bitcoin-purchase-december-16-22",
+    "will-microstrategy-announce-holding-650k-btc-by-november-30",
+    "will-microstrategy-announce-holding-740k-btc-by-march-31",
+    "will-microstrategy-hold-620k-btc-before-august",
+    "will-microstrategy-hold-680k-btc-by-december-31",
+    "will-microstrategy-purchase-bitcoin-july-1-7",
+    "will-openai-release-a-new-frontier-model-by-december-13-683",
+    "will-openai-release-a-new-frontier-model-on-december-11",
+    "will-us-or-israel-strike-iran-by-february-28-2026-766",
+    "will-yulia-navalnaya-win-the-nobel-peace-prize-in-2025"
+  ],
+  "test_markets": [
+    "will-stable-launch-a-token-in-2025"
+  ],
+  "n_features": 20,
+  "features": [
+    "adaptive_markout_raw_grosswt_h0p070",
+    "unrealized_edge_per_open_token",
+    "adaptive_markout_raw_grosswt_h0p010",
+    "adaptive_markout_raw_grosswt_h0p150",
+    "unrealized_edge_per_open_token_sqrt",
+    "buy_markout_adj_grosswt_h0p070_lb0p150",
+    "adaptive_markout_raw_grosswt_h0p200",
+    "buy_markout_adj_grosswt_h0p030_lb0p200",
+    "high_sell_nonflattening_cash_frac_pctl90",
+    "realized_pnl_per_closing_trade",
+    "adaptive_plus_realized_alpha0p25_h0p030",
+    "buy_markout_adj_grosswt_h0p030_lb0p010",
+    "adaptive_plus_realized_alpha0p5_h0p070",
+    "buy_markout_adj_mean_h0p200_lb0p030",
+    "buy_markout_adj_mean_h0p200_lb0p200",
+    "sell_markout_adj_median_h0p150_lb0p010",
+    "n_distinct_buy_days",
+    "major_move_time_remaining_pct",
+    "time_to_major_move_pct_of_market",
+    "adaptive_markout_raw_grosswt_h0p030"
+  ],
+  "feature_selection": "top 20 from cb_insider_30feat_latest.meta.json",
+  "threshold": 0.15,
+  "calibrator_file": "xgb_insider_20feat_v2_stable_20260617_142354.calibrator.joblib",
+  "calibration": {
+    "method": "Platt scaling (sklearn LogisticRegression on raw prob)",
+    "fit_on": "OOF predictions from CV (no leakage; train rows held out)",
+    "coef": 5.8232525022959045,
+    "intercept": -3.80281143069852
+  },
+  "model_params": {
+    "objective": "binary:logistic",
+    "eval_metric": "aucpr",
+    "tree_method": "hist",
+    "random_state": 42,
+    "n_estimators": 1650,
+    "max_depth": 2,
+    "learning_rate": 0.006769959901818497,
+    "min_child_weight": 13.784156532302383,
+    "subsample": 0.999902078482965,
+    "colsample_bytree": 0.8259391785029809,
+    "reg_lambda": 1.115422955129201,
+    "reg_alpha": 0.00268109895721136,
+    "gamma": 3.3492242257373674,
+    "scale_pos_weight": 4.149139082149235
+  },
+  "tuning": {
+    "framework": "optuna",
+    "sampler": "TPESampler",
+    "pruner": "MedianPruner",
+    "n_trials_requested": 100,
+    "n_trials_completed": 100,
+    "n_trials_pruned": 0,
+    "n_startup_trials": 20,
+    "objective_metric": "mean PR-AUC across CV folds",
+    "tuning_seconds": 2482.2970581054688,
+    "best_cv_pr_auc": 0.7359489674044382
+  },
+  "cv": {
+    "scheme": "StratifiedGroupKFold(n_splits=5, shuffle=True, random_state=42) on market_slug; folds keep markets intact and stratify by is_insider",
+    "n_folds": 5,
+    "folds": [
+      {
+        "fold": 1,
+        "n_train_markets": 27,
+        "n_val_markets": 1,
+        "val_markets": [
+          "us-strikes-iran-by-march-1-2026-492"
+        ],
+        "n_val_rows": 245,
+        "n_val_positives": 35,
+        "pr_auc": 0.9430336458907888
+      },
+      {
+        "fold": 2,
+        "n_train_markets": 27,
+        "n_val_markets": 1,
+        "val_markets": [
+          "us-strikes-iran-by-february-28-2026-227-967-547-688-589-491-592-418-452-924-384-915-464-672-196-157-993-596-269-535-381-391-471-256-988-997-296-225-762-973-292-827-345-182-558-215-794-879-189-761"
+        ],
+        "n_val_rows": 189,
+        "n_val_positives": 27,
+        "pr_auc": 0.820812282593886
+      },
+      {
+        "fold": 3,
+        "n_train_markets": 21,
+        "n_val_markets": 7,
+        "val_markets": [
+          "microstrategy-sell-any-bitcoin-in-2025",
+          "openai-browser-by-october-31",
+          "openai-browser-in-2025",
+          "will-axiom-be-accused-of-insider-trading",
+          "will-draftkings-launch-a-prediction-market-in-2025",
+          "will-microstrategy-announce-holding-650k-btc-by-november-30",
+          "will-microstrategy-hold-680k-btc-by-december-31"
+        ],
+        "n_val_rows": 112,
+        "n_val_positives": 16,
+        "pr_auc": 0.6344662927776692
+      },
+      {
+        "fold": 4,
+        "n_train_markets": 19,
+        "n_val_markets": 9,
+        "val_markets": [
+          "microstrategy-announces-1000-btc-purchase-december-2-8",
+          "microstrategy-announces-1000-btc-purchase-november-11-17",
+          "will-cardi-b-perform-during-the-super-bowl-lx-halftime-show",
+          "will-microstrategy-announce-a-bitcoin-purchase-december-16-22",
+          "will-microstrategy-announce-holding-740k-btc-by-march-31",
+          "will-microstrategy-hold-620k-btc-before-august",
+          "will-microstrategy-purchase-bitcoin-july-1-7",
+          "will-openai-release-a-new-frontier-model-by-december-13-683",
+          "will-yulia-navalnaya-win-the-nobel-peace-prize-in-2025"
+        ],
+        "n_val_rows": 113,
+        "n_val_positives": 17,
+        "pr_auc": 0.4797861081471364
+      },
+      {
+        "fold": 5,
+        "n_train_markets": 18,
+        "n_val_markets": 10,
+        "val_markets": [
+          "khamenei-out-as-supreme-leader-of-iran-by-march-31",
+          "nothing-ever-happens-microstrategy",
+          "openai-social-app-in-2025",
+          "us-x-iran-ceasefire-by-april-7",
+          "will-aztec-launch-a-token-in-2025",
+          "will-karol-g-perform-during-the-super-bowl-lx-halftime-show",
+          "will-lighter-perform-an-airdrop-by-december-31",
+          "will-mara-corina-machado-win-the-nobel-peace-prize-in-2025",
+          "will-openai-release-a-new-frontier-model-on-december-11",
+          "will-us-or-israel-strike-iran-by-february-28-2026-766"
+        ],
+        "n_val_rows": 114,
+        "n_val_positives": 18,
+        "pr_auc": 0.8016465076127098
+      }
+    ],
+    "pr_auc_mean": 0.7359489674044382,
+    "pr_auc_std": 0.16144358570747558
+  },
+  "metrics": {
+    "train": {
+      "n": 773,
+      "n_positives": 113,
+      "roc_auc": 0.9801890587288817,
+      "pr_auc": 0.8739080498680661,
+      "precision": 0.6331360946745562,
+      "recall": 0.9469026548672567,
+      "f1": 0.7588652482269503,
+      "classification_at_threshold": {
+        "threshold": 0.15,
+        "tp": 107,
+        "fp": 62,
+        "fn": 6,
+        "tn": 598,
+        "precision": 0.6331360946745562,
+        "recall": 0.9469026548672567,
+        "f1": 0.7588652482269503
+      }
+    },
+    "test": {
+      "n": 20,
+      "n_positives": 4,
+      "roc_auc": 0.828125,
+      "pr_auc": 0.7589285714285714,
+      "precision": 1.0,
+      "recall": 0.5,
+      "f1": 0.6666666666666666,
+      "classification_at_threshold": {
+        "threshold": 0.15,
+        "tp": 2,
+        "fp": 0,
+        "fn": 2,
+        "tn": 16,
+        "precision": 1.0,
+        "recall": 0.5,
+        "f1": 0.6666666666666666
+      }
+    },
+    "train_test_pr_auc_gap": 0.11497947843949474,
+    "cv_test_pr_auc_gap": -0.022979604024133238,
+    "roc_auc": 0.828125,
+    "pr_auc": 0.7589285714285714
+  },
+  "log_file": "xgboost3_stable_20260617_142354.log",
+  "curves_plot": "xgboost3_stable_20260617_142354_curves.png",
+  "source_training_data": "cache/training_data.parquet"
+}
